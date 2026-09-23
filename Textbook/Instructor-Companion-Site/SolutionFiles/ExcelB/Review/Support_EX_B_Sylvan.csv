@@ -1,0 +1,22 @@
+Store ID,City,State,Postal Code,Store Type,Market,Location
+Store00,Website,,,Website,5-Global,Website
+Store01,Albuquerque,NM,87121,Brick & Mortar,3-Medium,Southwest
+Store02,Beaverton,OR,97005,Brick & Mortar,1-Small,Pacific
+Store03,Boulder,CO,80301,Brick & Mortar,2-Minor,Mountain
+Store04,Bend,OR,97702,Brick & Mortar,1-Small,Pacific
+Store05,Bellevue,WA,98005,Brick & Mortar,1-Small,Pacific
+Store06,Colorado Springs,CO,80904,Brick & Mortar,2-Minor,Mountain
+Store07,Corpus Christi,TX,78408,Brick & Mortar,2-Minor,Southwest
+Store08,Dubuque,IA,52004,Brick & Mortar,1-Small,Midwest
+Store09,Phoenix,AZ,85010,Brick & Mortar,4-Large,Southwest
+Store10,Madison,WI,53705,Brick & Mortar,2-Minor,Midwest
+Store11,San Antonio,TX,78211,Brick & Mortar,4-Large,Southwest
+Store12,Fort Worth,TX,76110,Brick & Mortar,3-Medium,Southwest
+Store13,Denver,CO,80229,Brick & Mortar,3-Medium,Mountain
+Store14,Portland,OR,97202,Brick & Mortar,3-Medium,Pacific
+Store15,San Jose,CA,95112,Brick & Mortar,4-Large,Pacific
+Store16,Omaha,NE,68022,Brick & Mortar,2-Minor,Midwest
+Store17,Salt Lake City,UT,84123,Brick & Mortar,1-Small,Mountain
+Store18,Seattle,WA,98105,Brick & Mortar,3-Medium,Pacific
+Store19,Spokane,WA,99202,Brick & Mortar,2-Minor,Pacific
+Store20,Tempe,AZ,85281,Brick & Mortar,1-Small,Southwest

@@ -1,0 +1,41 @@
+Key Terms
+back-end database
+Big Data
+business intelligence (BI)
+Confidentiality, Integrity, and Availability (CIA) triad
+dashboard
+data analytics
+data lake
+data validation
+data warehouse
+database
+database administrator (DBA)
+Database as a Service (DBaaS)
+database management system (DBMS)
+field
+filter
+foreign key
+form
+front-end database
+high availability
+index
+information
+input mask
+key-value database
+many-to-many relationship
+nonrelational database
+NoSQL database
+one-to-many relationship
+one-to-one relationship
+open source program
+primary key
+query
+record
+relational database
+relational database management system (RDBMS)
+relationship
+report
+scalable
+sort
+SQL (Structured Query Language)
+table

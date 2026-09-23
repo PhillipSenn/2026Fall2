@@ -1,0 +1,7 @@
+Discussion Questions
+Keiko runs a growing restaurant that is about to expand to a second location. To encourage customer loyalty, she has hired a software developer to create a mobile app that will offer discounts to frequent customers. She also hired a contractor to convert her Excel spreadsheet of customer contact information into a database that will be connected to the app. To justify this expense, Keiko wants to make a list of the ways the database will help her business. What do you see as the biggest advantage the database will offer Keiko’s business?
+
+Duane is designing a database for a non-profit that will serve economically disadvantaged children by connecting them with mentors in the local business community. What are three tables Duane will need to include in his database?
+
+The use of Big Data offers both benefits and risks. Benefits include better understanding of issues and interests as well as more effective technology to meet current needs. Risks include less privacy, inflated expectations, and greater dependence on technology. What do you think? Is the use of Big Data worth the risks? Or should these technologies be limited in scope? Explain your reasoning and the implications of how you think Big Data should be handled.
+

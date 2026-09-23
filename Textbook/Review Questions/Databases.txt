@@ -1,0 +1,135 @@
+Review Questions for CC13-26
+In a veterinarian’s database, data about an individual pet is stored as a separate _____________.
+
+table
+
+column
+
+field
+
+record
+
+Aimee works for a martial arts studio. Which of the following tables will give her contact information for the mother of a student who requested more information about a new class being offered?
+
+Classes
+
+Locations
+
+Instructors
+
+Students
+
+Carlos’s small start-up company can’t afford their own servers, but they need a robust database for their new web app. Which of the following is the best fit for Carlos’s needs?
+
+Microsoft SQL Server
+
+Google Docs
+
+Amazon Aurora
+
+Microsoft Excel
+
+Chantelle wants to change the color scheme for her company’s web app, and she needs to get the logos updated. What kind of developer should she talk to?
+
+Back-end
+
+DBA
+
+Front-end
+
+Mobile
+
+Which data type would be best for a username field?
+
+Short text
+
+Hyperlink
+
+Long text
+
+AutoNumber
+
+Which database object is best suited to print and hand out during a presentation to a board of advisors?
+
+Table
+
+Report
+
+Form
+
+Query
+
+Which SQL statement would show the type of pet most preferred by retirees?
+
+INSERT INTO TblPets (Owner, Species)
+
+VALUES (‘Retired’, ‘Pet’)
+
+SELECT OwnerAge
+
+FROM TblOwner
+
+WHERE OwnerAge >64
+
+SELECT Species
+
+FROM TblPets
+
+WHERE OwnerAge >64
+
+SELECT Species
+
+FROM TblOwners
+
+WHERE Pet=‘Yes’
+
+Which of the following techniques would be detrimental to the security of an insurance company’s database?
+
+Require long account passwords
+
+Encrypt customer contact information
+
+Install the database server behind a firewall
+
+Allow any user to delete tables
+
+Which aspect of the CIA triad requires that passwords in a database be encrypted?
+
+Integrity
+
+Scalability
+
+Availability
+
+Confidentiality
+
+What’s the most important reason that Big Data is often managed in a cloud environment?
+
+Volume
+
+Veracity
+
+Value
+
+Variety
+
+A database for a website where thousands of users will post their own photos needs to be highly ________________ to handle the quickly increasing number of files.
+
+available
+
+scalable
+
+consistent
+
+distributed
+
+Nadine can check her _____________ for updated, at-a-glance information on current stock prices.
+
+data warehouse
+
+relational database
+
+dashboard
+
+data lake
+

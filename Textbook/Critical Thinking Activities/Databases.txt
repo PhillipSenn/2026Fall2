@@ -1,0 +1,7 @@
+Critical Thinking Activities
+Corbin’s company is developing an innovative new website to provide more personalized shopping experiences online. His team has already concluded that a relational database will not meet their needs. You learned earlier about key-value stores. Do some online research and make a list of three more types of nonrelational databases.
+
+Each time a change is made to a database, the database must be locked to ensure that conflicting changes aren’t made at the same time. Each of these changes is called a transaction. Four characteristics of each transaction must always be maintained. These four properties are called ACID. Research online to find out what the acronym ACID stands for and give an example of why ACID compliance is important.
+
+Many companies use Big Data to develop deeper insights into existing markets and potential new markets. However, data analysis of smaller portions of a data warehouse or data lake is often more informative than attempts to analyze the entire thing. Do some online research to find out what a data mart is and then explain how a data mart differs from a data warehouse. Give two examples of a data mart.
+

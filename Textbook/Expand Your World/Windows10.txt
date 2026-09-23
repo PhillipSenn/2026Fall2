@@ -1,0 +1,75 @@
+WIN 1-9d. Expand Your World
+Using Microsoft Edge
+Create a solution that uses cloud or web technologies by learning and investigating on your own from general guidance.
+
+Part 1 Instructions: Starting Microsoft Edge
+
+1
+If necessary, connect to the Internet.
+
+2
+If necessary, display the desktop and then start Microsoft Edge.
+
+Part 2 Instructions: Exploring the Cengage Website
+
+1
+Type cengage.com in the ‘Search or enter web address’ text box and then press ENTER (Figure 1–81).
+
+Figure 1–81
+Open Image Viewer.
+2
+Answer the following questions:
+
+What web address is displayed on the address bar?
+
+What content is displayed on the cengage.com webpage?
+
+3
+If necessary, scroll to view the contents of the webpage. List three links shown on this webpage.
+
+4
+Click any link on the webpage. Which link did you click?
+
+5
+Describe the webpage that was displayed when you clicked the link.
+
+6
+If requested by your instructor, click the More actions button and then click the Print button to print the webpage.
+
+Part 3 Instructions: Exploring the National Park Service Website
+
+1
+Click the web address in the address bar to select it.
+
+2
+Type nps.gov in the address bar and then press ENTER.
+
+3
+What title is displayed on the browser tab?
+
+4
+Scroll the webpage to view its contents. Do any graphic images appear on the webpage?
+
+5
+Does the webpage include an image that is a link? (Pointing to an image on a webpage and having the pointer change to a hand indicates the image is a link.) If so, describe the image.
+
+6
+Click the image to display another webpage. What title is displayed on the browser tab?
+
+7
+If requested by your instructor, print the webpage.
+
+Part 4 Instructions: Displaying Previously Displayed Webpages
+
+1
+Click the Back button. What webpage is displayed?
+
+2
+Click the Back button two times. What webpage is displayed?
+
+3
+If requested by your instructor, print the webpage.
+
+4
+Click the Close button on the Microsoft Edge title bar to exit Microsoft Edge.
+

@@ -1,0 +1,50 @@
+WIN 1-9c. Extend Your Knowledge
+Extend the skills you learned in this module and experiment with new skills. You will use the search box to complete the assignment.
+
+Obtaining Help
+Instructions: Use the search box to search for the answers to the following questions.
+
+1
+Find information about Windows shortcuts by entering Windows shortcuts in the search box (Figure 1–80). Browse the search results to locate websites that can help you answer the following questions:
+
+What keyboard shortcut is used to copy a file?
+
+What keyboard shortcut is used to paste a file?
+
+How do you display a shortcut menu?
+
+Figure 1–80
+Open Image Viewer.
+Details
+2
+Determine the appropriate search text to use in the search box and then use the search box to locate information to answer the following questions:
+
+What is Windows Defender?
+
+What is Windows Firewall?
+
+What settings can you control for kids who use your computer?
+
+What are five ways to protect your computer from viruses and other threats?
+
+What is a user account?
+
+What is the difference between a local user account and a Microsoft account?
+
+3
+Use the search box or other available method in Windows to obtain answers to the following questions:
+
+How do you turn on Windows Firewall?
+
+How do you perform a full scan of your computer or mobile device using Windows Defender?
+
+How do you add a printer?
+
+How do you display the Control Panel?
+
+How do you change the screen saver?
+
+How do you change the date and time?
+
+How do you connect to a wireless network?
+

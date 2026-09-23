@@ -1,0 +1,79 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+/* MAP */
+
+#map {
+    position: absolute;
+    top: 56px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 56px);
+}
+
+/* AIRPORT MARKERS */
+
+.airport-marker {
+    display: inline-block;
+}
+
+.airport-marker img {
+    display: block;
+    width: 24px;
+    height: 24px;
+}
+/* NAVBAR TICKER */
+
+.ticker-container {
+    overflow: hidden;
+    white-space: nowrap;
+    flex: 1;
+    margin: 0 20px;
+    color: #fff;
+}
+
+.ticker-text {
+    display: inline-block;
+    padding-left: 100%;
+    animation: ticker 20s linear infinite;
+}
+
+@keyframes ticker {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.airplane {
+    transform-origin: center;
+    will-change: transform;
+    line-height: 1;
+    display: inline-block;
+}
+
+#sidebar {
+    position: absolute;
+    top: 56px;
+    right: 0;
+    width: 300px;
+    height: calc(100vh - 56px);
+    background: white;
+    border-left: 1px solid #ddd;
+    padding: 20px;
+    z-index: 900;
+    transform: translateX(100%);
+    transition: transform .3s ease;
+}
+
+#sidebar.open {
+    transform: translateX(0);
+}

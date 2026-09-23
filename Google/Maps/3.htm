@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dulles Airport Map - Controlled Zoom</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      display: flex;
+      height: 100%;
+      width: 100%;
+    }
+
+    #map {
+      flex: 1;
+    }
+
+    .sidebar {
+      width: 280px;
+      background: #f8f9fa;
+      border-left: 1px solid #ddd;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .widget-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .zoom-display {
+      font-size: 32px;
+      font-weight: bold;
+      color: #1a73e8;
+      margin-top: 10px;
+    }
+
+    .airport-marker {
+      background: #1a73e8;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+      border: 2px solid white;
+      white-space: nowrap;
+    }
+  </style>
+
+  <script src="google-maps.js"></script>
+  <script>
+    async function initMap() {
+      const dulles = { lat: 38.9531, lng: -77.4565 };
+
+      const { Map } = await google.maps.importLibrary("maps");
+      const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+      const map = new Map(document.getElementById("map"), {
+        zoom: 3,          // Start zoom
+        minZoom: 3,       // Enforce minimum zoom
+        center: dulles,
+        mapId: "7c151be88bb28cf02723aa80",
+      });
+
+      // Custom marker
+      const markerContent = document.createElement("div");
+      markerContent.className = "airport-marker";
+      markerContent.textContent = "IAD – Dulles Airport";
+
+      new AdvancedMarkerElement({
+        map,
+        position: dulles,
+        content: markerContent,
+        title: "Washington Dulles International Airport (IAD)"
+      });
+
+      // Zoom widget logic
+      const zoomDisplay = document.getElementById("zoomValue");
+      zoomDisplay.textContent = map.getZoom();
+
+      map.addListener("zoom_changed", () => {
+        zoomDisplay.textContent = parseInt(map.getZoom()*10)/10; // Display zoom with one decimal place
+      });
+    }
+
+    window.initMap = initMap;
+  </script>
+</head>
+
+<body onload="initMap()">
+  <div class="container">
+    <div id="map"></div>
+
+    <div class="sidebar">
+      <div class="widget-title">Map Info</div>
+      <div>Current Zoom Level:</div>
+      <div id="zoomValue" class="zoom-display">--</div>
+      <div style="margin-top:15px;font-size:14px;color:#666;">
+        Minimum Zoom: 3<br>
+        Initial Zoom: 3
+      </div>
+    </div>
+  </div>
+</body>
+</html>

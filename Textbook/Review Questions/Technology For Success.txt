@@ -1,0 +1,1269 @@
+declare @actid int
+declare @catid int=104
+insert into act(act_cat,actname) values(@catid,'Module 1. Impact of Digital Technology Review Questions')
+(True or False) A microprocessor is the “brains” of a computer.
+
+(True or False) Embedded computers are standalone products that have many functions.
+
+The basic premise of blank 1 is that objects can be tagged, tracked, and monitored through a local network, or across the Internet.
+
+intelligent workspaces
+the digital divide
+the Internet of Things
+artificial intelligence
+(True or False) Computers with AI use human intelligence to make decisions.
+
+(True or False) A digital citizen uses technology to be productive and efficient.
+
+(True or False) A kiosk is a freestanding booth usually placed in a public area that can contain a display device used to show information to the public or event attendees.
+
+blank 1 are smart devices that respond to a user’s verbal commands by using search technology to provide an answer to a question or perform a task.
+
+ATMs
+Green computers
+Integrated circuits
+Digital assistants
+blank 1 text is descriptive text added to an object.
+
+Associative
+Alternative
+Accessible
+Assistive
+(True or False) The ENERGY STAR program encourages manufacturers to reduce the amount of electricity used by computers and related devices.
+
+BYOD stands for Bring Your Own blank 1.
+
+Device
+Daily planner
+Database
+Data
+(True or False) An intelligent classroom is one in which technology is used to facilitate learning and communication.
+
+Colleges use blank 1 management systems (LMSs) to set up web-based training sites where students can check their progress in a course, take practice tests, and exchange messages with the instructor or other students.
+
+learning
+linked
+locational
+live
+(True or False) Automated vehicles decrease independent transportation options for people with disabilities.
+
+(True or False) The mobile health (mHealth) trend refers to doctors and nurses using smartphones or tablets to access health records stored on mobile devices.
+
+A company’s computers monitor assembly lines and equipment using blank 1 communications.
+
+CAM
+AI
+IT
+M2M
+A company’s blank 1 department oversees the centralized computer equipment and administers the network.
+
+operations
+management
+technical support
+information security
+(True or False) When looking for a job, you should use humorous or informal names for your account profiles, blog, or domain name to make yourself stand out.
+
+
+
+
+insert into act(act_cat,actname) values(@catid,'Module 2. The Web Review Questions')
+select @actid=scope_identity()
+Each webpage is assigned a(n) blank 1, an address that identifies the location of the page on the Internet.
+
+Internet Protocol (IP)
+
+uniform resource locator (URL)
+
+top-level domain (TLD)
+
+Hypertext Transfer Protocol (HTTP)
+
+In the web address www.microsoft.com, the “.com” is the blank 1 meaning blank 2.
+
+web server name; World Wide Web
+
+pathname; location of the webpage
+
+top-level domain (TLD); commercial enterprise
+
+domain name; name of the organization
+
+(True or False) The Internet Engineering Task Force (IETF) sets standards for webpage design.
+
+A(n) blank 1 website gathers, organizes, and then distributes web content.
+
+content aggregator
+
+media sharing
+
+entertainment
+
+search engine
+
+(True or False) You must be online to use web apps.
+
+On a webpage, a blank 1 provides supplemental material such as social networking feeds and ads.
+
+navigation bar
+
+header
+
+footer
+
+sidebar
+
+Which of the following indicates a secure website connection?
+
+https in the URL
+
+http in the URL
+
+the message “secure website” in the address bar
+
+a shield icon in the address bar
+
+Which of the following is not an advantage of e-commerce for consumers?
+
+You save time by visiting websites instead of stores.
+
+You have little risk of having your credit card number intercepted.
+
+You can choose goods from any vendor in the world.
+
+You can shop no matter your location, time of day, or conditions.
+
+Which of the following describes business-to-business (B2B) e-commerce purchases?
+
+The consumer is the decision maker.
+
+Pricing can vary for each customer.
+
+Customers bid on items being sold by other customers.
+
+Customers can pick up the purchased item in a physical store.
+
+A business-to-consumer (B2C) website tracks the items you place in a shopping cart using blank 1.
+
+an electronic wallet
+
+the Transport Layer Security (TLS) protocol
+
+crawlers
+
+cookies
+
+(True or False) A digital coupon provides a promotional code you enter when you check out and pay for online purchases.
+
+If you have blank 1, you can evaluate whether information is misleading, biased, or out of date.
+
+information protocols
+
+technical proficiency
+
+information security
+
+information literacy
+
+(True or False) When you perform a search, a general search engine searches the entire Internet.
+
+Who or what creates the index for a web directory?
+
+a digital spider
+
+a human editor
+
+a wiki
+
+a search operator
+
+Which search operator would you use to locate webpages containing the exact phrase augmented reality, with words in the same order?
+
+augmented + reality
+
+– augmented reality
+
+“augmented reality”
+
+~augmented reality~
+
+Which of the following is an example of a specialty search engine?
+
+Bing
+
+Wolfram Alpha
+
+Google
+
+NexTag
+
+Checking a website author’s credentials is one way to establish a site’s blank 1.
+
+copyright
+
+information literacy
+
+credibility
+
+security
+
+Which of the following lets you use a sentence or paragraph of text without permission if you include a citation to its source?
+
+fair use doctrine
+
+Creative Commons
+
+CARS checklist
+
+citation style
+
+Plagiarism is best defined as blank 1.
+
+moral principles that govern our behavior
+
+the act of citing sources
+
+using another’s work and claiming it as your own
+
+rights belonging to a work’s creator
+
+
+
+insert into act(act_cat,actname) values(@catid,'Module 3. Computer Hardware Review Questions')
+select @actid=scope_identity()
+(True or False) Flash memory is a type of volatile memory.
+
+(True or False) Volatile memory loses its contents when power is removed.
+
+(True or False) In an 8-bit coding scheme, 8 bits can represent one character.
+
+Which of the following storage devices requires an Internet connection?
+
+internal hard drive
+
+cloud storage
+
+solid state drive
+
+flash memory
+
+In which of the following types of computers is the system unit in separate housing from the monitor?
+
+desktop computer
+
+all-in-one computer
+
+laptop computer
+
+tablet
+
+(True or False) In general, a high-powered processor is not necessary for a computer that will be used primarily to check email and browse the web.
+
+All of the following are pointing devices except:
+
+trackball
+
+touchpad
+
+mouse
+
+touchpointer
+
+(True or False) Plotters are small, lightweight printers that easily can be connected to mobile devices.
+
+Which of the following tells your computer how to connect to devices you might connect?
+
+device manager
+
+device driver
+
+configuration manager
+
+communication manager
+
+(True or False) The speed at which data travels on a bus is referred to as the word size.
+
+Under which of the following circumstances might you be most likely to contact a professional to repair your computer or mobile device?
+
+screen is broken
+
+computer cannot synchronize with Bluetooth accessories
+
+computer or device is too hot
+
+printer will not print
+
+(True or False) Uninterruptable power supplies and surge suppressors will help protect your computer from power outages.
+
+If you are experiencing display problems on your computer, which of the following troubleshooting techniques might you attempt first?
+
+Contact a professional for assistance.
+
+Replace the cables.
+
+Check to see that all cables are properly connected.
+
+Purchase a new monitor.
+
+
+insert into act(act_cat,actname) values(@catid,'Module 4. Operating Systems and File Management Review Questions')
+select @actid=scope_identity()
+(True or False) An operating system is a program that manages the complete operation of your computer or mobile device and lets you interact with it.
+
+GUI stands for blank 1 user interface.
+
+Google
+
+graphical
+
+government
+
+general
+
+(True or False) A data file contains the instructions your computer or device needs to run programs and apps.
+
+(True or False) The operating system manages interactions between hardware and software.
+
+Which of the following is NOT true about RAM?
+
+Every program and app requires RAM.
+
+The system can assign virtual memory to function as RAM.
+
+RAM is nonvolatile memory.
+
+RAM stores open apps and document data while a computer or device is on.
+
+(True or False) The kernel is the core of an operating system.
+
+blank 1 is any data and instructions entered into the memory.
+
+Input
+
+Information
+
+Output
+
+Objection
+
+(True or False) A shortcut icon puts the actual file, folder, or app on the desktop, removing it from the location where it is saved on your computer or device
+
+(True or False) CAPS LOCK is a sticky key.
+
+The blank 1 window is the window you are currently using, which appears in front of any other open windows.
+
+active
+
+forward
+
+native
+
+default
+
+(True or False) When you move a file to the Recycle Bin or Trash, it is permanently deleted.
+
+Which of the following units measure millions of bytes of data?
+
+kilobytes
+
+megabytes
+
+gigabytes
+
+terabytes
+
+(True or False) When you work on a file using a web app, changes are saved as you make them.
+
+(True or False) File properties are the same no matter what type of file.
+
+What is the temporary Windows storage area that holds items you copy or cut called?
+
+the cloud
+
+the buffer
+
+the Library
+
+the Clipboard
+
+(True or False) Moving or copying a folder affects all of the contents of the folder.
+
+(True or False) When you open the file manager you have access to frequently or recently opened files and folders, favorite files and folders, and the main folders on your computer or device.
+
+
+insert into act(act_cat,actname) values(@catid,'Module 5. Software and Apps Review Questions')
+select @actid=scope_identity()
+You want to share information about an upcoming event at your school by creating a short promotional video. Which type of app might you use to create the video?
+
+graphics and media
+
+communications
+
+device management
+
+personal interest
+
+Which of these is not an option for formatting text?
+
+changing the text’s color
+
+changing the text’s size
+
+making text bold
+
+copying a region of text
+
+Which type of app would most likely NOT be found included in a productivity suite?
+
+word processing
+
+web browser
+
+spreadsheet
+
+presentation
+
+To run a productivity app with most complete and advanced capabilities, you would most likely blank 1.
+
+download it from an app store to your smartphone
+
+run a web app in a web browser
+
+install and run the software on your desktop or laptop computer
+
+update the app online to make sure you have the most recent version
+
+Mobile first design is important because blank 1.
+
+developers must provide simplified user experiences for apps that run on small screens
+
+sales of personal computers have surpassed sales of smartphones
+
+developers can only write apps for one platform
+
+smartphones generally have more processing power than laptops
+
+When a value in a worksheet changes, the spreadsheet program will blank 1.
+
+reformat any cells whose values changed
+
+recalculate any cells whose formulas depend on the value that changed
+
+delete the value
+
+launch a calculator for you to check the calculations
+
+When giving a presentation, pushing one slide off the right edge of the screen as another one appears is an example of a(n) blank 1.
+
+transition
+
+exit
+
+entrance
+
+animation
+
+In a relational database, data is organized into rows of data called blank 1.
+
+fields
+
+tables
+
+records
+
+views
+
+When you take a photo with a digital camera, most likely it is saved in blank 1 format.
+
+TIFF
+
+GIF
+
+PNG
+
+JPG
+
+
+insert into act(act_cat,actname) values(@catid,'Module 6. Security and Safety Review Questions')
+select @actid=scope_identity()
+blank 1 are attackers who want to attack computers but lack the knowledge needed to do so.
+
+Script kiddies
+
+Hactivists
+
+Cyberterrorists
+
+Nation state actors
+
+Each of the following is a factor that causes repetitive strain injury (RSI) except blank 1.
+
+repetitive activity
+
+improper technique
+
+lack of restful sleep
+
+uninterrupted intensity
+
+(True or False) A worm is a malicious program that uses a computer network to replicate.
+
+A blank 1 is a very short duration of a voltage increase that can be absorbed by a surge protector.
+
+spike
+
+surge
+
+blackout
+
+brownout
+
+(True or False) Wi-Fi Protected Access 2 (WPA2) Personal encrypts wireless data transmissions and limits who can access the Wi-Fi network.
+
+When creating a strong password blank 1 is the most important element.
+
+length
+
+complexity
+
+repetitiveness
+
+ability to memorize
+
+blank 1 is the process of “scrambling” information in such a way that it cannot be read unless the user possesses the “key.”
+
+Decryption
+
+Encryption
+
+Digital signing
+
+Certification
+
+(True or False) You have the right to see your credit information.
+
+Which of the following is not a web browser setting for managing cookies?
+
+Have all cookies automatically expire after 45 days.
+
+Accept or deny cookies.
+
+Delete all cookies when the web browser is closed.
+
+Make exceptions for specific websites.
+
+
+insert into act(act_cat,actname) values(@catid,'Module 7. Digital Media Review Questions')
+select @actid=scope_identity()
+A _______ is an image you can see, store, and manipulate on a digital device.
+
+geotag
+sound wave
+digital graphic
+digital assistant
+A process called _______ converts analog sound waves into digital sound.
+
+sampling
+augmenting
+in-betweening
+simulating
+_______ refers to the clarity or sharpness of an image.
+
+Compression
+Bit rate
+In-betweening
+Resolution
+A(n) _______ file uses lossy compression, which discards some of the original file data during compression.
+
+SVG
+GIF
+WAV
+JPG or JPEG
+(True or False) Of the two types of digital animation, 2-D animation is considered superior to 3-D animation.
+
+Mobile games were the first to popularize _______, which uses an image of an actual place or thing and adds digital information to it.
+
+virtual reality (VR)
+augmented reality (AR)
+mixed reality (MR)
+computer-aided design (CAD)
+A _______ is a sophisticated computer animation useful for training and teaching in many fields.
+
+keyframe
+transition
+simulation
+motion-sensing game
+With a search engine, you can use a _______ to search for pictures that you can use, share, or modify for personal or commercial use.
+
+codec
+license filter
+graphics tablet
+pixel
+What type of software do engineers and scientists use to create wireframe drawings of objects, which they can rotate to view from many angles?
+
+animation software
+photo-editing software
+spatial recognition software
+3-D CAD software
+(True or False) When you stream digital media, you must transfer the entire video or audio file to your computer.
+
+(True or False) A scanner converts a printed document into a bitmap file by dividing the image into a grid of tiny cells and assigning colors to each cell.
+
+A _______ combines speakers and a microphone into one device.
+
+camcorder
+hologram
+headset
+sound card
+(True or False) Of all types of digital media, digital video files are the smallest and download faster than the other types.
+
+Most _______ shows media on a timeline with separate tracks for video and sound.
+
+image editing software
+stock photo galleries
+video editing software
+video consoles
+
+
+
+
+
+insert into act(act_cat,actname) values(@catid,'Module 8. Program and App Use and Development Review Questions')
+select @actid=scope_identity()
+(True or False) A copyright is an originator’s exclusive legal right to reproduce, publish, or sell intellectual property.
+
+______ refers to a program that is copyrighted and provided at no cost, but the developer retains all rights to the product.
+
+Shareware
+Freeware
+Open source
+Public domain
+(True or False) On a desktop or laptop computer, you should uninstall a program or app by using your system’s file management program to delete the folder containing the program’s files.
+
+A(n) ______ is an upgrade that addresses a single issue.
+
+patch
+service pack
+update
+debugger
+(True or False) Preinstalled programs and apps may be included as part of a marketing agreement between the device’s manufacturer and a software development company.
+
+(True or False) Programs only are considered restricted by copyright laws if the author has applied for legal protections.
+
+Which of the following troubleshooting tools would you use if you made an update that seems to have caused issues?
+
+process manager
+auditing tools
+patch finder
+restorer
+(True or False) An EULA grants permission for one installation.
+
+In OOP, a(n) ______ defines the format of an object and the actions the object can perform.
+
+class
+compiler
+interpreter
+source
+Which of the following types of software creates a personal security zone around your computer or device?
+
+moat
+firewall
+protection area
+hacker
+(True or False) UX refers to the focus on the user’s reaction and interaction to a product, including its efficiency, effectiveness, and ease of use.
+
+During which phase of the SDLC does the feasibility study take place?
+
+planning
+design
+analysis
+implementation
+(True or False) The waterfall method is an example of agile development.
+
+Ruby and SQL are examples of what type of language?
+
+procedural
+4GL
+assembly
+machine
+(True or False) In order to run a program’s source code, it must be translated into machine language.
+
+
+
+insert into act(act_cat,actname) values(@catid,'Module 9. Web Development Review Questions')
+select @actid=scope_identity()
+When you write HTML code, you use blank 1 to describe the structure of information on a webpage.
+
+a web address
+tags
+styles
+links
+CSS lets you change the blank 1 of a website.
+
+behavior
+structure
+speed
+appearance
+Which of these is a use for JavaScript on a webpage?
+
+centering text on a page
+displaying a slideshow of images
+creating a hyperlink
+displaying an image as the background of a webpage
+Which of these is most likely an example of a static website?
+
+a website for purchasing an airplane ticket
+a website for making reservations at a local restaurant
+a website for creating and sharing vacation photos
+a website for learning about a local barbershop’s hours and services
+If you want to make a personal website and do not have any coding skills, you should probably use blank 1.
+
+an IDE
+a CMS
+Filezilla
+a website builder
+A web host’s uptime is a measure of blank 1.
+
+reliability, so visitors can access your site without concerns that the web server is unavailable
+data transfer speed available so your site will load quickly
+processing power available so complex database queries will run efficiently
+the speed of the solid-state drives on the web server, so information can be stored quickly
+Which of these usually is NOT collected by a website analytics tool?
+
+number of visitors online
+names of website visitors
+how long a visitor stays on each page on average
+type of device used to view the page
+Which of these statements is true about XML?
+
+You can export data from a database into XML to share with other applications
+You can display XML data in a browser without special formatting
+XML data is stored in binary, so it has small file sizes
+Every XML file has a head and a body section.
+When you upload webpage files from your computer to a web server, you should use a(n) blank 1.
+
+text editor
+website analytics tool
+webpage builder
+FTP client
+Code to specify webpage elements such as paragraphs, lists, links, audio or video files, is an example of blank 1.
+
+HTML
+CSS
+JavaScript
+XML
+Code to modify the background color of text or a webpage probably is an example of blank 1.
+
+HTML
+CSS
+JavaScript
+XML
+When you can click a button on a website to run code to change the font size, the code that changes the font size dynamically probably is an example of blank 1.
+
+HTML
+CSS
+JavaScript
+XML
+Which of these tags is not specified in the <body> section of a webpage?
+
+<title>
+<h1>
+<p>
+<br>
+When coding an image, HTML 5 requires you to blank 1.
+
+specify height and width attributes
+specify descriptive alternative information using the alt attribute
+place the image in an images folder
+use the <image> tag
+When coding a hyperlink to a webpage that is external to your website, an accepted behavior is to blank 1.
+
+open the page in the same browser tab
+open the page in a new browser tab
+use a relative webpage reference
+display a warning that you are visiting a webpage outside of your website
+If your webpage contains a link to an external website and its web address changes, blank 1.
+
+your webpage will automatically forward to the new address of the external page
+the external website’s web host will notify you to update your webpage
+the link to the external website must be a relative reference
+the link on your website will no longer work
+Which of these should you NOT do when including a video from YouTube on your website?
+
+copy and paste in the embed code from YouTube into your webpage’s HTML file
+use the <video> tag to access the video in your webpage’s HTML file
+locate the code to include the video by clicking Share then embed
+decide whether or not to display player controls on your webpage
+Older HTML tags that have been replaced with newer ways to accomplish the same task are called blank 1.
+
+discontinued
+depreciated
+deprecated
+defunct
+
+
+
+insert into act(act_cat,actname) values(@catid,'Module 10. Networking Review Questions')
+select @actid=scope_identity()
+(True or False) Networks allow computers to share resources, such as hardware, software, data, and information.
+
+(True or False) A switch is a communications device that connects a communications channel such as the Internet to a sending or receiving device such as a computer.
+
+(True or False) A DSL modem uses existing standard copper telephone wiring to send and receive digital data.
+
+Which of the following is not a common network topology?
+
+bus network
+
+star network
+
+client/server network
+
+mesh network
+
+Which of the following is a private network used by organizations to communicate internally?
+
+intranet
+
+Internet
+
+extranet
+
+virtual network
+
+(True or False) Adware tracks and transmits personal information from your computer or device without your knowledge.
+
+Which of the following describes a normal-looking, yet fraudulent Wi-Fi network?
+
+virtual private network
+
+trojan
+
+spoof
+
+evil twin
+
+(True or False) Two types of firewalls include hardware firewalls and software firewalls.
+
+Which of the following is an advisable practice for securing data stored on a network?
+
+Store all data on network attached storage.
+
+Allow all network users access to all data.
+
+Only grant access to data to those with a legitimate need.
+
+Store data on a separate storage device instead of one that is connected to the network.
+
+(True or False) Encryption converts unrecognizable data into recognizable data.
+
+Which government agency is responsible for releasing the rules surrounding Internet access?
+
+Federal Communications Commission (FCC)
+
+Internet Advisory Board (IAB)
+
+Internet Access Commission (IAC)
+
+None of the above
+
+(True or False) The Ethernet standard controls how network interface cards (NICs), routers, and modems share access to cables and phone lines, as well as dictates how to transmit data.
+
+Which of the following is not a safety precaution for securing a wireless network?
+
+Regularly change the wireless network key.
+
+Change the administrative password from the factory-provided default.
+
+Disable WPA2.
+
+Regularly check for and perform updates to your router’s software.
+
+
+insert into act(act_cat,actname) values(@catid,'Module 11. Digital Communication Review Questions')
+select @actid=scope_identity()
+The sending of data from one computer or mobile device to another, often via the Internet, is called ________.
+
+anonymous messaging
+networking
+digital communication
+netiquette
+(True or False) You can send text messages over cellular networks using a mobile phone, or through the web using a desktop computer.
+
+A town might inform its residents of an impending tornado using a(n) ________.
+
+podcast
+aggregator
+media-sharing network
+microblog
+To remove older email messages from your mailbox without deleting them, you can _____ them.
+
+attach
+reply to
+copy
+archive
+As you use digital communication, you should follow the rules of _____ to protect yourself, your family, and your career.
+
+netiquette
+interactivity
+social media
+privacy
+Which of the following is not a negative effect of social networking?
+
+exposure to illegal activities
+increased sense of community
+loss of information control
+decreased employability
+Pinterest, Fancred, and Fitocracy are examples of _____ networks.
+
+social shopping
+sharing economy
+interest-based
+blog
+(True or False) Online harassment is called anonymous messaging.
+
+Which of the following is true for video conferences?
+
+They can only have two participants at one time.
+They may require you to download software and set up an account.
+They are the same as video chats.
+They do not allow participants to see and hear each other.
+
+
+
+insert into act(act_cat,actname) values(@catid,'Module 12. Digital Transformation: Cloud, E-commerce, and AI Review Questions')
+select @actid=scope_identity()
+What characteristic of cloud technology helps minimize storage costs by allowing customers to pay only for what the resources they use?
+
+Broad network access
+
+Measured service
+
+Resource pooling
+
+On-demand self-service
+
+Your website development team is setting up a new website for your company, and you’ve decided to host this website in a cloud service. However, in the interest of improving the website’s performance, you don’t want to have to manage underlying servers. What kind of cloud service will best meet your needs?
+
+SaaS
+
+FWaaS
+
+IaaS
+
+PaaS
+
+Which of the following is not a concern when storing sensitive files in cloud storage?
+
+Access to data during an outage
+
+Compliance with state and federal laws
+
+Automatic scaling of services
+
+Third party access to data
+
+What kind of technology can allow employees to access information about accumulated vacation days from their home computers?
+
+E-commerce
+
+Cloud
+
+CRM
+
+IaaS
+
+What marketing strategy can help streamline contacts with customers and target customer interests?
+
+E-business
+
+USP
+
+Omnichannel
+
+C2C
+
+What kind of e-commerce platform is best suited to support C2C transactions?
+
+Online marketplace
+
+Physical store
+
+Internet-native store
+
+Online storefront
+
+Which e-commerce job role has the most direct influence on customer satisfaction ratings?
+
+Shipping clerk
+
+Customer service representative
+
+Marketing specialist
+
+Delivery truck driver
+
+What set of standards requires retailers to encrypt customers’ payment information?
+
+HIPAA
+
+RaaS
+
+PCI DSS
+
+CRM
+
+What AI technology does a computer use to get better at playing chess?
+
+NLP
+
+ML
+
+Chatbot
+
+IoT
+
+An AI system can use ________ learning processes to identify a previously unknown cause of heart disease.
+
+reinforcement
+
+supervised
+
+personalized
+
+unsupervised
+
+What technologies can be used to connect an IoT device to a local network? Choose two.
+
+Wi-Fi
+
+ANN
+
+Bluetooth
+
+Smart plug
+
+What technology can a call center technician use to find information about a product a customer is interested in purchasing?
+
+RPA
+
+Data analytics
+
+IoT
+
+Chatbot
+
+How can your smartphone’s virtual assistant determine if you’re giving it a command or if someone else is talking instead?
+
+You pause before asking your question.
+
+You use the correct wake word.
+
+You include details in your request.
+
+You complete the voice training process.
+
+
+
+insert into act(act_cat,actname) values(@catid,'Module 13. Databases Review Questions')
+select @actid=scope_identity()
+In a veterinarian’s database, data about an individual pet is stored as a separate _____________.
+
+table
+
+column
+
+field
+
+record
+
+Aimee works for a martial arts studio. Which of the following tables will give her contact information for the mother of a student who requested more information about a new class being offered?
+
+Classes
+
+Locations
+
+Instructors
+
+Students
+
+Carlos’s small start-up company can’t afford their own servers, but they need a robust database for their new web app. Which of the following is the best fit for Carlos’s needs?
+
+Microsoft SQL Server
+
+Google Docs
+
+Amazon Aurora
+
+Microsoft Excel
+
+Chantelle wants to change the color scheme for her company’s web app, and she needs to get the logos updated. What kind of developer should she talk to?
+
+Back-end
+
+DBA
+
+Front-end
+
+Mobile
+
+Which data type would be best for a username field?
+
+Short text
+
+Hyperlink
+
+Long text
+
+AutoNumber
+
+Which database object is best suited to print and hand out during a presentation to a board of advisors?
+
+Table
+
+Report
+
+Form
+
+Query
+
+Which SQL statement would show the type of pet most preferred by retirees?
+
+INSERT INTO TblPets (Owner, Species)
+
+VALUES (‘Retired’, ‘Pet’)
+
+SELECT OwnerAge
+
+FROM TblOwner
+
+WHERE OwnerAge >64
+
+SELECT Species
+
+FROM TblPets
+
+WHERE OwnerAge >64
+
+SELECT Species
+
+FROM TblOwners
+
+WHERE Pet=‘Yes’
+
+Which of the following techniques would be detrimental to the security of an insurance company’s database?
+
+Require long account passwords
+
+Encrypt customer contact information
+
+Install the database server behind a firewall
+
+Allow any user to delete tables
+
+Which aspect of the CIA triad requires that passwords in a database be encrypted?
+
+Integrity
+
+Scalability
+
+Availability
+
+Confidentiality
+
+What’s the most important reason that Big Data is often managed in a cloud environment?
+
+Volume
+
+Veracity
+
+Value
+
+Variety
+
+A database for a website where thousands of users will post their own photos needs to be highly ________________ to handle the quickly increasing number of files.
+
+available
+
+scalable
+
+consistent
+
+distributed
+
+Nadine can check her _____________ for updated, at-a-glance information on current stock prices.
+
+data warehouse
+
+relational database
+
+dashboard
+
+data lake
+
+
+
+insert into act(act_cat,actname) values(@catid,'Module 14. Digital Ethics and Lifestyle Review Questions')
+select @actid=scope_identity()
+(True or False) A person living a digital lifestyle relies on technology to be productive and creative, to manage activities, and to consume entertainment.
+
+AUP stands for ______ use policy.
+
+activity
+
+acceptable
+
+app
+
+administrative
+
+(True or False) Catfishing is the deliberate posting of content intended to cause harm or mislead people by tricking them into believing something that is false.
+
+(True or False) Digital inclusion is the movement to ensure that all users have access to devices, data, and infrastructure to receive high-speed, accurate, reliable information.
+
+The ______ allows you to use a sentence or paragraph of text without permission if you include a citation to the original source.
+
+Creative Commons
+
+public domain
+
+fair use doctrine
+
+DRM
+
+(True or False) Your digital footprint includes all of the information about you that exists online.
+
+A ______ is a collaborative website where users can publish and modify content on a webpage.
+
+wiki
+
+wireframe
+
+blog
+
+chat room
+
+(True or False) It does not matter if your webpage content follows a logical order, as screen readers will read in a random order.
+
+A digital ______ is a period of time during which an individual refrains from using technology.
+
+divide
+
+quarantine
+
+vacation
+
+detox
+
+RSI stands for repetitive ______ injuries.
+
+soreness
+
+strain
+
+syndrome
+
+symptom
+
+(True or False) It is not necessary to remove your personal data from a device before recycling or disposing of it.
+
+

@@ -1,0 +1,11 @@
+Review Session 2.1 Quick Check
+Explain how to insert a comment in a document.
+
+Which paste option inserts copied text using the formatting of the surrounding text?
+
+How can you ensure that the Navigation pane will find instances of “Prairie Savings and Loan” instead of “prairie savings and loan”?
+
+Which style is applied to all text in a new document by default?
+
+What are the two types of styles?
+

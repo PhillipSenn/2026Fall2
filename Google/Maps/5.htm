@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Airport Map</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+html,body{
+height:100%;
+margin:0;
+overflow:hidden;
+font-family:Arial, sans-serif;
+}
+/* FULLSCREEN MAP */
+
+#map{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:1;
+}
+
+/* NAVBAR FLOATS */
+
+.navbar{
+z-index:1000;
+}
+
+/* SIDEBAR */
+
+#sidebar{
+position:absolute;
+top:56px;
+right:0;
+width:300px;
+height:calc(100vh - 56px);
+background:#fff;
+border-left:1px solid #ddd;
+padding:20px;
+z-index:900;
+transform:translateX(100%);
+transition:transform .3s ease;
+}
+
+#sidebar.open{
+transform:translateX(0);
+}
+
+/* AIRPORT MARKER */
+
+.airport-marker{
+background:#1a73e8;
+color:white;
+padding:3px 8px;
+border-radius:12px;
+font-size:12px;
+font-weight:700;
+border:2px solid white;
+box-shadow:0 2px 6px rgba(0,0,0,0.3);
+cursor:pointer;
+}
+
+/* ZOOM DISPLAY */
+
+.zoom-display{
+font-size:36px;
+font-weight:bold;
+color:#1a73e8;
+}
+
+
+/* NAVBAR TICKER */
+
+.ticker-container{
+overflow:hidden;
+white-space:nowrap;
+flex:1;
+margin:0 20px;
+color:#fff;
+}
+
+.ticker-text{
+display:inline-block;
+padding-left:100%;
+animation:ticker 15s linear infinite;
+}
+
+@keyframes ticker{
+0%{
+transform:translateX(0);
+}
+100%{
+transform:translateX(-100%);
+}
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+
+<div class="container-fluid">
+
+<a class="navbar-brand" href="#">Airport Map</a>
+
+<div class="ticker-container">
+  <div class="ticker-text">
+    Phillip departed Egypt for United States
+  </div>
+</div>
+
+<button class="btn btn-outline-light" id="toggleSidebar">
+Info
+</button>
+
+</div>
+
+</nav>
+<!-- MAP -->
+
+<div id="map"></div>
+
+<!-- SIDEBAR -->
+
+<div id="sidebar">
+
+<h5>Map Info</h5>
+
+<div class="mt-3">Current Zoom Level</div>
+
+<div id="zoomValue" class="zoom-display">--</div>
+
+<div class="text-muted mt-3">
+
+</div>
+
+</div>
+
+
+<!-- SCRIPTS -->
+
+<script src="google-maps.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script>
+
+async function initMap(){
+
+const dulles = {lat:38.9531,lng:-77.4565};
+
+const {Map} = await google.maps.importLibrary("maps");
+const {AdvancedMarkerElement} = await google.maps.importLibrary("marker");
+
+const map = new Map(document.getElementById("map"),{
+
+zoom:3,
+minZoom:3,
+center:dulles,
+mapId:"7c151be88bb28cf02723aa80",
+
+restriction:{
+latLngBounds:{
+north:85,
+south:-78,
+west:-180,
+east:180
+}
+}
+
+});
+
+/* MARKER */
+
+const markerContent = document.createElement("div");
+
+markerContent.className="airport-marker";
+markerContent.textContent="IAD";
+
+markerContent.setAttribute("data-bs-toggle","tooltip");
+markerContent.setAttribute("data-bs-title","Dulles Airport");
+
+new AdvancedMarkerElement({
+
+map:map,
+position:dulles,
+content:markerContent
+
+});
+
+/* ZOOM DISPLAY */
+
+const zoomDisplay=$("#zoomValue");
+
+zoomDisplay.text(map.getZoom());
+
+map.addListener("zoom_changed",function(){
+
+const zoom=Math.round(map.getZoom()*10)/10;
+
+zoomDisplay.text(zoom);
+
+});
+
+}
+
+/* SIDEBAR TOGGLE */
+
+$("#toggleSidebar").on("click",function(){
+
+$("#sidebar").toggleClass("open");
+
+});
+
+/* INIT MAP */
+
+$(initMap);
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+---
+description: JavaScript style — named functions, no arrows, jQuery, promises/callbacks
+globs: "**/*.js"
+alwaysApply: false
+---
+
+# JavaScript Style
+
+- Use named `function` declarations. Do not use anonymous functions or arrow syntax (`=>`).
+- Handlers take a `response` argument and return a result.
+- Prefer jQuery over vanilla DOM APIs.
+- Prefer promises (`.then` / `.catch`) and callbacks. Do not use `async`/`await`.
+
+```javascript
+// ❌ BAD
+$('.nav-link').each(() => { $(this).addClass('active') })
+async function load() {
+  const data = await fetch(url).then(r => r.json())
+}
+
+// ✅ GOOD
+$('.nav-link').each(each_navlink)
+function each_navlink() {
+  $(this).addClass('active')
+}
+
+function get_json(url) {
+  return fetch(url).then(done).catch(caught(url))
+  function done(response) {
+    if (!response.ok) {
+      throw new Error('HTTP ' + response.status)
+    }
+    return response.json()
+  }
+}
+```

@@ -1,0 +1,42 @@
+Review Session 1.1 Quick Check
+How are chart sheets different from worksheets?
+
+What is the cell reference for the cell located in the third column and fourth row of a worksheet?
+
+What is the range reference for the block of cells D3 through E10?
+
+What is the range reference for cells A1 through C5 and cells A8 through C12?
+
+How is text aligned within a worksheet cell by default?
+
+How would the number 00514 appear in a cell?
+
+Cell B2 contains the entry May 3, 2025. Why doesn’t Excel consider this a text entry?
+
+How do you autofit a column to match its longest cell entry?
+
+
+
+
+
+
+Review Session 1.2 Quick Check
+What is the formula to add values in cells A1, B1, and C1? What function will achieve the same result?
+
+What is the formula to count the number of numeric values in the range A1:A30?
+
+If you insert cells into the range C1:D10, shifting the cells to the right, what is the new location of the data that was previously in cell F4?
+
+Cell E11 contains the formula =SUM(E1:E10). How is the formula adjusted when a new row is inserted above row 5?
+
+In the following function, which arguments are required and which arguments are optional:
+ReviewSession1.2QuickCheck.png
+
+Details
+What is the formula to sum all the numeric values in column C.
+
+Describe the four ways of viewing worksheet contents in Excel.
+
+How are page breaks indicated in Page Break Preview?
+
+

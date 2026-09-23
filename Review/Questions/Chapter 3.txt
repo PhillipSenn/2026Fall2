@@ -1,0 +1,75 @@
+Review Questions
+(True or False) Flash memory is a type of volatile memory.
+
+(True or False) Volatile memory loses its contents when power is removed.
+
+(True or False) In an 8-bit coding scheme, 8 bits can represent one character.
+
+Which of the following storage devices requires an Internet connection?
+
+internal hard drive
+
+cloud storage
+
+solid state drive
+
+flash memory
+
+In which of the following types of computers is the system unit in separate housing from the monitor?
+
+desktop computer
+
+all-in-one computer
+
+laptop computer
+
+tablet
+
+(True or False) In general, a high-powered processor is not necessary for a computer that will be used primarily to check email and browse the web.
+
+All of the following are pointing devices except:
+
+trackball
+
+touchpad
+
+mouse
+
+touchpointer
+
+(True or False) Plotters are small, lightweight printers that easily can be connected to mobile devices.
+
+Which of the following tells your computer how to connect to devices you might connect?
+
+device manager
+
+device driver
+
+configuration manager
+
+communication manager
+
+(True or False) The speed at which data travels on a bus is referred to as the word size.
+
+Under which of the following circumstances might you be most likely to contact a professional to repair your computer or mobile device?
+
+screen is broken
+
+computer cannot synchronize with Bluetooth accessories
+
+computer or device is too hot
+
+printer will not print
+
+(True or False) Uninterruptable power supplies and surge suppressors will help protect your computer from power outages.
+
+If you are experiencing display problems on your computer, which of the following troubleshooting techniques might you attempt first?
+
+Contact a professional for assistance.
+
+Replace the cables.
+
+Check to see that all cables are properly connected.
+
+Purchase a new monitor.
+

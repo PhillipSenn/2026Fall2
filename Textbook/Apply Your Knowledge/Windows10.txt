@@ -1,0 +1,37 @@
+WIN 1-9b. Apply Your Knowledge
+Reinforce the skills and apply the concepts you learned in this module.
+
+Exploring Windows 10
+Instructions: You will use Windows 10 to perform the following tasks. For each task, record the exact steps you take and submit them in the format required by your instructor.
+
+Perform the following tasks:
+
+1
+Pin the Photos app to the taskbar.
+
+2
+Unpin the Photos app from the taskbar.
+
+3
+Pin the File Explorer to the Start menu.
+
+4
+Unpin the File Explorer from the Start menu.
+
+5
+Change the size of a tile on the Start menu (choose from any available size).
+
+6
+Turn on a Live Tile.
+
+7
+Turn off a Live Tile.
+
+8
+Move a tile to a different area on the Start menu.
+
+9
+Search for an app.
+
+10
+Start the Microsoft Store app (Figure 1–79).

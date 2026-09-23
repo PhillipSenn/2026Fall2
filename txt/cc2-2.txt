@@ -1,0 +1,63 @@
+Define Web Browsing Terms
+When you use a mobile phone or other device to access the web, you are accessing a collection of webpages located on computers around the world, connected through the Internet. A webpage like the one shown in Figure 2-2 is an electronic document that can contain text, graphics, sound, video, and links to other webpages.
+
+Figure 2-2
+
+Details
+Webpage
+
+The content of most webpages makes them visually appealing. The links make it possible to pursue information in a nonlinear fashion, following a route that looks more like a web than a straight line.
+
+A collection of webpages (often shortened to “pages”) makes up a website. A company, organization, institution, group, or person creates and maintains a website. In general, websites focus on a specific topic, business, or purpose.
+
+When you visit a website for the first time, figure out its purpose so you know what type of content to expect and which actions are appropriate. For example, the purpose of the ESPN website shown in Figure 2-3 is to provide sports news and entertainment, while the Sports Reference website provides statistics only. Both websites are dedicated to sports, but each has a different purpose.
+
+Figure 2-3
+
+Details
+espn.com; sports-reference.com
+
+Comparing websites
+
+Use a Browser
+To access the web, you open a browser, an app designed to display webpages. For example, Google Chrome, Apple Safari, and Microsoft Edge are browsers. You use the tools in a browser to navigate the web, or move from one webpage to another.
+
+The webpage that appears when you open a browser is called the home page or start page. (The main page in a website is also called the home page. For example, the webpage shown in Figure 2-2 is the home page on the Cengage website.) To display a different webpage, you use links, short for hyperlinks, words or graphics you can click to display a webpage or other resource on the Internet, such as a file.
+
+Keep Track of Webpages
+To keep track of billions of webpages, the Internet assigns each one a uniform resource locator (URL), an address that identifies the location of the page on the Internet. A URL can consist of the parts shown in Figure 2-4.
+
+Figure 2-4
+
+Details
+Parts of a URL
+
+If you can interpret a URL, you can learn about the sponsor, origin, and location of the webpage and catch a glimpse of how the web works. Table 2-1 defines each part of a URL.
+
+Table 2-1 URL Parts
+URL Part	Definition
+Protocol	A standardized procedure computers use to exchange information
+Server address	The address of the server storing the webpage
+Pathname	The address to the folder containing the webpage
+File name	The name of the webpage file
+When the URL for a webpage starts with http://, the browser uses the Hypertext Transfer Protocol (HTTP), the most common way to transfer information around the web, to retrieve the page.
+
+A server is a powerful networked computer that provides resources to other computers. A web server delivers webpages to computers requesting the pages through a browser. In the server address www.cengage.com, the www indicates that the server is a web server, cengage is the name the Cengage company chose for this website, and .com means that a commercial entity runs the web server.
+
+The server address in a URL corresponds to an Internet Protocol (IP) address, which identifies every computer on the Internet. An IP address is a unique number that consists of four sets of numbers from 0 to 255 separated by periods, or dots, as in 69.32.132.255. Although computers can use IP addresses easily, they are difficult for people to remember, so domain names were created. A domain name identifies one or more IP addresses, such as cengage.com. URLs use the domain name in the server address part of the URL to identify a particular website.
+
+In addition, each file stored on a web server has a unique pathname, just like files stored on a computer. The pathname in a URL includes the names of the folders containing the file, the file name, and its extension. A common file name extension for webpages is .html, sometimes shortened to .htm. For example, the pathname might be student/index.html, which specifies a file named index.html stored in a folder named student.
+
+Not all URLs include a pathname. If you don’t specify a pathname or file name in a URL, most web browsers open a file named index.html or index.htm, which is the default name for a website’s main page.
+
+Navigate the Web
+A browser displays the URL for the current webpage in its address bar, as shown in Figure 2-5. You can also use the address bar to type the URL of the webpage you want to display.
+
+Figure 2-5
+
+Details
+Microsoft Corporation
+
+Navigating the web with a browser
+
+As you navigate websites, your browser keeps a copy of each page you view in a cache, so that the next time you go to a webpage, it loads more quickly. The browser also keeps track of pages you have viewed in sequence by tracking breadcrumbs—the path you followed to display a webpage. The navigation bar in a browser includes buttons such as Back and Forward that you can use to revisit webpages along the breadcrumb path.

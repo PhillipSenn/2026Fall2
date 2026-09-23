@@ -1,0 +1,267 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="zen_garden.css">
+</head>
+<body>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&display=swap');
+
+.zg-root {
+  font-family: 'DM Mono', monospace;
+  padding: 1.5rem 0;
+  color: var(--color-text-primary);
+}
+
+.zg-header {
+  margin-bottom: 1.5rem;
+}
+
+.zg-header h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  font-weight: 400;
+  margin: 0 0 4px;
+}
+
+.zg-header p {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+
+.zg-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.zg-card {
+  background: var(--color-background-primary);
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s;
+}
+
+.zg-card:hover {
+  border-color: var(--color-border-primary);
+}
+
+.zg-thumb {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: var(--color-background-secondary);
+  position: relative;
+  overflow: hidden;
+}
+
+.zg-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.zg-thumb-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+  letter-spacing: 0.08em;
+}
+
+.zg-body {
+  padding: 12px 14px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.zg-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.zg-author {
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+  letter-spacing: 0.04em;
+}
+
+.zg-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 2px 0;
+}
+
+.zg-tag {
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 20px;
+  border: 0.5px solid var(--color-border-secondary);
+  color: var(--color-text-secondary);
+  letter-spacing: 0.03em;
+}
+
+.zg-explain-btn {
+  margin-top: auto;
+  padding: 7px 12px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  background: transparent;
+  border: 0.5px solid var(--color-border-secondary);
+  border-radius: var(--border-radius-md);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  letter-spacing: 0.03em;
+}
+
+.zg-explain-btn:hover {
+  background: var(--color-background-secondary);
+  border-color: var(--color-border-primary);
+  color: var(--color-text-primary);
+}
+
+.zg-explain-btn.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.zg-explanation {
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  border-top: 0.5px solid var(--color-border-tertiary);
+  padding-top: 8px;
+  display: none;
+}
+
+.zg-explanation.visible {
+  display: block;
+}
+</style>
+
+<div class="zg-root">
+  <h2 class="sr-only">CSS Zen Garden design cards — click any card to see what makes that design unique</h2>
+  <div class="zg-header">
+    <h2>CSS Zen Garden</h2>
+    <p>same html · different css · infinite designs</p>
+  </div>
+  <div class="zg-grid" id="grid"></div>
+</div>
+
+<script>
+const designs = [
+  { id: 221, name: "Mid Century Modern", author: "Andrew Lohman", tags: ["geometric", "warm palette", "retro"], description: "Clean geometric shapes and a warm earth-tone palette inspired by 1950s American design. Bold sans-serif typography, structured layouts, and a sense of order with decorative flair." },
+  { id: 220, name: "Garments", author: "Dan Mall", tags: ["editorial", "fashion", "typographic"], description: "Editorial fashion-magazine aesthetic. Typography is the hero — oversized display text, stark contrast, and refined whitespace create a high-fashion feel without a single image." },
+  { id: 219, name: "Steel", author: "Steffen Knoeller", tags: ["industrial", "dark", "metallic"], description: "Raw industrial aesthetic with a dark, metallic palette. Simulates riveted steel surfaces and brushed metal textures using only CSS gradients — no images required." },
+  { id: 218, name: "Apothecary", author: "Trent Walton", tags: ["vintage", "serif-heavy", "earthy"], description: "Victorian apothecary shop aesthetic. Dense serif typography, aged parchment tones, and ornamental rules and dividers evoke hand-typeset pharmaceutical labels from the 1800s." },
+  { id: 217, name: "Screen Filler", author: "Elliot Jay Stocks", tags: ["bold", "full-bleed", "modern"], description: "Every element stretches edge-to-edge. Typography at huge scale fills the viewport deliberately. Contrast and spatial tension replace decorative detail." },
+  { id: 216, name: "Fountain Kiss", author: "Jeremy Carlson", tags: ["romantic", "painterly", "flowing"], description: "Organic, flowing shapes and a romantic soft-focus palette. Curved containers and painterly background elements make the layout feel hand-crafted rather than constructed." },
+  { id: 215, name: "A Robot Named Jimmy", author: "meltmedia", tags: ["playful", "illustrated", "quirky"], description: "Full illustrated character art integrated into the layout. The CSS positions and animates a custom robot illustration around the text, blurring the line between graphic design and web design." },
+  { id: 214, name: "Verde Moderna", author: "Dave Shea", tags: ["elegant", "green", "art nouveau"], description: "Dave Shea's own submission. Art Nouveau ornamental borders and a deep forest-green palette. Decorative floral motifs built from CSS-positioned background images frame the content with gallery-worthy elegance." },
+  { id: 213, name: "Under the Sea!", author: "Eric Stoltz", tags: ["aquatic", "illustrated", "layered"], description: "Richly illustrated underwater scene layered behind and around the text. Multiple z-index layers of coral, fish, and bubbles create parallax depth — all controlled by CSS positioning." },
+  { id: 212, name: "Make 'em Proud", author: "McAghon & Reifsnyder", tags: ["americana", "bold", "athletic"], description: "Bold American sports-team aesthetic. Block typography, strong diagonal accents, and a high-contrast red-white-blue palette give it the energy of a stadium scoreboard or vintage pennant." },
+  { id: 211, name: "Orchid Beauty", author: "Kevin Addison", tags: ["floral", "soft", "feminine"], description: "Delicate orchid motifs and a soft pink-lavender palette. Floating petals and curved section backgrounds are pure CSS — the layout breathes and the decoration feels woven into the structure." },
+  { id: 210, name: "Oceanscape", author: "Justin Gray", tags: ["panoramic", "blue", "atmospheric"], description: "A wide, cinematic ocean horizon stretches across the top. Cool blue gradients and generous whitespace make it feel like staring out to sea — calm, spacious, and unhurried." },
+  { id: 209, name: "CSS Co., Ltd.", author: "Benjamin Klemm", tags: ["corporate", "japanese", "structured"], description: "Japanese corporate design language — clean grid structure, kanji-style logotype, formal hierarchy, and a restrained monochromatic palette. Looks like a multinational annual report." },
+  { id: 208, name: "Sakura", author: "Tatsuya Uchida", tags: ["japanese", "minimalist", "spring"], description: "Deeply Japanese — falling cherry blossoms, soft ink-wash tones, and haiku-like negative space. Minimalism here is cultural rather than trendy, referencing wabi-sabi and seasonal impermanence." },
+  { id: 207, name: "Kyoto Forest", author: "John Politowski", tags: ["lush", "vertical", "nature"], description: "Tall bamboo grove imagery and vertical rhythms dominate. The layout scrolls like a hanging scroll painting; deep greens and vertical text spacing reinforce the forest immersion." },
+  { id: 206, name: "A Walk in the Garden", author: "Simon Van Hauwermeiren", tags: ["illustrated", "storybook", "green"], description: "A hand-illustrated garden stroll. Whimsical plant and path illustrations border the content, giving it the feel of a children's book illustration rather than a web page." },
+  { id: 205, name: "spring360", author: "Rene Hornig", tags: ["circular", "radial", "experimental"], description: "Radial layout instead of a vertical stack — elements orbit a central point. Breaking the top-to-bottom reading convention entirely is the core CSS statement here." },
+  { id: 204, name: "Withering Beauty", author: "William Duffy", tags: ["dark", "gothic", "decay"], description: "Gothic decay aesthetic. Dark backgrounds, aged textures, and wilting botanical motifs create a memento mori mood. The typography is deliberately distressed and fragile-feeling." },
+];
+
+const allNames = designs.map(d => d.name);
+
+function renderCards() {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = designs.map(d => `
+    <div class="zg-card" id="card-${d.id}">
+      <div class="zg-thumb">
+        <img src="https://csszengarden.com/content/previews/${d.id}.png" alt="${d.name} design preview"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="zg-thumb-placeholder" style="display:none;">${d.id}</div>
+      </div>
+      <div class="zg-body">
+        <p class="zg-title">${d.name}</p>
+        <p class="zg-author">by ${d.author}</p>
+        <div class="zg-tags">${d.tags.map(t => `<span class="zg-tag">${t}</span>`).join('')}</div>
+        <button class="zg-explain-btn" onclick="explain(${d.id})">↗ what makes this unique?</button>
+        <div class="zg-explanation" id="exp-${d.id}"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function explain(id) {
+  const design = designs.find(d => d.id === id);
+  const btn = document.querySelector(`#card-${id} .zg-explain-btn`);
+  const expDiv = document.getElementById(`exp-${id}`);
+
+  if (expDiv.classList.contains('visible')) {
+    expDiv.classList.remove('visible');
+    btn.textContent = '↗ what makes this unique?';
+    return;
+  }
+
+  btn.classList.add('loading');
+  btn.textContent = 'thinking...';
+
+  const otherDesigns = designs.filter(d => d.id !== id).map(d => `- ${d.name}: ${d.tags.join(', ')}`).join('\n');
+
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{
+          role: 'user',
+          content: `You are an expert CSS and web design historian explaining CSS Zen Garden designs.
+
+The design is: "${design.name}" by ${design.author}
+Its character: ${design.description}
+Tags: ${design.tags.join(', ')}
+
+The other 17 designs in this set are:
+${otherDesigns}
+
+Write 2–3 sentences explaining what makes "${design.name}" distinctly different from all the others. Focus on its unique CSS technique, aesthetic philosophy, or cultural inspiration. Be specific and interesting. Do not use bullet points. Plain prose only.`
+        }]
+      })
+    });
+    const data = await resp.json();
+    const text = data.content?.find(b => b.type === 'text')?.text || design.description;
+    expDiv.textContent = text;
+    expDiv.classList.add('visible');
+    btn.textContent = '↑ hide';
+  } catch (e) {
+    expDiv.textContent = design.description;
+    expDiv.classList.add('visible');
+    btn.textContent = '↑ hide';
+  }
+
+  btn.classList.remove('loading');
+}
+
+renderCards();
+</script>
+</body>
+</html>

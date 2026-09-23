@@ -1,0 +1,160 @@
+Review Questions
+Each webpage is assigned a(n) blank 1, an address that identifies the location of the page on the Internet.
+
+Internet Protocol (IP)
+
+uniform resource locator (URL)
+
+top-level domain (TLD)
+
+Hypertext Transfer Protocol (HTTP)
+
+In the web address www.microsoft.com, the “.com” is the blank 1 meaning blank 2.
+
+web server name; World Wide Web
+
+pathname; location of the webpage
+
+top-level domain (TLD); commercial enterprise
+
+domain name; name of the organization
+
+(True or False) The Internet Engineering Task Force (IETF) sets standards for webpage design.
+
+A(n) blank 1 website gathers, organizes, and then distributes web content.
+
+content aggregator
+
+media sharing
+
+entertainment
+
+search engine
+
+(True or False) You must be online to use web apps.
+
+On a webpage, a blank 1 provides supplemental material such as social networking feeds and ads.
+
+navigation bar
+
+header
+
+footer
+
+sidebar
+
+Which of the following indicates a secure website connection?
+
+https in the URL
+
+http in the URL
+
+the message “secure website” in the address bar
+
+a shield icon in the address bar
+
+Which of the following is not an advantage of e-commerce for consumers?
+
+You save time by visiting websites instead of stores.
+
+You have little risk of having your credit card number intercepted.
+
+You can choose goods from any vendor in the world.
+
+You can shop no matter your location, time of day, or conditions.
+
+Which of the following describes business-to-business (B2B) e-commerce purchases?
+
+The consumer is the decision maker.
+
+Pricing can vary for each customer.
+
+Customers bid on items being sold by other customers.
+
+Customers can pick up the purchased item in a physical store.
+
+A business-to-consumer (B2C) website tracks the items you place in a shopping cart using blank 1.
+
+an electronic wallet
+
+the Transport Layer Security (TLS) protocol
+
+crawlers
+
+cookies
+
+(True or False) A digital coupon provides a promotional code you enter when you check out and pay for online purchases.
+
+If you have blank 1, you can evaluate whether information is misleading, biased, or out of date.
+
+information protocols
+
+technical proficiency
+
+information security
+
+information literacy
+
+(True or False) When you perform a search, a general search engine searches the entire Internet.
+
+Who or what creates the index for a web directory?
+
+a digital spider
+
+a human editor
+
+a wiki
+
+a search operator
+
+Which search operator would you use to locate webpages containing the exact phrase augmented reality, with words in the same order?
+
+augmented + reality
+
+– augmented reality
+
+“augmented reality”
+
+~augmented reality~
+
+Which of the following is an example of a specialty search engine?
+
+Bing
+
+Wolfram Alpha
+
+Google
+
+NexTag
+
+Checking a website author’s credentials is one way to establish a site’s blank 1.
+
+copyright
+
+information literacy
+
+credibility
+
+security
+
+Which of the following lets you use a sentence or paragraph of text without permission if you include a citation to its source?
+
+fair use doctrine
+
+Creative Commons
+
+CARS checklist
+
+citation style
+
+Plagiarism is best defined as blank 1.
+
+moral principles that govern our behavior
+
+the act of citing sources
+
+using another’s work and claiming it as your own
+
+rights belonging to a work’s creator
+
+

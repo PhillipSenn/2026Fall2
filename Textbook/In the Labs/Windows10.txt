@@ -1,0 +1,101 @@
+WIN 1-9e. In the Labs
+Design and implement a solution using creative thinking and problem-solving skills.
+
+Lab 1 Setting Reminders in Windows 10
+Problem: You have just started a new job and want to be sure that you meet all project deadlines and attend required meetings. You have added these events to your calendar but also want to set reminders for these events in Windows 10 (Figure 1–82).
+
+Figure 1–82
+Open Image Viewer.
+Details
+Perform the following steps:
+
+1
+Click the search box to activate it.
+
+2
+Click the Notebook button to display the Notebook.
+
+3
+Click the ‘Create a reminder’ link.
+
+4
+Type Weekly project team meeting in the Remember to… box.
+
+5
+Select 2:00 PM for the reminder time.
+
+6
+Set the meeting to occur every Wednesday (Hint: Select the first upcoming Wednesday on the calendar, click the Only Once drop down list, and then click Weekly.)
+
+7
+Click the Remind button.
+
+8
+Set the following additional reminders. Choose descriptive text to identify each reminder:
+
+Accounting report due every Tuesday at 3:00 p.m.
+
+Meeting with IT Department on March 19, 2021, at 9:00 a.m.
+
+Complete system backup every Wednesday at 4:00 p.m.
+
+Attend team lunch every Friday at 12:00 p.m.
+
+Financial system training on April 12, 2021, at 11:00 a.m.
+
+9
+Record the steps you took to perform these actions, and submit them in a format required by your instructor.
+
+Lab 2 Working with Multiple Apps
+Problem: You have learned that Windows supports multitasking, which is the ability to have multiple apps open at once and switch between them (Figure 1–83). You would like to experiment with the different methods by which you can switch between apps.
+
+Figure 1–83
+Open Image Viewer.
+Details
+Perform the following steps:
+
+Part 1: Starting Microsoft Edge, the File Explorer, and WordPad
+
+1
+Display the desktop and then click the Microsoft Edge app button on the taskbar to start Microsoft Edge.
+
+2
+Click the File Explorer button to open the File Explorer window.
+
+3
+Type WordPad in the search box and then click the WordPad Desktop app search result to start the WordPad app.
+
+Part 2: Switching among the Windows
+
+1
+Press ALT+TAB to switch to the next open window.
+
+2
+Press CTRL+ALT+TAB to view the programs that are running. Press TAB. Click the WordPad Live Preview to switch to the WordPad app.
+
+3
+Click the Task View button on the taskbar to view the programs that are running. Click the Microsoft Edge Live Preview to switch to Microsoft Edge.
+
+Part 3: Reporting Your Findings
+
+1
+What happens when you press ALT+TAB?
+
+2
+What is the difference between pressing ALT+TAB and CTRL+ALT+TAB?
+
+3
+What happens when you click the Task View button?
+
+Part 4: Close All Open Windows
+
+1
+Click the Close button for each of the three open windows to close the windows. If a dialog box is displayed that prompts you to save changes to the WordPad document, click the Don’t Save button.
+
+Lab 3 Consider This: Your Turn: Reviewing Installed Apps
+Problem: You have been hired at a local accounting company to oversee the delivery, installation, and configuration of new computers for each of the company’s 20 employees. The company’s president has asked you to remove apps that might be a distraction to the employees and prevent them from working efficiently.
+
+Part 1: Review the apps preinstalled on your computer and prepare a list of apps you might remove. In addition, prepare a list of apps you might keep that would help employees perform their job functions.
+
+Part 2: You made several decisions while searching for this assignment. What decisions did you make? What was the rationale behind these decisions? How did you locate the required information about which apps to keep or remove?
+

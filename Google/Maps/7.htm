@@ -1,0 +1,37 @@
+<pre>&lt;cfscript>
+include '/Inc/header.cfm'
+&lt;/cfscript>
+
+&lt;nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+
+    &lt;div class="container-fluid">
+
+        &lt;a class="navbar-brand">Airport Map&lt;/a>
+
+        &lt;div class="ticker-container">
+            &lt;div class="ticker-text">
+                Phillip departed Egypt for United States
+            &lt;/div>
+        &lt;/div>
+
+        &lt;button class="btn btn-outline-light" id="toggleSidebar">
+            Info
+        &lt;/button>
+
+    &lt;/div>
+&lt;/nav>
+&lt;!-- MAP -->
+
+&lt;div id="map">&lt;/div>
+&lt;div id="sidebar">
+
+    &lt;h5>Map Info&lt;/h5>
+
+    &lt;p>Flight: CAI → IAD&lt;/p>
+    &lt;p>Speed: &lt;span id="speed">&lt;/span> mph&lt;/p>
+    &lt;p>Duration: 30 seconds&lt;/p>
+
+&lt;/div>
+&lt;script src="google-maps.js">&lt;/script>
+&lt;cfinclude template="/Inc/footer.cfm">
+</pre>

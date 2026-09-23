@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Dulles Airport Map - Controlled Zoom</title>
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+html, body{
+  height:100%;
+  margin:0;
+  font-family:Arial, sans-serif;
+}
+
+.main-layout{
+  height:calc(100vh - 56px);
+}
+
+#map{
+  height:100%;
+}
+
+.airport-marker{
+  background:#1a73e8;
+  color:white;
+  padding:3px 8px;
+  border-radius:12px;
+  font-size:12px;
+  font-weight:600;
+  border:2px solid white;
+  box-shadow:0 2px 6px rgba(0,0,0,0.3);
+  white-space:nowrap;
+  cursor:pointer;
+}
+
+.zoom-display{
+  font-size:42px;
+  font-weight:bold;
+  color:#1a73e8;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+
+    <a class="navbar-brand" href="#">Airport Map</a>
+
+    <button class="navbar-toggler" type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarMain">
+
+      <span class="navbar-toggler-icon"></span>
+
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarMain">
+
+      <ul class="navbar-nav me-auto">
+
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Map</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#">Airports</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#">Flights</a>
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+</nav>
+
+
+<!-- MAIN CONTENT -->
+
+<div class="container-fluid main-layout">
+
+  <div class="row h-100">
+
+    <!-- MAP -->
+
+    <div class="col-md-9 p-0">
+      <div id="map"></div>
+    </div>
+
+    <!-- SIDEBAR -->
+
+    <div class="col-md-3 bg-light border-start p-4">
+
+      <h5 class="fw-semibold">Map Info</h5>
+
+      <div class="mt-3">Current Zoom Level:</div>
+
+      <div id="zoomValue" class="zoom-display">--</div>
+
+      <div class="text-muted mt-4">
+        Minimum Zoom: 3<br>
+        Initial Zoom: 3
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- SCRIPTS -->
+
+<!-- Google Maps loader -->
+<script src="google-maps.js"></script>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script>
+
+async function initMap(){
+
+  const dulles = {lat:38.9531,lng:-77.4565};
+
+  const {Map} = await google.maps.importLibrary("maps");
+  const {AdvancedMarkerElement} = await google.maps.importLibrary("marker");
+
+const map = new Map(document.getElementById("map"), {
+  zoom: 3,
+  minZoom: 3,
+  center: dulles,
+  mapId: "7c151be88bb28cf02723aa80",
+tilt:0,
+heading:0,
+
+  restriction: {
+    latLngBounds: {
+      north: 84,
+      south: -78,
+      west: -180,
+      east: 180
+    },
+    strictBounds: false
+  }
+
+});
+
+const markerContent = document.createElement("div");
+
+markerContent.className = "airport-marker";
+
+markerContent.textContent = "IAD";
+
+markerContent.setAttribute("data-bs-toggle","tooltip");
+markerContent.setAttribute("data-bs-title","Dulles Airport");
+markerContent.setAttribute("data-bs-placement","top");
+
+  new AdvancedMarkerElement({
+    map:map,
+    position:dulles,
+    content:markerContent,
+    title:"Dulles International"
+  });
+
+  const zoomDisplay = $("#zoomValue");
+
+  zoomDisplay.text(map.getZoom());
+
+  map.addListener("zoom_changed",function(){
+
+    const zoom = Math.round(map.getZoom()*10)/10;
+
+    zoomDisplay.text(zoom);
+
+  });
+
+}
+
+initMap()
+
+</script>
+
+<!-- Bootstrap JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
