@@ -85,7 +85,7 @@ if (aloud) {
 $(document).on('click','.ansid',ansid)
 function ansid() {
 	var ansid = +$(this).val()
-	get_text('guess/merge_ans.cfm?ansid=' + ansid)
+	get_text('../guess/merge_ans.cfm?ansid=' + ansid)
 }
 
 var voices = []

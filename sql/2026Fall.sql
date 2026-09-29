@@ -591,6 +591,9 @@ declare @answered int=(
 update grade set
  earned=ceiling(100.0 * @answered / @possible)
 where gradeid=@gradeid
+select earned
+from grade
+where gradeid=@gradeid
 go
 
 create or alter proc guess.merge_ans_name
@@ -797,6 +800,27 @@ from (
 ) x
 go
 exec act.rightWrong '19C76747-5CF9-449C-9A52-FEF8906AD52E',224
+go
+create or alter proc ans.where_act
+(@id uniqueidentifier
+,@actid int
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+select ansid,ansname,qname
+	,guess_ans
+from ans
+join q on ans_q=qid
+outer apply (
+	select guess_ans
+	from guess
+	join grade on guess_grade=gradeid
+	where grade_usr=@usrid
+	and guess_ans=ansid
+) guess
+where q_act=@actid
+order by qname
+go
+
 select * from act
 order by actid desc
 select * from usr

@@ -67,3 +67,9 @@ code {
 	margin-left: 2rem;
 	color: inherit !important;
 }
+.card-header[data-bs-toggle="collapse"] {
+	cursor: pointer;
+}
+table.cfdebug {
+	font-family: consolas;
+}

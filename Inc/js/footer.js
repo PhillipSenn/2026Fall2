@@ -105,3 +105,20 @@ document.querySelectorAll('[title]').forEach(pgm.tooltip)
 
 var end = performance.now()
 console.log((performance.now() - app.start).toFixed(0) + 'ms')
+setTimeout(cfdebug,100)
+function cfdebug() {
+	var debug = $('table.cfdebug').first()
+	if (!debug.length) return
+	debug.wrap('<div class="container"></div>')
+	debug.wrap('<div class="card"></div>')
+	debug.wrap('<div class="collapse" id="cfdebugBody"></div>')
+	debug.wrap('<div class="card-body"></div>')
+
+	debug.closest('.card').prepend(
+		'<div class="card-header" data-bs-toggle="collapse" data-bs-target="#cfdebugBody">' +
+			'Debugging Information' +
+		'</div>'
+	)
+    $('a[name="cfdebug_top"]').remove()
+	$('style[type="text/css"]').remove()
+}
