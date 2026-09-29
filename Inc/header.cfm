@@ -20,7 +20,7 @@ param request.progress.width = 0;
 
 param request.flush = true;
 param request.script_name = cgi.script_name;
-echo('<script src="' & request.home & '/Inc/js/header.js"></script>' & chr(10))
+writeoutput('<script src="' & request.home & '/Inc/js/header.js"></script>' & chr(10))
 if (Len(cgi.query_string)) {
 	request.script_name &= '?' & cgi.query_string
 }
@@ -31,20 +31,20 @@ request.pgmDir		= ExpandPath(request.serverDir)
 request.pgmName	= Left(request.serverFile,Len(request.serverFile)-4)
 param request.jQueryUI = 'none';	// base, black-tie, blitzer, cupertino, dark-hive, dot-luv, eggplant, excite-bike, flick, hot-sneaks, humanity, le-frog, mint-choc, overcast, pepper-grinder, redmond, smoothness, south-street, start, sunny, swanky-purse, trontastic, ui-darkness, ui-lightness, vader
 if (request.jQueryUI  != 'none') {
-	echo('<link	rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/' & request.jQueryUI & '/jquery-ui.css">' & chr(10))
+	writeoutput('<link	rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/' & request.jQueryUI & '/jquery-ui.css">' & chr(10))
 }
 param request.bootstrap = true;
 if (request.bootstrap) {
-	echo('<link	rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.css">' & chr(10))
-	echo('<link	rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.css">' & chr(10))
+	writeoutput('<link	rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.css">' & chr(10))
+	writeoutput('<link	rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.css">' & chr(10))
 }
 if (request.header.css) {
-	echo('<link	rel="stylesheet" href="' & request.home & '/Inc/css/header.css' & request.cache & '">' & chr(10))
+	writeoutput('<link	rel="stylesheet" href="' & request.home & '/Inc/css/header.css' & request.cache & '">' & chr(10))
 }
 if (fileExists(request.pgmDir & request.pgmName & '.css')) {
-	echo('<link	rel="stylesheet" href="' & request.pgmName & '.css' & request.cache & '">' & chr(10))
+	writeoutput('<link	rel="stylesheet" href="' & request.pgmName & '.css' & request.cache & '">' & chr(10))
 }
-echo('<link	rel="icon"		 href="' & request.ico & '">' & chr(10))
+writeoutput('<link	rel="icon"		 href="' & request.ico & '">' & chr(10))
 param form.actid=0;
 if (form.actid) {
 	act = new dbo.proc().exec('act.where_act',form.actid)
@@ -60,11 +60,11 @@ if (form.actid) {
 		}
 	}
 }
-echo('<title>' & request.title & '</title>' & chr(10))
+writeoutput('<title>' & request.title & '</title>' & chr(10))
 param request.navbar = true;
 param request.body = 'bg-body-tertiary';
-echo('</head>' & chr(10))
-echo('<body class="' & request.body & '">')
+writeoutput('</head>' & chr(10))
+writeoutput('<body class="' & request.body & '">')
 </cfscript>
 <cfoutput>
 <cfif request.navbar>
@@ -78,25 +78,28 @@ echo('<body class="' & request.body & '">')
 		</button>
 		<form class="collapse navbar-collapse">
 			<cfif StructKeyExists(request,'usr')>
-			<ul id="main-navbar" class="navbar-nav me-auto">
-				<li class="nav-item">
-					<a href="#request.home#?id=#request.usr.id#" class="nav-link">CSC175</a>
-				</li>
-			</ul>
+				<ul id="main-navbar" class="navbar-nav me-auto">
+					<li class="nav-item">
+						<a href="#request.home#?id=#request.usr.id#" class="nav-link">CSC175</a>
+					</li>
+				</ul>
 
-			<ul class="navbar-nav ms-auto me-3">
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="JavaScript:" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-						#request.usr.firstname#
-					</a>
-					<ul class="dropdown-menu dropdown-menu-end">
-						<li><a class="dropdown-item" href="#request.home#/profile.cfm">Edit Profile</a></li>
-						<li><a class="dropdown-item" href="#request.home#/audit.cfm">Email Grade</a></li>
-						<li><hr class="dropdown-divider ms-3"></li>
-						<li><a class="dropdown-item" href="#request.home#/login.cfm">Logout</a></li>
-					</ul>
-				</li>
-			</ul>
+				<ul class="navbar-nav ms-auto me-3">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="JavaScript:" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							#request.usr.firstname#
+						</a>
+						<ul class="dropdown-menu dropdown-menu-end">
+							<li><a class="dropdown-item" href="#request.home#/profile.cfm">Edit Profile</a></li>
+							<li><a class="dropdown-item" href="#request.home#/audit.cfm">Email Grade</a></li>
+							<li><hr class="dropdown-divider ms-3"></li>
+							<li><a class="dropdown-item" href="#request.home#/login.cfm">Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+			<cfelse>
+				<ul id="main-navbar" class="navbar-nav me-auto">
+				</ul>
 			</cfif>
 			<input hidden name="actid" value="#form.actid#">
 		</form>

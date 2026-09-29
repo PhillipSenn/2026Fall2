@@ -36,7 +36,8 @@ if (unanswered.recordcount) {
 	form.pollid = poll.pollid
 	ans = new dbo.proc().exec('ans.where_q',unanswered.qid)
 	length = 0
-	loop query=ans {
+
+	cfloop(query="ans") {
 		if (correct) {
 			length = Len(ansname)
 		}
@@ -48,6 +49,7 @@ if (unanswered.recordcount) {
 		qdesc = ListFirst(qdesc,'_') & '_' & ListLast(qdesc,'_')
 	}
 } else {
+	dump(form)
 	form.pollid=0 // remaining=0
 	totalSeconds = 0
 	maxEnd = 0

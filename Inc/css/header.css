@@ -57,3 +57,13 @@ button.btn-link {
 fieldset, legend {
 	all: revert;
 }
+.template_overage {
+	color: inherit !important;
+}
+font[color="red"] {
+	color: inherit !important;
+}
+code {
+	margin-left: 2rem;
+	color: inherit !important;
+}

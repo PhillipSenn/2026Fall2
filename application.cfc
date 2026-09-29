@@ -1,6 +1,6 @@
 ﻿component {
-this.name = 'lr2026Fall'
-this.datasource = 'lr2026Fall'
+this.name = 'lr2026Fall2'
+this.datasource = 'lr2026Fall2'
 this.sessionmanagement = true
 this.tag.location.addtoken = false
 this.nullSupport = true
@@ -15,17 +15,16 @@ this.serialization = {}
 //	,serializeQueryAs = 'struct' // { COLUMNS:[...], DATA:[ [...], [...], ... ] }
 //	dateTimeFormat = 'iso8601' // 2025-12-20T13:45:00Z
 this.serialization.dateTimeFormat = 'iso8601' // 2025-12-20T13:45:00Z
-this.mappings['/passwords'] = 'C:\home\phillipsenn.com\Passwords'
-//dump(this)
+this.mappings['/passwords'] = 'C:\Passwords'
 
 function onRequestStart(response) {
 //	cfheader(name='Content-Type', value='text/html; charset=utf-8')
 	structAppend(form,url,false)
 
-	request.home = '/2026Fall'
+	request.home = '/2026Fall2'
 	request.counter = 0
 	var cginame = getPageContext().getRequest().getServletPath()
-	var usr
+	var usr = {}
 	if (structKeyExists(form,'email') AND Len(form.email)) {
 		if (Find('@',form.email) and structKeyExists(url,'actid')) {
 			usr = new dbo.proc().exec('usr.email_act',[form.email,url.actid])
@@ -33,7 +32,7 @@ function onRequestStart(response) {
 				var svc = new mail()
 				svc.setSubject('LRU CSC Login')
 				svc.setFrom('Professor Senn<Professor.Senn@gmail.com>')
-				include '/Inc/password.cfm'
+				include '/passwords/2026Fall2.cfm'
 				svc.setPassword(password)
 				svc.setPort(465)
 				svc.setServer('smtp.gmail.com')
@@ -54,7 +53,11 @@ function onRequestStart(response) {
 			usr = new dbo.proc().exec('usr.where_pass',form.email)
 		}
 		if (usr.recordCount) {
-			request.usr = StructCopy(usr)
+			request.usr = {}
+
+			for (var column in usr.columnList) {
+				request.usr[column] = usr[column][1]
+			}
 		} else {
 			sleep(3000)
 		}
@@ -68,13 +71,11 @@ function onRequestStart(response) {
 		// 123456789012345678901234567890123456
 		var usr = new dbo.proc().exec('usr.where_id',form.id)
 		if (usr.recordCount) {
-			request.usr = structCopy(usr)
-//			session.usr = structCopy(usr)
-//			if (IsDefined('url.actid')) {
-//				location url=cgi.script_name & '?actid=' & url.actid; // This won't work if there's an actid and another parameter
-//			} else {
-//				location url=cgi.script_name;
-//			}
+			request.usr = {}
+
+			for (var column in usr.columnList) {
+				request.usr[column] = usr[column][1]
+			}
 		}
 	}
 	if (FindNoCase('/google/maps/',cginame)) {
@@ -105,4 +106,9 @@ function onRequestStart(response) {
 	}
 }
 
+function onRequest(required string targetPage) {
+	include '/Inc/cfm/dump.cfm'
+	include '/Inc/cfm/echo.cfm'
+	include arguments.targetPage
+}
 }

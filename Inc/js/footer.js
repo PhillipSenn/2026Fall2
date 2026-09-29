@@ -5,6 +5,7 @@ $('.btn:not([class*="btn-"]):not([class*="bg-"])').addClass('btn-primary')
 
 $('form:not([method=get])').attr('method', 'post')
 $('textarea').addClass('form-control')
+$('input[type=email]').addClass('form-control')
 $('table').addClass('table table-bordered').wrap('<div class="table-responsive"></div>')
 
 pgm.each_navlink = function() {
