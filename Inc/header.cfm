@@ -20,7 +20,7 @@ param request.progress.width = 0;
 
 param request.flush = true;
 param request.script_name = cgi.script_name;
-writeoutput('<script src="' & request.home & '/Inc/js/header.js"></script>' & chr(10))
+writeoutput('<script src="' & request.home & 'Inc/js/header.js"></script>' & chr(10))
 if (Len(cgi.query_string)) {
 	request.script_name &= '?' & cgi.query_string
 }
@@ -35,11 +35,11 @@ if (request.jQueryUI  != 'none') {
 }
 param request.bootstrap = true;
 if (request.bootstrap) {
-	writeoutput('<link	rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.css">' & chr(10))
-	writeoutput('<link	rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.css">' & chr(10))
+	writeoutput('<link	rel="stylesheet" href="' & request.home & 'Inc/css/bootstrap.css">' & chr(10))
+	writeoutput('<link	rel="stylesheet" href="' & request.home & 'Inc/css/bootstrap-icons.css">' & chr(10))
 }
 if (request.header.css) {
-	writeoutput('<link	rel="stylesheet" href="' & request.home & '/Inc/css/header.css' & request.cache & '">' & chr(10))
+	writeoutput('<link	rel="stylesheet" href="' & request.home & 'Inc/css/header.css' & request.cache & '">' & chr(10))
 }
 if (fileExists(request.pgmDir & request.pgmName & '.css')) {
 	writeoutput('<link	rel="stylesheet" href="' & request.pgmName & '.css' & request.cache & '">' & chr(10))
@@ -90,10 +90,10 @@ writeoutput('<body class="' & request.body & '">')
 							#request.usr.firstname#
 						</a>
 						<ul class="dropdown-menu dropdown-menu-end">
-							<li><a class="dropdown-item" href="#request.home#/profile.cfm">Edit Profile</a></li>
-							<li><a class="dropdown-item" href="#request.home#/audit.cfm">Email Grade</a></li>
+							<li><a class="dropdown-item" href="#request.home#profile.cfm">Edit Profile</a></li>
+							<li><a class="dropdown-item" href="#request.home#audit.cfm">Email Grade</a></li>
 							<li><hr class="dropdown-divider ms-3"></li>
-							<li><a class="dropdown-item" href="#request.home#/login.cfm">Logout</a></li>
+							<li><a class="dropdown-item" href="#request.home#login.cfm">Logout</a></li>
 						</ul>
 					</li>
 				</ul>

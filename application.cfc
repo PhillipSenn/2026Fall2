@@ -21,7 +21,7 @@ function onRequestStart(response) {
 //	cfheader(name='Content-Type', value='text/html; charset=utf-8')
 	structAppend(form,url,false)
 
-	request.home = '/2026Fall2'
+	request.home = '/2026Fall2/' // Trailing slash so that everywhere it's used we don't need a slash
 	request.counter = 0
 	var cginame = getPageContext().getRequest().getServletPath()
 	var usr = {}
@@ -37,7 +37,7 @@ function onRequestStart(response) {
 				svc.setPort(465)
 				svc.setServer('smtp.gmail.com')
 				var emailBody = usr.firstname & ':<p>'
-					& '<a href="https://PhillipSenn.com' & request.home & '/' & usr.actlink & '?actid=' & url.actid & '&id=' & usr.id & '">Click here to login</a>.'
+					& '<a href="https://PhillipSenn.com' & request.home & usr.actlink & '?actid=' & url.actid & '&id=' & usr.id & '">Click here to login</a>.'
 					& '<br>PhillipSenn.com' & request.home & '?id=' & usr.id
 				
 				svc.setBody(emailBody)
@@ -47,7 +47,7 @@ function onRequestStart(response) {
 				svc.setUserName('Professor.Senn@gmail.com')
 				svc.setUseSSL(true)
 				svc.Send()
-				location url=request.home & '/Login?actid=' & url.actid;
+				location url=request.home & 'Login?actid=' & url.actid;
 			}
 		} else {
 			usr = new dbo.proc().exec('usr.where_pass',form.email)
@@ -82,15 +82,15 @@ function onRequestStart(response) {
 //	} else if (FindNoCase('/unicode',cginame)) {
 	} else if (structKeyExists(request,'usr')) {
 		session.usr = StructCopy(request.usr)
-		if (cginame == request.home & '/login.cfm') {
+		if (cginame == request.home & 'login.cfm') {
 			location url=request.home;
 		}
 	} else {
-		if (cginame == request.home & '/login.cfm') {
+		if (cginame == request.home & 'login.cfm') {
 		} else if (structKeyExists(session,'usr')) {
 			request.usr = structCopy(session.usr)
 		} else {
-			include request.home & '/Login.cfm'
+			include request.home & 'login.cfm'
 			return false
 		}
 	}

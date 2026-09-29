@@ -2,8 +2,8 @@
 <cfscript>
 param request.bootstrap = true;
 if (request.bootstrap) {
-	writeoutput('<script src="https://cdn.jsdelivr.net/npm/@popperjs/core/dist/umd/popper.js"></script>' & chr(10))
-	writeoutput('<script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.js"></script>' & chr(10))
+	writeoutput('<script src="' & request.home & 'Inc/js/popper.js"></script>' & chr(10))
+	writeoutput('<script src="' & request.home & 'Inc/js/bootstrap.js"></script>' & chr(10))
 }
 param request.jQuery = '';
 if (request.jQuery == 'none') {
@@ -26,7 +26,7 @@ request.serverFile= getFileFromPath(request.cgiName)
 request.pgmDir		= ExpandPath(request.serverDir)
 request.pgmName	= Left(request.serverFile,Len(request.serverFile)-4)
 if (request.footer.js) {
-	writeoutput('<script src="' & request.home & '/Inc/js/footer.js' & request.cache & '"></script>' & chr(10))
+	writeoutput('<script src="' & request.home & 'Inc/js/footer.js' & request.cache & '"></script>' & chr(10))
 }
 //writeoutput('<h1>#request.pgmDir#</h1>')
 //writeoutput('<h1>#request.pgmname#</h1>')
