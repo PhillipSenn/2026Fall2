@@ -1,10 +1,12 @@
-use lr2026Fall
+use lr2026Fall2
 insert into usr(id,usrname,firstname,email) values('19C76747-5CF9-449C-9A52-FEF8906AD52E',N'Professor Senn',N'Professor','sennp@lr.edu')
-insert into usr(id,usrname,firstname,email) values('21E468EC-A70C-46F5-BB9F-5B5A21F7F32F',N'Phillip Senn',N'Phillip','PhillipSenn@gmail.com')
-insert into usr(usrname,email,firstname) values('Nguyen, Tommy David','Tommy.Nguyen@my.lr.edu','Tommy')
+insert into usr(usrname,email,firstname) values('Mcnulty, Saoirse Rose','Saoirse.Mcnulty@my.lr.edu','Saoirse')
 insert into usr(usrname,email,firstname) values('Ramsey, Nathaniel','Nathaniel.Ramsey@my.lr.edu','Nathaniel')
-insert into usr(usrname,email,firstname) values('Rose, Miles','Miles.Rose@my.lr.edu','Rose')
+insert into usr(usrname,email,firstname) values('Rodatz, Kaydence Emery','Kaydence.Rodatz@my.lr.edu','Kaydence')
+insert into usr(usrname,email,firstname) values('Rose, Miles','Miles.Rose@my.lr.edu','Miles')
 insert into usr(usrname,email,firstname) values('Taylor, Zane M','Zane.Taylor@my.lr.edu','Zane')
+select * from usr
+
 --select newid()
 go
 

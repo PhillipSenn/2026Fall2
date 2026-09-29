@@ -1,6 +1,6 @@
 ﻿<cfscript>
 include '/Inc/header.cfm'
-act = new dbo.proc().usr('act.list')
+act = new dbo.proc().usr('act.where_usr')
 </cfscript>
 
 <cfoutput>

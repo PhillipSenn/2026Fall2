@@ -1,4 +1,4 @@
-drop table if exists LR2026Fall..usr
+drop table if exists LR2026Fall2..usr
 go
 create table usr
 (usrid int identity primary key nonclustered

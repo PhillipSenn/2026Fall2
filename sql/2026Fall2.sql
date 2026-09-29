@@ -1,15 +1,140 @@
-﻿/*
+﻿use lr2026Fall2
+/*
 (@id uniqueidentifier
 ,@actid int
 ) as
 declare @usrid int=(select usrid from usr where id=@id)
 */
+--create schema usr authorization dbo
 create proc usr.where_id
 (@id uniqueidentifier
 ) as
 select * from usr
 where id=@id
 go
+--create schema act authorization dbo
+create or alter proc act.where_usr
+(@id uniqueidentifier
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+select actid,actname,actlink
+	,grpname
+	,catname
+	,earned
+from act
+left join grp on act_grp=grpid
+left join cat on act_cat=catid
+left join(
+	select grade_act,earned
+	from grade
+	where grade_usr=@usrid
+) grade
+on grade_act=actid
+where actsort is null
+or actsort <> 0
+order by actsort,actid
+go
+create or alter proc act.where_act
+(@actid int
+) as
+select actname
+	,act_cat as catid
+from act
+where actid=@actid
+go
+--create schema grade authorization dbo
+create or alter proc grade.where_act
+(@id uniqueidentifier
+,@actid int
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+select earned
+from act
+left join grade on grade_usr=@usrid and grade_act=@actid
+where actid=@actid
+go
+--create schema ans authorization dbo
+create or alter proc ans.where_act
+(@id uniqueidentifier
+,@actid int
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+select ansid,ansname,qname
+	,guess_ans
+from ans
+join q on ans_q=qid
+outer apply (
+	select guess_ans
+	from guess
+	join grade on guess_grade=gradeid
+	where grade_usr=@usrid
+	and guess_ans=ansid
+) guess
+where q_act=@actid
+order by qname
+go
+--create schema guess authorization dbo
+create or alter proc guess.merge_ans
+(@id uniqueidentifier
+,@ansid int
+,@redo int
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+declare @qid int=(select ans_q from ans where ansid=@ansid)
+declare @actid int=(select q_act from q where qid=@qid)
+
+declare @gradeid int=(select gradeid from grade where grade_usr=@usrid and grade_act=@actid)
+if @gradeid is null begin
+	insert into grade(grade_usr,grade_act) values(@usrid,@actid)
+	select @gradeid=scope_identity()
+end
+if @redo = 1 begin
+	delete from guess where guessid in(
+		select guessid
+		from guess
+		join grade on guess_grade=gradeid
+		join ans on guess_ans=ansid
+		where grade_usr=@usrid
+		and ans_q=@qid
+	)
+end
+declare @guessid int=(
+	select guessid 
+	from guess 
+	join grade on guess_grade=gradeid 
+	where grade_usr=@usrid
+	and guess_ans=@ansid
+)
+if @guessid is null begin
+	insert into guess(guess_grade,guess_ans) values(@gradeid,@ansid)
+end
+declare @possible int=(select count(*) from q where q_act=@actid)
+declare @answered int=(
+	select count(distinct ans_q) 
+	from guess 
+	join ans on guess_ans=ansid
+	where guess_grade=@gradeid
+	and correct=1 -- This grades only correct answers
+)
+update grade set
+ earned=ceiling(100.0 * @answered / @possible)
+where gradeid=@gradeid
+select earned
+from grade
+where gradeid=@gradeid
+go
+
+
+
+
+
+
+
+
+
+
+
+
 create or alter proc q.where_act
 (@actid int
 ) as
@@ -470,47 +595,6 @@ on ans_q=qid
 where ans_q is null
 order by rowNumber
 go
---create schema grade authorization dbo
-
-create or alter proc grade.where_act
-(@id uniqueidentifier
-,@actid int
-) as
-declare @usrid int=(select usrid from usr where id=@id)
-select earned
-from act
-left join grade on grade_usr=@usrid and grade_act=@actid
-where actid=@actid
-go
-create or alter proc act.where_act
-(@actid int
-) as
-select actname
-	,act_cat as catid
-from act
-where actid=@actid
-go
-create or alter proc act.list
-(@id uniqueidentifier
-) as
-declare @usrid int=(select usrid from usr where id=@id)
-select actid,actname,actlink
-	,grpname
-	,catname
-	,earned
-from act
-left join grp on act_grp=grpid
-left join cat on act_cat=catid
-left join(
-	select grade_act,earned
-	from grade
-	where grade_usr=@usrid
-) grade
-on grade_act=actid
-where actsort is null
-or actsort <> 0
-order by actsort,actid
-go
 --create schema guess authorization dbo
 create or alter proc guess.change_ans
 (@id uniqueidentifier
@@ -546,55 +630,6 @@ update grade set
 where gradeid=@gradeid
 go
 
-create or alter proc guess.merge_ans
-(@id uniqueidentifier
-,@ansid int
-,@redo int
-) as
-declare @usrid int=(select usrid from usr where id=@id)
-declare @qid int=(select ans_q from ans where ansid=@ansid)
-declare @actid int=(select q_act from q where qid=@qid)
-
-declare @gradeid int=(select gradeid from grade where grade_usr=@usrid and grade_act=@actid)
-if @gradeid is null begin
-	insert into grade(grade_usr,grade_act) values(@usrid,@actid)
-	select @gradeid=scope_identity()
-end
-if @redo = 1 begin
-	delete from guess where guessid in(
-		select guessid
-		from guess
-		join grade on guess_grade=gradeid
-		join ans on guess_ans=ansid
-		where grade_usr=@usrid
-		and ans_q=@qid
-	)
-end
-declare @guessid int=(
-	select guessid 
-	from guess 
-	join grade on guess_grade=gradeid 
-	where grade_usr=@usrid
-	and guess_ans=@ansid
-)
-if @guessid is null begin
-	insert into guess(guess_grade,guess_ans) values(@gradeid,@ansid)
-end
-declare @possible int=(select count(*) from q where q_act=@actid)
-declare @answered int=(
-	select count(distinct ans_q) 
-	from guess 
-	join ans on guess_ans=ansid
-	where guess_grade=@gradeid
-	and correct=1 -- This grades only correct answers
-)
-update grade set
- earned=ceiling(100.0 * @answered / @possible)
-where gradeid=@gradeid
-select earned
-from grade
-where gradeid=@gradeid
-go
 
 create or alter proc guess.merge_ans_name
 (@id uniqueidentifier
@@ -750,6 +785,16 @@ end else begin
 	order by qsort,qid
 end
 go
+create or alter proc usr.update_firstname
+(@id uniqueidentifier
+,@firstname nvarchar(max)
+) as
+update usr set
+ firstname=@firstname
+where id=@id
+select * from usr
+where id=@id
+go
 create or alter proc usr.update_SpeechSynthesisUtterance
 (@id uniqueidentifier
 ,@SpeechSynthesisUtterance int
@@ -801,25 +846,7 @@ from (
 go
 exec act.rightWrong '19C76747-5CF9-449C-9A52-FEF8906AD52E',224
 go
-create or alter proc ans.where_act
-(@id uniqueidentifier
-,@actid int
-) as
-declare @usrid int=(select usrid from usr where id=@id)
-select ansid,ansname,qname
-	,guess_ans
-from ans
-join q on ans_q=qid
-outer apply (
-	select guess_ans
-	from guess
-	join grade on guess_grade=gradeid
-	where grade_usr=@usrid
-	and guess_ans=ansid
-) guess
-where q_act=@actid
-order by qname
-go
+select * from usr
 
 select * from act
 order by actid desc
