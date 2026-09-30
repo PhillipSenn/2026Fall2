@@ -14,9 +14,17 @@ $(document).on('click', '#questions button, #answers button', function () {
 		lock(picked)
 		lock(button)
 		picked = null
-		fetch('../guess/merge_ans.cfm?ansid=' + ansid)
+		var formData = new URLSearchParams()
+		formData.append('id', dom.id)
+		formData.append('ansid', ansid)
+		var url = '../guess/merge_ans.cfm'
+		var params = {
+			method: 'POST',
+			body: formData
+		}
+		fetch(url, params)
 			.then(done)
-			.catch(caught('../guess/merge_ans.cfm?ansid=' + ansid))
+			.catch(caught(url))
 		if (!$('#questions button:not(:disabled)').length) {
 			$('.card-header').text('All shortcuts matched.')
 		}

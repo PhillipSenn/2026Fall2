@@ -1,6 +1,8 @@
 ﻿<cfscript>
-//form.qname = 'Explain how to insert a comment in a document.'
-//form.qname = 'What is the cell reference for the cell located in the third column and fourth row of a worksheet?'
+//param form.qname = 'Explain how to insert a comment in a document.';
+//param form.qname = 'What is the cell reference for the cell located in the third column and fourth row of a worksheet?';
+//param form.id = '19C76747-5CF9-449C-9A52-FEF8906AD52E'; Doesn't work because it has to be in the url.
+setting showdebugoutput=false;
 apiKey = trim("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")
 
 requestBody = {
@@ -25,8 +27,7 @@ Do not use Markdown."
 
 cfhttp(
 	url="https://api.groq.com/openai/v1/chat/completions",
-	method="post",
-	encodeUrl=false
+	method="post"
 ) {
 	cfhttpparam(
 		type="header",

@@ -39,6 +39,7 @@ create table act
 ,act_grp int
 ,act_cat int
 ,actname nvarchar(max)
+,actdesc nvarchar(max)
 ,actsort int
 ,actlink varchar(max)
 )

@@ -101,3 +101,54 @@ function dropTerm(event,ui) {
 function slideup() {
 	$('.col-4').slideUp('slow')
 }
+
+window.addEventListener('keydown', showClue, true)
+window.addEventListener('keyup', hideClue, true)
+window.addEventListener('blur', hideClue)
+
+function showClue(event) {
+	if (!altKey(event) || event.repeat) {
+		return
+	}
+	event.preventDefault()
+	var next = $('.drop-term').filter(unsolved).first()
+	if (!next.length || next.attr('data-blank')) {
+		return
+	}
+	next.attr('data-blank', next.text())
+	next.text(next.attr('data-answer'))
+}
+
+function hideClue(event) {
+	if (event && event.type === 'keyup' && !altKey(event)) {
+		return
+	}
+	if (event && event.type === 'keyup') {
+		event.preventDefault()
+	}
+	$('.drop-term').each(restoreClue)
+}
+
+function restoreClue() {
+	var term = $(this)
+	var blank = term.attr('data-blank')
+	if (!blank) {
+		return
+	}
+	term.removeAttr('data-blank')
+	if (term.droppable('option', 'disabled')) {
+		return
+	}
+	term.text(blank)
+}
+
+function altKey(event) {
+	return event.key === 'Alt'
+		|| event.key === 'AltGraph'
+		|| event.code === 'AltLeft'
+		|| event.code === 'AltRight'
+}
+
+function unsolved() {
+	return !$(this).droppable('option', 'disabled')
+}

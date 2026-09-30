@@ -30,14 +30,14 @@ left join(
 	where grade_usr=@usrid
 ) grade
 on grade_act=actid
-where actsort is null
-or actsort <> 0
+--where actsort is null
+--or actsort <> 0
 order by actsort,actid
 go
 create or alter proc act.where_act
 (@actid int
 ) as
-select actname
+select actname,actdesc
 	,act_cat as catid
 from act
 where actid=@actid

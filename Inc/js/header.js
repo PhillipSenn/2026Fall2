@@ -1,5 +1,5 @@
 ﻿app = {}
-app.start = performance.now()
+//app.start = performance.now()
 
 pgm = {}
 pgm.resolve = function() {	

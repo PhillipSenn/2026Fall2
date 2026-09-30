@@ -86,6 +86,9 @@ function onRequestStart(response) {
 //			location url=request.home;
 //		}
 	} else {
+		setting showdebugoutput=false;
+		writeoutput("No request.usr")
+		abort;
 		if (cginame == request.home & 'login.cfm') {
 //		} else if (structKeyExists(session,'usr')) {
 //			request.usr = session.usr
@@ -106,9 +109,9 @@ function onRequestStart(response) {
 	}
 }
 
-//function onRequest(required string targetPage) {
-	//include '/Inc/cfm/dump.cfm'
-	//include '/Inc/cfm/echo.cfm'
-	//include arguments.targetPage
-//}
+function onRequest(required string targetPage) {
+include '/Inc/cfm/dump.cfm'
+include '/Inc/cfm/echo.cfm'
+include arguments.targetPage
+}
 }

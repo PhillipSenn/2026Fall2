@@ -1,13 +1,13 @@
-﻿var form = {}
-form.qname = 'Subject: ' + $('#catname').text() + '. Question: ' + $('#qname').text().trim()
+﻿var formData = new URLSearchParams()
+formData.append('id', dom.id)
+formData.append('qname','Subject: ' + $('#catname').text() + '. Question: ' + $('#qname').text().trim())
+
 fetch('groq.cfm', {
 	method: 'POST',
 	headers: {
 		'Content-Type': 'application/x-www-form-urlencoded'
 	},
-	body: new URLSearchParams({
-		qname: form.qname
-	})
+	body: formData
 })
 .then(getGroqResponse)
 .catch(handleError)

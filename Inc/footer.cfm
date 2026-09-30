@@ -22,7 +22,7 @@ param request.footer.js = true;
 request.cache=''
 request.cgiName		= getPageContext().getRequest().getServletPath()
 request.serverDir	= getDirectoryFromPath(request.cgiName)
-request.serverFile= getFileFromPath(request.cgiName)
+request.serverFile	= getFileFromPath(request.cgiName)
 request.pgmDir		= ExpandPath(request.serverDir)
 request.pgmName	= Left(request.serverFile,Len(request.serverFile)-4)
 if (request.footer.js) {
@@ -32,8 +32,12 @@ if (request.footer.js) {
 //writeoutput('<h1>#request.pgmname#</h1>')
 //writeoutput('<h1>#fileExists(request.pgmDir & request.pgmName & '.js')#</h1>')
 if (fileExists(request.pgmDir & request.pgmName & '.js')) {
-	writeoutput('<script src="' & request.pgmName & '.js' & request.cache & '"></script>')
+	writeoutput('<script src="' & request.pgmName & '.js' & request.cache & '"></script>' & chr(10))
 }
+//writeOutput('<div hidden id="serverfile">' & request.serverFile & '</div>' & chr(10))
+//if (isDefined('request.scriptname')) {
+	//writeoutput('<div hidden id="scriptname">' & request.scriptname & '</div>')
+//}
 </cfscript>
 </body>
 </html>

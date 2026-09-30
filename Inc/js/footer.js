@@ -1,4 +1,5 @@
 var dom = {} // Document Object Model
+dom.id = $('input[name=id]').val()
 
 $('button').addClass('btn')
 $('.btn:not([class*="btn-"]):not([class*="bg-"])').addClass('btn-primary')
@@ -30,7 +31,7 @@ function caught(url) {
 	}
 	return make_caught
 }
-
+/*
 function get_text(url) {
 	var response = fetch(url).then(done)
 		.catch(caught(url))
@@ -86,7 +87,7 @@ function post_json(url, form) {
 		return response.json()
 	}
 }
-
+*/
 pgm.form_submit = function() {
 	$('body').css('cursor', 'wait')
 }
@@ -103,8 +104,8 @@ pgm.tooltip = function(element) {
 }
 document.querySelectorAll('[title]').forEach(pgm.tooltip)
 
-var end = performance.now()
-console.log((performance.now() - app.start).toFixed(0) + 'ms')
+//var end = performance.now()
+//console.log((performance.now() - app.start).toFixed(0) + 'ms')
 setTimeout(cfdebug,100)
 function cfdebug() {
 	var debug = $('table.cfdebug').first()
