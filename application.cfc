@@ -1,7 +1,7 @@
 ﻿component {
 this.name = 'lr2026Fall2'
 this.datasource = 'lr2026Fall2'
-this.sessionmanagement = true
+this.sessionmanagement = false
 this.tag.location.addtoken = false
 this.nullSupport = true
 
@@ -20,7 +20,6 @@ this.mappings['/passwords'] = 'C:\Passwords'
 function onRequestStart(response) {
 //	cfheader(name='Content-Type', value='text/html; charset=utf-8')
 	structAppend(form,url,false)
-
 	request.home = '/2026Fall2/' // Trailing slash so that everywhere it's used we don't need a slash
 	request.counter = 0
 	var cginame = getPageContext().getRequest().getServletPath()
@@ -76,19 +75,20 @@ function onRequestStart(response) {
 			for (var column in usr.columnList) {
 				request.usr[column] = usr[column][1]
 			}
+//			writedump(request.usr)
 		}
 	}
 	if (FindNoCase('/google/maps/',cginame)) {
 //	} else if (FindNoCase('/unicode',cginame)) {
 	} else if (structKeyExists(request,'usr')) {
-		session.usr = StructCopy(request.usr)
-		if (cginame == request.home & 'login.cfm') {
-			location url=request.home;
-		}
+//		session.usr = StructCopy(request.usr)
+//		if (cginame == request.home & 'login.cfm') {
+//			location url=request.home;
+//		}
 	} else {
 		if (cginame == request.home & 'login.cfm') {
-		} else if (structKeyExists(session,'usr')) {
-			request.usr = structCopy(session.usr)
+//		} else if (structKeyExists(session,'usr')) {
+//			request.usr = session.usr
 		} else {
 			include request.home & 'login.cfm'
 			return false
@@ -106,9 +106,9 @@ function onRequestStart(response) {
 	}
 }
 
-function onRequest(required string targetPage) {
-	include '/Inc/cfm/dump.cfm'
-	include '/Inc/cfm/echo.cfm'
-	include arguments.targetPage
-}
+//function onRequest(required string targetPage) {
+	//include '/Inc/cfm/dump.cfm'
+	//include '/Inc/cfm/echo.cfm'
+	//include arguments.targetPage
+//}
 }

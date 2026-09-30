@@ -1,29 +1,9 @@
 <cfscript>
-request.container = 'container-lg'
+if (isDefined('form.reset')) {
+	new dbo.proc().usr('guess.reset_act',form.actid)
+}
 include '/Inc/header.cfm'
-//ans = new dbo.proc().usr('ans.where_act', form.actid)
-//cfstoredproc(procedure="ans.where_act") {
-//	cfprocparam(cfsqltype="cf_sql_varchar",value=request.usr.id)
-//	cfprocparam(cfsqltype="cf_sql_integer",value=form.actid)
-//	cfprocresult(name="ans")
-//}
-/*
-sql = "declare @usrid int=(select usrid from usr where id='" & request.usr.id & "')
-select ansid,ansname,qname
-	,guess_ans
-from ans
-join q on ans_q=qid
-outer apply (
-	select guess_ans
-	from guess
-	join grade on guess_grade=gradeid
-	where grade_usr=@usrid
-	and guess_ans=ansid
-) guess
-where q_act=" & form.actid & "
-order by qname"
-ans = queryExecute(sql)
-*/
+ans = new dbo.proc().usr('ans.where_act', form.actid)
 choices = []
 guessed = {}
 cfloop(query=ans) {
@@ -44,9 +24,15 @@ for (i = arrayLen(choices); i > 1; i--) {
 </cfscript>
 
 <cfoutput query="act">
-<div class="card">
+<form class="card">
 	<div class="card-header bg-primary-subtle">
-		Click a shortcut and what it does, in either order.
+		<cfif grade.earned ge 100>
+			<button class="float-end btn-outline-danger" name="reset">Reset</button>
+			<input hidden name="id" value="#request.usr.id#">
+			<input hidden name="actid" value="#form.actid#">
+		<cfelse>
+			Click a shortcut and what it does, in either order.
+		</cfif>
 	</div>
 	<div class="card-body">
 		<div class="row g-3">
@@ -68,7 +54,7 @@ for (i = arrayLen(choices); i > 1; i--) {
 			</div>
 		</div>
 	</div>
-</div>
+</form>
 <button class="nav-link">#actname#</button>
 <cfinclude template="/Inc/footer.cfm">
 </cfoutput>

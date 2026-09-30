@@ -32,10 +32,7 @@ function exec(proc,params) {
 
 	cfstoredproc(procedure=proc) {
 		for (i=1;i <= ArrayLen(arrParams);i++) {
-			cfprocparam(
-				value=arrParams[i],
-				cfsqltype='cf_sql_varchar'
-			)
+			cfprocparam(value=arrParams[i],	cfsqltype='cf_sql_varchar')
 		}
 
 		cfprocresult(name='result')

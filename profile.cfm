@@ -23,12 +23,14 @@ if (!len(mark)) {
 
 <cfoutput>
 <div class="card profile shadow">
-	<div class="profile-banner">
-		<div class="profile-mark" aria-hidden="true">#mark#</div>
-		<div class="usrname">#encodeForHtml(request.usr.usrname)#</div>
-		<div class="email">#encodeForHtml(request.usr.email)#</div>
-	</div>
 	<form>
+		<div class="text-center">
+			<button formaction="Unicode/player.cfm" class="profile-banner">
+				<div class="profile-mark" aria-hidden="true">#mark#</div>
+				<div class="usrname">#encodeForHtml(request.usr.usrname)#</div>
+				<div class="email">#encodeForHtml(request.usr.email)#</div>
+			</button>
+		</div>
 		<div class="card-body">
 			<p class="lead mb-3">Hello, <span class="profile-firstname">#encodeForHtml(request.usr.firstname)#</span>.</p>
 			<label for="firstname">First name</label>

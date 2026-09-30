@@ -48,7 +48,7 @@ create or alter proc grade.where_act
 ,@actid int
 ) as
 declare @usrid int=(select usrid from usr where id=@id)
-select earned
+select isnull(earned,0) as earned
 from act
 left join grade on grade_usr=@usrid and grade_act=@actid
 where actid=@actid
@@ -123,9 +123,28 @@ select earned
 from grade
 where gradeid=@gradeid
 go
-
-
-
+create or alter proc usr.codePoint
+(@id uniqueidentifier
+,@codePoint varchar(50)
+) as
+update usr set
+ codePoint=@codePoint
+where id=@id
+exec usr.where_id @id
+go
+create or alter proc guess.reset_act
+(@id uniqueidentifier
+,@actid int
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+declare @gradeid int=(select gradeid from grade where grade_usr=@usrid and grade_act=@actid)
+delete from guess where guessid in(
+	select guessid
+	from guess
+	where guess_grade=@gradeid
+)
+delete from grade where gradeid=@gradeid
+go
 
 
 

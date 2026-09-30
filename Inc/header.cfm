@@ -80,7 +80,7 @@ writeoutput('<body class="' & request.body & '">')
 			<cfif StructKeyExists(request,'usr')>
 				<ul id="main-navbar" class="navbar-nav me-auto">
 					<li class="nav-item">
-						<a href="#request.home#?id=#request.usr.id#" class="nav-link">CSC175</a>
+						<button formaction="#request.home#Index.cfm" class="btn-link nav-link">CSC175</button>
 					</li>
 				</ul>
 
@@ -90,13 +90,14 @@ writeoutput('<body class="' & request.body & '">')
 							#request.usr.firstname#
 						</a>
 						<ul class="dropdown-menu dropdown-menu-end">
-							<li><a class="dropdown-item" href="#request.home#profile.cfm">Edit Profile</a></li>
-							<li><a class="dropdown-item" href="#request.home#audit.cfm">Email Grade</a></li>
+							<li><button class="dropdown-item btn-link" formaction="#request.home#profile.cfm">Edit Profile</button></li>
+							<li><button class="dropdown-item btn-link" formaction="#request.home#audit.cfm">Email Grade</button></li>
 							<li><hr class="dropdown-divider ms-3"></li>
 							<li><a class="dropdown-item" href="#request.home#login.cfm">Logout</a></li>
 						</ul>
 					</li>
 				</ul>
+				<input hidden name="id" value="#request.usr.id#">
 			<cfelse>
 				<ul id="main-navbar" class="navbar-nav me-auto">
 				</ul>

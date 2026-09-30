@@ -79,6 +79,7 @@ include '/Inc/header.cfm'
 		<button name="codePoint" class="btn-primary">
 		Save
 		</button>
+		<input hidden name="id" value="#request.usr.id#">
 	</form>
 </div>
 <cfinclude template="/Inc/footer.cfm">

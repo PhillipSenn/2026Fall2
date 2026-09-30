@@ -1,8 +1,7 @@
 var dom = {}
 dom.codePoint = $('[name="codePoint"]')
 
-var state =
-{
+var state = {
 	page:0,
 	perPage:24,
 	start:0,
@@ -10,14 +9,12 @@ var state =
 	list:[]
 }
 
-var player =
-{
+var player = {
 	baseEmoji:null,
 	finalEmoji:null
 }
 
-var skinTones =
-[
+var skinTones = [
 	null,
 	0x1F3FB,
 	0x1F3FC,
@@ -28,8 +25,7 @@ var skinTones =
 
 $(document).ready(init)
 
-function init()
-{
+function init() {
 	dom.container = $('#emojiContainer')
 	dom.categories = $('#emojiCategories button')
 	dom.skinSection = $('#skinToneSection')
@@ -41,8 +37,7 @@ function init()
 	loadCategory(dom.categories.first())
 }
 
-function categoryClick()
-{
+function categoryClick() {
 	var self = $(this)
 
 	dom.categories.removeClass('active')
@@ -56,8 +51,7 @@ function categoryClick()
 	loadCategory(self)
 }
 
-function loadCategory(btn)
-{
+function loadCategory(btn) {
 	var startHex = btn.data('start')
 	var endHex = btn.data('end')
 
@@ -71,18 +65,15 @@ function loadCategory(btn)
 	render()
 }
 
-function buildEmojiList()
-{
+function buildEmojiList() {
 	var list = []
 	var code
 	var emoji
 
-	for(code = state.start; code <= state.end; code = code + 1)
-	{
+	for(code = state.start; code <= state.end; code = code + 1) {
 		emoji = String.fromCodePoint(code)
 
-		if(isValidEmoji(emoji))
-		{
+		if(isValidEmoji(emoji)) {
 			list.push(emoji)
 		}
 	}
@@ -90,8 +81,7 @@ function buildEmojiList()
 	return list
 }
 
-function render()
-{
+function render() {
 	dom.container.empty()
 
 	var start = state.page * state.perPage
@@ -99,15 +89,13 @@ function render()
 
 	var i
 
-	for(i = start; i < end && i < state.list.length; i = i + 1)
-	{
+	for(i = start; i < end && i < state.list.length; i = i + 1) {
 		addEmoji(state.list[i])
 	}
 	initTooltips()
 }
 
-function addEmoji(emoji)
-{
+function addEmoji(emoji) {
 	var btn = $('<button class="btn btn-light"></button>')
 
 	btn.text(emoji)
@@ -120,15 +108,13 @@ function addEmoji(emoji)
 }
 
 
-function showSkinTonePicker()
-{
+function showSkinTonePicker() {
 	dom.skinContainer.empty()
 
 	var i
 	var emoji
 
-	for(i = 0; i < skinTones.length; i = i + 1)
-	{
+	for(i = 0; i < skinTones.length; i = i + 1) {
 		emoji = applySkinTone(player.baseEmoji,skinTones[i])
 
 		addSkinToneButton(emoji,skinTones[i])
@@ -137,8 +123,7 @@ function showSkinTonePicker()
 	dom.skinSection.removeAttr('hidden')
 }
 
-function addSkinToneButton(emoji,tone)
-{
+function addSkinToneButton(emoji,tone) {
 	var btn = $('<button class="btn btn-light"></button>')
 
 	btn.text(emoji)
@@ -149,8 +134,7 @@ function addSkinToneButton(emoji,tone)
 	dom.skinContainer.append(btn)
 }
 
-function skinToneSelect()
-{
+function skinToneSelect() {
 	var self = $(this)
 
 	var tone = self.data('tone')
@@ -161,10 +145,8 @@ function skinToneSelect()
 	dom.selected.text(player.finalEmoji)
 }
 
-function applySkinTone(baseEmoji,tone)
-{
-	if(!tone)
-	{
+function applySkinTone(baseEmoji,tone) {
+	if(!tone) {
 		return baseEmoji
 	}
 
@@ -173,18 +155,15 @@ function applySkinTone(baseEmoji,tone)
 	return baseEmoji + modifier
 }
 
-function supportsSkinTone(emoji)
-{
-	if(!emojiNameLookup || !emojiNameLookup[emoji])
-	{
+function supportsSkinTone(emoji) {
+	if(!emojiNameLookup || !emojiNameLookup[emoji]) {
 		return false
 	}
 
 	return emojiNameLookup[emoji].skin_tone_support === true
 }
 
-function emojiSelect()
-{
+function emojiSelect() {
 	var self = $(this)
 
 	var emoji = self.data('emoji')
@@ -242,12 +221,10 @@ function initTooltips() {
 }
 
 
-function emojiToCodepoints(emoji)
-{
+function emojiToCodepoints(emoji) {
 	var points = []
 
-	for (var char of emoji)
-	{
+	for (var char of emoji) {
 		points.push(char.codePointAt(0).toString(16).toUpperCase())
 	}
 
