@@ -64,7 +64,7 @@ if (unanswered.recordCount) {
 	</div>
 	<input hidden name="id" value="#request.usr.id#">
 </form>
-<div hidden>
+<div >
 	<cfloop query="unanswered">
 		<cfif Left(ansdesc,3) eq "en/">
 			<cfset src = 'https://upload.wikimedia.org/wikipedia/' & ansdesc>
@@ -81,6 +81,6 @@ if (unanswered.recordCount) {
 		<div class="ansdesc">#src#</div>
 	</cfloop>
 </div>
-<a class="nav-link" href="#request.script_name#">#actname#</a>
+<button class="nav-link" name="actid" value="#actid#" formaction="#request.dir#">#actname#</a>
 <cfinclude template="/Inc/footer.cfm">
 </cfoutput>

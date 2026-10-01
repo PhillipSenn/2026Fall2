@@ -103,7 +103,7 @@ function text(response) {
 var url = 'grade/where_act.cfm'
 var formData = new URLSearchParams()
 formData.set('id', dom.id)
-formData.set('actid', $('#actid').val())
+formData.set('actid', $('[name=actid]').val())
 var params = {
 	method: 'POST',
 	body: formData

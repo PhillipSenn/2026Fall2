@@ -7,7 +7,7 @@ go
 declare @usrid int=(select usrid from usr where id=@id)
 */
 --create schema usr authorization dbo
-create proc usr.where_id
+create or alter proc usr.where_id
 (@id uniqueidentifier
 ) as
 select * from usr
@@ -236,17 +236,9 @@ end else begin
 	order by qsort,qid
 end
 go
-
-
-
-
-
-
-
-
-
-
-
+select * from act
+go
+--create schema q authorization dbo
 create or alter proc q.where_act
 (@actid int
 ) as
@@ -263,6 +255,116 @@ from q
 where q_act=@actid
 order by qsort,qid
 go
+-- We don't really need to do poll.start_q
+-- It just shows how long they thought before answering.
+create or alter proc poll.start_q
+(@id uniqueidentifier
+,@qid int
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+declare @actid int=(select q_act from q where qid=@qid)
+
+declare @gradeid int=(select gradeid from grade where grade_usr=@usrid and grade_act=@actid)
+if @gradeid is null begin
+	insert into grade(grade_usr,grade_act) values(@usrid,@actid)
+	select @gradeid=scope_identity()
+end
+
+declare @pollid int=(
+	select pollid 
+	from poll 
+	join grade on poll_grade=gradeid
+	where poll_grade=@gradeid
+	and poll_q=@qid
+)
+if @pollid is null begin
+	insert into poll(poll_grade,poll_q) values(@gradeid,@qid)
+	select @pollid=scope_identity()
+end
+update poll set -- If they revisit, it will reset pollStart
+ pollStart=getdate()
+where pollid=@pollid
+select pollid=@pollid
+go
+--create schema cat authorization dbo
+create or alter proc cat.where_cat
+(@catid int
+) as
+select catname
+from cat
+where catid=@catid
+go
+create or alter proc poll.unanswered_keyTerms
+(@id uniqueidentifier
+,@actid int
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+declare @actname nvarchar(max)=(select actname from act where actid=@actid)
+select qid,qname
+	,qdesc
+	,q2_href as qhref
+	,ansdesc
+from q
+left join( -- This is the image that they chose
+	select qname as ans_qname
+		,ansdesc
+	from guess
+	join grade on guess_grade=gradeid
+	join ans on guess_ans=ansid
+	join q on ans_q=qid
+	join act on q_act=actid
+	join cat on act_cat=catid
+	where grade_usr=@usrid
+	and actname = @actname
+	and catname='Key Terms setup'
+) ans
+on ans_qname=qname
+join (
+	select qname as q2_qname
+		,qhref as q2_href
+	from q
+	join act on q_act=actid
+	join cat on act_cat=catid
+	where actname = @actname
+	and catname='Key Terms setup'
+) q2
+on q2_qname = qname
+left join(
+	select poll_q
+	from poll
+	join grade on poll_grade=gradeid
+	where grade_usr=@usrid
+	and pollEnd is not null -- They've answered it
+) poll
+on poll_q = qid
+where q_act=@actid
+and poll_q is null
+order by newid()
+go
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 create or alter proc q.usr_act
 (@id uniqueidentifier
@@ -308,37 +410,6 @@ create or alter proc latlng.where_act
 ) as
 select * from latlng
 where latlng_act=@actid
-go
--- We don't really need to do poll.start_q
--- It just shows how long they thought before answering.
-create or alter proc poll.start_q
-(@id uniqueidentifier
-,@qid int
-) as
-declare @usrid int=(select usrid from usr where id=@id)
-declare @actid int=(select q_act from q where qid=@qid)
-
-declare @gradeid int=(select gradeid from grade where grade_usr=@usrid and grade_act=@actid)
-if @gradeid is null begin
-	insert into grade(grade_usr,grade_act) values(@usrid,@actid)
-	select @gradeid=scope_identity()
-end
-
-declare @pollid int=(
-	select pollid 
-	from poll 
-	join grade on poll_grade=gradeid
-	where poll_grade=@gradeid
-	and poll_q=@qid
-)
-if @pollid is null begin
-	insert into poll(poll_grade,poll_q) values(@gradeid,@qid)
-	select @pollid=scope_identity()
-end
-update poll set -- If they revisit, it will reset pollStart
- pollStart=getdate()
-where pollid=@pollid
-select pollid=@pollid
 go
 create or alter proc poll.update_poll -- Doesn't affect grade.earned
 (@id uniqueidentifier
@@ -559,53 +630,6 @@ go
 --on ans_q=qid
 --where qid=@qid
 --go
-create or alter proc poll.unanswered_keyTerms
-(@id uniqueidentifier
-,@actid int
-) as
-declare @usrid int=(select usrid from usr where id=@id)
-declare @actname nvarchar(max)=(select actname from act where actid=@actid)
-select qid,qname
-	,qdesc
-	,q2_href as qhref
-	,ansdesc
-from q
-left join( -- This is the image that they chose
-	select qname as ans_qname
-		,ansdesc
-	from guess
-	join grade on guess_grade=gradeid
-	join ans on guess_ans=ansid
-	join q on ans_q=qid
-	join act on q_act=actid
-	join cat on act_cat=catid
-	where grade_usr=@usrid
-	and actname = @actname
-	and catname='Key Terms setup'
-) ans
-on ans_qname=qname
-join (
-	select qname as q2_qname
-		,qhref as q2_href
-	from q
-	join act on q_act=actid
-	join cat on act_cat=catid
-	where actname = @actname
-	and catname='Key Terms setup'
-) q2
-on q2_qname = qname
-left join(
-	select poll_q
-	from poll
-	join grade on poll_grade=gradeid
-	where grade_usr=@usrid
-	and pollEnd is not null -- They've answered it
-) poll
-on poll_q = qid
-where q_act=@actid
-and poll_q is null
-order by newid()
-go
 
 
 create or alter proc q.unanswered
@@ -794,14 +818,6 @@ create or alter proc q.update_desc
 update q set
  qdesc=@qdesc
 where qid=@qid
-go
---create schema cat authorization dbo
-create or alter proc cat.where_cat
-(@catid int
-) as
-select catname
-from cat
-where catid=@catid
 go
 create or alter proc usr.update_firstname
 (@id uniqueidentifier

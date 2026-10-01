@@ -96,6 +96,7 @@ function onRequestStart(response) {
 	}
 	request.cgiName = getPageContext().getRequest().getServletPath()
 	request.dir = getDirectoryFromPath(request.cgiName)
+	include '/server.cfm' // outside of request.home
 }
 
 //function onRequest(required string targetPage) {
