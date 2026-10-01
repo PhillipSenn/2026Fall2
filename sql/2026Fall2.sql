@@ -1,4 +1,5 @@
 ﻿use lr2026Fall2
+go
 /*
 (@id uniqueidentifier
 ,@actid int
@@ -37,7 +38,7 @@ go
 create or alter proc act.where_act
 (@actid int
 ) as
-select actname,actdesc
+select actid,actname,actdesc
 	,act_cat as catid
 from act
 where actid=@actid
@@ -145,6 +146,98 @@ delete from guess where guessid in(
 )
 delete from grade where gradeid=@gradeid
 go
+--create schema poll authorization dbo
+create or alter proc poll.unanswered
+(@id uniqueidentifier
+,@actid int
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+select qid,qname
+	,qdesc,qhref -- Key Terms
+from q
+left join(
+	select poll_q
+	from poll
+	join grade on poll_grade=gradeid
+	where grade_usr=@usrid
+	and pollEnd is not null -- They've answered it
+) poll
+on poll_q = qid
+where q_act=@actid
+and poll_q is null
+order by qsort,qid
+go
+create or alter proc ans.where_q
+(@qid int
+) as
+select ansid,ansname,ansdesc
+	,isnull(correct,0) as correct -- Test/bank.cfm
+from ans
+where ans_q=@qid
+order by ansid
+go
+create or alter proc poll.merge_q
+(@id uniqueidentifier
+,@qid int
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+declare @actid int=(select q_act from q where qid=@qid)
+
+declare @gradeid int=(select gradeid from grade where grade_usr=@usrid and grade_act=@actid)
+if @gradeid is null begin
+	insert into grade(grade_usr,grade_act) values(@usrid,@actid)
+	select @gradeid=scope_identity()
+end
+
+declare @pollid int=(
+	select pollid 
+	from poll 
+	join grade on poll_grade=gradeid
+	where poll_grade=@gradeid
+	and poll_q=@qid
+)
+if @pollid is null begin
+	insert into poll(poll_grade,poll_q) values(@gradeid,@qid)
+	select @pollid=scope_identity()
+end
+update poll set
+ pollEnd=getdate()
+where pollid=@pollid
+
+declare @possible int=(select count(*) from q where q_act=@actid)
+declare @answered int=(
+	select count(*) 
+	from poll 
+	where poll_grade=@gradeid
+	and pollEnd is not null
+)
+update grade set
+ earned=ceiling(100.0 * @answered / @possible)
+where gradeid=@gradeid
+select earned
+from grade
+where gradeid=@gradeid
+go
+create or alter proc poll.gt_q
+(@actid int
+,@old_qid int
+) as
+declare @qid int
+if @old_qid=0 begin
+	select top 1 qid,qname,qdesc
+	from q
+	where q_act=@actid
+	order by qsort,qid
+end else begin
+	select top 1 qid,qname,qdesc
+	from q
+	where q_act=@actid
+	and qid > @old_qid
+	order by qsort,qid
+end
+go
+
+
 
 
 
@@ -216,26 +309,6 @@ create or alter proc latlng.where_act
 select * from latlng
 where latlng_act=@actid
 go
-create or alter proc poll.unanswered
-(@id uniqueidentifier
-,@actid int
-) as
-declare @usrid int=(select usrid from usr where id=@id)
-select qid,qname
-	,qdesc,qhref -- Key Terms
-from q
-left join(
-	select poll_q
-	from poll
-	join grade on poll_grade=gradeid
-	where grade_usr=@usrid
-	and pollEnd is not null -- They've answered it
-) poll
-on poll_q = qid
-where q_act=@actid
-and poll_q is null
-order by qsort,qid
-go
 -- We don't really need to do poll.start_q
 -- It just shows how long they thought before answering.
 create or alter proc poll.start_q
@@ -281,57 +354,6 @@ where pollid in(
 	where grade_usr=@usrid
 	and pollid=@pollid
 )
-go
-create or alter proc poll.merge_q
-(@id uniqueidentifier
-,@qid int
-) as
-declare @usrid int=(select usrid from usr where id=@id)
-declare @actid int=(select q_act from q where qid=@qid)
-
-declare @gradeid int=(select gradeid from grade where grade_usr=@usrid and grade_act=@actid)
-if @gradeid is null begin
-	insert into grade(grade_usr,grade_act) values(@usrid,@actid)
-	select @gradeid=scope_identity()
-end
-
-declare @pollid int=(
-	select pollid 
-	from poll 
-	join grade on poll_grade=gradeid
-	where poll_grade=@gradeid
-	and poll_q=@qid
-)
-if @pollid is null begin
-	insert into poll(poll_grade,poll_q) values(@gradeid,@qid)
-	select @pollid=scope_identity()
-end
-update poll set
- pollEnd=getdate()
-where pollid=@pollid
-
-declare @possible int=(select count(*) from q where q_act=@actid)
-declare @answered int=(
-	select count(*) 
-	from poll 
-	where poll_grade=@gradeid
-	and pollEnd is not null
-)
-update grade set
- earned=ceiling(100.0 * @answered / @possible)
-where gradeid=@gradeid
-select earned
-from grade
-where gradeid=@gradeid
-go
-create or alter proc ans.where_q
-(@qid int
-) as
-select ansid,ansname,ansdesc
-	,isnull(correct,0) as correct -- Test/bank.cfm
-from ans
-where ans_q=@qid
-order by ansid
 go
 
 create or alter proc grade.update_act
@@ -785,24 +807,6 @@ create or alter proc cat.where_cat
 select catname
 from cat
 where catid=@catid
-go
-create or alter proc poll.gt_q
-(@actid int
-,@old_qid int
-) as
-declare @qid int
-if @old_qid=0 begin
-	select top 1 qid,qname,qdesc
-	from q
-	where q_act=@actid
-	order by qsort,qid
-end else begin
-	select top 1 qid,qname,qdesc
-	from q
-	where q_act=@actid
-	and qid > @old_qid
-	order by qsort,qid
-end
 go
 create or alter proc usr.update_firstname
 (@id uniqueidentifier

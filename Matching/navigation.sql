@@ -41,3 +41,9 @@ go
 select * from grp
 select * from cat
 insert into cat(catname) values('Matching')
+update ans set correct=1 where ansid in(
+	select ansid
+	from ans
+	join q on ans_q=qid
+	where q_act=236
+)

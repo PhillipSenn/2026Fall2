@@ -75,27 +75,14 @@ function onRequestStart(response) {
 			for (var column in usr.columnList) {
 				request.usr[column] = usr[column][1]
 			}
-//			writedump(request.usr)
 		}
 	}
 	if (FindNoCase('/google/maps/',cginame)) {
-//	} else if (FindNoCase('/unicode',cginame)) {
 	} else if (structKeyExists(request,'usr')) {
-//		session.usr = StructCopy(request.usr)
-//		if (cginame == request.home & 'login.cfm') {
-//			location url=request.home;
-//		}
 	} else {
 		setting showdebugoutput=false;
-		writeoutput("No request.usr")
-		abort;
-		if (cginame == request.home & 'login.cfm') {
-//		} else if (structKeyExists(session,'usr')) {
-//			request.usr = session.usr
-		} else {
-			include request.home & 'login.cfm'
-			return false
-		}
+		writeoutput("No user")
+		return false
 	}
 	if (FindNoCase('/admin/',cginame)) {
 		if (!structKeyExists(cookie,'admin')) {
@@ -110,8 +97,7 @@ function onRequestStart(response) {
 }
 
 function onRequest(required string targetPage) {
-include '/Inc/cfm/dump.cfm'
-include '/Inc/cfm/echo.cfm'
-include arguments.targetPage
+	include '/Inc/cfm/functions.cfm'
+	include arguments.targetPage
 }
 }

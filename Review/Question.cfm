@@ -7,6 +7,7 @@ q = new dbo.proc().usr('q.unanswered',form.actid)
 if (q.recordcount) {
 	ans = new dbo.proc().exec('ans.where_q',q.qid)
 }
+
 </cfscript>
 
 <cfoutput>

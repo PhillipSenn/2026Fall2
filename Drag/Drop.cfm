@@ -12,7 +12,7 @@ if (!q.recordcount) {
 	param form.qid=0;
 	q = new dbo.proc().exec('poll.gt_q',[form.actid,form.qid])
 	if (!q.recordcount) {
-		location url=request.home;
+		location(request.home & '?id=' & request.usr.id,false)
 	}
 }
 ans = new dbo.proc().exec('ans.where_q',q.qid)

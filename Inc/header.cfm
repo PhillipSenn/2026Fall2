@@ -80,7 +80,7 @@ writeoutput('<body class="' & request.body & '">')
 			<cfif StructKeyExists(request,'usr')>
 				<ul id="main-navbar" class="navbar-nav me-auto">
 					<li class="nav-item">
-						<button formaction="#request.home#Index.cfm" class="btn-link nav-link">CSC175</button>
+						<button formaction="#request.home#" class="btn-link nav-link">CSC175</button>
 					</li>
 				</ul>
 

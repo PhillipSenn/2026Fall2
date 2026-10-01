@@ -1,6 +1,10 @@
 ﻿<cfscript>
 include '/Inc/header.cfm'
-act = new dbo.proc().usr('act.where_usr')
+//act = new dbo.proc().usr('act.where_usr')
+cfstoredproc (procedure="act.where_usr") {
+	cfprocparam(cfsqltype="cf_sql_varchar", value=request.usr.id)
+	cfprocresult(name='act')
+}
 </cfscript>
 
 <cfoutput>
