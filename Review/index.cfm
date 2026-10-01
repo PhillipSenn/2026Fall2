@@ -3,12 +3,12 @@ include '/Inc/header.cfm'
 </cfscript>
 
 <cfoutput query="act">
-<form action="Drop.cfm">
+<form action="question.cfm">
 	<div class="card">
 		<div class="card-header bg-primary-subtle">
 		</div>
 		<div class="card-body">
-			Here be instructions.
+			Review Questions!
 		</div>
 	</div>
 	<div class="card">

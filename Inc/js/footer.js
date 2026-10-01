@@ -122,4 +122,8 @@ function cfdebug() {
 	)
     $('a[name="cfdebug_top"]').remove()
 	$('style[type="text/css"]').remove()
+	$('.template_overage').remove()
+	$('[name=cfdebug_execution]').remove()
+	$('hr').remove()
+	$('.cfdebuglge').remove()
 }

@@ -5,28 +5,30 @@ function radio() {
 
 $('.ai').each(each_ai)
 function each_ai() {
-	var qname = $('#qname').text()
+	var qname = $('#qname').text().trim()
 	var ansname = $(this).closest('.form-check')
 		.find('.form-check-label')
 		.text()
+		.trim()
+
+	var formData = new URLSearchParams()
+	formData.set('id',dom.id)
+	formData.set('qname', qname)
+	formData.set('ansname', ansname)
 
 	fetch('serper/images.cfm', {
 		method: 'post',
-		body: new URLSearchParams({
-			qname: qname.trim(),
-			ansname: ansname.trim()
-		})
+		body: formData
 	}).then(return_json)
 		.then(done)
 	
 	function done(response) {
-//		console.log(response)
+		console.log(26,response)
 		response.images.forEach(each)
 	}
 	function each(response) {
-		console.log(response.title,response.imageUrl)
+//		console.log(response.imageUrl)
 		$('.ai:first').attr('src',response.imageUrl.split('?')[0])
-//			.attr('title',response.title)
 			.removeClass('ai')
 	}
 

@@ -20,10 +20,8 @@ param request.cache = '?cache=' & TimeFormat(now(),'Hmmss');
 param request.footer = {};
 param request.footer.js = true;
 request.cache=''
-request.cgiName		= getPageContext().getRequest().getServletPath()
-request.serverDir	= getDirectoryFromPath(request.cgiName)
 request.serverFile	= getFileFromPath(request.cgiName)
-request.pgmDir		= ExpandPath(request.serverDir)
+request.pgmDir		= ExpandPath(request.dir)
 request.pgmName	= Left(request.serverFile,Len(request.serverFile)-4)
 if (request.footer.js) {
 	writeoutput('<script src="' & request.home & 'Inc/js/footer.js' & request.cache & '"></script>' & chr(10))

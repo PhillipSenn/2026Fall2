@@ -94,10 +94,12 @@ function onRequestStart(response) {
 	if (len(cgi.QUERY_STRING)) {
 		request.scriptname &= '?' & cgi.QUERY_STRING
 	}
+	request.cgiName = getPageContext().getRequest().getServletPath()
+	request.dir = getDirectoryFromPath(request.cgiName)
 }
 
-function onRequest(required string targetPage) {
-	include '/Inc/cfm/functions.cfm'
-	include arguments.targetPage
-}
+//function onRequest(required string targetPage) {
+	//include '/Inc/cfm/functions.cfm'
+	//include arguments.targetPage
+//}
 }

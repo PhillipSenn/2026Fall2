@@ -49,8 +49,8 @@ cfhttp(
 if (cfhttp.statusCode == "200 OK") {
 	response = deserializeJSON(cfhttp.fileContent)
 	result = response.choices[1].message.content
-	echo(result)
+	writeOutput(result)
 } else {
-	dump(cfhttp)
+	writedump(cfhttp)
 }
 </cfscript>

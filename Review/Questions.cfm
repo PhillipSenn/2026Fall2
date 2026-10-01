@@ -6,12 +6,12 @@ include '/Inc/header.cfm'
 q = new dbo.proc().usr('guess.where_act',form.actid)
 // q left join guess
 tscore = 0
-tpossible = 0
 </cfscript>
 
 <cfoutput query="act">
 <form action="Feedback.cfm" class="card" method="post">
 	<div class="card-header bg-primary-subtle">
+		<button class="float-end btn-outline-danger" formaction="reset.cfm">Reset</button>
 	</div>
 	<div class="card-body">
 		<table class="table-bordered table-striped table-hover">
@@ -21,7 +21,6 @@ tpossible = 0
 					<th>Answer</th>
 					<th>Question</th>
 					<th class="text-end">Score</th>
-					<th class="text-end">Possible</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -40,23 +39,18 @@ tpossible = 0
 							#score#
 							<cfset tscore += score>
 						</td>
-						<td class="text-end">
-							#possible#
-							<cfset tpossible += possible>
-						</td>
 					</tr>
 				</cfloop>
 			</tbody>
 			<tfoot>
 				<tr>
-					<th></th>
-					<th></th>
-					<th>Total Score:</th>
-					<th class="text-end">
-						#tscore#
+					<th class="text-end">#q.recordcount#</th>
+					<th>Questions</th>
+					<th>
+						Total Score: #grade.earned#
 					</th>
 					<th class="text-end">
-						#tpossible#
+						#tscore#
 					</th>
 				</tr>
 		</table>
@@ -66,6 +60,6 @@ tpossible = 0
 	<input hidden name="actid" value="#form.actid#">
 	<input hidden name="id" value="#request.usr.id#">
 </form>
-<a class="nav-link" href="#request.scriptname#">Review: #actname#</a>
+<button class="nav-link" name="actid" value="#actid#" formaction="#request.dir#">#actname#</button>
 <cfinclude template="/Inc/footer.cfm">
 </cfoutput>

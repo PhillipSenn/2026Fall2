@@ -10,35 +10,37 @@ if (q.recordcount) {
 
 </cfscript>
 
-<cfoutput>
+<cfoutput query="act">
 <form class="card">
 	<cfif q.recordcount>
 		<div class="card-header bg-primary-subtle">
 		</div>
 		<div class="card-body">
 			<div class="row">
-				<div id="qname" class="col-4 d-flex align-items-center h4">
+				<div class="col-4 d-flex align-items-center h4" id="qname">
 					#q.qname#
 				</div>
-				<div class="col-8 border-start">
+				<div class="col-4 border-start">
 					<cfloop query="ans">
-						<div class="form-check">
+						<div class="col-12 form-check">
 							<input class="form-check-input me-2" type="radio" name="ansid" value="#ansid#" id="ans#ansid#">
 							<label class="form-check-label" for="ans#ansid#">
 								#ansname#
 							</label>
-							<cfif len(q.qdesc)>
-								<img src="#q.qdesc#" width="100px">
-							<cfelseif ansname eq "False">
-							<cfelse>
-								<img class="ai cursor-pointer" src="NoPictureAvailable.jpg" width="100px">
-								<img class="ai cursor-pointer" src="NoPictureAvailable.jpg" width="100px">
-								<img class="ai cursor-pointer" src="NoPictureAvailable.jpg" width="100px">
-								<img class="ai cursor-pointer" src="NoPictureAvailable.jpg" width="100px">
-								<img class="ai cursor-pointer" src="NoPictureAvailable.jpg" width="100px">
-							</cfif>
 						</div>
 					</cfloop>
+				</div>
+				<div class="col-4 border-start">
+					<cfif len(q.qdesc)>
+						<img src="#q.qdesc#" width="100px">
+					<cfelseif ans.ansname eq "False">
+					<cfelse>
+						<img class="ai cursor-pointer" src="" width="100px">
+						<img class="ai cursor-pointer" src="" width="100px">
+						<img class="ai cursor-pointer" src="" width="100px">
+						<img class="ai cursor-pointer" src="" width="100px">
+						<img class="ai cursor-pointer" src="" width="100px">
+					</cfif>
 				</div>
 			</div>
 		</div>
@@ -46,7 +48,7 @@ if (q.recordcount) {
 			<textarea autofocus name="guessname"></textarea>
 		</div>
 	<cfelse>
-		<div class="card-header bg-primary">
+		<div class="card-header bg-success">
 			Congratulations!
 		</div>
 		<div class="card-body display-1">
@@ -61,6 +63,6 @@ if (q.recordcount) {
 	<input hidden name="id" value="#request.usr.id#">
 </form>
 <script src="/Inc/js/autosize.js"></script>
-<a class="nav-link active" href="#request.scriptname#">Review Question: #act.actname#</a>
+<button class="nav-link" name="actid" value="#actid#" formaction="#request.dir#">#actname#</button>
 <cfinclude template="/Inc/footer.cfm">
 </cfoutput>

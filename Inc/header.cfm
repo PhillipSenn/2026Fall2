@@ -102,7 +102,6 @@ writeoutput('<body class="' & request.body & '">')
 				<ul id="main-navbar" class="navbar-nav me-auto">
 				</ul>
 			</cfif>
-			<input hidden name="actid" value="#form.actid#">
 		</form>
 	</nav>
 	<cfif isDefined('act') and act.recordcount>

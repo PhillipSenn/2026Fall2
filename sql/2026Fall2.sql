@@ -703,28 +703,23 @@ update guess set
 ,guessname=@guessname
 where guessid=@guessid
 declare @possible int=(select count(*) from q where q_act=@actid)
+print '@possible: ' + cast(@possible as varchar)
 declare @answered int=(
 	select count(distinct ans_q) 
 	from guess 
 	join ans on guess_ans=ansid
 	where guess_grade=@gradeid
 )
+print '@answered: ' + cast(@answered as varchar)
 update grade set
  earned=ceiling(100.0 * @answered / @possible)
 where gradeid=@gradeid
 go
-
-
-
-
-exec guess.merge_ans '19C76747-5CF9-449C-9A52-FEF8906AD52E',52,'test2'
-exec guess.merge_ans '21E468EC-A70C-46F5-BB9F-5B5A21F7F32F',52,'John Doe'
-exec guess.merge_ans '21E468EC-A70C-46F5-BB9F-5B5A21F7F32F',61,'John Doe'
-select * from usr
-select * from ans
-select * from guess
-select * from grade
-
+/*
+declare @id uniqueidentifier='19C76747-5CF9-449C-9A52-FEF8906AD52E'
+declare @ansid int=3638
+exec guess.merge_ans_name @id,@ansid,'x'
+*/
 create or alter proc guess.where_act
 (@id uniqueidentifier
 ,@actid int
@@ -733,20 +728,14 @@ declare @usrid int=(select usrid from usr where id=@id)
 select qid,qname
 	,ansname
 	,(select count(*)
-		from guess
-		join ans on guess_ans=ansid
-		where ans_q=qid
-	) possible
-	,(select count(*)
-		from guess
-		where guess_ans = (
-			select DISTINCT guess_ans
+		from (
+			select DISTINCT ans_q
 			from guess
 			join grade on guess_grade=gradeid
 			join ans on guess_ans=ansid
 			where grade_usr=@usrid
 			and ans_q = qid
-		)
+		) q
 	) score
 from q
 left join (
@@ -760,6 +749,12 @@ on ans_q=qid
 where q_act=@actid
 order by qid
 go
+/*
+declare @id uniqueidentifier='19C76747-5CF9-449C-9A52-FEF8906AD52E'
+declare @actid int=179
+exec guess.where_act @id,@actid
+*/
+
 create or alter proc guess.where_q
 (@id uniqueidentifier
 ,@qid int

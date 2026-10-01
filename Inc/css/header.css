@@ -1,5 +1,5 @@
 ﻿body {
-	font-size:16px;
+/*	font-size:16px; */
 	font-family:"Times New Roman", Times, serif;
 }
 main {
@@ -10,16 +10,17 @@ main {
 label {
 	cursor:pointer
 }
-.form-control {
-	font-size:16px
-}
 .cursor-pointer {
 	cursor:pointer
+}
+/*
+.form-control {
+	font-size:16px
 }
 button.btn-link {
 	font-size:16px;
 }
-
+*/
 .btn-primary {
 	--bs-btn-color: #333;
 	--bs-btn-border-color: #5493a4;
@@ -71,5 +72,6 @@ code {
 	cursor: pointer;
 }
 table.cfdebug {
+	display: none;
 	font-family: consolas;
 }

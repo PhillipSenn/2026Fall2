@@ -109,4 +109,8 @@ insert into q(q_act,qname) values(@actid,'When looking for a job, you should use
 select @qid=scope_identity()
 insert into ans(ans_q,ansname) values(@qid,'True')
 insert into ans(ans_q,ansname) values(@qid,'False')
+select * 
+from ans
+join q on ans_q=qid
+where q_act=@actid
 go

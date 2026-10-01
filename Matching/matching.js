@@ -15,8 +15,8 @@ $(document).on('click', '#questions button, #answers button', function () {
 		lock(button)
 		picked = null
 		var formData = new URLSearchParams()
-		formData.append('id', dom.id)
-		formData.append('ansid', ansid)
+		formData.set('id', dom.id)
+		formData.set('ansid', ansid)
 		var url = '../guess/merge_ans.cfm'
 		var params = {
 			method: 'POST',

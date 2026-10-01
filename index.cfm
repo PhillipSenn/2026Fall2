@@ -38,6 +38,7 @@ cfstoredproc (procedure="act.where_usr") {
 		</table>
 	</div>
 	<div class="card-footer">
+		<button formaction="Debug/guess.cfm">Guess</button>
 	</div>
 	<input hidden name="id" value="#request.usr.id#">
 </div>

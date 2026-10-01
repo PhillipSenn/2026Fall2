@@ -59,12 +59,14 @@ if (q.recordCount) {
 	<form class="card" action="../../Index.cfm">
 		<div class="card-header bg-primary-subtle">
 			You did it!
+			<button class="float-end btn-outline-danger" name="actid" value="#actid#" formaction="reset.cfm">Reset</a>
 		</div>
 		<div class="card-body">
 			<button class="btn-success" name="id" value="#request.usr.id#">Finished!</button>
 		</div>
+		<input hidden name="id" value="#request.usr.id#">
 	</form>
 </cfif>
-<a class="nav-link" href="#request.scriptname#">#actname#</a>
+<button class="nav-link" name="actid" value="#actid#" formaction="#request.dir#">#actname#</a>
 <cfinclude template="/Inc/footer.cfm">
 </cfoutput>

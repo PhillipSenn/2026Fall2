@@ -1,4 +1,5 @@
 ﻿<cfscript>
+setting showdebugoutput=false;
 
 //form.qname = 'Abraham Lincoln'
 //form.ansname = ''

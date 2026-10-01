@@ -1,6 +1,6 @@
 ﻿var formData = new URLSearchParams()
-formData.append('id', dom.id)
-formData.append('qname','Subject: ' + $('#catname').text() + '. Question: ' + $('#qname').text().trim())
+formData.set('id', dom.id)
+formData.set('qname','Subject: ' + $('#catname').text() + '. Question: ' + $('#qname').text().trim())
 
 fetch('groq.cfm', {
 	method: 'POST',
@@ -20,15 +20,16 @@ function sendToWikipedia(answer) {
 	if (answer) {
 		$('#ansname').html(answer)
 	}
+	var formData = new URLSearchParams()
+	formData.set('id',dom.id)
+	formData.set('qname', qname)
+	formData.set('ansname', answer)
 	fetch('Wikipedia.cfm', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded'
 		},
-		body: new URLSearchParams({
-			qname: qname,
-			ansname: answer
-		})
+		body: formData
 	})
 	.then(getWikipediaResponse)
 	.catch(handleError)

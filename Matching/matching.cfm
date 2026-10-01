@@ -55,6 +55,6 @@ for (i = arrayLen(choices); i > 1; i--) {
 		</div>
 	</div>
 </form>
-<button class="nav-link">#actname#</button>
+<button class="nav-link" name="actid" value="#actid#" formaction="#request.dir#">#actname#</button>
 <cfinclude template="/Inc/footer.cfm">
 </cfoutput>
