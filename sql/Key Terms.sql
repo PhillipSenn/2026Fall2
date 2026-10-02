@@ -3443,7 +3443,8 @@ and ansid is null
 select * from act
 order by actid desc
 
-select '"' + qname + '"',qdesc
+select actname,'"' + qname + '"',qdesc
 from q
+join act on q_act=actid
 where q_act=213
 order by qname

@@ -3,15 +3,12 @@ include '/Inc/header.cfm'
 </cfscript>
 
 <cfoutput query="act">
-<form action="question.cfm">
+<form action="blank.cfm">
 	<div class="card">
 		<div class="card-header bg-primary-subtle">
 		</div>
 		<div class="card-body">
-			The textbook supplies these review questions, but no answer sheet.
-			<p>Don't worry! You'll get a 100 posted into Canvas for having completed this task.
-			But in addition, there is a scoring system that should help us come to an agreement as to which answer is best:
-			<p>You receive 1 point towards consensus, for your vote and anyone who agrees with you.
+			Fill-in-the-blank
 		</div>
 	</div>
 	<div class="card">

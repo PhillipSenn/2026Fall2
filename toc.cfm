@@ -2,7 +2,8 @@
 include '/Inc/header.cfm'
 </cfscript>
 
-<div class="card">
+<cfoutput>
+<form class="card">
 	<div class="card-body">
 		<div class="row">
 			<div class="col-6">
@@ -11,19 +12,19 @@ include '/Inc/header.cfm'
 			<div class="col-6 d-flex justify-content-end mb-3">
 				<div class="btn-group btn-group-sm" role="group" aria-label="View options">
 				<cfif StructKeyExists(url,'accordion')>
-					<a href="?accordion" class="btn btn-primary">
+					<button formaction="toc.cfm?accordion" class="btn-primary">
 					Accordion View
-					</a>
-					<a href="toc.cfm" class="btn btn-outline-secondary">
+					</div>
+					<button formaction="toc.cfm" class="btn-outline-secondary">
 					List View
-					</a>
+					</button>
 				<cfelse>
-					<a href="?accordion" class="btn btn-outline-secondary">
+					<button formaction="toc.cfm?accordion" class="btn-outline-secondary">
 					Accordion View
-					</a>
-					<a href="?" class="btn btn-primary">
+					</button>
+					<button formaction="toc.cfm?" class="btn-primary">
 					List View
-					</a>
+					</button>
 				</cfif>
 				</div>
 			</div>
@@ -3937,6 +3938,8 @@ include '/Inc/header.cfm'
 		</li>
 	</ul>
 	</div>
-</div>
-<a class="nav-link" href="toc.cfm">Table Of Contents</a>
+	<input hidden name="id" value="#request.usr.id#">
+</form>
+<button class="nav-link">Table Of Contents</button>
 <cfinclude template="/Inc/footer.cfm"></li>
+</cfoutput>

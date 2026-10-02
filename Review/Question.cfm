@@ -30,17 +30,7 @@ if (q.recordcount) {
 						</div>
 					</cfloop>
 				</div>
-				<div class="col-4 border-start">
-					<cfif len(q.qdesc)>
-						<img src="#q.qdesc#" width="100px">
-					<cfelseif ans.ansname eq "False">
-					<cfelse>
-						<img class="ai cursor-pointer" src="" width="100px">
-						<img class="ai cursor-pointer" src="" width="100px">
-						<img class="ai cursor-pointer" src="" width="100px">
-						<img class="ai cursor-pointer" src="" width="100px">
-						<img class="ai cursor-pointer" src="" width="100px">
-					</cfif>
+				<div id="ai_images" class="col-4 border-start">
 				</div>
 			</div>
 		</div>
@@ -63,6 +53,7 @@ if (q.recordcount) {
 	<input hidden name="id" value="#request.usr.id#">
 </form>
 <script src="/Inc/js/autosize.js"></script>
+<script src="#request.home#Inc/js/cleanText.js"></script>
 <button class="nav-link" name="actid" value="#actid#" formaction="#request.dir#">#actname#</button>
 <cfinclude template="/Inc/footer.cfm">
 </cfoutput>

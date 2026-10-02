@@ -18,7 +18,7 @@ create or alter proc act.where_usr
 (@id uniqueidentifier
 ) as
 declare @usrid int=(select usrid from usr where id=@id)
-select actid,actname,actlink
+select actid,actname,actsort,actlink
 	,grpname
 	,catname
 	,earned

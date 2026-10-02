@@ -3,14 +3,12 @@ function radio() {
 	$(this).closest('form').submit()
 }
 
-$('.ai').each(each_ai)
-function each_ai() {
+$('.form-check-label').each(each_check_label)
+function each_check_label(i) {
 	var qname = $('#qname').text().trim()
-	var ansname = $(this).closest('.form-check')
-		.find('.form-check-label')
-		.text()
-		.trim()
-
+	var ansname = $(this).text()
+console.log(qname)
+console.log(ansname)
 	var formData = new URLSearchParams()
 	formData.set('id',dom.id)
 	formData.set('qname', qname)

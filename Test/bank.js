@@ -85,7 +85,23 @@ if (aloud) {
 $(document).on('click','.ansid',ansid)
 function ansid() {
 	var ansid = +$(this).val()
-	get_text('../guess/merge_ans.cfm?ansid=' + ansid)
+	var url = '../guess/merge_ans.cfm'
+	var formData = new URLSearchParams()
+	formData.set('id', dom.id)
+	formData.set('ansid', ansid)
+	var params = {
+		method: 'POST',
+		body: formData
+	}
+	fetch(url, params)
+		.then(done)
+		.catch(caught(url))
+	function done(response) {
+		if (!response.ok) {
+			throw new Error('HTTP ' + response.status + ' ' + response.statusText)
+		}
+		return response.text()
+	}
 }
 
 var voices = []

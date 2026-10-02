@@ -8,15 +8,16 @@ cfstoredproc (procedure="act.where_usr") {
 </cfscript>
 
 <cfoutput>
-<form class="card" method="post">
+<form class="card">
 	<div class="card-header bg-primary-subtle">
 		
 	</div>
 	<div class="card-body">
-		<a href="toc.cfm?accordion">Table Of Contents (TOC)</a>
+		<button class="btn-link" formaction="toc.cfm?accordion">Table Of Contents (TOC)</button>
 		<table>
 			<thead>
 				<tr>
+					<th class="text-end">Sort</th>
 					<th>Chapter</th>
 					<th>Category</th>
 					<th>Assignment</th>
@@ -24,7 +25,8 @@ cfstoredproc (procedure="act.where_usr") {
 				</tr>
 			</thead>
 			<cfloop query="act">
-				<tr>
+				<tr data-actid="#actid#">
+					<td class="text-end" contenteditable>#actsort#</td>
 					<td>#grpname#</td>
 					<td>#catname#</td>
 					<td>
