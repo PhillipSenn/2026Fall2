@@ -9,6 +9,6 @@ pgm.resolve = function() {
 	}
 }
 
-setTimeout(pgm.resolve,1000)
+setTimeout(pgm.resolve,200)
 
 

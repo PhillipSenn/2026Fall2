@@ -179,6 +179,7 @@ go
 create or alter proc poll.merge_q
 (@id uniqueidentifier
 ,@qid int
+,@pollname nvarchar(max)=''
 ) as
 declare @usrid int=(select usrid from usr where id=@id)
 declare @actid int=(select q_act from q where qid=@qid)
@@ -202,6 +203,7 @@ if @pollid is null begin
 end
 update poll set
  pollEnd=getdate()
+,pollname=@pollname
 where pollid=@pollid
 
 declare @possible int=(select count(*) from q where q_act=@actid)
@@ -260,6 +262,7 @@ go
 create or alter proc poll.start_q
 (@id uniqueidentifier
 ,@qid int
+,@pollname nvarchar(max)
 ) as
 declare @usrid int=(select usrid from usr where id=@id)
 declare @actid int=(select q_act from q where qid=@qid)
@@ -278,13 +281,15 @@ declare @pollid int=(
 	and poll_q=@qid
 )
 if @pollid is null begin
-	insert into poll(poll_grade,poll_q) values(@gradeid,@qid)
+	insert into poll(poll_grade,poll_q,pollname) values(@gradeid,@qid,@pollname)
 	select @pollid=scope_identity()
 end
 update poll set -- If they revisit, it will reset pollStart
  pollStart=getdate()
 where pollid=@pollid
-select pollid=@pollid
+select pollid,pollname
+from poll
+where pollid=@pollid
 go
 --create schema cat authorization dbo
 create or alter proc cat.where_cat
@@ -880,6 +885,17 @@ from (
 go
 exec act.rightWrong '19C76747-5CF9-449C-9A52-FEF8906AD52E',224
 go
+--drop proc poll.where_q
+--(@id uniqueidentifier
+--,@qid int
+--) as
+--declare @usrid int=(select usrid from usr where id=@id)
+--select pollname
+--from poll
+--join grade on poll_grade=gradeid
+--where grade_usr=@usrid
+--and poll_q=@qid
+--go
 select * from usr
 
 select * from act

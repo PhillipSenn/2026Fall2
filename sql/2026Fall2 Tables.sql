@@ -92,6 +92,7 @@ create table poll
 ,poll_q int
 ,pollStart datetime2(0) default getdate()
 ,pollEnd datetime2(0)
+,pollname nvarchar(max)
 ) 
 go
 select * from usr

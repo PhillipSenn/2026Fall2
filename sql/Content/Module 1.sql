@@ -463,4 +463,5 @@ insert into q(q_act,qname) values(@actid,'You work in the educational software i
 insert into q(q_act,qname) values(@actid,'You and your roommate decide to reduce your environmental impact by recycling more, going paperless, and using environmentally safe cleaning products. You know you also can use green computing tactics to reduce electronic waste, minimize power use, and more. Create a list of five reasons why you should add green computing to your efforts. List 10 ways you can apply green computing to your daily life.')
 insert into q(q_act,qname) values(@actid,'Research the trend of BYOD in workplaces. Compare the advantages to any potential disadvantages. Do you think more companies should adopt this policy? Why or why not?')
 */
-select * from grp
+select * from act order by actid desc
+

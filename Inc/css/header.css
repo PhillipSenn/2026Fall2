@@ -58,6 +58,13 @@ button.btn-link {
 fieldset, legend {
 	all: revert;
 }
+fieldset {
+	border-radius: .4rem;
+}
+legend {
+	padding-left: .4rem;
+	padding-right: .4rem;
+}
 .template_overage {
 	color: inherit !important;
 }
