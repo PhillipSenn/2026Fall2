@@ -6,7 +6,9 @@ function radio() {
 $('.form-check-label').each(each_check_label)
 function each_check_label(i) {
 	var qname = $('#qname').text().trim()
-	var ansname = $(this).text().trim()
+	var ansname = $(this).text()
+console.log(qname)
+console.log(ansname)
 	var formData = new URLSearchParams()
 	formData.set('id',dom.id)
 	formData.set('qname', qname)
@@ -19,38 +21,12 @@ function each_check_label(i) {
 		.then(done)
 	
 	function done(response) {
-		if (!response.images) {
-			return
-		}
+		console.log(26,response)
 		response.images.forEach(each)
 	}
 	function each(response) {
-		var picture = response
-		var src = picture_src(picture)
-		if (!src) {
-			return
-		}
-		var img = $('<img>', {
-			class: 'cursor-pointer',
-			alt: picture.title || ansname
-		})
-		img.attr('referrerpolicy', 'no-referrer')
-		img.on('error', image_error)
-		img.attr('src', src)
-		img.appendTo('#ai_images')
-
-		function image_error() {
-			var full = ''
-			if (picture.imageUrl) {
-				full = picture.imageUrl.split('?')[0]
-			}
-			if (full && img.attr('src') != full) {
-				img.attr('src', full)
-				return
-			}
-			img.off('error')
-			img.attr('src', 'NoPictureAvailable.jpg')
-		}
+//		console.log(response.imageUrl)
+		$('<img>', { class: 'cursor-pointer', src: response.imageUrl.split('?')[0], width: 100 }).appendTo('#ai_images')
 	}
 
 }
@@ -69,16 +45,6 @@ function cursor_pointer() {
 		$('.cursor-pointer').attr('hidden',true)
 		self.attr('hidden',false)
 	}
-}
-
-function picture_src(response) {
-	if (response.thumbnailUrl) {
-		return response.thumbnailUrl
-	}
-	if (!response.imageUrl) {
-		return ''
-	}
-	return response.imageUrl.split('?')[0]
 }
 
 function return_json(response) {
