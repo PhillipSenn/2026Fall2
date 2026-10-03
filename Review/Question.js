@@ -25,15 +25,32 @@ function each_check_label(i) {
 		response.images.forEach(each)
 	}
 	function each(response) {
-		if (!response.imageUrl) {
+		var picture = response
+		var src = picture_src(picture)
+		if (!src) {
 			return
 		}
-		$('<img>', {
+		var img = $('<img>', {
 			class: 'cursor-pointer',
-			src: response.imageUrl.split('?')[0],
-			width: 100,
-			alt: response.title || ansname
-		}).appendTo('#ai_images')
+			alt: picture.title || ansname
+		})
+		img.attr('referrerpolicy', 'no-referrer')
+		img.on('error', image_error)
+		img.attr('src', src)
+		img.appendTo('#ai_images')
+
+		function image_error() {
+			var full = ''
+			if (picture.imageUrl) {
+				full = picture.imageUrl.split('?')[0]
+			}
+			if (full && img.attr('src') != full) {
+				img.attr('src', full)
+				return
+			}
+			img.off('error')
+			img.attr('src', 'NoPictureAvailable.jpg')
+		}
 	}
 
 }
@@ -52,6 +69,16 @@ function cursor_pointer() {
 		$('.cursor-pointer').attr('hidden',true)
 		self.attr('hidden',false)
 	}
+}
+
+function picture_src(response) {
+	if (response.thumbnailUrl) {
+		return response.thumbnailUrl
+	}
+	if (!response.imageUrl) {
+		return ''
+	}
+	return response.imageUrl.split('?')[0]
 }
 
 function return_json(response) {

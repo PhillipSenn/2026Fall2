@@ -14,7 +14,10 @@
 
 #ai_images img {
 	display: inline-block;
-	height: auto;
+	width: 100px;
+	height: 75px;
+	object-fit: contain;
 	margin: 4px;
 	vertical-align: top;
+	background: #fff;
 }
