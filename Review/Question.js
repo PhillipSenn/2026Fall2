@@ -6,9 +6,7 @@ function radio() {
 $('.form-check-label').each(each_check_label)
 function each_check_label(i) {
 	var qname = $('#qname').text().trim()
-	var ansname = $(this).text()
-console.log(qname)
-console.log(ansname)
+	var ansname = $(this).text().trim()
 	var formData = new URLSearchParams()
 	formData.set('id',dom.id)
 	formData.set('qname', qname)
@@ -21,13 +19,21 @@ console.log(ansname)
 		.then(done)
 	
 	function done(response) {
-		console.log(26,response)
+		if (!response.images) {
+			return
+		}
 		response.images.forEach(each)
 	}
 	function each(response) {
-//		console.log(response.imageUrl)
-		$('.ai:first').attr('src',response.imageUrl.split('?')[0])
-			.removeClass('ai')
+		if (!response.imageUrl) {
+			return
+		}
+		$('<img>', {
+			class: 'cursor-pointer',
+			src: response.imageUrl.split('?')[0],
+			width: 100,
+			alt: response.title || ansname
+		}).appendTo('#ai_images')
 	}
 
 }

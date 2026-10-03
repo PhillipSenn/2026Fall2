@@ -11,3 +11,10 @@
 	display: block;
 	width: 100%;
 }
+
+#ai_images img {
+	display: inline-block;
+	height: auto;
+	margin: 4px;
+	vertical-align: top;
+}
