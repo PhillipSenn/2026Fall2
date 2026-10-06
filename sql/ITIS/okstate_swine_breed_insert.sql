@@ -1,0 +1,87 @@
+﻿-- https://breeds.okstate.edu/swine
+select speciesid,speciesname
+from species
+where speciesname like 'Sus%'
+order by speciesname
+
+declare @speciesid int=361240
+
+insert into breed(breed_species,breedname)
+select @speciesid,v.breedname
+from (values
+	 (N'American Landrace Swine')
+	,(N'American Yorkshire Swine')
+	,(N'Angeln Saddleback Swine')
+	,(N'Arapawa Island Swine')
+	,(N'Ba Xuyen Swine')
+	,(N'Bantu Swine')
+	,(N'Beijing Black Swine')
+	,(N'Belarus Black Pied Swine')
+	,(N'Belgian Landrace Swine')
+	,(N'Berkshire Swine')
+	,(N'British Landrace Swine')
+	,(N'British Lop Swine')
+	,(N'Bulgarian White Swine')
+	,(N'Cantonese Swine')
+	,(N'Chester White Swine')
+	,(N'Choctaw Hog Swine')
+	,(N'Czech Improved White Swine')
+	,(N'Danish Landrace Swine')
+	,(N'Duroc Swine')
+	,(N'Dutch Landrace Swine')
+	,(N'Fengjing Swine')
+	,(N'Finnish Landrace Swine')
+	,(N'French Landrace Swine')
+	,(N'German Landrace Swine')
+	,(N'Gloucestershire Old Spot Swine')
+	,(N'Guinea Hog Swine')
+	,(N'Hampshire Swine')
+	,(N'Hereford Swine')
+	,(N'Hezuo Swine')
+	,(N'Iberian Swine')
+	,(N'Italian Landrace Swine')
+	,(N'Jinhua Swine')
+	,(N'Kele Swine')
+	,(N'Krskopolje Swine')
+	,(N'Kunekune Swine')
+	,(N'Lacombe Swine')
+	,(N'Large Black Swine')
+	,(N'Large Black-White Swine')
+	,(N'Large White Swine')
+	,(N'Lithuanian Swine')
+	,(N'Mangalitza Swine')
+	,(N'Meishan Swine')
+	,(N'Middle White Swine')
+	,(N'Minzhu Swine')
+	,(N'Mong Cai Swine')
+	,(N'Mora Romagnola Swine')
+	,(N'Mukota Swine')
+	,(N'Mulefoot Swine')
+	,(N'Neijiang Swine')
+	,(N'Ningxiang Swine')
+	,(N'Norwegian Landrace Swine')
+	,(N'Ossabaw Island Swine')
+	,(N'Oxford Sandy and Black Swine')
+	,(N'Philippine Native Swine')
+	,(N'Pietrain Swine')
+	,(N'Poland China Swine')
+	,(N'Red Wattle Swine')
+	,(N'Saddleback Swine')
+	,(N'Spotted Swine')
+	,(N'Swedish Landrace Swine')
+	,(N'Tamworth Swine')
+	,(N'Thuoc Nhieu Swine')
+	,(N'Thuropolje Swine')
+	,(N'Tibetan Swine')
+	,(N'Vietnamese Potbelly Swine')
+	,(N'Welsh Swine')
+	,(N'Wuzhishan Swine')
+	,(N'Yorkshire Swine')
+) v(breedname)
+where not exists (
+	select 1
+	from breed
+	where breed_species=@speciesid
+	and breedname=v.breedname
+)
+go

@@ -1,0 +1,132 @@
+.card-body:has(.star) {
+	container-type: inline-size;
+}
+
+.star {
+	--d: clamp(16px, 6.6cqi, 36px);
+	width: fit-content;
+	margin-inline: auto;
+	padding: calc(var(--d) * 0.85) calc(var(--d) * 0.7);
+	background:
+		radial-gradient(circle at 50% 42%, #f6dcb0 0%, #e2b86c 42%, #c4893d 74%, #8d5c2a 100%);
+	border: calc(var(--d) * 0.16) solid #6d4c32;
+	border-radius: calc(var(--d) * 0.5);
+	box-shadow:
+		inset 0 0 0 3px rgba(255, 255, 255, 0.2),
+		0 10px 28px rgba(0, 0, 0, 0.18);
+	user-select: none;
+	transition: transform 0.25s ease;
+}
+
+.star.flipped {
+	transform: rotate(180deg);
+}
+
+.cc-row {
+	display: flex;
+	justify-content: center;
+	gap: calc(var(--d) * 0.22);
+}
+
+.cc-row + .cc-row {
+	margin-top: calc(var(--d) * 0.056);
+}
+
+.hole {
+	width: var(--d);
+	height: var(--d);
+	flex: 0 0 auto;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: radial-gradient(circle at 40% 35%, #6e5646, #241c18 72%);
+	box-shadow:
+		inset 0 2px 3px rgba(0, 0, 0, 0.55),
+		0 1px 0 rgba(255, 255, 255, 0.28);
+	position: relative;
+}
+
+.hole.turn {
+	cursor: pointer;
+	box-shadow:
+		inset 0 2px 3px rgba(0, 0, 0, 0.55),
+		0 0 0 3px #f6c945;
+}
+
+.hole.selected {
+	box-shadow:
+		inset 0 2px 3px rgba(0, 0, 0, 0.55),
+		0 0 0 3px #fff4c2;
+}
+
+.hole.drag-over {
+	box-shadow:
+		inset 0 2px 3px rgba(0, 0, 0, 0.55),
+		0 0 0 3px #7dcea0;
+}
+
+.hole.legal,
+.hole.jump {
+	cursor: pointer;
+}
+
+.hole.legal::after,
+.hole.jump::after {
+	content: "";
+	width: 30%;
+	height: 30%;
+	border-radius: 50%;
+	background: rgba(46, 160, 90, 0.95);
+	box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35);
+	pointer-events: none;
+}
+
+.hole.jump::after {
+	width: 52%;
+	height: 52%;
+	background: transparent;
+	box-shadow: inset 0 0 0 3px rgba(46, 160, 90, 0.95);
+}
+
+.marble {
+	width: 76%;
+	height: 76%;
+	border-radius: 50%;
+	box-shadow:
+		inset -2px -3px 4px rgba(0, 0, 0, 0.35),
+		0 1px 1px rgba(0, 0, 0, 0.35);
+}
+
+.marble[draggable="true"] {
+	cursor: grab;
+}
+
+.marble.dragging {
+	cursor: grabbing;
+	opacity: 0.55;
+}
+
+.marble.red {
+	background: radial-gradient(circle at 35% 30%, #ffb0b0, #e03131 52%, #8f1212);
+}
+
+.marble.orange {
+	background: radial-gradient(circle at 35% 30%, #ffd0a8, #e07020 52%, #8a3d0c);
+}
+
+.marble.yellow {
+	background: radial-gradient(circle at 35% 30%, #fff3b0, #e6c229 52%, #8a7010);
+}
+
+.marble.green {
+	background: radial-gradient(circle at 35% 30%, #b7f0c0, #2f9e4a 52%, #146028);
+}
+
+.marble.blue {
+	background: radial-gradient(circle at 35% 30%, #b9d4ff, #2f6fdb 52%, #14387a);
+}
+
+.marble.purple {
+	background: radial-gradient(circle at 35% 30%, #e0c4ff, #8b4fc4 52%, #4c2078);
+}

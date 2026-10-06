@@ -1,0 +1,12 @@
+---
+description: Always edit, commit, and push on main
+alwaysApply: true
+---
+
+# Work on main
+
+- Check out `main` before making changes.
+- Commit and push those changes directly to `main`.
+- Do not create a feature branch.
+- Do not open a pull request.
+- If a branch or pull request gets created anyway, move that work onto `main`, push `main`, and delete the branch. Do not leave a pull request for the user to merge.

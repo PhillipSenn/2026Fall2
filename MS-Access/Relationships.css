@@ -1,0 +1,106 @@
+.rel-window {
+	margin: 12px 8px 16px;
+	border: 1px solid #6d6d6d;
+	background: #f3f3f3;
+	user-select: none;
+}
+
+#rel-canvas {
+	position: relative;
+	height: 720px;
+	overflow: hidden;
+	background: #d0d0d0;
+	cursor: default;
+	touch-action: none;
+}
+
+#rel-canvas > svg {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+}
+
+.rel-line {
+	stroke: #000;
+	stroke-width: 1.25;
+	fill: none;
+}
+
+.rel-table {
+	position: absolute;
+	min-width: 196px;
+	border: 1px solid #5c5c5c;
+	background: #fff;
+	box-shadow: 1px 1px 0 #8d8d8d;
+	font-family: "Segoe UI", Tahoma, sans-serif;
+	font-size: 13px;
+}
+
+.rel-title {
+	padding: 3px 8px;
+	background: #5b9bd5;
+	color: #fff;
+	font-weight: 600;
+	cursor: grab;
+}
+
+.rel-table.is-selected .rel-title {
+	background: #2e75b6;
+}
+
+.rel-title:active {
+	cursor: grabbing;
+}
+
+.rel-field {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	height: 22px;
+	padding: 0 6px;
+	cursor: default;
+	white-space: nowrap;
+}
+
+.rel-field.is-pk {
+	font-weight: 700;
+	cursor: grab;
+}
+
+.rel-field.is-fk {
+	cursor: grab;
+}
+
+.rel-field.is-lookup {
+	cursor: pointer;
+}
+
+.rel-key {
+	display: block;
+	width: 14px;
+	height: 14px;
+	min-width: 14px;
+	flex: 0 0 14px;
+}
+
+.rel-field.is-source {
+	background: #fff2cc;
+}
+
+.rel-field.is-target {
+	background: #cce4f7;
+	outline: 1px solid #0078d4;
+	outline-offset: -1px;
+	cursor: copy;
+}
+
+.rel-field.is-hot {
+	background: #9dc3e6;
+}
+
+.rel-field.is-muted {
+	color: #9a9a9a;
+	cursor: not-allowed;
+}

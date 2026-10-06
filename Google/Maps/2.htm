@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dulles Airport Map - Advanced Marker + Zoom Widget</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Layout container */
+    .container {
+      display: flex;
+      height: 100%;
+      width: 100%;
+    }
+
+    /* Map takes remaining space */
+    #map {
+      flex: 1;
+    }
+
+    /* Right-side widget */
+    .sidebar {
+      width: 280px;
+      background: #f8f9fa;
+      border-left: 1px solid #ddd;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .widget-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .zoom-display {
+      font-size: 32px;
+      font-weight: bold;
+      color: #1a73e8;
+      margin-top: 10px;
+    }
+
+    /* Custom marker styling */
+    .airport-marker {
+      background: #1a73e8;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+      border: 2px solid white;
+      white-space: nowrap;
+    }
+  </style>
+
+  <script src="google-maps.js"></script>
+
+  <script>
+    async function initMap() {
+      const dulles = { lat: 38.9531, lng: -77.4565 };
+
+      const { Map } = await google.maps.importLibrary("maps");
+      const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+      const map = new Map(document.getElementById("map"), {
+        zoom: 14,
+        center: dulles,
+        mapId: "YOUR_MAP_ID",
+      });
+
+      // Create marker content
+      const markerContent = document.createElement("div");
+      markerContent.className = "airport-marker";
+      markerContent.textContent = "IAD – Dulles Airport";
+
+      new AdvancedMarkerElement({
+        map,
+        position: dulles,
+        content: markerContent,
+        title: "Washington Dulles International Airport (IAD)"
+      });
+
+      // Zoom widget logic
+      const zoomDisplay = document.getElementById("zoomValue");
+      zoomDisplay.textContent = map.getZoom();
+
+      map.addListener("zoom_changed", () => {
+        zoomDisplay.textContent = map.getZoom();
+      });
+    }
+
+    window.initMap = initMap;
+  </script>
+</head>
+
+<body onload="initMap()">
+  <div class="container">
+    <div id="map"></div>
+
+    <div class="sidebar">
+      <div class="widget-title">Map Info</div>
+      <div>Current Zoom Level:</div>
+      <div id="zoomValue" class="zoom-display">--</div>
+    </div>
+  </div>
+</body>
+</html>

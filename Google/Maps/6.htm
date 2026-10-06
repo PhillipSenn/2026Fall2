@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Airport Flight Map</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+html,
+body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+/* MAP */
+
+#map {
+    position: absolute;
+    top: 56px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 56px);
+}
+
+/* AIRPORT MARKERS */
+
+.airport-marker {
+    background: #1a73e8;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    border: 2px solid white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* NAVBAR TICKER */
+
+.ticker-container {
+    overflow: hidden;
+    white-space: nowrap;
+    flex: 1;
+    margin: 0 20px;
+    color: #fff;
+}
+
+.ticker-text {
+    display: inline-block;
+    padding-left: 100%;
+    animation: ticker 20s linear infinite;
+}
+
+@keyframes ticker {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.airplane {
+    transform-origin: center;
+    will-change: transform;
+    line-height: 1;
+    display: inline-block;
+}
+
+#sidebar {
+    position: absolute;
+    top: 56px;
+    right: 0;
+    width: 300px;
+    height: calc(100vh - 56px);
+    background: white;
+    border-left: 1px solid #ddd;
+    padding: 20px;
+    z-index: 900;
+    transform: translateX(100%);
+    transition: transform .3s ease;
+}
+
+#sidebar.open {
+    transform: translateX(0);
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+
+    <div class="container-fluid">
+
+        <a class="navbar-brand">Airport Map</a>
+
+        <div class="ticker-container">
+            <div class="ticker-text">
+                Phillip departed Egypt for United States
+            </div>
+        </div>
+
+        <button class="btn btn-outline-light" id="toggleSidebar">
+            Info
+        </button>
+
+    </div>
+</nav>
+<!-- MAP -->
+
+<div id="map"></div>
+<div id="sidebar">
+
+    <h5>Map Info</h5>
+
+    <p>Flight: CAI → IAD</p>
+    <p>Speed: <span id="speed"></span> mph</p>
+    <p>Duration: 30 seconds</p>
+
+</div>
+
+<!-- SCRIPTS -->
+
+<script src="google-maps.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script>
+
+    async function initMap() {
+
+        const cairo = { lat: 30.1219, lng: 31.4056 };
+        const dulles = { lat: 38.9531, lng: -77.4565 };
+
+        const { Map } = await google.maps.importLibrary("maps");
+        const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+        await google.maps.importLibrary("geometry");
+
+        const map = new Map(document.getElementById("map"), {
+
+            zoom: 3,
+            center: { lat: 40, lng: -20 },
+            mapId: "7c151be88bb28cf02723aa80"
+
+        });
+
+        /* ROUTE LINE */
+
+        const route = new google.maps.Polyline({
+
+            path: [cairo, dulles],
+            geodesic: true,
+            strokeColor: "#00AEEF",
+            strokeOpacity: 1,
+            strokeWeight: 3,
+            map: map
+
+        });
+
+        /* AIRPORT MARKERS */
+
+        function createAirport(label, pos) {
+
+            const el = document.createElement("div");
+            el.className = "airport-marker";
+            el.textContent = label;
+
+            return new AdvancedMarkerElement({
+                map: map,
+                position: pos,
+                content: el
+            });
+
+        }
+
+        createAirport("CAI", cairo);
+        createAirport("IAD", dulles);
+
+        /* AIRPLANE */
+
+        const planeEl = document.createElement("div");
+        planeEl.style.fontSize = "24px";
+        planeEl.textContent = "✈️";
+        planeEl.className = "airplane";
+
+        const plane = new AdvancedMarkerElement({
+            map: map,
+            position: cairo,
+            content: planeEl
+        });
+
+        /* GREAT CIRCLE ANIMATION */
+
+        const start = new google.maps.LatLng(cairo);
+        const end = new google.maps.LatLng(dulles);
+        //const start=new google.maps.LatLng(dulles);
+        //const end=new google.maps.LatLng(cairo);
+
+        const duration = 30; // seconds
+
+        const distanceMeters =
+            google.maps.geometry.spherical.computeDistanceBetween(start, end);
+
+        const speedMps = distanceMeters / duration;
+
+        const speedMph = speedMps * 2.23694;
+
+        $('#speed').text(Math.round(speedMph).toLocaleString())
+
+        let startTime = null;
+
+        function animatePlane(timestamp) {
+
+            if (!startTime) startTime = timestamp;
+
+            const elapsed = (timestamp - startTime) / 1000;
+
+            const fraction = Math.min(elapsed / duration, 1);
+
+            const position =
+                google.maps.geometry.spherical.interpolate(start, end, fraction);
+
+            plane.position = position;
+
+            /* compute heading slightly ahead of current position */
+
+            const nextFraction = Math.min(fraction + 0.001, 1);
+
+            const nextPosition =
+                google.maps.geometry.spherical.interpolate(start, end, nextFraction);
+
+            const heading =
+                google.maps.geometry.spherical.computeHeading(position, nextPosition);
+
+            /* correction because airplane emoji isn't aligned with north */
+
+            planeEl.style.transform = `rotate(${heading - 40}deg) translateY(-20px)`;
+            if (fraction < 1) {
+
+                requestAnimationFrame(animatePlane);
+
+            } else {
+
+                /* snap perfectly onto the airport */
+
+                plane.position = end;
+
+                planeEl.style.transform = "rotate(0deg)";
+            }
+        }
+
+        requestAnimationFrame(animatePlane);
+
+    }
+
+    $(initMap);
+
+    $("#toggleSidebar").on("click", function () {
+        $("#sidebar").toggleClass("open");
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

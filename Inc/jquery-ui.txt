@@ -1,0 +1,33 @@
+https://code.jquery.com/ui/1.14.2/themes/{cdn_folder}/jquery-ui.css
+
+theme_name,cdn_folder,description
+Base,base,Minimal neutral theme used as the default foundation
+Black Tie,black-tie,Dark professional theme with high contrast
+Blitzer,blitzer,Bold red highlight theme
+Cupertino,cupertino,Mac OS–inspired light theme
+Dark Hive,dark-hive,Dark gray modern theme
+Dot Luv,dot-luv,Playful dotted futuristic theme
+Eggplant,eggplant,Purple-toned theme with soft gradients
+Excite Bike,excite-bike,Retro gaming-inspired theme
+Flick,flick,Clean light theme with subtle highlights
+Hot Sneaks,hot-sneaks,Dark blue urban-style theme
+Humanity,humanity,Warm earthy tones
+Le Frog,le-frog,Bright green playful theme
+Mint Choc,mint-choc,Dark brown and mint color palette
+Overcast,overcast,Muted gray professional theme
+Pepper Grinder,pepper-grinder,Textured brown industrial look
+Redmond,redmond,Windows-style blue professional theme
+Smoothness,smoothness,Soft gradients and rounded corners
+South Street,south-street,Earthy green classic theme
+Start,start,Simple blue theme with strong structure
+Sunny,sunny,Bright yellow high-contrast theme
+Swanky Purse,swanky-purse,Pink whimsical theme
+Trontastic,trontastic,Dark blue glossy theme
+UI Darkness,ui-darkness,Very dark high-contrast theme
+UI Lightness,ui-lightness,Clean light gray classic theme
+Vader,vader,Dark Star Wars–inspired theme
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.14.2/themes/redmond/jquery-ui.css">
+
+request.jquery = 'slim' (default) || 'none' (don't include) || '' (full version of jquery)
+request.jqueryui = 'none' (default) || 'base' (default theme if included) || 'redmond', etc.

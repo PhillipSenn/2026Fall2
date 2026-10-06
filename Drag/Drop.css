@@ -1,0 +1,27 @@
+﻿.letter-spacing {
+	letter-spacing: .15em;
+}
+#terms {
+	cursor:pointer
+}
+figcaption {
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: .875rem;
+	font-style: italic;
+}
+
+fieldset {
+	min-width: 0;
+	padding: .35em .75em .625em;
+	margin: 0;
+	border: 2px groove;
+	border-radius: .375rem;
+}
+
+legend {
+	float: none;
+	width: auto;
+	padding: 0 .25em;
+	margin: 0;
+	font: inherit;
+}

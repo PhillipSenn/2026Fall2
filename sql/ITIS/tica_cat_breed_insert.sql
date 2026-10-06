@@ -1,0 +1,103 @@
+﻿-- https://tica.org/ticas-breeds/browse-all-breeds/
+declare @speciesid int
+
+select @speciesid=speciesid
+from species
+where speciesname='Felis catus'
+
+if @speciesid is null
+	throw 50000,'Felis catus was not found in species',1
+
+-- Add TICA breeds that are not already present from CFA.
+insert into breed(breed_species,breedname,breedCoat)
+select @speciesid,v.breedname,v.breedCoat
+from (values
+	 (N'Abyssinian',N'Short')
+	,(N'American Bobtail',N'Short')
+	,(N'American Bobtail Shorthair',N'Short')
+	,(N'American Curl',N'Short')
+	,(N'American Curl Longhair',N'Long')
+	,(N'American Shorthair',N'Short')
+	,(N'American Wirehair',N'Short')
+	,(N'Australian Mist',N'Short')
+	,(N'Balinese',N'Short')
+	,(N'Bengal',N'Long')
+	,(N'Bengal Longhair',N'Long')
+	,(N'Birman',N'Short')
+	,(N'Bombay',N'Long')
+	,(N'British Longhair',N'Short')
+	,(N'British Shorthair',N'Short')
+	,(N'Burmese',N'Short')
+	,(N'Burmilla',N'Long')
+	,(N'Burmilla Longhair',N'Short')
+	,(N'Chartreux',N'Short')
+	,(N'Chausie',N'Short')
+	,(N'Cherubim',N'Long')
+	,(N'Cornish Rex',N'Long')
+	,(N'Cymric',N'Short')
+	,(N'Cymric Tailed',N'Short')
+	,(N'Devon Rex',N'Short')
+	,(N'Donskoy',N'Short')
+	,(N'Egyptian Mau',N'Medium')
+	,(N'Exotic Shorthair',N'Short')
+	,(N'Havana',N'Short')
+	,(N'Highlander',N'Long')
+	,(N'Highlander Shorthair',N'Short')
+	,(N'Himalayan',N'Long')
+	,(N'Japanese Bobtail',N'Short')
+	,(N'Japanese Bobtail Longhair',N'Long')
+	,(N'Khaomanee',N'Short')
+	,(N'Korat',N'Short')
+	,(N'Kurilian Bobtail',N'Short')
+	,(N'Kurilian Bobtail Longhair',N'Long')
+	,(N'LaPerm',N'Long')
+	,(N'LaPerm Shorthair',N'Short')
+	,(N'Lykoi',N'Long')
+	,(N'Maine Coon',N'Long')
+	,(N'Maine Coon Polydactyl',N'Long')
+	,(N'Manx',N'Long')
+	,(N'Manx Tailed',N'Long')
+	,(N'Minuet',N'Short')
+	,(N'Minuet Longhair',N'Long')
+	,(N'Minuet Talls',N'Short')
+	,(N'Minuet Talls Longhair',N'Long')
+	,(N'Munchkin',N'Short')
+	,(N'Munchkin Longhair',N'Long')
+	,(N'Nebelung',N'Short')
+	,(N'Norwegian Forest',N'Short')
+	,(N'Ocicat',N'Long')
+	,(N'Oriental Longhair',N'Long')
+	,(N'Oriental Shorthair',N'Short')
+	,(N'Persian',N'Short')
+	,(N'Peterbald',N'Short')
+	,(N'Pixiebob',N'Short')
+	,(N'Pixiebob Longhair',N'Short')
+	,(N'Ragdoll',N'Long')
+	,(N'Russian Blue',N'Short')
+	,(N'Savannah',N'Long')
+	,(N'Scottish Fold',N'Short')
+	,(N'Scottish Fold Longhair',N'Long')
+	,(N'Scottish Straight',N'Short')
+	,(N'Scottish Straight Longhair',N'Short')
+	,(N'Selkirk Rex',N'Long')
+	,(N'Selkirk Rex Longhair',N'Long')
+	,(N'Siamese',N'Short')
+	,(N'Siberian',N'Short')
+	,(N'Singapura',N'Long')
+	,(N'Snowshoe',N'Long')
+	,(N'Somali',N'Medium')
+	,(N'Sphynx',N'Short')
+	,(N'Tennessee Rex',NULL)
+	,(N'Thai',N'Short')
+	,(N'Tonkinese',N'Short')
+	,(N'Toyger',N'Short')
+	,(N'Turkish Angora',N'Long')
+	,(N'Turkish Van',N'Long')
+) v(breedname,breedCoat)
+where not exists (
+	select 1
+	from breed
+	where breed_species=@speciesid
+	and breedname=v.breedname
+)
+go

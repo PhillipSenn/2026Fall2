@@ -1,0 +1,10 @@
+Table 1 Abbreviations in MindTap
+Computer Concepts	CC
+Word	WD
+Excel	EX
+PowerPoint	PPT
+Access	AC
+Outlook	OUT
+Office	OFF
+Windows	WIN
+Integration	INT
