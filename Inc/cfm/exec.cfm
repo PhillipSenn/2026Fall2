@@ -22,7 +22,7 @@ function exec(proc,params) {
 			ArrayAppend(arrParams,params)
 		}
 	}
-	cfstoredproc(procedure=proc) {
+	cfstoredproc(procedure=proc, datasource='lr2026Fall2') {
 		for (i=1;i <= ArrayLen(arrParams);i++) {
 			cfprocparam(value=arrParams[i], cfsqltype='cf_sql_varchar')
 		}

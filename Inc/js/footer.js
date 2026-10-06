@@ -15,11 +15,11 @@ pgm.each_navlink = function() {
 		$(this).removeClass('btn-primary')
 			.addClass('btn-link')
 	}
-	$(this).addClass('active')
-		.wrap('<li class="nav-item"></li>')
+	$(this).wrap('<li class="nav-item"></li>')
 	$(this).parent().appendTo('#main-navbar')
 }
 $('.nav-link').each(pgm.each_navlink)
+$('#main-navbar .nav-link').last().addClass('active')
 
 function caught(url) {
 	function make_caught(error) {

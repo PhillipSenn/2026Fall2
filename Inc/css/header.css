@@ -70,6 +70,18 @@ code {
 .card-header[data-bs-toggle="collapse"] {
 	cursor: pointer;
 }
+#main-navbar > .nav-item {
+	display: flex;
+	align-items: center;
+}
+#main-navbar .nav-link {
+	padding-inline-end: 0;
+}
+#main-navbar > .nav-item:not(:last-child):after {
+	content: "\2022";
+	margin-left: .35rem;
+	color: rgba(255, 255, 255, .75);
+}
 table.cfdebug {
 	display: none;
 	font-family: consolas;
