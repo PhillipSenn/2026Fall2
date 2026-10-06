@@ -26,6 +26,10 @@ breed = queryExecute(
 	"select * from breed where breed_species = :speciesid order by breedname",
 	{speciesid: {value: form.speciesid, cfsqltype: "cf_sql_integer"}}
 )
+anchor = ''
+if (path.speciesname == 'Equus caballus') {
+	anchor = 'https://breeds.okstate.edu/horses/'
+}
 </cfscript>
 
 <cfoutput query="act">
@@ -40,7 +44,13 @@ breed = queryExecute(
 	<div class="card-header bg-primary-subtle">Species: #path.speciesname#</div>
 	<div class="card-body">
 		<cfloop query="breed">
-			<div>#breedname#</div>
+			<div>
+				<cfif len(anchor)>
+					<a target="_blank" href="#anchor##replace(lcase(breedname),' ','-','all')#">#breedname#</a>
+				<cfelse>
+					#breedname#
+				</cfif>
+			</div>
 		</cfloop>
 	</div>
 	<input hidden name="id" value="#request.usr.id#">
@@ -49,11 +59,11 @@ breed = queryExecute(
 <button class="nav-link" name="actid" value="#actid#" formaction="domain.cfm">Domain</button>
 <button class="nav-link" name="actid" value="#actid#" formaction="kingdom.cfm?domainid=#path.domainid#">Kingdom</button>
 <button class="nav-link" name="actid" value="#actid#" formaction="phylum.cfm?kingdomid=#path.kingdomid#">Phylum</button>
-<button class="nav-link" name="actid" value="#actid#" formaction="class.cfm?phylumid="#path.phylumid#">Class</button>
+<button class="nav-link" name="actid" value="#actid#" formaction="class.cfm?phylumid=#path.phylumid#">Class</button>
 <button class="nav-link" name="actid" value="#actid#" formaction="ord.cfm?classid=#path.classid#">Order</button>
 <button class="nav-link" name="actid" value="#actid#" formaction="family.cfm?ordid=#path.ordid#">Family</button>
 <button class="nav-link" name="actid" value="#actid#" formaction="genus.cfm?familyid=#path.familyid#">Genus</button>
 <button class="nav-link" name="actid" value="#actid#" formaction="species.cfm?genusid=#path.genusid#">Species</button>
-<button class="nav-link" name="actid" value="#actid#">Breed</button>
+<button class="nav-link" name="actid" value="#actid#" formaction="breed.cfm?speciesid=#path.speciesid#">Breed</button>
 <cfinclude template="/Inc/footer.cfm">
 </cfoutput>

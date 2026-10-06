@@ -3,7 +3,7 @@ request.title = 'kingdom'
 request.progress.bar = false
 include '/Inc/header.cfm'
 path = queryExecute(
-	"select domainname
+	"select domainid, domainname
 	from domain
 	where domainid = :domainid",
 	{domainid: {value: form.domainid, cfsqltype: "cf_sql_integer"}}
@@ -14,7 +14,7 @@ kingdom = queryExecute(
 )
 </cfscript>
 
-<cfoutput>
+<cfoutput query="act">
 <form class="card" action="phylum.cfm">
 	<div class="card-header bg-primary-subtle">domain: #path.domainname#</div>
 	<div class="card-body">
@@ -27,5 +27,7 @@ kingdom = queryExecute(
 	<input hidden name="id" value="#request.usr.id#">
 	<input hidden name="actid" value="#form.actid#">
 </form>
+<button class="nav-link" name="actid" value="#actid#" formaction="domain.cfm">Domain</button>
+<button class="nav-link" name="actid" value="#actid#" formaction="kingdom.cfm?domainid=#path.domainid#">Kingdom</button>
 <cfinclude template="/Inc/footer.cfm">
 </cfoutput>

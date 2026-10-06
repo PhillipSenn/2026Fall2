@@ -3,7 +3,7 @@ request.title = 'species'
 request.progress.bar = false
 include '/Inc/header.cfm'
 path = queryExecute(
-	"select domainname, kingdomname, phylumname, classname, ordname, familyname, genusname
+	"select domainid, domainname, kingdomid, kingdomname, phylumid, phylumname, classid, classname, ordid, ordname, familyid, familyname, genusid, genusname
 	from genus
 	left join family on genus_family = familyid
 	left join ord on family_ord = ordid
@@ -20,7 +20,7 @@ species = queryExecute(
 )
 </cfscript>
 
-<cfoutput>
+<cfoutput query="act">
 <form class="card" action="breed.cfm">
 	<div class="card-header bg-primary-subtle">domain: #path.domainname#</div>
 	<div class="card-header bg-primary-subtle">kingdom: #path.kingdomname#</div>
@@ -39,5 +39,13 @@ species = queryExecute(
 	<input hidden name="id" value="#request.usr.id#">
 	<input hidden name="actid" value="#form.actid#">
 </form>
+<button class="nav-link" name="actid" value="#actid#" formaction="domain.cfm">Domain</button>
+<button class="nav-link" name="actid" value="#actid#" formaction="kingdom.cfm?domainid=#path.domainid#">Kingdom</button>
+<button class="nav-link" name="actid" value="#actid#" formaction="phylum.cfm?kingdomid=#path.kingdomid#">Phylum</button>
+<button class="nav-link" name="actid" value="#actid#" formaction="class.cfm?phylumid=#path.phylumid#">Class</button>
+<button class="nav-link" name="actid" value="#actid#" formaction="ord.cfm?classid=#path.classid#">Order</button>
+<button class="nav-link" name="actid" value="#actid#" formaction="family.cfm?ordid=#path.ordid#">Family</button>
+<button class="nav-link" name="actid" value="#actid#" formaction="genus.cfm?familyid=#path.familyid#">Genus</button>
+<button class="nav-link" name="actid" value="#actid#" formaction="species.cfm?genusid=#path.genusid#">Species</button>
 <cfinclude template="/Inc/footer.cfm">
 </cfoutput>
