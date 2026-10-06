@@ -1,0 +1,17 @@
+---
+description: State the planned change and wait for confirmation before editing
+alwaysApply: true
+---
+
+# Confirm before changes
+
+Before editing, creating, or deleting files, state the planned change and wait for an explicit go-ahead.
+
+- Say which files will change and what will change in them.
+- Do not make the change in the same turn as the plan.
+- Questions that need no file changes can be answered immediately.
+
+```
+I will add a to address in application.cfc on the cfmail call.
+Waiting for your go-ahead.
+```

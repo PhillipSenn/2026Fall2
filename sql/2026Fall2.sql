@@ -35,6 +35,8 @@ outer apply (
 ) grade
 order by actsort,actid
 go
+exec act.where_usr '19C76747-5CF9-449C-9A52-FEF8906AD52E'
+
 create or alter proc act.where_act
 (@actid int
 ) as
