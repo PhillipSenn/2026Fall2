@@ -35,7 +35,7 @@ outer apply (
 ) grade
 order by actsort,actid
 go
-exec act.where_usr '19C76747-5CF9-449C-9A52-FEF8906AD52E'
+--exec act.where_usr '19C76747-5CF9-449C-9A52-FEF8906AD52E'
 
 create or alter proc act.where_act
 (@actid int
@@ -43,6 +43,14 @@ create or alter proc act.where_act
 select actid,actname,actdesc
 	,act_cat as catid
 from act
+where actid=@actid
+go
+create or alter proc act.update_sort
+(@actid int
+,@actsort int
+) as
+update act set 
+ actsort=@actsort
 where actid=@actid
 go
 --create schema grade authorization dbo
@@ -646,6 +654,25 @@ from (
 ) x
 where qid=@qid
 go
+create or alter proc usr.update_SpeechSynthesisUtterance
+(@id uniqueidentifier
+,@SpeechSynthesisUtterance int
+,@SpeechRate decimal(9,2)
+,@SpeechPitch decimal(9,2)
+,@SpeechVolume decimal(9,2)
+,@voiceName nvarchar(200)
+) as
+update usr set
+ SpeechSynthesisUtterance=@SpeechSynthesisUtterance
+,SpeechRate=@SpeechRate
+,SpeechPitch=@SpeechPitch
+,SpeechVolume=@SpeechVolume
+,voiceName=@voiceName
+where id=@id
+select * from usr
+where id=@id
+go
+
 
 
 
@@ -920,25 +947,6 @@ where id=@id
 select * from usr
 where id=@id
 go
-create or alter proc usr.update_SpeechSynthesisUtterance
-(@id uniqueidentifier
-,@SpeechSynthesisUtterance int
-,@SpeechRate decimal(9,2)
-,@SpeechPitch decimal(9,2)
-,@SpeechVolume decimal(9,2)
-,@voiceName nvarchar(200)
-) as
-update usr set
- SpeechSynthesisUtterance=@SpeechSynthesisUtterance
-,SpeechRate=@SpeechRate
-,SpeechPitch=@SpeechPitch
-,SpeechVolume=@SpeechVolume
-,voiceName=@voiceName
-where id=@id
-select * from usr
-where id=@id
-go
-
 declare @id uniqueidentifier = '19C76747-5CF9-449C-9A52-FEF8906AD52E'
 declare @actid int=242
 declare @usrid int=(select usrid from usr where id=@id)

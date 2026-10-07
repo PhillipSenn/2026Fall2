@@ -10,6 +10,7 @@ q = usr('poll.unanswered',form.actid) // Includes all unanswered questions
 if (q.recordCount) {
 	usr('poll.start_q',q.qid)
 	cat = exec('cat.where_cat',act.catid)
+	ans = exec('ans.where_q',q.qid)
 }
 </cfscript>
 
@@ -29,7 +30,7 @@ if (q.recordCount) {
 						<div class="accordion-item">
 							<h2 class="accordion-header">
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="##answer">
-									Answer
+									Groq's answer
 								</button>
 							</h2>
 							<div id="answer" class="accordion-collapse collapse" data-bs-parent="##answerAccordion">
@@ -45,11 +46,28 @@ if (q.recordCount) {
 								</div>
 							</div>
 						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="##textbook-answer">
+									Textbook's answer
+								</button>
+							</h2>
+							<div id="textbook-answer" class="accordion-collapse collapse" data-bs-parent="##answerAccordion">
+								<div class="accordion-body">
+									<div class="card">
+										<div class="card-body">
+											#ans.ansname#
+										</div>
+										<div class="card-footer">
+											<button name="qid" value="#q.qid#" class="mt-2">Save</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="card-footer">
 		</div>
 		<input hidden name="actid" value="#form.actid#">
 		<input hidden name="id" value="#request.usr.id#">

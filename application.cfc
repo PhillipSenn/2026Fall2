@@ -60,7 +60,7 @@ function onRequest(targetPage) {
 		include targetPage
 	}
 }
-
+/*
 function onError(exception, eventName) {
 	var source = exception
 	var message = ''
@@ -142,4 +142,5 @@ function errorField(source, key) {
 		return ''
 	}
 }
+*/
 }

@@ -1,3 +1,4 @@
 <cfscript>
-queryExecute('update act set actsort=' & form.actsort & ' where actid=' & form.actid)
+setting showdebugoutput=false;
+exec('act.update_sort',[form.actid,form.actsort])
 </cfscript>

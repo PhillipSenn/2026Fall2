@@ -23,11 +23,14 @@ $('#main-navbar .nav-link').last().addClass('active')
 
 function caught(url) {
 	function make_caught(error) {
-		console.error('Fetch error for URL:', url)
-		console.error('Status:', error.status || 'unknown')
-		console.error('Message:', error.message)
-		console.error('Stack:', error.stack)
-		$('.card-header').text('Fetch to ' + url + ' failed: ' + error.message)
+		console.log('Fetch error for URL:', url)
+		console.log('Status:', error.status || 'unknown')
+		console.log('Message:', error.message)
+		console.log('Stack:', error.stack)
+		$('.card-header').removeClass('bg-primary-subtle')
+			.addClass('bg-danger')
+			.text('Fetch to ' + url + ' failed: ' + error.message)
+		debugger // It could be because you're on the wrong server.
 	}
 	return make_caught
 }

@@ -21,19 +21,19 @@ function saveSort() {
 	if (actsort === String(cell.data('actsort'))) {
 		return
 	}
-
-	var body = new URLSearchParams()
-	body.set('id', dom.id)
-	body.set('actid', cell.closest('tr').data('actid'))
-	body.set('actsort', actsort)
-
-	fetch('Act/update_sort.cfm', {
+	var url = 'Act/update_sort.cfm'
+	var formData = new URLSearchParams()
+	formData.set('id', dom.id)
+	formData.set('actid', cell.closest('tr').data('actid'))
+	formData.set('actsort', actsort)
+	console.log(url + '?' + formData.toString())
+	fetch(url, {
 		method: 'POST',
-		body: body
-	}).then(saved)
-		.catch(caught('Act/update_sort.cfm'))
+		body: formData
+	}).then(done)
+		.catch(caught(url))
 
-	function saved(response) {
+	function done(response) {
 		if (!response.ok) {
 			throw new Error('HTTP ' + response.status + ' ' + response.statusText)
 		}
