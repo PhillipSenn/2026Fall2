@@ -778,21 +778,20 @@ function haltRoll() {
 }
 
 function postSync(fields, done) {
-	const body = new URLSearchParams()
+	var url = 'sync.cfm'
+	var form = {}
+	form.body = new URLSearchParams()
 	const names = Object.keys(fields)
 	for (let i = 0; i < names.length; i++) {
-		body.append(names[i], fields[names[i]])
+		form.body.set(names[i], fields[names[i]])
 	}
 	if (!fields.id) {
-		body.append('id', myId())
+		form.body.set('id', myId())
 	}
-	fetch('sync.cfm', { method: 'POST', body: body }).then(readSync).then(done).catch(ignoreSync)
-	function readSync(response) {
-		return response.json()
-	}
-}
-
-function ignoreSync() {
+	fetch(url,form)
+		.then(json_done)
+		.then(done)
+		.catch(caught(url))
 }
 
 function sendInit() {

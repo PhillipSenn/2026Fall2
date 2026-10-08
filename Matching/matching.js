@@ -14,16 +14,14 @@ $(document).on('click', '#questions button, #answers button', function () {
 		lock(picked)
 		lock(button)
 		picked = null
-		var formData = new URLSearchParams()
-		formData.set('id', dom.id)
-		formData.set('ansid', ansid)
 		var url = '../guess/merge_ans.cfm'
-		var params = {
-			method: 'POST',
-			body: formData
-		}
-		fetch(url, params)
-			.then(done)
+		var form = {}
+		form.body = new URLSearchParams()
+		form.body.set('id', dom.id)
+		form.body.set('ansid', ansid)
+		fetch(url, form)
+			.then(text_done)
+			.then(showEarned)
 			.catch(caught(url))
 		if (!$('#questions button:not(:disabled)').length) {
 			$('.card-header').text('All shortcuts matched.')
@@ -69,13 +67,6 @@ function resting(column) {
 		return 'btn-outline-primary'
 	}
 	return 'btn-outline-secondary'
-}
-
-function done(response) {
-	if (!response.ok) {
-		throw new Error('HTTP ' + response.status + ' ' + response.statusText)
-	}
-	return response.text().then(showEarned)
 }
 
 function showEarned(text) {

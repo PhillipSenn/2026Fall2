@@ -1,8 +1,10 @@
 pgm.init = function() {
 	var nativeFetch = window.fetch
-	window.fetch = function(url, options) {
-		options = Object.assign({ method: 'post' }, options)
-		return nativeFetch.call(window, url, options)
+	window.fetch = function(url, form) {
+		form = Object.assign({ method: 'post' }, form)
+		console.log(url)
+		console.log(form)
+		return nativeFetch.call(window, url, form)
 	}
 	
 	var nativeText = $.fn.text

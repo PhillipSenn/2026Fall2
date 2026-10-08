@@ -678,6 +678,49 @@ where id=@id
 select * from usr
 where id=@id
 go
+create or alter proc guess.merge_ans_name
+(@id uniqueidentifier
+,@ansid int
+,@guessname nvarchar(max)
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+declare @qid int=(select ans_q from ans where ansid=@ansid)
+declare @actid int=(select q_act from q where qid=@qid)
+
+declare @gradeid int=(select gradeid from grade where grade_usr=@usrid and grade_act=@actid)
+if @gradeid is null begin
+	insert into grade(grade_usr,grade_act) values(@usrid,@actid)
+	select @gradeid=scope_identity()
+end
+
+declare @guessid int=(
+	select DISTINCT guessid -- Because the join to the ans table produces multiple rows
+	from guess
+	join ans on guess_ans=@ansid
+	where guess_grade=@gradeid
+	and ans_q=@qid
+)
+if @guessid is null begin
+	insert into guess(guess_grade,guess_ans) values(@gradeid,@ansid)
+	select @guessid=scope_identity()
+end
+update guess set 
+ guess_ans=@ansid 
+,guessname=@guessname
+where guessid=@guessid
+declare @possible int=(select count(*) from q where q_act=@actid)
+print '@possible: ' + cast(@possible as varchar)
+declare @answered int=(
+	select count(distinct ans_q) 
+	from guess 
+	join ans on guess_ans=ansid
+	where guess_grade=@gradeid
+)
+print '@answered: ' + cast(@answered as varchar)
+update grade set
+ earned=ceiling(100.0 * @answered / @possible)
+where gradeid=@gradeid
+go
 
 
 
@@ -868,49 +911,6 @@ where gradeid=@gradeid
 go
 
 
-create or alter proc guess.merge_ans_name
-(@id uniqueidentifier
-,@ansid int
-,@guessname nvarchar(max)
-) as
-declare @usrid int=(select usrid from usr where id=@id)
-declare @qid int=(select ans_q from ans where ansid=@ansid)
-declare @actid int=(select q_act from q where qid=@qid)
-
-declare @gradeid int=(select gradeid from grade where grade_usr=@usrid and grade_act=@actid)
-if @gradeid is null begin
-	insert into grade(grade_usr,grade_act) values(@usrid,@actid)
-	select @gradeid=scope_identity()
-end
-
-declare @guessid int=(
-	select DISTINCT guessid -- Because the join to the ans table produces multiple rows
-	from guess
-	join ans on guess_ans=@ansid
-	where guess_grade=@gradeid
-	and ans_q=@qid
-)
-if @guessid is null begin
-	insert into guess(guess_grade,guess_ans) values(@gradeid,@ansid)
-	select @guessid=scope_identity()
-end
-update guess set 
- guess_ans=@ansid 
-,guessname=@guessname
-where guessid=@guessid
-declare @possible int=(select count(*) from q where q_act=@actid)
-print '@possible: ' + cast(@possible as varchar)
-declare @answered int=(
-	select count(distinct ans_q) 
-	from guess 
-	join ans on guess_ans=ansid
-	where guess_grade=@gradeid
-)
-print '@answered: ' + cast(@answered as varchar)
-update grade set
- earned=ceiling(100.0 * @answered / @possible)
-where gradeid=@gradeid
-go
 /*
 declare @id uniqueidentifier='19C76747-5CF9-449C-9A52-FEF8906AD52E'
 declare @ansid int=3638

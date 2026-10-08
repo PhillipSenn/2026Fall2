@@ -93,14 +93,11 @@ function pct_done(response) {
 
 
 var url = 'grade/where_act.cfm'
-var formData = new URLSearchParams()
-formData.set('id', dom.id)
-formData.set('actid', $('[name=actid]').val())
-var params = {
-	method: 'POST',
-	body: formData
-}
-fetch(url, params)
+var form = {}
+form.body = new URLSearchParams()
+form.body.set('id', dom.id)
+form.body.set('actid', $('[name=actid]').val())
+fetch(url, form)
 	.then(text_done)
 	.then(pct_done)
 	.catch(caught(url))

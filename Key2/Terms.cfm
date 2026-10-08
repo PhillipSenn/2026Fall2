@@ -26,7 +26,9 @@ cfloop(query=finishedPoll) {
 			<div class="col-8">
 				<div id="qid"></div>
 				<figure>
-					<img id="wikipedia" class="img-thumbnail mt-3 d-none" alt="">
+					<a id="wikipedia-link" target="_blank">
+						<img id="wikipedia" class="img-thumbnail mt-3 d-none" alt="">
+					</a>
 					<figcaption></figcaption>
 				</figure>
 			</div>
