@@ -2,7 +2,7 @@
 include '/Inc/header.cfm'
 if (structKeyExists(form, 'firstname')) {
 	usr('usr.update_firstname', form.firstname)
-	location(request.home, false)
+	location('login.cfm?id=' & request.usr.id, false)
 }
 
 mark = ''

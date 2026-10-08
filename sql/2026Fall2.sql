@@ -729,6 +729,28 @@ update q set
  qdesc=@qdesc
 where qid=@qid
 go
+create or alter proc guess.where_q
+(@id uniqueidentifier
+,@qid int
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+select guess_ans,guessname
+from guess
+join grade on guess_grade=gradeid
+join ans on guess_ans=ansid
+where grade_usr=@usrid
+and ans_q=@qid
+go
+create or alter proc usr.update_firstname
+(@id uniqueidentifier
+,@firstname nvarchar(max)
+) as
+update usr set
+ firstname=@firstname
+where id=@id
+select * from usr
+where id=@id
+go
 
 
 
@@ -930,29 +952,7 @@ declare @actid int=179
 exec guess.where_act @id,@actid
 */
 
-create or alter proc guess.where_q
-(@id uniqueidentifier
-,@qid int
-) as
-declare @usrid int=(select usrid from usr where id=@id)
-select guess_ans,guessname
-from guess
-join grade on guess_grade=gradeid
-join ans on guess_ans=ansid
-where grade_usr=@usrid
-and ans_q=@qid
-go
 --exec guess.where_q '19C76747-5CF9-449C-9A52-FEF8906AD52E',24759
-create or alter proc usr.update_firstname
-(@id uniqueidentifier
-,@firstname nvarchar(max)
-) as
-update usr set
- firstname=@firstname
-where id=@id
-select * from usr
-where id=@id
-go
 declare @id uniqueidentifier = '19C76747-5CF9-449C-9A52-FEF8906AD52E'
 declare @actid int=242
 declare @usrid int=(select usrid from usr where id=@id)

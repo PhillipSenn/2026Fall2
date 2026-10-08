@@ -13,10 +13,11 @@ if (q.recordcount) {
 <form class="card">
 	<cfif q.recordcount>
 		<div class="card-header bg-primary-subtle">
+			Review Questions
 		</div>
 		<div class="card-body">
 			<div class="row">
-				<div class="col-4 d-flex align-items-center h4" id="qname">
+				<div class="col-4 d-flex xalign-items-centerx h4" id="qname">
 					#q.qname#
 				</div>
 				<div class="col-4 border-start">
@@ -41,6 +42,7 @@ if (q.recordcount) {
 		</div>
 	<cfelse>
 		<div class="card-header bg-primary-subtle">
+			Review Questions
 			<button class="float-end btn-outline-danger" formaction="reset.cfm">Reset</button>
 		</div>
 		<div class="card-body display-1">

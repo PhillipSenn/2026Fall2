@@ -6,6 +6,10 @@ main {
 	opacity: 0;
 	transition: opacity 1s ease 1s;
 }
+.progress {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
 
 label {
 	cursor:pointer

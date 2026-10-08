@@ -11,7 +11,8 @@ tscore = 0
 <cfoutput query="act">
 <form action="Feedback.cfm" class="card" method="post">
 	<div class="card-header bg-primary-subtle">
-		<button class="float-end btn-outline-danger" formaction="reset.cfm">Reset</button>
+		Review Questions
+		<button class="btn-sm float-end btn-outline-danger" formaction="reset.cfm">Reset</button>
 	</div>
 	<div class="card-body">
 		<table class="table-bordered table-striped table-hover">

@@ -1,4 +1,4 @@
-﻿app = {}
+﻿app = {}  // String and numeric variables
 //app.start = performance.now()
 
 pgm = {}
