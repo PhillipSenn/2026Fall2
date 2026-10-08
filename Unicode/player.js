@@ -199,7 +199,7 @@ function getEmojiName(emoji) {
 
 var emojiNameLookup = {}
 
-fetch('https://cdn.jsdelivr.net/npm/unicode-emoji-json@0.8.0/data-by-emoji.json')
+fetch('https://cdn.jsdelivr.net/npm/unicode-emoji-json@0.8.0/data-by-emoji.json', { method: 'get' })
 	.then(function(response){
 	  return response.json()
 	})

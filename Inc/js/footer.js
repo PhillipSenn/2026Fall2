@@ -1,9 +1,26 @@
+pgm.init = function() {
+	var nativeFetch = window.fetch
+	window.fetch = function(url, options) {
+		options = Object.assign({ method: 'post' }, options)
+		return nativeFetch.call(window, url, options)
+	}
+	
+	var nativeText = $.fn.text
+	$.fn.text = function(response) {
+		if (response === undefined) {
+			return nativeText.call(this).trim()
+		}
+		return nativeText.call(this, response)
+	}
+}
+pgm.init()
+
+
 var dom = {} // Document Object Model
 dom.id = $('input[name=id]').val()
 
 $('button').addClass('btn')
 $('.btn:not([class*="btn-"]):not([class*="bg-"])').addClass('btn-primary')
-
 $('form:not([method=get])').attr('method', 'post')
 $('textarea').addClass('form-control')
 $('input[type=email]').addClass('form-control')
@@ -21,6 +38,20 @@ pgm.each_navlink = function() {
 $('.nav-link').each(pgm.each_navlink)
 $('#main-navbar .nav-link').last().addClass('active')
 
+function text_done(response) {
+	if (!response.ok) {
+		throw new Error('HTTP ' + response.status + ' ' + response.statusText)
+	}
+	return response.text()
+}
+function json_done(response) {
+	if (!response.ok) {
+		throw new Error('HTTP ' + response.status + ' ' + response.statusText)
+	}
+	return response.json()
+}
+
+
 function caught(url) {
 	function make_caught(error) {
 		console.log('Fetch error for URL:', url)
@@ -34,63 +65,6 @@ function caught(url) {
 	}
 	return make_caught
 }
-/*
-function get_text(url) {
-	var response = fetch(url).then(done)
-		.catch(caught(url))
-	return response
-	function done(response) {
-		if (!response.ok) {
-			throw new Error('HTTP ' + response.status + ' ' + response.statusText)
-		}
-		return response.text()
-	}
-}
-
-function get_json(url) {
-	var response = fetch(url).then(done)
-		.catch(caught(url))
-	return response
-	function done(response) {
-		if (!response.ok) {
-			throw new Error('HTTP ' + response.status + ' ' + response.statusText)
-		}
-		return response.json()
-	}
-}
-
-function post_text(url, form) {
-	var response = fetch(url, {
-		 method: 'POST'
-		,headers: { 'Content-Type': 'application/json' }
-		,body: JSON.stringify(form)
-	}).then(done)
-		.catch(caught(url))
-	return response
-	function done(response) {
-		if (!response.ok) {
-			throw new Error('HTTP ' + response.status + ' ' + response.statusText)
-		}
-		return response.text()
-	}
-}
-
-function post_json(url, form) {
-	var response = fetch(url, {
-		 method: 'POST'
-		,headers: { 'Content-Type': 'application/json' }
-		,body: JSON.stringify(form)
-	}).then(done)
-		.catch(caught(url))
-	return response
-	function done(response) {
-		if (!response.ok) {
-			throw new Error('HTTP ' + response.status + ' ' + response.statusText)
-		}
-		return response.json()
-	}
-}
-*/
 pgm.form_submit = function() {
 	$('body').css('cursor', 'wait')
 }

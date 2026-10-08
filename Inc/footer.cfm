@@ -5,13 +5,13 @@ if (isDefined('form.actid')) {
 writeOutput('</main>' & chr(10))
 param request.bootstrap = true;
 if (request.bootstrap) {
-	writeoutput('<script src="' & request.home & 'Inc/js/popper.js"></script>' & chr(10))
-	writeoutput('<script src="' & request.home & 'Inc/js/bootstrap.js"></script>' & chr(10))
+	writeoutput('<script src="/Inc/js/popper.js"></script>' & chr(10))
+	writeoutput('<script src="/Inc/js/bootstrap.js"></script>' & chr(10))
 }
 param request.jQuery = '';
 if (request.jQuery == 'none') {
 } else {
-	writeoutput('<script src="' & request.home & 'Inc/js/jQuery.js"></script>' & chr(10))
+	writeoutput('<script src="/Inc/js/jQuery.js"></script>' & chr(10))
 }
 param request.jQueryUI = 'none';
 if (request.jQueryUI != 'none') {

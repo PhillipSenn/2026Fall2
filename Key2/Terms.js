@@ -24,7 +24,7 @@ function picture(qname, qid) {
 	$('figcaption').empty()
 	var url = 'https://en.wikipedia.org/api/rest_v1/page/summary/'
 		+ encodeURIComponent(qname.trim())
-	fetch(url)
+	fetch(url, { method: 'get' })
 		.then(done_json)
 		.then(show_picture)
 		.catch(hide_picture)

@@ -67,17 +67,14 @@ function btn(myEvent) {
 			.hide('slow')
 		$('#slider').slideUp('slow')
 		var url = 'Poll/merge_q.cfm'
-		var formData = new URLSearchParams()
-		formData.set('id', dom.id)
-		formData.set('qid', app.qid)
-		var params = {
-			method: 'POST',
-			body: formData
-		}
-		fetch(url, params)
-			.then(text)
+		var form = {}
+		form.body = new URLSearchParams()
+		form.body.set('id', dom.id)
+		form.body.set('qid', app.qid)
+		fetch(url, form)
+			.then(text_done)
 			.then(pct_done)
-			.catch(pgm.caught(url))
+			.catch(caught(url))
 	} else {
 		$(this).removeClass('btn-outline-primary btn-primary')
 			.addClass('btn-warning')
@@ -94,12 +91,6 @@ function pct_done(response) {
 	}
 }
 
-function text(response) {
-	if (!response.ok) {
-		throw new Error('HTTP ' + response.status + ' ' + response.statusText)
-	}
-	return response.text()
-}
 
 var url = 'grade/where_act.cfm'
 var formData = new URLSearchParams()
@@ -110,7 +101,7 @@ var params = {
 	body: formData
 }
 fetch(url, params)
-	.then(text)
+	.then(text_done)
 	.then(pct_done)
-	.catch(pgm.caught(url))
+	.catch(caught(url))
 

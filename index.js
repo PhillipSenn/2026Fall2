@@ -22,15 +22,13 @@ function saveSort() {
 		return
 	}
 	var url = 'Act/update_sort.cfm'
-	var formData = new URLSearchParams()
-	formData.set('id', dom.id)
-	formData.set('actid', cell.closest('tr').data('actid'))
-	formData.set('actsort', actsort)
-	console.log(url + '?' + formData.toString())
-	fetch(url, {
-		method: 'POST',
-		body: formData
-	}).then(done)
+	var form = {}
+	form.body = new URLSearchParams()
+	form.body.set('id', dom.id)
+	form.body.set('actid', cell.closest('tr').data('actid'))
+	form.body.set('actsort', actsort)
+	console.log(url + '?' + form.body.toString())
+	fetch(url, form).then(done)
 		.catch(caught(url))
 
 	function done(response) {

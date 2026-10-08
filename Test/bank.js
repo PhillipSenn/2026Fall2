@@ -36,10 +36,24 @@ function preventDefault(e) {
 	e.preventDefault()
 }
 
-if (answered.innerHTML) {
+if (typeof answered !== 'undefined' && answered.innerHTML) {
 	var text = $('.progress-bar').text()
 	$('.progress-bar').css('width', text)
 		.append(' complete (' + answered.innerHTML + ' / ' + questions.innerHTML + ')')
+}
+
+if ($('#count_right').length) {
+	var countRight = +$('#count_right').text()
+	var countWrong = +$('#count_wrong').text()
+	var total = countRight + countWrong
+	var rightPct = total ? 100 * countRight / total : 0
+	var wrongPct = total ? 100 * countWrong / total : 0
+	var bar = $('.progress-bar')
+	bar.removeClass('bg-primary progress-bar-striped progress-bar-animated fw-bold')
+		.addClass('bg-success')
+		.css('width', rightPct + '%')
+		.text(countRight)
+	bar.after('<div class="progress-bar bg-danger" style="width:' + wrongPct + '%">' + countWrong + '</div>')
 }
 
 $(document).on('click','.bi-volume-up',volumeUp)
@@ -86,22 +100,12 @@ $(document).on('click','.ansid',ansid)
 function ansid() {
 	var ansid = +$(this).val()
 	var url = '../guess/merge_ans.cfm'
-	var formData = new URLSearchParams()
-	formData.set('id', dom.id)
-	formData.set('ansid', ansid)
-	var params = {
-		method: 'POST',
-		body: formData
-	}
-	fetch(url, params)
-		.then(done)
+	var form = {}
+	form.body = new URLSearchParams()
+	form.body.set('id', dom.id)
+	form.body.set('ansid', ansid)
+	fetch(url, form).then(text_done)
 		.catch(caught(url))
-	function done(response) {
-		if (!response.ok) {
-			throw new Error('HTTP ' + response.status + ' ' + response.statusText)
-		}
-		return response.text()
-	}
 }
 
 var wrong = +$('#wrong').text()

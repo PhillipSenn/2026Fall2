@@ -62,7 +62,6 @@ if (unanswered.recordcount) {
 		}
 	}
 	rightWrong = usr('act.rightWrong',form.actid)
-	total=rightWrong.count_right + rightWrong.count_wrong
 }
 qry = usr('guess.wrong_act',form.actid)
 wrong = 0
@@ -162,14 +161,6 @@ cfloop(query="qry") {
 			<div id="questions">#q.recordcount#</div>
 		</div>
 	<cfelse>
-		<div class="progress">
-			<div class="progress-bar bg-success" style="width:#100 * rightWrong.count_right / total#%">
-				#rightWrong.count_right#
-			</div>
-			<div class="progress-bar bg-danger" style="width:#100 * rightWrong.count_wrong / total#%">
-				#rightWrong.count_wrong#
-			</div>
-		</div>
 		<div class="card">
 			<div class="card-body">
 				<table>
@@ -255,6 +246,8 @@ cfloop(query="qry") {
 				</table>
 			</div>
 		</div>
+		<div hidden id="count_right">#rightWrong.count_right#</div>
+		<div hidden id="count_wrong">#rightWrong.count_wrong#</div>
 	</cfif>
 	<cfif structKeyExists(form,'qid')>
 		<input hidden name="redo" value="1">

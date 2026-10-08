@@ -54,7 +54,7 @@ if (q.recordcount) {
 	<input hidden id="qid" value="#q.qid#">
 	<input hidden name="id" value="#request.usr.id#">
 </form>
-<script src="#request.home#Inc/js/autosize.js"></script>
+<script src="/Inc/js/autosize.js"></script>
 <button class="nav-link" name="actid" value="#actid#" formaction="#request.dir#">#actname#</button>
 <cfinclude template="/Inc/footer.cfm">
 </cfoutput>

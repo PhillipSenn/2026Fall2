@@ -1,51 +1,37 @@
-﻿var formData = new URLSearchParams()
-formData.set('id', dom.id)
-formData.set('qname','Subject: ' + $('#catname').text() + '. Question: ' + $('#qname').text().trim())
+﻿var url = 'groq.cfm'
+var form = {}
+form.body = new URLSearchParams()
+form.body.set('id', dom.id)
+form.body.set('qname','Subject: ' + $('#catname').text() + '. Question: ' + $('#qname').text())
 
-fetch('groq.cfm', {
-	method: 'POST',
-	headers: {
-		'Content-Type': 'application/x-www-form-urlencoded'
-	},
-	body: formData
-})
-.then(getGroqResponse)
-.catch(handleError)
-
-function getGroqResponse(response) {
-	return response.text().then(sendToWikipedia)
-}
+fetch(url,form)
+	.then(text_done)
+	.then(sendToWikipedia)
+	.catch(caught(url))
 
 function sendToWikipedia(answer) {
 	if (answer) {
 		$('#ansname').html(answer)
 	}
-	var formData = new URLSearchParams()
-	formData.set('id',dom.id)
-	formData.set('qname', qname)
-	formData.set('ansname', answer)
-	fetch('Wikipedia.cfm', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded'
-		},
-		body: formData
-	})
-	.then(getWikipediaResponse)
-	.catch(handleError)
-
+	var url = 'Wikipedia.cfm'
+	var form = {}
+	form.body = new URLSearchParams()
+	form.body.set('id',dom.id)
+	form.body.set('qname', $('#qname').text())
+	form.body.set('ansname', answer)
+	form.body.set('ansname', '')
+	console.log(url,form.body.toString())
+	fetch(url,form)
+		.then(json_done)
+		.then(showWikipediaResponse)	
+		.catch(caught(url))
 }
 
-function getWikipediaResponse(response) {
-	return response.json().then(showWikipediaResponse)
-}
 
 function showWikipediaResponse(response) {
-	if (response.image) {
-		$('#imgname').html('<img src="' + response.image + '" class="img-fluid img-thumbnail">')
+	console.log(response)
+	var image = response.image || response.IMAGE
+	if (image) {
+		$('#imgname').html('<img src="' + image + '" class="img-fluid img-thumbnail">')
 	}
-}
-
-function handleError(error) {
-	console.error(error)
 }
