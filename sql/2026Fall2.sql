@@ -7,6 +7,12 @@ go
 declare @usrid int=(select usrid from usr where id=@id)
 */
 --create schema usr authorization dbo
+create or alter proc usr.list as
+select usrid,firstname
+from usr
+order by usrname
+go
+
 create or alter proc usr.where_id
 (@id uniqueidentifier
 ) as

@@ -6,7 +6,7 @@
 <cfscript>
 param request.cache='';
 param request.cache = '?cache=' & TimeFormat(now(),'Hmmss');
-param request.container = 'container-sm'; // Phones (landscape), small tablets
+param request.container = 'container';
 param request.title = 'CSC175';
 param request.ico = 'https://www.lr.edu/sites/default/files/favicon.ico';
 param request.top = 'sticky-top';
@@ -69,14 +69,11 @@ writeoutput('<body class="' & request.body & '">')
 <cfoutput>
 <cfif request.navbar>
 <div class="#request.container# #request.top#">
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-0">
+	<nav class="navbar navbar-expand navbar-dark bg-dark py-0">
 		<a class="navbar-brand ms-3 me-1" href="https://lr.edu" target="_self">
 			<img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Lenoir-rhyne_logo_from_NCAA.svg" alt="Logo" height="32">
 		</a>
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<form class="collapse navbar-collapse">
+		<form class="navbar-collapse">
 			<cfif StructKeyExists(request,'usr')>
 				<ul id="main-navbar" class="navbar-nav me-auto">
 					<li class="nav-item">

@@ -15,11 +15,22 @@ create table usr
 ,isAdmin int default 0
 )
 go
---alter table usr add SpeechSynthesisUtterance int default 1
---alter table usr add SpeechRate decimal(9,2) default .9
---alter table usr add SpeechPitch decimal(9,2) default 1
---alter table usr add SpeechVolume decimal(9,2) default 1
---update usr set SpeechRate=.9,SpeechPitch=1,SpeechVolume=1
+alter table usr
+add constraint id
+default newid() for id
+
+alter table usr add constraint SpeechSynthesisUtterance default 1 for SpeechSynthesisUtterance
+alter table usr add constraint SpeechRate default .9 for SpeechRate
+alter table usr add constraint SpeechPitch default 1 for SpeechPitch
+alter table usr add constraint SpeechVolume default 1 for SpeechVolume
+alter table usr add constraint isAdmin default 0 for isAdmin
+alter table usr add constraint x default x for x
+alter table usr add constraint x default x for x
+alter table usr add SpeechSynthesisUtterance int default 1
+alter table usr add SpeechRate decimal(9,2) default .9
+alter table usr add SpeechPitch decimal(9,2) default 1
+alter table usr add SpeechVolume decimal(9,2) default 1
+update usr set SpeechRate=.9,SpeechPitch=1,SpeechVolume=1
 --alter table usr alter column SpeechRate decimal(9,1)
 --alter table usr alter column SpeechPitch decimal(9,1)
 --alter table usr alter column SpeechVolume decimal(9,1)

@@ -1,8 +1,6 @@
 ---
-description: State the planned change and wait for confirmation before editing
-alwaysApply: true
+alwaysApply: false
 ---
-
 # Confirm before changes
 
 Before editing, creating, or deleting files, state the planned change and wait for an explicit go-ahead.

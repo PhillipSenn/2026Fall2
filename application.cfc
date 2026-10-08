@@ -52,13 +52,13 @@ function onRequestStart(targetPage) {
 }
 
 function onRequest(targetPage) {
-	if (structKeyExists(url, 'id')) {
-		include 'login.cfm'
-	} else {
+//	if (structKeyExists(url, 'id')) {
+//		include 'login.cfm'
+//	} else {
 		include '/Inc/cfm/exec.cfm'
 		include '/Inc/cfm/dump.cfm'
 		include targetPage
-	}
+//	}
 }
 /*
 function onError(exception, eventName) {

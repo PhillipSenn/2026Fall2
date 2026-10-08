@@ -1,0 +1,10 @@
+---
+description: Open this project in the browser at PhillipSenn.localhost
+alwaysApply: true
+---
+
+# Local server
+
+When testing this project in the browser, use `http://PhillipSenn.localhost/2026Fall2/`.
+
+Example: `http://PhillipSenn.localhost/2026Fall2/Marbles/marbles.cfm?id=237DB729-5FCE-4569-A914-CDDB5D2E8422`

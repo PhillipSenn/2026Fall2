@@ -1,0 +1,83 @@
+.board {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	gap: 16px;
+}
+
+#myCanvas {
+	display: block;
+	flex: 0 0 auto;
+	touch-action: none;
+	user-select: none;
+	border-radius: 10px;
+}
+
+.scores {
+	flex: 0 0 230px;
+	width: 230px;
+	background: #241c16;
+	color: #f6f1e7;
+	border-radius: 12px;
+	padding: 16px 12px 10px;
+	box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+}
+
+.scores h2 {
+	margin: 0 8px 12px;
+	font-size: 0.78rem;
+	font-weight: 700;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: #e7c27a;
+}
+
+.score-list,
+#scoreList {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.score-row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 0 0 6px;
+	padding: 8px 10px;
+	border-radius: 8px;
+	background: linear-gradient(90deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+	border: 1px solid rgba(255, 255, 255, 0.06);
+	will-change: transform;
+}
+
+.score-row.shooting {
+	border-color: rgba(231, 194, 122, 0.85);
+	background: linear-gradient(90deg, rgba(231, 194, 122, 0.28), rgba(255, 255, 255, 0.05));
+}
+
+.score-rank {
+	width: 1.2em;
+	font-variant-numeric: tabular-nums;
+	color: rgba(246, 241, 231, 0.55);
+	font-size: 0.85rem;
+}
+
+.score-name {
+	flex: 1 1 auto;
+	font-weight: 600;
+}
+
+.score-usrid {
+	font-variant-numeric: tabular-nums;
+	font-size: 0.75rem;
+	color: rgba(246, 241, 231, 0.45);
+}
+
+.score-points {
+	min-width: 1.4em;
+	text-align: right;
+	font-variant-numeric: tabular-nums;
+	font-weight: 700;
+	color: #e7c27a;
+}

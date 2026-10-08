@@ -1,6 +1,6 @@
 <cfscript>
 if (isDefined('form.actid')) {
-	writeoutput('<h4>' & form.actid & '</h4>')
+//	writeoutput('<h4>' & form.actid & '</h4>')
 }
 writeOutput('</main>' & chr(10))
 param request.bootstrap = true;
@@ -10,10 +10,8 @@ if (request.bootstrap) {
 }
 param request.jQuery = '';
 if (request.jQuery == 'none') {
-} else if (request.jQuery == 'slim') {
-	writeoutput('<script	src="https://code.jquery.com/jquery-4.0.0.slim.js"></script>' & chr(10))
 } else {
-	writeoutput('<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.js"></script>' & chr(10))
+	writeoutput('<script src="' & request.home & 'Inc/js/jQuery.js"></script>' & chr(10))
 }
 param request.jQueryUI = 'none';
 if (request.jQueryUI != 'none') {

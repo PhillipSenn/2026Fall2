@@ -1,11 +1,40 @@
+/*
+Prerequisite: Satisfactory completion of LRU 050 or LRU 060 
+This course provides literacy in computers and information systems. 
+Concepts covered include:
+	the Internet, 
+	software (both system and application), 
+	hardware, 
+	networking, 
+	security and 
+	privacy, and 
+	databases. 
+The goal of the course is to relate computer concepts to the students’ daily life. 
+In addition, students will learn how to use Microsoft Excel and Access. 
+The course is delivered through lecture and laboratory work, or as an online offering. 
+Three credits. (Offered: Fall, Spring, Summer) 
+This is a HYBRID class. 
+It will meet TR 8:00 - 9:15 AM and the remainder of the work will be completed asynchronously online.
+*/
 use lr2026Fall2
-insert into usr(id,usrname,firstname,email) values('19C76747-5CF9-449C-9A52-FEF8906AD52E',N'Professor Senn',N'Professor','sennp@lr.edu')
-insert into usr(usrname,email,firstname) values('Mcnulty, Saoirse Rose','Saoirse.Mcnulty@my.lr.edu','Saoirse')
-insert into usr(usrname,email,firstname) values('Ramsey, Nathaniel','Nathaniel.Ramsey@my.lr.edu','Nathaniel')
-insert into usr(usrname,email,firstname) values('Rodatz, Kaydence Emery','Kaydence.Rodatz@my.lr.edu','Kaydence')
-insert into usr(usrname,email,firstname) values('Rose, Miles','Miles.Rose@my.lr.edu','Miles')
-insert into usr(usrname,email,firstname) values('Taylor, Zane M','Zane.Taylor@my.lr.edu','Zane')
+truncate table usr
+
+insert into usr(usrname,email,id,isAdmin) values('Senn, Professor','sennp@lr.edu','19C76747-5CF9-449C-9A52-FEF8906AD52E',1)
+insert into usr(usrname,email,id) values('Mcnulty, Saoirse Rose','Saoirse.Mcnulty@my.lr.edu','F327FB4F-D2C5-498E-8C8F-93B3DFB62C5F')
+insert into usr(usrname,email,id) values('O''Sullivan, Allyson F','Allyson.OSullivan@my.lr.edu','F2AE71B9-C271-46BD-AFC6-BE72AE2A7EC2')
+insert into usr(usrname,email,id) values('Ramsey, Nathaniel','Nathaniel.Ramsey@my.lr.edu','8C12D623-1255-4FC0-9655-963A2BD7CC7F')
+insert into usr(usrname,email,id) values('Rodatz, Kaydence Emery','Kaydence.Rodatz@my.lr.edu','8F620C23-ACEE-4A36-8E73-4553775ED0F4')
+insert into usr(usrname,email,id) values('Rose, Miles','Miles.Rose@my.lr.edu','D2F47675-4362-4413-B151-26F49FEBA593')
+insert into usr(usrname,email,id) values('Taylor, Zane M','Zane.Taylor@my.lr.edu','AC4B03B9-80AE-4723-943E-7C53D2EC5968')
+
+
+update usr
+set firstname = left(trim(substring(usrname,charindex(',',usrname)+1,100))
+	,charindex(' ',trim(substring(usrname,charindex(',',usrname)+1,100))+' ')-1)
+where usrname like '%,%'
+insert into usr(usrname,email,firstname,id) values('Computer','PhillipSenn@gmail.com','Computer','237DB729-5FCE-4569-A914-CDDB5D2E8422')
 select * from usr
+
 
 --select newid()
 go

@@ -52,11 +52,13 @@ if (unanswered.recordcount) {
 } else {
 	form.pollid=0 // remaining=0
 	totalSeconds = 0
-	maxEnd = 0
+	maxEnd = ""
 	cfloop(query="q") {
-		totalSeconds += DateDiff('s',pollStart,pollEnd)
-		if (maxEnd < pollEnd) {
-			maxEnd = pollEnd
+		if (isDate(pollStart) and isDate(pollEnd)) {
+			totalSeconds += DateDiff('s',pollStart,pollEnd)
+			if (!isDate(maxEnd) or maxEnd < pollEnd) {
+				maxEnd = pollEnd
+			}
 		}
 	}
 	rightWrong = usr('act.rightWrong',form.actid)
@@ -232,21 +234,21 @@ cfloop(query="qry") {
 								</td>
 
 								<td class="text-end font-monospace">
-									#TimeFormat(pollStart,'h:mm:ss')#
+									<cfif isDate(pollStart)>#TimeFormat(pollStart,'h:mm:ss')#</cfif>
 								</td>
 								<td class="text-end font-monospace">
-									#TimeFormat(pollEnd,'h:mm:ss')#
+									<cfif isDate(pollEnd)>#TimeFormat(pollEnd,'h:mm:ss')#</cfif>
 								</td>
 								<td class="text-end">
-									#TimeFormat(pollEnd-pollStart,'m:ss')#
+									<cfif isDate(pollStart) and isDate(pollEnd)>#TimeFormat(pollEnd-pollStart,'m:ss')#</cfif>
 								</td>
 							</tr>
 						</cfloop>
 						<tr>
 							<th></th>
 							<th colspan="3">Total</th>
-							<td class="text-end font-monospace" title="#DateFormat(q.pollStart,'mm/dd/yyyy')#">#TimeFormat(q.pollStart,'h:mm')#&nbsp;#TimeFormat(q.pollStart,'tt')#</td>
-							<td class="text-end font-monospace" title="#DateFormat(maxEnd,'mm/dd/yyyy')#">#TimeFormat(maxEnd,'h:mm')#&nbsp;#TimeFormat(maxEnd,'tt')#</td>
+							<td class="text-end font-monospace"<cfif isDate(q.pollStart)> title="#DateFormat(q.pollStart,'mm/dd/yyyy')#"</cfif>><cfif isDate(q.pollStart)>#TimeFormat(q.pollStart,'h:mm')#&nbsp;#TimeFormat(q.pollStart,'tt')#</cfif></td>
+							<td class="text-end font-monospace"<cfif isDate(maxEnd)> title="#DateFormat(maxEnd,'mm/dd/yyyy')#"</cfif>><cfif isDate(maxEnd)>#TimeFormat(maxEnd,'h:mm')#&nbsp;#TimeFormat(maxEnd,'tt')#</cfif></td>
 							<th class="text-end">#Int(totalSeconds / 60)#m&nbsp;#NumberFormat(totalSeconds mod 60,'00')#s</th>
 						</tr>
 					</tbody>
