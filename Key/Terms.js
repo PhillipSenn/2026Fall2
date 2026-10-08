@@ -69,7 +69,7 @@ function btn(myEvent) {
 		var url = 'Poll/merge_q.cfm'
 		var form = {}
 		form.body = new URLSearchParams()
-		form.body.set('id', dom.id)
+		form.body.set('id', app.id)
 		form.body.set('qid', app.qid)
 		fetch(url, form)
 			.then(text_done)
@@ -80,6 +80,17 @@ function btn(myEvent) {
 			.addClass('btn-warning')
 	}
 }
+
+var url = 'grade/where_act.cfm'
+var form = {}
+form.body = new URLSearchParams()
+form.body.set('id', app.id)
+form.body.set('actid', app.actid)
+fetch(url, form)
+	.then(text_done)
+	.then(pct_done)
+	.catch(caught(url))
+
 function pct_done(response) {
 	var pct = +response
 	$('.progress-bar').css('width', pct + '%')
@@ -90,15 +101,4 @@ function pct_done(response) {
 		$('#all').removeClass('d-none')
 	}
 }
-
-
-var url = 'grade/where_act.cfm'
-var form = {}
-form.body = new URLSearchParams()
-form.body.set('id', dom.id)
-form.body.set('actid', $('[name=actid]').val())
-fetch(url, form)
-	.then(text_done)
-	.then(pct_done)
-	.catch(caught(url))
-
+	

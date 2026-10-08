@@ -24,10 +24,10 @@ function saveSort() {
 	var url = 'Act/update_sort.cfm'
 	var form = {}
 	form.body = new URLSearchParams()
-	form.body.set('id', dom.id)
+	form.body.set('id', app.id)
 	form.body.set('actid', cell.closest('tr').data('actid'))
 	form.body.set('actsort', actsort)
-	console.log(url + '?' + form.body.toString())
+	//console.log(url + '?' + form.body.toString())
 	fetch(url, form).then(done)
 		.catch(caught(url))
 

@@ -12,7 +12,7 @@ function each_check_label(i) {
 	var url = 'serper/images.cfm'
 	var form = {}
 	form.body = new URLSearchParams()
-	form.body.set('id',dom.id)
+	form.body.set('id',app.id)
 	form.body.set('qname', qname)
 	form.body.set('ansname', ansname)
 
@@ -37,13 +37,14 @@ function cursor_pointer() {
 	var url = 'Q/update_desc.cfm'
 	var form = {}
 	form.body = new URLSearchParams()
-	form.body.set('id',dom.id)
+	form.body.set('id',app.id)
 	form.body.set('qid', $('#qid').val())
 	form.body.set('qdesc', self.attr('src'))
 	fetch(url,form).then(done)
 	function done() {
-		$('.cursor-pointer').attr('hidden',true)
-		self.attr('hidden',false)
+		$('#qdesc').attr('src',self.attr('src'))
+//		$('.cursor-pointer').attr('hidden',true)
+//		self.attr('hidden',false)
 	}
 }
 

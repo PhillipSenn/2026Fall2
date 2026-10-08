@@ -4,6 +4,7 @@ pgm.init = function() {
 		form = Object.assign({ method: 'post' }, form)
 		console.log(url)
 		console.log(form)
+		console.log(url + '?' + form.body.toString())
 		return nativeFetch.call(window, url, form)
 	}
 	
@@ -19,7 +20,8 @@ pgm.init()
 
 
 var dom = {} // Document Object Model
-dom.id = $('input[name=id]').val()
+app.id = $('input[name=id]').val()
+app.actid = +$('[name=actid]').val()
 
 $('button').addClass('btn')
 $('.btn:not([class*="btn-"]):not([class*="bg-"])').addClass('btn-primary')

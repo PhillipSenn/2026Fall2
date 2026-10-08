@@ -17,7 +17,7 @@ $(document).on('click', '#questions button, #answers button', function () {
 		var url = '../guess/merge_ans.cfm'
 		var form = {}
 		form.body = new URLSearchParams()
-		form.body.set('id', dom.id)
+		form.body.set('id', app.id)
 		form.body.set('ansid', ansid)
 		fetch(url, form)
 			.then(text_done)

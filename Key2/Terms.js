@@ -127,7 +127,7 @@ function btn() {
 	var url = 'Poll/merge_q.cfm'
 	var form = {}
 	form.body = new URLSearchParams()
-	form.body.set('id', dom.id)
+	form.body.set('id', app.id)
 	form.body.set('qid', app.qid)
 	fetch(url, form)
 		.then(text_done)

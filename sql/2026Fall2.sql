@@ -721,6 +721,14 @@ update grade set
  earned=ceiling(100.0 * @answered / @possible)
 where gradeid=@gradeid
 go
+create or alter proc q.update_desc
+(@qid int
+,@qdesc varchar(max) 
+) as
+update q set
+ qdesc=@qdesc
+where qid=@qid
+go
 
 
 
@@ -935,14 +943,6 @@ where grade_usr=@usrid
 and ans_q=@qid
 go
 --exec guess.where_q '19C76747-5CF9-449C-9A52-FEF8906AD52E',24759
-create or alter proc q.update_desc
-(@qid int
-,@qdesc varchar(max) 
-) as
-update q set
- qdesc=@qdesc
-where qid=@qid
-go
 create or alter proc usr.update_firstname
 (@id uniqueidentifier
 ,@firstname nvarchar(max)
