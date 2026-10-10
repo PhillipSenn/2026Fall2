@@ -4,7 +4,7 @@ if (StructKeyExists(form,'ansid')) {
 }
 q = usr('q.keyTerms',form.actid) // All the unanswered questions that have > 1 available answers
 if (!q.recordCount) {
-	location(request.home & '?id=' & request.usr.id,false)
+	location('../login.cfm?id=' & request.usr.id, false)
 }
 include '/Inc/header.cfm'
 qs = exec('q.where_ans_gt_1',form.actid) // All the questions that have > 1 available answers.

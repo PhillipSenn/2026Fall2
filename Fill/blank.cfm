@@ -5,16 +5,13 @@ if (StructKeyExists(form,'qid')) {
 request.flush = false
 include '/Inc/header.cfm'
 disabled = 'disabled'
-if (request.usr.isAdmin) {
-	disabled = ''
-}	
 q = usr('poll.unanswered',form.actid)
 if (!q.recordcount) {
 	disabled = ''
 	param form.qid=0;
 	q = exec('poll.gt_q',[form.actid,form.qid])
 	if (!q.recordcount) {
-		location(request.home & '?id=' & request.usr.id,false)
+		location('../login.cfm?id=' & request.usr.id, false)
 	}
 }
 ans = exec('ans.where_q',q.qid)

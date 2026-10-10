@@ -75,87 +75,128 @@ cfloop(query="qry") {
 <cfoutput query="act">
 <form>
 	<cfif StructKeyExists(form,'qid') OR remaining>
-		<div class="row">
-			<div class="col">
-				<div class="card">
-					<div class="card-header">
-						Textbook
-					</div>
-					<div class="card-body">
-						#qname#
-					</div>
-				</div>
-			</div>
-			<div class="col">
-				<div class="card">
-					<cfif len(q.qdesc)>
-					<fieldset class="card-header">
-						<legend>AI</legend>
-						<div class="row">
-							<div class="col-2 border">
-								<label for="SpeechPitch" class="d-block">Pitch</label>
-								<input style="width:60px" type="number" id="SpeechPitch" name="SpeechPitch" min=0 max=2 step=0.1 value=#request.usr.SpeechPitch#>
-							</div>
-						
-							<div class="col-7 border">
-								<label for="voiceName" class="d-block">Voice</label>
-								<select class="form-control" id="voiceName" name="voiceName">
-									<option value="#request.usr.voiceName#">#request.usr.voiceName#</option>
-								</select>
-							</div>
-						
-							<div class="col-2 border">
-								<label for="SpeechRate" class="d-block">Rate</label>
-								<input style="width:60px" type="number" id="SpeechRate" name="SpeechRate" min=.1 max=10 step=.1 value=#request.usr.SpeechRate#>
-							</div>
-							<div class="col-1 border ps-1">
-								<label for="SpeechSynthesisUtterance" class="d-block">&nbsp;</label>
-								<cfif request.usr.SpeechSynthesisUtterance>
-									<button type="button" name="SpeechSynthesisUtterance" class="btn-outline-primary bi-volume-up" value="1"></button>
-								<cfelse>
-									<button type="button" name="SpeechSynthesisUtterance" class="btn-outline-primary bi-volume-mute" value="0"></button>
-								</cfif>
-							</div>
+		<cfif len(q.qdesc)>
+			<div class="row">
+				<div class="col">
+					<div class="card">
+						<div class="card-header">
+							Textbook
 						</div>
-						<input hidden name="SpeechVolume" value="1">
-						<input hidden name="Speech" value="#request.usr.SpeechSynthesisUtterance#">
-					</fieldset>
-					</cfif>
-					<div class="card-body">
-						<div id="qdesc">#qdesc#</div>
-						<ul class="list-unstyled" id="answers">
-							<cfloop query="ans">
-								<li>
-									<cfif FindNoCase('Select all ',qname)>
-										<div class="form-check">
-											<cfif correct>
-												<input class="form-check-input" type="checkbox" name="ansids" id="ans#ansid#" value="#ansid#">
-												<label class="form-check-label" for="ans#ansid#">
-													#ansname#
-												</label>
-											<cfelse>
-												<!---  class="ansid" for fetch statement --->
-												<input class="ansid form-check-input" type="checkbox" tabindex="-1" value="#ansid#">
-												<label class="form-check-label">
-													#ansname#
-												</label>
-											</cfif>
-										</div>
-									<cfelseif Val(correct)>
-										<button name="ansid" class="btn-link text-start" value="#ansid#">#ansname#</button>
-									<cfelse>
-										<button type="button" class="ansid btn-link text-start" value="#ansid#">#ansname#</button>
-									</cfif>
-								</li>
-							</cfloop>
-						</ul>
+						<div class="card-body">
+							#qname#
+						</div>
 					</div>
-					<div class="card-footer text-end">
-						<a target="_blank" href="https://ebooks.cengage.com/reader/37144ab6-3307-483b-b060-42403fe46440/content-bd_part_02_opener?sidepanel=contents">#unanswered.qhref#</a>
+				</div>
+				<div class="col">
+					<div class="card">
+						<fieldset class="card-header">
+							<legend>AI</legend>
+							<div class="row">
+								<div class="col-2 border">
+									<label for="SpeechPitch" class="d-block">Pitch</label>
+									<input style="width:60px" type="number" id="SpeechPitch" name="SpeechPitch" min=0 max=2 step=0.1 value=#request.usr.SpeechPitch#>
+								</div>
+							
+								<div class="col-7 border">
+									<label for="voiceName" class="d-block">Voice</label>
+									<select class="form-control" id="voiceName" name="voiceName">
+										<option value="#request.usr.voiceName#">#request.usr.voiceName#</option>
+									</select>
+								</div>
+							
+								<div class="col-2 border">
+									<label for="SpeechRate" class="d-block">Rate</label>
+									<input style="width:60px" type="number" id="SpeechRate" name="SpeechRate" min=.1 max=10 step=.1 value=#request.usr.SpeechRate#>
+								</div>
+								<div class="col-1 border ps-1">
+									<label for="SpeechSynthesisUtterance" class="d-block">&nbsp;</label>
+									<cfif request.usr.SpeechSynthesisUtterance>
+										<button type="button" name="SpeechSynthesisUtterance" class="btn-outline-primary bi-volume-up" value="1"></button>
+									<cfelse>
+										<button type="button" name="SpeechSynthesisUtterance" class="btn-outline-primary bi-volume-mute" value="0"></button>
+									</cfif>
+								</div>
+							</div>
+							<input hidden name="SpeechVolume" value="1">
+							<input hidden name="Speech" value="#request.usr.SpeechSynthesisUtterance#">
+						</fieldset>
+						<div class="card-body">
+							<div id="qdesc">#qdesc#</div>
+							<ul class="list-unstyled" id="answers">
+								<cfloop query="ans">
+									<li>
+										<cfif FindNoCase('Select all ',qname)>
+											<div class="form-check">
+												<cfif correct>
+													<input class="form-check-input" type="checkbox" name="ansids" id="ans#ansid#" value="#ansid#">
+													<label class="form-check-label" for="ans#ansid#">
+														#ansname#
+													</label>
+												<cfelse>
+													<!---  class="ansid" for fetch statement --->
+													<input class="ansid form-check-input" type="checkbox" tabindex="-1" value="#ansid#">
+													<label class="form-check-label">
+														#ansname#
+													</label>
+												</cfif>
+											</div>
+										<cfelseif Val(correct)>
+											<button name="ansid" class="btn-link text-start" value="#ansid#">#ansname#</button>
+										<cfelse>
+											<button type="button" class="ansid btn-link text-start" value="#ansid#">#ansname#</button>
+										</cfif>
+									</li>
+								</cfloop>
+							</ul>
+						</div>
+						<div class="card-footer text-end">
+							<a target="_blank" href="https://ebooks.cengage.com/reader/37144ab6-3307-483b-b060-42403fe46440/content-bd_part_02_opener?sidepanel=contents">#unanswered.qhref#</a>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		<cfelse>
+			<div class="row">
+				<div class="col-6 mx-auto">
+					<div class="card">
+						<div class="card-header">
+							#qname#
+						</div>
+						<div class="card-body">
+							<ul class="list-unstyled" id="answers">
+								<cfloop query="ans">
+									<li>
+										<cfif FindNoCase('Select all ',qname)>
+											<div class="form-check">
+												<cfif correct>
+													<input class="form-check-input" type="checkbox" name="ansids" id="ans#ansid#" value="#ansid#">
+													<label class="form-check-label" for="ans#ansid#">
+														#ansname#
+													</label>
+												<cfelse>
+													<!---  class="ansid" for fetch statement --->
+													<input class="ansid form-check-input" type="checkbox" tabindex="-1" value="#ansid#">
+													<label class="form-check-label">
+														#ansname#
+													</label>
+												</cfif>
+											</div>
+										<cfelseif Val(correct)>
+											<button name="ansid" class="btn-link text-start" value="#ansid#">#ansname#</button>
+										<cfelse>
+											<button type="button" class="ansid btn-link text-start" value="#ansid#">#ansname#</button>
+										</cfif>
+									</li>
+								</cfloop>
+							</ul>
+						</div>
+						<div class="card-footer text-end">
+							<a target="_blank" href="https://ebooks.cengage.com/reader/37144ab6-3307-483b-b060-42403fe46440/content-bd_part_02_opener?sidepanel=contents">#unanswered.qhref#</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</cfif>
 		<div hidden>
 			<div id="answered">#answered#</div>
 			<div id="questions">#q.recordcount#</div>

@@ -5,7 +5,7 @@ if (isDefined('form.pollname')) {
 include '/Inc/header.cfm'
 q = usr('poll.unanswered',form.actid)
 if (!q.recordcount) {
-	location(request.home & '?id=' & request.usr.id,false)
+	location('../login.cfm?id=' & request.usr.id, false)
 }
 poll = usr('poll.start_q',[q.qid,q.qname])
 </cfscript>

@@ -71,7 +71,10 @@ writeoutput('<body class="' & request.body & '">')
 <div class="#request.container# #request.top#">
 	<nav class="navbar navbar-expand navbar-dark bg-dark py-0">
 		<a class="navbar-brand ms-3 me-1" href="https://lr.edu" target="_self">
+			LR
+			<!---
 			<img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Lenoir-rhyne_logo_from_NCAA.svg" alt="Logo" height="32">
+			--->
 		</a>
 		<form class="navbar-collapse">
 			<cfif StructKeyExists(request,'usr')>

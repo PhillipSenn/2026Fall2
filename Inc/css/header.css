@@ -7,8 +7,7 @@ main {
 	transition: opacity 1s ease 1s;
 }
 .progress {
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
+	border-radius: 0;
 }
 
 label {
@@ -89,4 +88,8 @@ code {
 table.cfdebug {
 	display: none;
 	font-family: consolas;
+}
+.navbar-brand {
+	color: #a31f34
+}
 }

@@ -1,27 +1,27 @@
 <cfscript>
 include '/Inc/header.cfm'
+q = exec('q.where_act',form.actid)
 </cfscript>
 
 <cfoutput query="act">
-<form action="Question.cfm">
-	<div class="card">
-		<div class="card-header bg-primary-subtle">
-		</div>
-		<div class="card-body">
-			Discuss.
-		</div>
-	</div>
-	<div class="card">
-		<div class="card-body">
-			#actdesc#
-		</div>
-		<div class="card-footer">
-			<button>Ready!</button>
-		</div>
-		<input hidden name="id" value="#request.usr.id#">
+<div class="row">
+	<div class="col-6 mx-auto">
+		<form class="card">
+			<div class="card-header bg-primary-subtle">
+				For classroom discussion
+			</div>
+		</form>
+		<cfloop query="q">
+			<div class="card">
+				<div class="card-body">
+					#qname#
+				</div>
+			</div>
+		</cfloop>
 		<input hidden name="actid" value="#actid#">
+		<input hidden name="id" value="#request.usr.id#">
+		<button class="nav-link" formaction="#request.dir#">#actname#</button>
 	</div>
-</form>
-<button class="nav-link" name="actid" value="#actid#">#actname#</button>
+</div>
 <cfinclude template="/Inc/footer.cfm">
 </cfoutput>
