@@ -19,7 +19,7 @@ function blankTerm() {
 
 	for (var i = 0; i < text.length; i++) {
 		var ch = text.charAt(i)
-		if (/\s/.test(ch)) {
+		if (/\s|-/.test(ch)) {
 			blank.append(document.createTextNode(ch))
 		} else {
 			var slot = $('<span class="slot">')

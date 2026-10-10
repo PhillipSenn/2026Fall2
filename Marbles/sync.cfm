@@ -5,7 +5,6 @@ param name="form.op" default="poll";
 param name="form.layout" default="";
 param name="form.scores" default="";
 param name="form.shotNo" default="0";
-param name="form.shooter" default="";
 
 function marblesGame() {
 	if (!structKeyExists(application, 'marbles')) {
@@ -91,6 +90,8 @@ function marblesPayload(game, accepted) {
 				}
 			} else if (form.op == 'shot') {
 				if (game.status != 'idle') {
+					accepted = false;
+				} else if (len(trim(game.lastShooter)) && compareNoCase(game.lastShooter, request.usr.id) == 0) {
 					accepted = false;
 				} else {
 					game.shotNo = val(game.shotNo) + 1;

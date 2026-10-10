@@ -15,6 +15,17 @@ if (!q.recordcount) {
 		location('../home.cfm?id=' & request.usr.id, false)
 	}
 }
+polls = usr('q.usr_act',form.actid)
+started = false
+for (i = 1; i <= polls.recordcount; i++) {
+	if (polls.qid[i] == q.qid and isDate(polls.pollStart[i])) {
+		started = true
+		break
+	}
+}
+if (!started) {
+	usr('poll.start_q',q.qid)
+}
 ans = exec('ans.where_q',q.qid)
 </cfscript>
 

@@ -1,0 +1,7 @@
+@media (min-width: 768px) {
+	#key-term-prompt {
+		position: sticky;
+		top: 56px;
+		align-self: flex-start;
+	}
+}

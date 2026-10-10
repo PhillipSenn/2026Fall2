@@ -4,7 +4,7 @@ pgm.init = function() {
 		form = Object.assign({ method: 'post' }, form)
 		console.log(url)
 		console.log(form)
-		console.log(url + '?' + form.body.toString())
+		console.log(url + (form.body ? '?' + form.body.toString() : ''))
 		return nativeFetch.call(window, url, form)
 	}
 	

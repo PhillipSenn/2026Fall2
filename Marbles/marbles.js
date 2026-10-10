@@ -20,7 +20,6 @@ const SWATCHES = [
 	['#ffe7a8', '#f0a202', '#6a4a00'],
 	['#f8d0d8', '#c45c74', '#5c2430']
 ]
-const COMPUTER_ID = '237DB729-5FCE-4569-A914-CDDB5D2E8422'
 const marbles = []
 let mine
 const MAX_PULL = 58
@@ -38,6 +37,7 @@ let remoteRest = null
 let remoteScores = null
 let seenShotNo = 0
 let authoredShot = 0
+let lastShooter = ''
 let needSettle = false
 let settleSent = false
 let announced = false
@@ -49,9 +49,6 @@ let scoresReady = false
 const pendingSlides = []
 const players = []
 let me
-let computerPlayer
-let computerAiming = false
-let computerRelease = 0
 let aimMarble = null
 
 function layout() {
@@ -340,7 +337,7 @@ function drawAim() {
 }
 
 function shown(m) {
-	if ((dragging || computerAiming) && m === aimMarble) {
+	if (dragging && m === aimMarble) {
 		return { x: m.x + pull.x, y: m.y + pull.y }
 	}
 	return { x: m.x, y: m.y }
@@ -381,7 +378,7 @@ function draw() {
 		return
 	}
 	drawTable()
-	if (dragging || computerAiming) {
+	if (dragging) {
 		drawAim()
 	}
 	marbles.slice().sort(function (a, b) { return a.y - b.y }).forEach(drawMarble)
@@ -465,17 +462,12 @@ function buildScores() {
 		if (id && id === myId().toUpperCase()) {
 			me = players[i]
 		}
-		if (id === COMPUTER_ID) {
-			computerPlayer = players[i]
-		}
 	}
 	let swatch = 0
 	for (let i = 0; i < players.length; i++) {
 		let tone = SWATCHES[swatch % SWATCHES.length]
 		if (players[i].name === 'Professor') {
 			tone = BLUE
-		} else if (players[i] === computerPlayer) {
-			tone = RED
 		} else {
 			swatch++
 		}
@@ -568,7 +560,8 @@ function overCue(screen, world) {
 }
 
 function canPlay() {
-	return placed && mine && !computerAiming && !remotePlay && settled() && !rolling
+	return placed && mine && !remotePlay && settled() && !rolling &&
+		lastShooter.toUpperCase() !== myId().toUpperCase()
 }
 
 function launch(marble) {
@@ -580,39 +573,6 @@ function launch(marble) {
 	marble.vx = -pull.x / len * used * POWER
 	marble.vy = -pull.y / len * used * POWER
 	return moving(marble)
-}
-
-function beginComputerTurn() {
-	if (!computerPlayer || !computerPlayer.marble) {
-		return
-	}
-	if (rolling || dragging || remotePlay || computerAiming || !settled()) {
-		return
-	}
-	const ang = Math.random() * Math.PI * 2
-	const shotLen = 14 + Math.random() * (MAX_PULL - 14)
-	pull = { x: -Math.cos(ang) * shotLen, y: -Math.sin(ang) * shotLen }
-	aimMarble = computerPlayer.marble
-	computerAiming = true
-	clearTimeout(computerRelease)
-	computerRelease = setTimeout(releaseComputerShot, 650)
-}
-
-function releaseComputerShot() {
-	if (!computerAiming) {
-		return
-	}
-	needSettle = true
-	settleSent = false
-	authoredShot = 0
-	if (launch(computerPlayer.marble)) {
-		cue = computerPlayer.marble
-	}
-	computerAiming = false
-	aimMarble = mine
-	pull = { x: 0, y: 0 }
-	rolling = true
-	sendShot('')
 }
 
 function onDown(ev) {
@@ -663,7 +623,7 @@ function onUp(ev) {
 		needSettle = true
 		settleSent = false
 		authoredShot = 0
-		sendShot('')
+		sendShot()
 	}
 	dragging = false
 	pointerId = null
@@ -806,10 +766,9 @@ function sendInit() {
 	}, gotPoll)
 }
 
-function sendShot(shooter) {
+function sendShot() {
 	postSync({
 		op: 'shot',
-		shooter: shooter,
 		layout: JSON.stringify(packMarbles())
 	}, sentShot)
 }
@@ -817,11 +776,12 @@ function sendShot(shooter) {
 function sentShot(data) {
 	if (!acceptedSync(data)) {
 		needSettle = false
-		computerAiming = false
+		lastShooter = String(field(data, 'lastshooter'))
 		haltRoll()
 		return
 	}
 	seenShotNo = Number(field(data, 'shotno'))
+	lastShooter = String(field(data, 'lastshooter'))
 	authoredShot = seenShotNo
 	if (needSettle && !rolling) {
 		sendSettle()
@@ -852,8 +812,6 @@ function playRemote(data) {
 	if (!shot) {
 		return
 	}
-	clearTimeout(computerRelease)
-	computerAiming = false
 	applyLayout(shot)
 	remotePlay = true
 	rolling = true
@@ -885,6 +843,7 @@ function gotPoll(data) {
 	const shotNo = Number(field(data, 'shotno'))
 	const status = String(field(data, 'status'))
 	const layout = parseLayout(field(data, 'marbles'))
+	lastShooter = String(field(data, 'lastshooter'))
 	if (!layout || layout.length !== marbles.length) {
 		sendInit()
 		return
@@ -901,22 +860,11 @@ function gotPoll(data) {
 	if (shotNo > seenShotNo) {
 		seenShotNo = shotNo
 	}
-	if (!rolling && !remotePlay && !dragging && !computerAiming && status === 'idle') {
+	if (!rolling && !remotePlay && !dragging && status === 'idle') {
 		applyLayout(layout)
 		haltRoll()
 		applyScores(parseLayout(field(data, 'scores')))
-		maybeComputer(data)
 	}
-}
-
-function maybeComputer(data) {
-	if (myId().toUpperCase() !== COMPUTER_ID) {
-		return
-	}
-	if (Number(field(data, 'idlefor')) < 30) {
-		return
-	}
-	beginComputerTurn()
 }
 
 function pollGame() {
@@ -925,7 +873,7 @@ function pollGame() {
 
 function startSync() {
 	pollGame()
-	setInterval(pollGame, 2000)
+	setInterval(pollGame, 10000)
 }
 
 function frame(now) {
@@ -943,7 +891,7 @@ function frame(now) {
 		scoreDirty = false
 		paintScores()
 	}
-	if (rolling && settled() && !computerAiming) {
+	if (rolling && settled()) {
 		rolling = false
 		cue = null
 		if (remotePlay) {

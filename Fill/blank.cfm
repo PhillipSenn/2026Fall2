@@ -1,6 +1,9 @@
 <cfscript>
 if (StructKeyExists(form,'qid')) {
-	usr('poll.merge_q',form.qid)
+	grade = usr('poll.merge_q',form.qid)
+	if (grade.earned gte 100) {
+		location('results.cfm?actid=' & form.actid & '&id=' & request.usr.id, false)
+	}
 }
 request.flush = false
 include '/Inc/header.cfm'
@@ -13,6 +16,17 @@ if (!q.recordcount) {
 	if (!q.recordcount) {
 		location('../home.cfm?id=' & request.usr.id, false)
 	}
+}
+polls = usr('q.usr_act',form.actid)
+started = false
+for (i = 1; i <= polls.recordcount; i++) {
+	if (polls.qid[i] == q.qid and isDate(polls.pollStart[i])) {
+		started = true
+		break
+	}
+}
+if (!started) {
+	usr('poll.start_q',q.qid)
 }
 ans = exec('ans.where_q',q.qid)
 </cfscript>

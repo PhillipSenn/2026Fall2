@@ -5,7 +5,6 @@ alwaysApply: true
 
 # Work on main
 
-- Check out `main` before making changes.
 - Do not create commits or push changes unless the user explicitly requests it.
 - Leave staging, commit messages, commits, and pushes to the user by default.
 - Do not create a feature branch.

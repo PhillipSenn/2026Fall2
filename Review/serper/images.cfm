@@ -1,6 +1,6 @@
 <cfscript>
 setting showdebugoutput=false;
-form.q = form.qname & ' ' & form.ansname
+form.q = form.qname
 	& ' site:wikipedia.org';
 
 requestBody = serializeJSON({

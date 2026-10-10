@@ -23,7 +23,7 @@ cfloop(query=finishedPoll) {
 	</div>
 	<div class="card-body">
 		<div class="row">
-			<div class="col-8">
+			<div id="key-term-prompt" class="col-8">
 				<div id="qid"></div>
 				<figure>
 					<a id="wikipedia-link" target="_blank">

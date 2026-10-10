@@ -1,4 +1,5 @@
 function init() {
+	console.log('init')
 	$('button.btn-warning').removeClass('btn-warning')
 		.addClass('btn-outline-primary')
 
@@ -21,6 +22,7 @@ function init() {
 }
 
 function picture(qname, qdesc, qid) {
+	console.log('picture')
 	$('#wikipedia').addClass('d-none').removeAttr('src')
 	$('#wikipedia-link').removeAttr('href')
 	$('figcaption').empty()
@@ -41,6 +43,7 @@ function picture(qname, qdesc, qid) {
 		show_image(page.thumbnail.source, page.description || '', page.content_urls.desktop.page)
 	}
 	function search_picture() {
+		console.log('search_picture')
 		if (app.qid !== qid) return
 		var query = '"' + term + '" ' + qdesc
 		var searchUrl = 'https://en.wikipedia.org/w/api.php'
@@ -62,6 +65,7 @@ function picture(qname, qdesc, qid) {
 			.catch(hide_picture)
 	}
 	function show_search(data) {
+		console.log('show_search')
 		if (app.qid !== qid) return
 		var pages = []
 		if (data.query && data.query.pages) {
@@ -99,6 +103,7 @@ function picture(qname, qdesc, qid) {
 
 $(document).on('click', 'a.rownum', show_row)
 function show_row(event) {
+	console.log('show_row')
 	event.preventDefault()
 	var row = $(this).closest('tr')
 	app.qid = +row.attr('data-qid')
@@ -116,6 +121,7 @@ function show_row(event) {
 
 $(document).on('click', 'button.btn-outline-primary', btn)
 function btn() {
+	console.log('btn')
 	if (+$(this).val() !== app.qid) {
 		$(this).removeClass('btn-outline-primary')
 			.addClass('btn-warning')

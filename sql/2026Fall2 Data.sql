@@ -20,12 +20,12 @@ use lr2026Fall2
 truncate table usr
 
 insert into usr(usrname,email,id,isAdmin) values('Senn, Professor','sennp@lr.edu','19C76747-5CF9-449C-9A52-FEF8906AD52E',1)
-insert into usr(usrname,email,id) values('Mcnulty, Saoirse Rose','Saoirse.Mcnulty@my.lr.edu','F327FB4F-D2C5-498E-8C8F-93B3DFB62C5F')
-insert into usr(usrname,email,id) values('O''Sullivan, Allyson F','Allyson.OSullivan@my.lr.edu','F2AE71B9-C271-46BD-AFC6-BE72AE2A7EC2')
-insert into usr(usrname,email,id) values('Ramsey, Nathaniel','Nathaniel.Ramsey@my.lr.edu','8C12D623-1255-4FC0-9655-963A2BD7CC7F')
-insert into usr(usrname,email,id) values('Rodatz, Kaydence Emery','Kaydence.Rodatz@my.lr.edu','8F620C23-ACEE-4A36-8E73-4553775ED0F4')
-insert into usr(usrname,email,id) values('Rose, Miles','Miles.Rose@my.lr.edu','D2F47675-4362-4413-B151-26F49FEBA593')
-insert into usr(usrname,email,id) values('Taylor, Zane M','Zane.Taylor@my.lr.edu','AC4B03B9-80AE-4723-943E-7C53D2EC5968')
+insert into usr(usrname,email,id) values('F327FB4F-D2C5-498E-8C8F-93B3DFB62C5F','Mcnulty, Saoirse Rose','Saoirse.Mcnulty@my.lr.edu','F327FB4F-D2C5-498E-8C8F-93B3DFB62C5F')
+insert into usr(usrname,email,id) values('F2AE71B9-C271-46BD-AFC6-BE72AE2A7EC2','O''Sullivan, Allyson F','Allyson.OSullivan@my.lr.edu','F2AE71B9-C271-46BD-AFC6-BE72AE2A7EC2')
+insert into usr(usrname,email,id) values('8C12D623-1255-4FC0-9655-963A2BD7CC7F','Ramsey, Nathaniel','Nathaniel.Ramsey@my.lr.edu','8C12D623-1255-4FC0-9655-963A2BD7CC7F')
+insert into usr(usrname,email,id) values('8F620C23-ACEE-4A36-8E73-4553775ED0F4','Rodatz, Kaydence Emery','Kaydence.Rodatz@my.lr.edu','8F620C23-ACEE-4A36-8E73-4553775ED0F4')
+insert into usr(usrname,email,id) values('D2F47675-4362-4413-B151-26F49FEBA593','Rose, Miles','Miles.Rose@my.lr.edu','D2F47675-4362-4413-B151-26F49FEBA593')
+insert into usr(usrname,email,id) values('AC4B03B9-80AE-4723-943E-7C53D2EC5968','Taylor, Zane M','Zane.Taylor@my.lr.edu','AC4B03B9-80AE-4723-943E-7C53D2EC5968')
 
 
 update usr

@@ -1,0 +1,9 @@
+---
+description: Do not use Git diff commands for whitespace validation
+alwaysApply: true
+---
+
+# Whitespace validation
+
+- Do not run `git diff --check` or any Git diff command to find whitespace errors.
+- Use an applicable project formatter or linter when available; otherwise, inspect the edited content directly.

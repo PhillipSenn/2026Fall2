@@ -1,0 +1,8 @@
+---
+description: Do not run JavaScript syntax checks
+alwaysApply: true
+---
+
+# JavaScript validation
+
+- Do not run JavaScript syntax checks, including `node --check`.

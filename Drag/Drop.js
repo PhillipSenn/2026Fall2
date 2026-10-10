@@ -103,8 +103,18 @@ function slideup() {
 }
 
 window.addEventListener('keydown', showClue, true)
+window.addEventListener('keydown', submitOnSpace, true)
 window.addEventListener('keyup', hideClue, true)
 window.addEventListener('blur', hideClue)
+
+function submitOnSpace(event) {
+	var next = $('[name=qid]')
+	if (event.key !== ' ' || event.repeat || next.prop('disabled')) {
+		return
+	}
+	event.preventDefault()
+	next.trigger('click')
+}
 
 function showClue(event) {
 	if (!altKey(event) || event.repeat) {
