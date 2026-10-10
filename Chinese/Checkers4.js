@@ -346,21 +346,18 @@
 		return candidate.jumps > best.jumps;
 	}
 
-	function bestMove(color) {
-		let best = null;
+	function legalMoves(color) {
+		const moves = [];
 		function consider(from, path, jumps) {
 			const to = path[path.length - 1];
 			const fromDist = goalDist[color][from];
-			const candidate = {
+			moves.push({
 				from: from,
 				path: path,
 				gain: fromDist - goalDist[color][to],
 				fromDist: fromDist,
 				jumps: jumps
-			};
-			if (better(candidate, best)) {
-				best = candidate;
-			}
+			});
 		}
 		function walk(origin, key, path) {
 			if (path.length >= 12) {
@@ -390,7 +387,42 @@
 			});
 			walk(from, from, []);
 		});
-		return best;
+		return moves;
+	}
+
+	function betterPlan(candidate, best) {
+		if (!best || candidate.totalGain !== best.totalGain) {
+			return !best || candidate.totalGain > best.totalGain;
+		}
+		return better(candidate.first, best.first);
+	}
+
+	function bestMove(color) {
+		let best = null;
+		legalMoves(color).forEach(function (first) {
+			const from = first.from;
+			const to = first.path[first.path.length - 1];
+			occupants[from] = '';
+			occupants[to] = color;
+
+			let second = null;
+			legalMoves(color).forEach(function (candidate) {
+				if (better(candidate, second)) {
+					second = candidate;
+				}
+			});
+
+			occupants[from] = color;
+			occupants[to] = '';
+			const plan = {
+				first: first,
+				totalGain: first.gain + (second ? second.gain : 0)
+			};
+			if (betterPlan(plan, best)) {
+				best = plan;
+			}
+		});
+		return best && best.first;
 	}
 
 	function scheduleComputer() {
