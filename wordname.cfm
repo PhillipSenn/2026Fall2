@@ -16,9 +16,9 @@ words = exec('word.random20')
 	<form>
 		<div class="card-body">
 			<p class="mb-3">Choose one word to identify yourself in this course.</p>
-			<div class="d-grid gap-2">
+			<div>
 				<cfloop query="words">
-					<button name="wordname" value="#encodeForHtmlAttribute(words.wordname)#" class="btn btn-outline-primary">
+					<button name="wordname" value="#encodeForHtmlAttribute(words.wordname)#">
 						#encodeForHtml(words.wordname)#
 					</button>
 				</cfloop>
