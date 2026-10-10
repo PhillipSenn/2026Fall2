@@ -18,11 +18,14 @@ act = usr('act.where_usr')
 					<th>Category</th>
 					<th>Assignment</th>
 					<th class="text-end">Earned</th>
+					<cfif request.usr.isAdmin>
+						<th classs="text-center">Hide</th>
+					</cfif>
 				</tr>
 			</thead>
 			<cfloop query="act">
 				<tr data-actid="#actid#">
-					<td class="text-end" contenteditable>#actsort#</td>
+					<td class="text-end actsort" contenteditable>#actsort#</td>
 					<td>#grpname#</td>
 					<td>#catname#</td>
 					<td>
@@ -31,6 +34,9 @@ act = usr('act.where_usr')
 					<td class="text-end">
 						#earned#
 					</td>
+					<cfif request.usr.isAdmin>
+						<td class="text-center isHidden" contenteditable>#isHidden#</td>
+					</cfif>
 				</tr>
 			</cfloop>
 		</table>

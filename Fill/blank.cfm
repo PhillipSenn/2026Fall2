@@ -11,7 +11,7 @@ if (!q.recordcount) {
 	param form.qid=0;
 	q = exec('poll.gt_q',[form.actid,form.qid])
 	if (!q.recordcount) {
-		location('../login.cfm?id=' & request.usr.id, false)
+		location('../home.cfm?id=' & request.usr.id, false)
 	}
 }
 ans = exec('ans.where_q',q.qid)

@@ -31,38 +31,54 @@ function onRequestStart(targetPage) {
 			return false
 		}
 	}
+	request.cginame = getPageContext().getRequest().getServletPath()
+	request.dir = getDirectoryFromPath(request.cgiName)
+	request.scriptname = cgi.SCRIPT_NAME
+	if (len(cgi.QUERY_STRING)) {
+		request.scriptname &= '?' & cgi.QUERY_STRING
+	}
 	if (!structKeyExists(request,'usr')) {
-		setting showdebugoutput=false;
-		writeoutput("No user")
+		request.loginError = ''
+		if (structKeyExists(form, 'password')) {
+			cfstoredproc(procedure='usr.where_wordname') {
+				cfprocparam(cfsqltype='cf_sql_varchar', value=form.password)
+				cfprocresult(name='loginUser')
+			}
+			if (loginUser.recordCount) {
+				loginUrl = cgi.script_name & '?id=' & loginUser.id
+				if (len(cgi.query_string)) {
+					loginUrl &= '&' & cgi.query_string
+				}
+				location(loginUrl, false)
+				return false
+			}
+			request.loginError = 'That password was not recognized.'
+		}
+		include '/Inc/cfm/exec.cfm'
+		include 'login.cfm'
 		return false
 	}
-	if (isNull(request.usr.wordname) and lCase(getFileFromPath(targetPage)) != 'wordname.cfm') {
+	if (lCase(getFileFromPath(targetPage)) == 'login.cfm') {
+		location(request.home & '?id=' & request.usr.id, false)
+		return false
+	}
+	if (!len(request.usr.wordname) and lCase(getFileFromPath(targetPage)) != 'wordname.cfm') {
 		location(request.home & 'wordname.cfm?id=' & request.usr.id, false)
 		return false
 	}
-	request.cginame = getPageContext().getRequest().getServletPath()
 	if (FindNoCase('/admin/',request.cginame)) {
 		if (!structKeyExists(cookie,'admin')) {
 			dump(cookie)
 			return false
 		}
 	}
-	request.scriptname = cgi.SCRIPT_NAME
-	if (len(cgi.QUERY_STRING)) {
-		request.scriptname &= '?' & cgi.QUERY_STRING
-	}
-	request.dir = getDirectoryFromPath(request.cgiName)
 	include '/server.cfm' // outside of request.home
 }
 
 function onRequest(targetPage) {
-//	if (structKeyExists(url, 'id')) {
-//		include 'login.cfm'
-//	} else {
-		include '/Inc/cfm/exec.cfm'
-		include '/Inc/cfm/dump.cfm'
-		include targetPage
-//	}
+	include '/Inc/cfm/exec.cfm'
+	include '/Inc/cfm/dump.cfm'
+	include targetPage
 }
 /*
 function onError(exception, eventName) {

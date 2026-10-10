@@ -20,7 +20,7 @@ domain = queryExecute(
 	<input hidden name="actid" value="#form.actid#">
 	<div class="card-footer"><pre>
 Human:  Eukaryota → Animalia → Chordata → Mammalia → Primates → Hominidae → Homo → Homo sapiens
-Dog:    Eukaryota → Animalia → Chordata → Mammalia → Carnivora → Canidae → Canis → Canis lupus → Canis lupus familiaris
+Dog:    Eukaryota → Animalia → Chordata → Mammalia → Carnivora → Canidae → Canis → Canis familiaris
 Cat:    Eukaryota → Animalia → Chordata → Mammalia → Carnivora → Felidae → Felis → Felis catus
 Horse:  Eukaryota → Animalia → Chordata → Mammalia → Perissodactyla → Equidae → Equus → Equus caballus
 Donkey: Eukaryota → Animalia → Chordata → Mammalia → Perissodactyla → Equidae → Equus → Equus asinus

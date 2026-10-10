@@ -13,8 +13,10 @@ create table usr
 ,SpeechVolume decimal(9,1) default 1
 ,voiceName nvarchar(200)
 ,isAdmin int default 0
+,wordname varchar(20)
 )
 go
+alter table usr add wordname varchar(20)
 alter table usr
 add constraint id
 default newid() for id
@@ -54,6 +56,7 @@ create table act
 ,actdesc nvarchar(max)
 ,actsort int
 ,actlink varchar(max)
+,isHidden int default 0
 )
 go
 create table q
@@ -83,10 +86,13 @@ create table grade
 (gradeid int identity(1000,1) primary key
 ,grade_usr int
 ,grade_act int
-,earned int -- max 100
+,earned int default 0 -- max 100
 -- ,score int to be determined on an individual basis
 )
 go
+ALTER TABLE grade
+ADD CONSTRAINT earned DEFAULT 0 FOR earned
+update grade set earned=0 where earned is null
 drop table if exists guess
 go
 create table guess

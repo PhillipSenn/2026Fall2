@@ -2,9 +2,11 @@
 include '/Inc/header.cfm'
 if (structKeyExists(form, 'firstname')) {
 	usr('usr.update_firstname', form.firstname)
-	location('login.cfm?id=' & request.usr.id, false)
+	usr('usr.update_wordname', form.wordname)
+	location('home.cfm?id=' & request.usr.id, false)
 }
 
+word = exec('word.random20')
 mark = ''
 points = listToArray(reReplace(request.usr.codePoint, '[^0-9A-Fa-f]+', ',', 'all'))
 for (point in points) {
@@ -32,6 +34,12 @@ if (!len(mark)) {
 			<input type="text" name="firstname" id="firstname" class="form-control" required autofocus
 				value="#encodeForHtmlAttribute(request.usr.firstname)#">
 			<div class="form-text">This is the name shown in the menu.</div>
+			<label for="wordname" class="mt-3">Word name</label>
+			<select name="wordname" id="wordname" class="form-select" required>
+				<cfloop query="word">
+					<option value="#encodeForHtmlAttribute(wordname)#">#encodeForHtml(wordname)#</option>
+				</cfloop>
+			</select>
 		</div>
 		<div class="card-footer text-end">
 			<button><i class="bi bi-person-check me-1"></i>Save</button>

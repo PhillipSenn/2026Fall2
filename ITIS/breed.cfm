@@ -27,8 +27,24 @@ breed = queryExecute(
 	{speciesid: {value: form.speciesid, cfsqltype: "cf_sql_integer"}}
 )
 anchor = ''
-if (path.speciesname == 'Equus caballus') {
+if (path.speciesname == 'Canis familiaris') {
+//	anchor = 'https://breeds.okstate.edu/dogs/'
+} else if (path.speciesname == 'Felis catus') {
+	anchor = 'https://cfa.org/breed/'
+} else if (path.speciesname == 'Equus caballus') {
 	anchor = 'https://breeds.okstate.edu/horses/'
+} else if (path.speciesname == 'Equus asinus') {
+	anchor = 'https://breeds.okstate.edu/other-breeds-of-livestock/donkeys/'
+} else if (path.speciesname == 'EBos taurus') {
+	anchor = 'https://breeds.okstate.edu/cattle/'
+} else if (path.speciesname == 'Capra hircus') {
+	anchor = 'https://breeds.okstate.edu/goats/'
+} else if (path.speciesname == 'Ovis aries') {
+	anchor = 'https://breeds.okstate.edu/sheep/'
+} else if (path.speciesname == 'Sus scrofa') {
+	anchor = 'https://breeds.okstate.edu/swine/'
+} else if (path.genusname == 'Anas') {
+	anchor = 'https://breeds.okstate.edu/poultry/ducks/'
 }
 </cfscript>
 

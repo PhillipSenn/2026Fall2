@@ -11,6 +11,7 @@ this.parentDir = getDirectoryFromPath(left(this.dir, len(this.dir) - 1))
 this.mappings['/course'] = this.parentDir
 this.mappings['/inc'] = this.parentDir & 'inc\'
 this.mappings['/passwords'] = 'C:\Passwords'
+/*
 this.javaSettings = {
 	loadPaths: [this.dir & 'lib'],
 	loadColdFusionClassPath: true,
@@ -49,7 +50,7 @@ function onApplicationStart() {
 	}
 	createObject("java", "java.lang.Class").forName("net.ucanaccess.jdbc.UcanaccessDriver", javacast("boolean", true), loader)
 }
-
+*/
 function onRequestStart(targetPage) {
 	structAppend(form, url, false)
 	request.home = '/2026Fall2/'

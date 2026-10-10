@@ -93,7 +93,7 @@ writeoutput('<body class="' & request.body & '">')
 							<li><button class="dropdown-item btn-link" formaction="#request.home#profile.cfm">Edit Profile</button></li>
 							<li><button class="dropdown-item btn-link" formaction="#request.home#audit.cfm">Email Grade</button></li>
 							<li><hr class="dropdown-divider ms-3"></li>
-							<li><a class="dropdown-item" href="#request.home#login.cfm">Logout</a></li>
+							<li><a class="dropdown-item" href="#request.home#home.cfm">Logout</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -104,7 +104,7 @@ writeoutput('<body class="' & request.body & '">')
 			</cfif>
 		</form>
 	</nav>
-	<cfif isDefined('act') and act.recordcount>
+	<cfif isDefined('grade')>
 		<cfif grade.earned ge 100>
 			<cfset request.progress.color = "bg-success progress-bar-striped progress-bar-animated fw-bold">
 		</cfif>
