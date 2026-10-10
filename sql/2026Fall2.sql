@@ -678,6 +678,25 @@ where id=@id
 select * from usr
 where id=@id
 go
+create or alter proc usr.update_wordname
+(@id uniqueidentifier
+,@wordname varchar(20)
+) as
+update usr set
+ wordname=@wordname
+where id=@id
+and exists (
+	select 1
+	from word
+	where word.wordname=@wordname
+)
+go
+--create schema word authorization dbo
+create or alter proc word.random20 as
+select top 20 wordname
+from word
+order by newid()
+go
 create or alter proc guess.merge_ans_name
 (@id uniqueidentifier
 ,@ansid int

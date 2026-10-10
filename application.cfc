@@ -36,6 +36,10 @@ function onRequestStart(targetPage) {
 		writeoutput("No user")
 		return false
 	}
+	if (isNull(request.usr.wordname) and lCase(getFileFromPath(targetPage)) != 'wordname.cfm') {
+		location(request.home & 'wordname.cfm?id=' & request.usr.id, false)
+		return false
+	}
 	request.cginame = getPageContext().getRequest().getServletPath()
 	if (FindNoCase('/admin/',request.cginame)) {
 		if (!structKeyExists(cookie,'admin')) {
