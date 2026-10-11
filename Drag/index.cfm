@@ -8,7 +8,7 @@ include '/Inc/header.cfm'
 		<div class="card-header bg-primary-subtle">
 		</div>
 		<div class="card-body">
-			Here be instructions.
+			Drag-and-Drop
 		</div>
 	</div>
 	<div class="card">

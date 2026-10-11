@@ -1,7 +1,10 @@
 <cfscript>
 request.jQueryUI = 'base'
 if (StructKeyExists(form,'qid')) {
-	usr('poll.merge_q',form.qid)
+	grade = usr('poll.merge_q',form.qid)
+	if (grade.earned gte 100) {
+		location('results.cfm?actid=' & form.actid & '&id=' & request.usr.id, false)
+	}
 }
 request.flush = false
 include '/Inc/header.cfm'
