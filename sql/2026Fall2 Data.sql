@@ -118,6 +118,9 @@ update usr usrname='',firstname='' where usrid=2
 select * from ans
 
 /*
+truncate table act
+truncate table cat
+truncate table grp
 truncate table grade
 truncate table poll
 truncate table guess

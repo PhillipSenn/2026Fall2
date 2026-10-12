@@ -1,0 +1,15 @@
+---
+description: Generate accurate Git commit messages
+alwaysApply: true
+---
+
+When generating a Git commit message:
+
+1. Examine the actual staged changes using `git diff --cached`.
+2. Describe ONLY changes present in the staged diff.
+3. Do not rely on previous conversations, earlier commits, or general project context.
+4. Never reuse a previous commit message unless the changes genuinely warrant it.
+5. Use a concise, single-line commit message.
+6. Identify the primary functionality added, changed, or removed.
+7. Avoid vague language such as "enhance user experience," "improve maintainability," or "streamline code."
+8. If the staged changes cannot be inspected, do not invent a description.
