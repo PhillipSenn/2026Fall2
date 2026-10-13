@@ -3,6 +3,7 @@ if (isDefined('form.pollname')) {
 	usr('poll.merge_q',[form.qid,form.pollname])
 }
 include '/Inc/header.cfm'
+cat = exec('cat.where_cat',act.catid)
 q = usr('poll.unanswered',form.actid)
 if (!q.recordcount) {
 	location('../home.cfm?id=' & request.usr.id, false)
@@ -15,21 +16,22 @@ poll = usr('poll.start_q',[q.qid,q.qname])
 	<div class="col">
 		<div class="card">
 			<div class="card-header bg-primary-subtle">
-				Textbook
+				Textbook AI grade: <span id="original-grade"></span>
 			</div>
 			<div class="card-body">
 				<fieldset>
 					<legend>Original</legend>
-					<p id="qname">#q.qname#</p>
+					<p id="qname">#encodeForHTML(q.qname)#</p>
 				</fieldset>
+				<input hidden id="original" value="#encodeForHTMLAttribute(q.qname)#">
 			</div>
 			<input hidden name="id" value="#request.usr.id#" />
 		</div>
 	</div>
-	<div class="col">
-		<form class="card">
-			<div class="card-header bg-primary-subtle">
-				Flesch-Kincaid Grade Level: <span id="Flesch-Kincaid"></span>
+	<form class="col">
+		<div class="card">
+			<div class="card-header bg-primary-subtle text-muted">
+				Flesch-Kincaid Grade: <span id="Flesch-Kincaid"></span> (not used)
 			</div>
 			<div class="card-body">
 				<fieldset>
@@ -37,15 +39,28 @@ poll = usr('poll.start_q',[q.qid,q.qname])
 					<textarea autofocus name="pollname" class="form-control" rows="10">#encodeForHTML(poll.pollname)#</textarea>
 				</fieldset>
 			</div>
+		</div>
+		<div class="card">
+			<div class="card-body">
+				<div id="ai-feedback" hidden>
+					<p>AI Grade Level: <span id="ai-grade"></span></p>
+					<p>Meaning preserved: <span id="ai-meaning"></span></p>
+					<p id="ai-reason"></p>
+					<p>Difficult words: <span id="ai-words"></span></p>
+				</div>
+			</div>
 			<div class="card-footer">
+				<button type="button" id="askAI" class="btn btn-outline-secondary me-2" disabled>Ask AI</button>
 				<button id="save" class="btn btn-outline-primary" disabled>Save</button>
 			</div>
 			<input hidden name="actid" value="#actid#">
 			<input hidden name="id" value="#request.usr.id#">
 			<input hidden name="qid" value="#q.qid#">
-		</form>
-	</div>
+			<input hidden id="isAdmin" value="#val(request.usr.isAdmin)#">
+		</div>
+	</form>
 </div>
+<button class="nav-link" name="actid" value="#actid#" formaction="#request.dir#">#cat.catname#</button>
 <button class="nav-link" name="actid" value="#actid#" formaction="#request.dir#">#actname#</button>
 <cfinclude template="/Inc/footer.cfm">
 </cfoutput>

@@ -1,5 +1,6 @@
 <cfscript>
 include '/Inc/header.cfm'
+cat = exec('cat.where_cat',act.catid)
 q = exec('q.where_act',form.actid)
 </cfscript>
 
@@ -20,8 +21,9 @@ q = exec('q.where_act',form.actid)
 		</cfloop>
 		<input hidden name="actid" value="#actid#">
 		<input hidden name="id" value="#request.usr.id#">
-		<button class="nav-link" formaction="#request.dir#">#actname#</button>
 	</div>
 </div>
+<button class="nav-link" formaction="#request.dir#">#actname#</button>
+<button class="nav-link" formaction="#request.dir#">#cat.catname#</button>
 <cfinclude template="/Inc/footer.cfm">
 </cfoutput>

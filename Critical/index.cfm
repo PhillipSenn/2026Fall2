@@ -9,15 +9,16 @@ include '/Inc/header.cfm'
 <form>
 	<div class="card">
 		<div class="card-header bg-primary-subtle">
+You are to reword the question, <strong>not answer it</strong>.
 			<cfif grade.earned ge 100>
 				<button name="reset" class="float-end btn-outline-danger">Reset</a>
 			</cfif>
 		</div>
 		<div class="card-body">
-<p>You are to reword the question, <strong>not answer it</strong>.
-<p>A Flesch-Kincaid Grade Level score is calculated by a combination of words, syllables &amp; sentences:</p>
-<blockquote>0.39 * (words / sentences) + 11.8 * (syllables / words) - 15.59</blockquote>
-<p>You are to change the textbook's wording so that it has a Flesch-Kincaid Grade Level score between 4-8.
+<p class="text-muted">A Flesch-Kincaid Grade Level score is calculated by a combination of words, syllables &amp; sentences:</p>
+<blockquote class="text-muted">0.39 * (words / sentences) + 11.8 * (syllables / words) - 15.59</blockquote>
+<p>But that's old-school thinking! Today we have AI.
+<p>Rewrite the question so AI gives a lower grade and still keeps the meaning.
 		</div>
 	</div>
 	<div class="card">
