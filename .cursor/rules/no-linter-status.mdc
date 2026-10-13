@@ -1,0 +1,9 @@
+---
+description: Avoid unsolicited linter-status discussion
+alwaysApply: true
+---
+
+# Linter-status communication
+
+- Do not mention linter errors, warnings, checks, or results in progress updates or final responses unless the user explicitly asks about them.
+- Still perform required validation silently when appropriate.

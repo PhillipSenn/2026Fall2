@@ -8,7 +8,6 @@ this.nullSupport = true
 this.app	= getCurrentTemplatePath()
 this.dir	= getDirectoryFromPath(this.app)
 this.mappings['/inc'] = this.dir & 'inc\'
-this.mappings['/passwords'] = 'C:\Passwords'
 this.serialization = {}
 this.serialization.dateTimeFormat = 'iso8601' // 2025-12-20T13:45:00Z
 

@@ -3,7 +3,7 @@
 //param form.qname = 'What is the cell reference for the cell located in the third column and fourth row of a worksheet?';
 //param form.id = '19C76747-5CF9-449C-9A52-FEF8906AD52E'; Doesn't work because it has to be in the url.
 setting showdebugoutput=false;
-apiKey = trim("")
+include '/Passwords/groq.cfm'
 
 requestBody = {
 	"model": "openai/gpt-oss-120b",

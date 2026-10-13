@@ -90,10 +90,8 @@ writeoutput('<body class="' & request.body & '">')
 							#request.usr.firstname#
 						</a>
 						<ul class="dropdown-menu dropdown-menu-end">
-							<li><button class="dropdown-item btn-link" formaction="#request.home#profile.cfm">Edit Profile</button></li>
-							<li><button class="dropdown-item btn-link" formaction="#request.home#audit.cfm">Email Grade</button></li>
-							<li><hr class="dropdown-divider ms-3"></li>
-							<li><a class="dropdown-item" href="#request.home#home.cfm">Logout</a></li>
+							<li><button class="dropdown-item btn-link" formaction="#request.home#Profile/profile.cfm">Edit Profile</button></li>
+							<li><button class="dropdown-item btn-link" formaction="#request.home#Profile/grade.cfm">Email Grade</button></li>
 						</ul>
 					</li>
 				</ul>

@@ -1,0 +1,163 @@
+:root {
+	--rts-ink: #20170e;
+	--rts-paper: #ead8a5;
+}
+
+html,
+body.rts-body {
+	height: 100%;
+	overflow: hidden;
+}
+
+body.rts-body {
+	margin: 0;
+	background: #28391e;
+	font-family: Georgia, "Times New Roman", serif;
+}
+
+body.rts-body main {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	max-width: none;
+	padding: 0;
+}
+
+.rts-demo {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	min-height: 100vh;
+	overflow: hidden;
+	background: #6d8f49;
+	cursor: crosshair;
+	touch-action: none;
+	user-select: none;
+}
+
+#rtsCanvas {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.rts-vignette {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	box-shadow: inset 0 0 90px rgba(27, 31, 14, 0.52), inset 0 0 12px rgba(25, 22, 11, 0.72);
+}
+
+.rts-hud {
+	position: absolute;
+	top: 18px;
+	left: 18px;
+	width: min(280px, calc(100% - 36px));
+	padding: 13px 16px 14px;
+	color: var(--rts-ink);
+	background:
+		linear-gradient(135deg, rgba(255, 245, 193, 0.93), rgba(206, 174, 104, 0.93)),
+		#ead8a5;
+	border: 3px solid #4a3119;
+	outline: 1px solid #d7ba6b;
+	box-shadow: 3px 4px 0 rgba(31, 22, 11, 0.65), inset 0 0 0 2px rgba(103, 68, 30, 0.38);
+	pointer-events: none;
+}
+
+.rts-eyebrow {
+	margin: 0 0 4px;
+	font-family: "Trebuchet MS", sans-serif;
+	font-size: 0.65rem;
+	font-weight: bold;
+	letter-spacing: 0.16em;
+	color: #6b3d1a;
+}
+
+.rts-hud h1 {
+	margin: 0 0 8px;
+	font-size: 1.35rem;
+	line-height: 1;
+	letter-spacing: 0.04em;
+}
+
+.rts-hud p {
+	margin: 3px 0;
+	font-size: 0.88rem;
+	line-height: 1.25;
+}
+
+.rts-status {
+	position: absolute;
+	right: 18px;
+	bottom: 270px;
+	padding: 7px 11px;
+	color: #f5ebc4;
+	background: rgba(27, 29, 16, 0.76);
+	border: 1px solid rgba(245, 225, 155, 0.55);
+	border-radius: 2px;
+	font-family: "Trebuchet MS", sans-serif;
+	font-size: 0.75rem;
+	letter-spacing: 0.04em;
+	pointer-events: none;
+}
+
+.rts-overview {
+	position: absolute;
+	right: 18px;
+	bottom: 18px;
+	width: 196px;
+	padding: 6px;
+	color: #f3dd9c;
+	background: rgba(32, 29, 17, 0.9);
+	border: 2px solid #826535;
+	box-shadow: 2px 3px 0 rgba(10, 12, 6, 0.6), inset 0 0 0 1px rgba(235, 203, 121, 0.35);
+	font-family: "Trebuchet MS", sans-serif;
+	font-size: 0.62rem;
+	font-weight: bold;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}
+
+.rts-overview span {
+	display: block;
+	margin: 1px 3px 5px;
+}
+
+#miniMap {
+	display: block;
+	width: 100%;
+	height: 210px;
+	background: #647d47;
+	cursor: pointer;
+}
+
+@media (max-width: 560px) {
+	.rts-hud {
+		top: 10px;
+		left: 10px;
+		padding: 10px 12px;
+	}
+
+	.rts-hud h1 {
+		font-size: 1.1rem;
+	}
+
+	.rts-hud p {
+		font-size: 0.77rem;
+	}
+
+	.rts-status {
+		right: 10px;
+		bottom: 210px;
+	}
+
+	.rts-overview {
+		right: 10px;
+		bottom: 10px;
+		width: 140px;
+	}
+
+	#miniMap {
+		height: 150px;
+	}
+}
