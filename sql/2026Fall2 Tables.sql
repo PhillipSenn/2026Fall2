@@ -45,6 +45,7 @@ create table grp
 go
 create table cat
 (catid int identity(101,1) primary key
+,cat_grp int
 ,catname varchar(max)
 )
 go
