@@ -8,8 +8,14 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 Write-Host ''
-Write-Host 'Files changed:'
+Write-Host 'Files to be deployed:'
 git diff --name-status HEAD origin/main
+if ($LASTEXITCODE -ne 0) {
+    throw 'Diff failed.'
+}
+
+Write-Host ''
+Read-Host 'Press Enter to deploy, or Ctrl+C to cancel'
 
 git reset --hard origin/main
 if ($LASTEXITCODE -ne 0) {
