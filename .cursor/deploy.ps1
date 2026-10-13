@@ -8,6 +8,10 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 Write-Host ''
+Write-Host 'Latest commit:'
+git log -1 --format='%h %s' origin/main
+
+Write-Host ''
 Write-Host 'Files to be deployed:'
 git diff --name-status HEAD origin/main
 if ($LASTEXITCODE -ne 0) {
@@ -17,7 +21,7 @@ if ($LASTEXITCODE -ne 0) {
 Write-Host ''
 Read-Host 'Press Enter to deploy, or Ctrl+C to cancel'
 
-git reset --hard origin/main
+git reset --hard --quiet origin/main
 if ($LASTEXITCODE -ne 0) {
     throw 'Deployment failed.'
 }
