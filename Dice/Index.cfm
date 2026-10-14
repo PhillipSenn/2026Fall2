@@ -2,6 +2,7 @@
 include '/Inc/header.cfm';
 </cfscript>
 
+<cfoutput query="act">
 <div class="card">
 	<div class="card-body text-center">
 		<h1 id="dice-heading" class="mb-4">Dice Roller</h1>
@@ -31,7 +32,7 @@ include '/Inc/header.cfm';
 						<label for="rollCount" class="form-label mb-1">Number of rolls</label>
 						<input id="rollCount" class="form-control" type="number" min="1" max="100000" value="1">
 					</div>
-					<button id="rollButton" type="button" class="btn btn-primary">Roll Dice</button>
+					<button id="rollButton">Roll Dice</button>
 				</div>
 				<p id="rollStatus" class="text-body-secondary mt-2 mb-0" role="status" aria-live="polite"></p>
 			</div>
@@ -64,5 +65,6 @@ include '/Inc/header.cfm';
 		</div>
 	</div>
 </div>
-
+<button class="nav-link">#actname#</button>
 <cfinclude template="/Inc/footer.cfm">
+</cfoutput>

@@ -10,7 +10,10 @@ pgm.init = function() {
 		$(this).wrap('<li class="nav-item"></li>')
 		$(this).parent().appendTo('#main-navbar')
 	}
-	$('.btn:not([class*="btn-"]):not([class*="bg-"])').addClass('btn-primary')
+	$('button').addClass('btn')
+	x = $('.btn:not([class*="btn-"]):not([class*="bg-"])')
+	console.log(x)
+	$('.btn:not([class*="btn-"]):not([class*="bg-"])').addClass('btn-primary CharliePark')
 	$('.nav-link').each(each_navlink)
 
 	dom.home = $('.home.nav-link')
@@ -42,7 +45,6 @@ pgm.init()
 app.id = $('input[name=id]').val()
 app.actid = +$('[name=actid]').val()
 
-$('button').addClass('btn')
 $('form:not([method=get])').attr('method', 'post')
 $('textarea').addClass('form-control')
 $('input[type=email]').addClass('form-control')

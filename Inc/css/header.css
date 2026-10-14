@@ -16,6 +16,27 @@ label {
 .cursor-pointer {
 	cursor:pointer
 }
+.CharliePark.btn-primary,
+.CharliePark.btn-outline-primary:hover,
+.CharliePark.btn-outline-primary.active {
+	--bs-btn-color: #333;
+	--bs-btn-border-color: #5493a4;
+	--bs-btn-hover-color: #333;
+	--bs-btn-hover-border-color: #457b89;
+	--bs-btn-active-color: #333;
+	--bs-btn-active-border-color: #457b89;
+
+	background-color: #5493a4;
+	background-image: linear-gradient(to bottom, #b8d3da, #5493a4);
+	background-repeat: repeat-x;
+	border-color: #5493a4 #5493a4 #487e8c;
+	color: #333;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, .49);
+	-webkit-font-smoothing: antialiased;
+}
+
+/*
+https://charliepark.org/bootstrap_buttons/
 .btn-primary,
 .btn-primary.active,
 .btn-outline-primary:hover,
@@ -50,6 +71,7 @@ label {
 	border-color: #457b89;
 	color: #333;
 }
+*/
 
 /* Reset Bootstrap's tweaks and use native UA look */
 fieldset, legend {

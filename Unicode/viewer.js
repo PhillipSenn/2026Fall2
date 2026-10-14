@@ -5,6 +5,34 @@ var TONES = [0, 0x1F3FB, 0x1F3FC, 0x1F3FD, 0x1F3FE, 0x1F3FF]
 
 var GRID_MAX = 1024
 var WINDOW = 128
+var TEXT = [
+	'text-primary',
+	'text-secondary',
+	'text-success',
+	'text-info',
+	'text-warning',
+	'text-danger',
+	'text-light',
+	'text-dark',
+	'text-black',
+	'text-white',
+	'text-body',
+	'text-muted',
+	'text-black-50',
+	'text-white-50',
+	'text-body-secondary',
+	'text-body-tertiary',
+	'text-body-emphasis',
+	'text-reset',
+	'text-primary-emphasis',
+	'text-secondary-emphasis',
+	'text-success-emphasis',
+	'text-info-emphasis',
+	'text-warning-emphasis',
+	'text-danger-emphasis',
+	'text-light-emphasis',
+	'text-dark-emphasis'
+]
 
 var CATEGORY = {
 	Lu: 'Letter, uppercase',
@@ -61,6 +89,8 @@ app.gridStart = -1
 app.gridEnd = -1
 app.degrees = 0
 app.rotating = false
+app.search = ''
+app.matchGrid = false
 
 pgm.hex = function(number, width) {
 	var text = number.toString(16).toUpperCase()
@@ -107,6 +137,16 @@ pgm.range_for = function(point) {
 	for (i = 0; i < app.ranges.length; i = i + 1) {
 		range = app.ranges[i]
 		if (point >= range.start && point <= range.end) return range
+	}
+	return null
+}
+
+pgm.block_for = function(point) {
+	var i
+	var block
+	for (i = 0; i < app.blocks.length; i = i + 1) {
+		block = app.blocks[i]
+		if (point >= block.start && point <= block.end) return block
 	}
 	return null
 }
@@ -382,10 +422,11 @@ pgm.render_grid = function(block) {
 	var button
 	if (!block) return 0
 	if (app.gridStart === block.start && app.gridEnd === block.end && grid.children().length) {
-		pgm.mark_grid()
-		pgm.mark_blocks(block.start)
-		return block.start
-	}
+	pgm.mark_grid()
+	pgm.mark_blocks(block.start)
+	if (app.matchGrid) pgm.mark_grid_matches()
+	return block.start
+}
 	grid.empty()
 	app.gridStart = block.start
 	app.gridEnd = block.end
@@ -400,6 +441,7 @@ pgm.render_grid = function(block) {
 	}
 	pgm.mark_grid()
 	pgm.mark_blocks(block.start)
+	if (app.matchGrid) pgm.mark_grid_matches()
 	return block.end - block.start + 1
 }
 
@@ -417,6 +459,7 @@ pgm.show_point = function(point) {
 	app.points = [point]
 	app.selected = 0
 	app.tone = 0
+	app.degrees = 0
 	pgm.render_all()
 	return point
 }
@@ -425,8 +468,97 @@ pgm.click_cell = function(response) {
 	return pgm.show_point(+$(this).attr('data-point'))
 }
 
+pgm.build_colors = function() {
+	var holder = $('#colors')
+	var i
+	var button
+	holder.empty()
+	for (i = 0; i < TEXT.length; i = i + 1) {
+		button = $('<button type="button"></button>')
+		button.addClass(TEXT[i])
+		button.attr('data-text', TEXT[i])
+		$('<span></span>').text('.' + TEXT[i]).appendTo(button)
+		holder.append(button)
+	}
+	return TEXT.length
+}
+
+pgm.click_color = function(response) {
+	var button = $(this)
+	var name = button.attr('data-text')
+	var rendered = $('#rendered')
+	var i
+	$('#colors button').removeClass('active')
+	button.addClass('active')
+	for (i = 0; i < TEXT.length; i = i + 1) rendered.removeClass(TEXT[i])
+	rendered.addClass(name)
+	return name
+}
+
 pgm.click_block = function(response) {
-	return pgm.show_point(+$(this).attr('data-start'))
+	app.matchGrid = $(this).hasClass('is-match')
+	pgm.show_point(+$(this).attr('data-start'))
+	if (!app.matchGrid) $('#grid button').removeClass('is-match')
+	return app.matchGrid
+}
+
+pgm.mark_block_matches = function() {
+	var query = app.search.toLowerCase()
+	var starts = {}
+	var point
+	var name
+	var block
+	var i
+	var range
+	$('#blocks button').removeClass('is-match')
+	if (!query) return 0
+	$('#blocks button').each(mark_block)
+	for (point in app.names) {
+		if (!Object.prototype.hasOwnProperty.call(app.names, point)) continue
+		name = app.names[point].toLowerCase()
+		if (name.indexOf(query) === -1) continue
+		block = pgm.block_for(+point)
+		if (block) starts[block.start] = true
+	}
+	for (i = 0; i < app.ranges.length; i = i + 1) {
+		range = app.ranges[i]
+		name = pgm.range_name(range.label, range.start).toLowerCase()
+		if (name.indexOf(query) === -1) continue
+		block = pgm.block_for(range.start)
+		if (block) starts[block.start] = true
+	}
+	$('#blocks button').each(mark_start)
+	return $('#blocks button.is-match').length
+	function mark_block() {
+		var button = $(this)
+		if (button.text().toLowerCase().indexOf(query) !== -1) button.addClass('is-match')
+	}
+	function mark_start() {
+		var button = $(this)
+		if (starts[+button.attr('data-start')]) button.addClass('is-match')
+	}
+}
+
+pgm.mark_grid_matches = function() {
+	var query = app.search.toLowerCase()
+	$('#grid button').removeClass('is-match')
+	if (!app.matchGrid || !query) return 0
+	$('#grid button').each(mark_cell)
+	return $('#grid button.is-match').length
+	function mark_cell() {
+		var button = $(this)
+		var point = +button.attr('data-point')
+		var text = button.text().toLowerCase()
+		var name = pgm.character_name(point).toLowerCase()
+		if (text.indexOf(query) !== -1 || name.indexOf(query) !== -1) button.addClass('is-match')
+	}
+}
+
+pgm.search_blocks = function(response) {
+	app.search = $(this).val().replace(/^\s+|\s+$/g, '')
+	app.matchGrid = false
+	$('#grid button').removeClass('is-match')
+	return pgm.mark_block_matches()
 }
 
 pgm.build_blocks = function() {
@@ -454,6 +586,7 @@ pgm.build_blocks = function() {
 		holder.append(button)
 	}
 	if (app.gridStart >= 0) pgm.mark_blocks(app.gridStart)
+	if (app.search) pgm.mark_block_matches()
 	return holder.children().length
 }
 
@@ -497,6 +630,7 @@ pgm.parse_names = function(text) {
 	pgm.render_tones()
 	pgm.render_detail()
 	pgm.refresh_grid()
+	if (app.search) pgm.mark_block_matches()
 	return lines.length
 }
 
@@ -591,6 +725,20 @@ pgm.rotate_degrees = function(response) {
 	var dy = response.clientY - centerY
 	var degrees = Math.round(Math.atan2(dx, -dy) * 180 / Math.PI)
 	if (degrees < 0) degrees = degrees + 360
+	return pgm.snap_degrees(degrees)
+}
+
+pgm.snap_degrees = function(degrees) {
+	var points = [0, 90, 180, 270]
+	var i
+	var point
+	var distance
+	for (i = 0; i < points.length; i = i + 1) {
+		point = points[i]
+		distance = Math.abs(degrees - point)
+		if (distance > 180) distance = 360 - distance
+		if (distance <= 5) return point
+	}
 	return degrees
 }
 
@@ -650,8 +798,11 @@ pgm.init = function() {
 	$('#rotate').on('pointermove', pgm.rotate_move)
 	$('#rotate').on('pointerup', pgm.rotate_up)
 	$('#rotate').on('keydown', pgm.rotate_key)
+	$('#block-search').on('input', pgm.search_blocks)
 	$('#blocks').on('click', 'button', pgm.click_block)
 	$('#grid').on('click', 'button', pgm.click_cell)
+	$('#colors').on('click', 'button', pgm.click_color)
+	pgm.build_colors()
 	$('#tones').on('click', 'button', pgm.click_tone)
 	pgm.load_text(NAMES_URL, pgm.parse_names, pgm.names_failed)
 	pgm.load_text(BLOCKS_URL, pgm.parse_blocks, pgm.blocks_failed)

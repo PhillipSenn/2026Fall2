@@ -30,6 +30,16 @@
 	align-content: flex-start;
 }
 
+#blocks button.is-match:not(.active),
+#grid button.is-match:not(.active) {
+	background-color: #fff3cd;
+}
+
+#blocks button.is-match,
+#grid button.is-match {
+	box-shadow: inset 0 0 0 3px #ffc107;
+}
+
 #blocks button {
 	white-space: normal;
 	border-radius: 0;
@@ -45,6 +55,9 @@
 	align-items: center;
 	gap: 0.75rem;
 	margin-bottom: 0.5rem;
+	padding-left: 1.5rem;
+	padding-top: 0.75rem;
+	padding-bottom: 0.75rem;
 }
 
 #rendered {
@@ -61,6 +74,7 @@
 	width: 3.25rem;
 	height: 3.25rem;
 	flex: 0 0 3.25rem;
+	margin-left: auto;
 	border: 2px solid #5493a4;
 	border-radius: 50%;
 	cursor: grab;
@@ -74,19 +88,18 @@
 .rotate-arm {
 	position: absolute;
 	left: 50%;
-	top: 0;
+	top: 50%;
 	width: 0;
-	height: 50%;
-	transform-origin: center bottom;
+	height: 0;
 	transform: rotate(var(--degrees, 0deg));
 }
 
 .rotate-handle {
 	position: absolute;
-	top: 0.15rem;
 	left: 0;
+	top: 0;
 	width: 0.7rem;
-	margin-left: -0.35rem;
+	transform: translate(-50%, -50%) translateY(calc(-1.625rem + 1px));
 }
 
 .rotate-handle span {
@@ -135,6 +148,37 @@
 
 #detail th {
 	width: 45%;
+}
+
+#colors {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	margin-top: 0.75rem;
+}
+
+#colors button {
+	text-align: left;
+	background: transparent;
+	border: 1px solid var(--bs-border-color);
+	border-radius: 0.25rem;
+	padding: 0.15rem 0.4rem;
+}
+
+#colors button.active {
+	background-color: currentColor;
+}
+
+#colors button.active span {
+	color: #fff !important;
+}
+
+#colors button.text-warning.active span,
+#colors button.text-light.active span,
+#colors button.text-white.active span,
+#colors button.text-white-50.active span,
+#colors button.text-info.active span {
+	color: #333 !important;
 }
 
 #grid {

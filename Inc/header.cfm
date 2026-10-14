@@ -107,13 +107,17 @@ writeoutput('<body class="' & request.body & '">')
 			<cfset request.progress.color = "bg-success progress-bar-striped progress-bar-animated fw-bold">
 		</cfif>
 		<cfif request.progress.bar>
-			<div class="progress">
-				<div class="progress-bar #request.progress.color#" role="progressbar" 
-					aria-valuenow="#grade.earned#"
-					aria-valuemin="0" 
-					aria-valuemax="100"
-					style="width: #request.progress.width#%">
-					<cfif val(grade.earned)>#grade.earned#%</cfif> <!--- This should be earned so as not to confused the student --->
+			<div class="row">
+				<div class="col">
+					<div class="progress border-start border-end">
+						<div class="progress-bar #request.progress.color#" role="progressbar" 
+							aria-valuenow="#grade.earned#"
+							aria-valuemin="0" 
+							aria-valuemax="100"
+							style="width: #request.progress.width#%">
+							<cfif val(grade.earned)>#grade.earned#%</cfif> <!--- This should be earned so as not to confused the student --->
+						</div>
+					</div>
 				</div>
 			</div>
 		</cfif>
