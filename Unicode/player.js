@@ -141,7 +141,7 @@ function skinToneSelect() {
 
 	player.finalEmoji = applySkinTone(player.baseEmoji,tone)
 	dom.codePoint.val(emojiToCodepoints(player.finalEmoji))
-		.text(emojiToCodepoints(player.finalEmoji))
+	$('#textCodePoint').text(emojiToCodepoints(player.finalEmoji))
 	dom.selected.text(player.finalEmoji)
 }
 
@@ -180,7 +180,7 @@ function emojiSelect() {
 		dom.skinSection.attr('hidden',true)
 	}
 	dom.codePoint.val(emojiToCodepoints(player.finalEmoji))
-		.text(emojiToCodepoints(player.finalEmoji))
+	$('#textCodePoint').text(emojiToCodepoints(player.finalEmoji))
 }
 
 function isValidEmoji(emoji) {

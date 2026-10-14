@@ -1,9 +1,12 @@
 <cfscript>
 include '/Inc/header.cfm'
+if (structKeyExists(form,'codePoint')) {
+    usr('usr.codePoint', form.codePoint)
+	writeoutput('<button class="home nav-link" formaction="' & request.home & '">Home</button>')
+}
 </cfscript>
 
-<cfoutput>
-
+<cfoutput query="act">
 <div class="card">
 	<div class="card-header">
 		Select Your Character
@@ -72,15 +75,17 @@ include '/Inc/header.cfm'
 			<h5>Selected Character</h5>
 
 			<div id="selectedCharacter" class="display-4"></div>
-
+			<div>CodePoint: <span id="textCodePoint"></span></div>
 		</div>
 	</div>
-	<form class="card-footer" action="playerSave.cfm" method="post">
+	<form class="card-footer">
 		<button name="codePoint" class="btn-primary">
 		Save
 		</button>
+		<input hidden name="actid" value="#actid#">
 		<input hidden name="id" value="#request.usr.id#">
 	</form>
 </div>
+<button class="nav-link">#actname#</button>
 <cfinclude template="/Inc/footer.cfm">
 </cfoutput>

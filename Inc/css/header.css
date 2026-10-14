@@ -16,7 +16,10 @@ label {
 .cursor-pointer {
 	cursor:pointer
 }
-.btn-primary, .btn-outline-primary:hover {
+.btn-primary,
+.btn-primary.active,
+.btn-outline-primary:hover,
+.btn-outline-primary.active {
 	--bs-btn-color: #333;
 	--bs-btn-border-color: #5493a4;
 	--bs-btn-hover-color: #333;
@@ -41,7 +44,6 @@ label {
 }
 
 .btn-primary:active,
-.btn-primary.active,
 .show > .btn-primary.dropdown-toggle {
 	background-color: #478494;
 	background-image: none;

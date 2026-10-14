@@ -1,4 +1,24 @@
+var dom = {} // Document Object Model
+
 pgm.init = function() {
+	function each_navlink() { // .home.nav-link needs to be moved into #main-navbar
+		if ($(this).closest('nav').length) return
+		if ($(this).hasClass('btn-primary')) {
+			$(this).removeClass('btn-primary')
+				.addClass('btn-link')
+		}
+		$(this).wrap('<li class="nav-item"></li>')
+		$(this).parent().appendTo('#main-navbar')
+	}
+	$('.btn:not([class*="btn-"]):not([class*="bg-"])').addClass('btn-primary')
+	$('.nav-link').each(each_navlink)
+
+	dom.home = $('.home.nav-link')
+	if (dom.home.length) {
+		$('main').hide()
+		dom.home.click()
+	}
+
 	var nativeFetch = window.fetch
 	window.fetch = function(url, form) {
 		form = Object.assign({ method: 'post' }, form)
@@ -19,27 +39,15 @@ pgm.init = function() {
 pgm.init()
 
 
-var dom = {} // Document Object Model
 app.id = $('input[name=id]').val()
 app.actid = +$('[name=actid]').val()
 
 $('button').addClass('btn')
-$('.btn:not([class*="btn-"]):not([class*="bg-"])').addClass('btn-primary')
 $('form:not([method=get])').attr('method', 'post')
 $('textarea').addClass('form-control')
 $('input[type=email]').addClass('form-control')
 $('table').addClass('table table-bordered').wrap('<div class="table-responsive"></div>')
 
-pgm.each_navlink = function() {
-	if ($(this).closest('nav').length) return
-	if ($(this).hasClass('btn-primary')) {
-		$(this).removeClass('btn-primary')
-			.addClass('btn-link')
-	}
-	$(this).wrap('<li class="nav-item"></li>')
-	$(this).parent().appendTo('#main-navbar')
-}
-$('.nav-link').each(pgm.each_navlink)
 $('#main-navbar .nav-link').last().addClass('active')
 
 function text_done(response) {

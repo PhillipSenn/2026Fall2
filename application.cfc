@@ -1,17 +1,18 @@
 ﻿component {
 this.name = 'lr2026Fall2'
 this.datasource = 'lr2026Fall2'
-this.sessionmanagement = false
+//this.sessionmanagement = false
 this.tag.location.addtoken = false
 this.nullSupport = true
 
-this.app	= getCurrentTemplatePath()
-this.dir	= getDirectoryFromPath(this.app)
-this.mappings['/inc'] = this.dir & 'inc\'
+this.app	= getCurrentTemplatePath() // C:\inetpub\wwwroot\PhillipSenn\2026Fall2\application.cfc
+this.root	= getDirectoryFromPath(this.app) // C:\inetpub\wwwroot\PhillipSenn\2026Fall2\
+this.mappings['/inc'] = this.root & 'inc\' // C:\inetpub\wwwroot\PhillipSenn\2026Fall2\inc\
 this.serialization = {}
 this.serialization.dateTimeFormat = 'iso8601' // 2025-12-20T13:45:00Z
 
 function onRequestStart(targetPage) {
+//	request.root = this.root // C:\inetpub\wwwroot\PhillipSenn\2026Fall2\
 //	cfheader(name='Content-Type', value='text/html; charset=utf-8')
 	structAppend(form,url,false)
 	request.home = '/2026Fall2/' // Trailing slash so that everywhere it's used we don't need a slash
@@ -119,7 +120,7 @@ function onError(exception, eventName) {
 			if (!findNoCase('\wwwroot\', template)) {
 				continue
 			}
-			template = replaceNoCase(template,this.dir,'','all')
+			template = replaceNoCase(template,this.root,'','all')
 			writeOutput(encodeForHTML(template) & ', Line: ' & source.tagContext[i].line & '<br>')
 		}
 	} catch (any ignore) {}

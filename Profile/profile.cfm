@@ -22,7 +22,7 @@ if (!len(mark)) {
 <div class="card profile shadow">
 	<form>
 		<div class="text-center">
-			<button formaction="Unicode/player.cfm" class="profile-banner">
+			<button name="actid" value="329" formaction="../Unicode/player.cfm" class="profile-banner">
 				<div class="profile-mark" aria-hidden="true">#mark#</div>
 				<div class="usrname">#encodeForHtml(request.usr.usrname)#</div>
 				<div class="email">#encodeForHtml(request.usr.email)#</div>
