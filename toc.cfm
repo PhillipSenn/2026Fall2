@@ -12,7 +12,7 @@ include '/Inc/header.cfm'
 			<div class="col-6 d-flex justify-content-end mb-3">
 				<div class="btn-group btn-group-sm" role="group" aria-label="View options">
 				<cfif StructKeyExists(url,'accordion')>
-					<button formaction="toc.cfm?accordion" class="btn-primary">
+					<button formaction="toc.cfm?accordion">
 					Accordion View
 					</div>
 					<button formaction="toc.cfm" class="btn-outline-secondary">
@@ -22,7 +22,7 @@ include '/Inc/header.cfm'
 					<button formaction="toc.cfm?accordion" class="btn-outline-secondary">
 					Accordion View
 					</button>
-					<button formaction="toc.cfm?" class="btn-primary">
+					<button formaction="toc.cfm?">
 					List View
 					</button>
 				</cfif>

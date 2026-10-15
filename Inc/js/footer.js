@@ -27,7 +27,7 @@ pgm.init = function() {
 		form = Object.assign({ method: 'post' }, form)
 		console.log(url)
 		console.log(form)
-		console.log(url + (form.body ? '?' + form.body.toString() : ''))
+		console.log(url + pgm.form_query(form.body))
 		return nativeFetch.call(window, url, form)
 	}
 	
@@ -39,6 +39,17 @@ pgm.init = function() {
 		return nativeText.call(this, response)
 	}
 }
+pgm.form_query = function(body) {
+	var parts = []
+	if (!body) return ''
+	if (typeof body.forEach !== 'function') return '?' + body
+	body.forEach(each_field)
+	return '?' + parts.join('&')
+	function each_field(value, key) {
+		parts.push(key + '=' + value)
+	}
+}
+
 pgm.init()
 
 

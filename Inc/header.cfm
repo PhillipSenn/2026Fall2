@@ -121,9 +121,7 @@ writeoutput('<body class="' & request.body & '">')
 				</div>
 			</div>
 		</cfif>
-		<!---
-		<input type="hidden" id="actid" value="#form.actid#">
-		--->
+		<input type="hidden" name="actid" value="#form.actid#"> <!--- fetch uses actid --->
 	</cfif>
 </div>
 </cfif>

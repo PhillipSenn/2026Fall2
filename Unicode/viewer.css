@@ -25,9 +25,31 @@
 	overflow: auto;
 }
 
+#unicode-viewer .blocks-column {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+#unicode-viewer .blocks-scroll {
+	flex: 1 1 auto;
+	min-height: 0;
+	overflow: auto;
+}
+
 #blocks {
 	width: 100%;
 	align-content: flex-start;
+}
+
+#blocks > .btn {
+	flex: 1 0 100%;
+	width: 100%;
+	margin-left: 0;
+}
+
+#blocks > .btn + .btn {
+	margin-top: calc(-1 * var(--bs-border-width));
 }
 
 #blocks button.is-match:not(.active),
@@ -79,6 +101,11 @@
 	border-radius: 50%;
 	cursor: grab;
 	touch-action: none;
+	user-select: none;
+}
+
+body.is-rotating {
+	user-select: none;
 }
 
 #rotate.is-dragging {

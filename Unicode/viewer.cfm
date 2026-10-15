@@ -25,12 +25,14 @@ include '/Inc/header.cfm'
 			<div class="col-6">
 				<div id="grid" aria-label="Characters in this block"></div>
 			</div>
-			<div class="col-3">
+			<div class="col-3 blocks-column">
 				<div class="input-group input-group-sm mb-2">
 					<span class="input-group-text"><i class="bi bi-search" aria-hidden="true"></i></span>
 					<input id="block-search" type="search" class="form-control" placeholder="Search" aria-label="Search blocks">
 				</div>
-				<div id="blocks" class="btn-group flex-wrap" role="group" aria-label="Unicode blocks"></div>
+				<div class="blocks-scroll">
+					<div id="blocks" class="btn-group flex-wrap" role="group" aria-label="Unicode blocks"></div>
+				</div>
 			</div>
 		</div>
 	</div>

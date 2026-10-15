@@ -88,6 +88,7 @@ app.bases = {}
 app.gridStart = -1
 app.gridEnd = -1
 app.degrees = 0
+app.glyphShift = {x: 0, y: 0}
 app.rotating = false
 app.search = ''
 app.matchGrid = false
@@ -137,16 +138,6 @@ pgm.range_for = function(point) {
 	for (i = 0; i < app.ranges.length; i = i + 1) {
 		range = app.ranges[i]
 		if (point >= range.start && point <= range.end) return range
-	}
-	return null
-}
-
-pgm.block_for = function(point) {
-	var i
-	var block
-	for (i = 0; i < app.blocks.length; i = i + 1) {
-		block = app.blocks[i]
-		if (point >= block.start && point <= block.end) return block
 	}
 	return null
 }
@@ -347,10 +338,12 @@ pgm.render_rendered = function() {
 	label = pgm.control_label(point)
 	if (label) {
 		rendered.addClass('is-control').text(label)
+		pgm.center_glyph()
 		pgm.apply_rotation()
 		return label
 	}
 	rendered.text(pgm.glyph_with_tone(point))
+	pgm.center_glyph()
 	pgm.apply_rotation()
 	return rendered.text()
 }
@@ -371,6 +364,7 @@ pgm.render_tones = function() {
 	var i
 	var tone
 	var button
+	pgm.clear_tips(holder)
 	holder.empty()
 	if (point == null || !pgm.supports_tone(point)) {
 		holder.attr('hidden', true)
@@ -381,10 +375,11 @@ pgm.render_tones = function() {
 		tone = TONES[i]
 		button = $('<button type="button" class="btn btn-outline-secondary"></button>')
 		button.attr('data-tone', tone)
-		button.attr('title', tone ? 'U+' + pgm.hex(tone, 4) : 'Default')
+		button.attr('title', pgm.character_name(tone || point))
 		button.text(tone ? pgm.safe_glyph(point) + String.fromCodePoint(tone) : pgm.safe_glyph(point))
 		if (tone === app.tone) button.removeClass('btn-outline-secondary').addClass('active btn-primary')
 		holder.append(button)
+		pgm.hover_tip(button[0])
 	}
 	return TONES.length
 }
@@ -394,7 +389,7 @@ pgm.click_tone = function(response) {
 	pgm.render_rendered()
 	pgm.render_detail()
 	pgm.render_tones()
-	return app.tone
+	return pgm.save_unicode()
 }
 
 pgm.mark_grid = function() {
@@ -427,6 +422,7 @@ pgm.render_grid = function(block) {
 	if (app.matchGrid) pgm.mark_grid_matches()
 	return block.start
 }
+	pgm.clear_tips(grid)
 	grid.empty()
 	app.gridStart = block.start
 	app.gridEnd = block.end
@@ -434,10 +430,11 @@ pgm.render_grid = function(block) {
 		if (pgm.is_surrogate(point)) continue
 		button = $('<button type="button" class="btn btn-outline-secondary"></button>')
 		button.attr('data-point', point)
-		button.attr('title', 'U+' + pgm.hex(point, 4))
+		button.attr('title', pgm.character_name(point))
 		button.text(pgm.cell_text(point))
 		if (pgm.control_label(point)) button.addClass('is-control')
 		grid.append(button)
+		pgm.hover_tip(button[0])
 	}
 	pgm.mark_grid()
 	pgm.mark_blocks(block.start)
@@ -465,7 +462,53 @@ pgm.show_point = function(point) {
 }
 
 pgm.click_cell = function(response) {
-	return pgm.show_point(+$(this).attr('data-point'))
+	pgm.show_point(+$(this).attr('data-point'))
+	return pgm.save_unicode()
+}
+
+pgm.hover_tip = function(element) {
+	new bootstrap.Tooltip(element, {trigger: 'hover'})
+	return element
+}
+
+pgm.clear_tips = function(holder) {
+	holder.find('[title], [data-bs-original-title]').each(dispose_tip)
+	return holder
+	function dispose_tip() {
+		var tip = bootstrap.Tooltip.getInstance(this)
+		if (tip) tip.dispose()
+	}
+}
+
+pgm.modifier_string = function() {
+	var point = app.points[app.selected]
+	if (point == null || !app.tone || !pgm.supports_tone(point)) return ''
+	return 'U+' + pgm.hex(app.tone, 4)
+}
+
+pgm.save_unicode = function() {
+	var point = app.points[app.selected]
+	var url = 'Q/merge_unicode.cfm'
+	var form = {}
+	if (point == null) return 0
+	form.body = new FormData()
+	form.body.set('id', app.id)
+	form.body.set('actid', app.actid)
+	form.body.set('qsort', point)
+	form.body.set('pollname', pgm.modifier_string())
+	fetch(url, form).then(text_done).then(pgm.show_earned).catch(caught(url))
+	return point
+}
+
+pgm.show_earned = function(response) {
+	var pct = +response
+	var bar = $('.progress-bar')
+	if (isNaN(pct)) return 0
+	bar.css('width', Math.min(100, pct) + '%')
+		.attr('aria-valuenow', pct)
+		.text(pct + '%')
+	if (pct >= 100) bar.addClass('bg-success progress-bar-striped progress-bar-animated fw-bold')
+	return pct
 }
 
 pgm.build_colors = function() {
@@ -508,23 +551,30 @@ pgm.mark_block_matches = function() {
 	var point
 	var name
 	var block
+	var cached
 	var i
 	var range
 	$('#blocks button').removeClass('is-match')
 	if (!query) return 0
 	$('#blocks button').each(mark_block)
+	cached = null
 	for (point in app.names) {
 		if (!Object.prototype.hasOwnProperty.call(app.names, point)) continue
+		point = +point
 		name = app.names[point].toLowerCase()
-		if (name.indexOf(query) === -1) continue
-		block = pgm.block_for(+point)
-		if (block) starts[block.start] = true
+		if (name.indexOf(query) === -1 && pgm.category_label(point).toLowerCase().indexOf(query) === -1) continue
+		if (!cached || point < cached.start || point > cached.end) cached = pgm.find_block(point)
+		if (cached) starts[cached.start] = true
 	}
 	for (i = 0; i < app.ranges.length; i = i + 1) {
 		range = app.ranges[i]
 		name = pgm.range_name(range.label, range.start).toLowerCase()
-		if (name.indexOf(query) === -1) continue
-		block = pgm.block_for(range.start)
+		if (name.indexOf(query) === -1 && pgm.category_label(range.start).toLowerCase().indexOf(query) === -1) continue
+		block = pgm.find_block(range.start)
+		if (block) starts[block.start] = true
+	}
+	if (pgm.category_label(0xAC00).toLowerCase().indexOf(query) !== -1) {
+		block = pgm.find_block(0xAC00)
 		if (block) starts[block.start] = true
 	}
 	$('#blocks button').each(mark_start)
@@ -550,7 +600,8 @@ pgm.mark_grid_matches = function() {
 		var point = +button.attr('data-point')
 		var text = button.text().toLowerCase()
 		var name = pgm.character_name(point).toLowerCase()
-		if (text.indexOf(query) !== -1 || name.indexOf(query) !== -1) button.addClass('is-match')
+		var category = pgm.category_label(point).toLowerCase()
+		if (text.indexOf(query) !== -1 || name.indexOf(query) !== -1 || category.indexOf(query) !== -1) button.addClass('is-match')
 	}
 }
 
@@ -742,12 +793,80 @@ pgm.snap_degrees = function(degrees) {
 	return degrees
 }
 
+pgm.center_glyph = function() {
+	var element = document.getElementById('rendered')
+	var text = element.textContent
+	var style
+	var probe
+	var rect
+	var baseY
+	var pad
+	var canvas
+	var ctx
+	var image
+	var minX
+	var minY
+	var maxX
+	var maxY
+	var x
+	var y
+	var index
+	var found
+	var originX
+	var originY
+	app.glyphShift = {x: 0, y: 0}
+	if (!text) return app.glyphShift
+	element.style.transform = 'none'
+	probe = document.createElement('span')
+	probe.style.cssText = 'display:inline-block;width:0;height:0;vertical-align:baseline'
+	element.appendChild(probe)
+	rect = element.getBoundingClientRect()
+	baseY = probe.getBoundingClientRect().top - rect.top
+	probe.remove()
+	style = getComputedStyle(element)
+	pad = Math.ceil(parseFloat(style.fontSize) * 2)
+	canvas = document.createElement('canvas')
+	canvas.width = Math.ceil(rect.width) + pad * 2
+	canvas.height = pad * 3
+	ctx = canvas.getContext('2d')
+	ctx.font = style.font
+	ctx.textBaseline = 'alphabetic'
+	ctx.fillStyle = '#000'
+	ctx.fillText(text, pad, pad)
+	image = ctx.getImageData(0, 0, canvas.width, canvas.height).data
+	minX = canvas.width
+	minY = canvas.height
+	maxX = 0
+	maxY = 0
+	found = false
+	for (y = 0; y < canvas.height; y = y + 1) {
+		for (x = 0; x < canvas.width; x = x + 1) {
+			index = (y * canvas.width + x) * 4
+			if (image[index + 3] <= 16) continue
+			found = true
+			if (x < minX) minX = x
+			if (y < minY) minY = y
+			if (x > maxX) maxX = x
+			if (y > maxY) maxY = y
+		}
+	}
+	if (!found) return app.glyphShift
+	originX = parseFloat(style.borderLeftWidth) + parseFloat(style.paddingLeft) + ((minX + maxX) / 2 - pad)
+	originY = baseY + ((minY + maxY) / 2 - pad)
+	app.glyphShift = {
+		x: rect.width / 2 - originX,
+		y: rect.height / 2 - originY
+	}
+	return app.glyphShift
+}
+
 pgm.apply_rotation = function() {
 	var dial = $('#rotate')
 	var label = app.degrees + ' degrees'
 	var tip
 	var inner
-	$('#rendered').css('transform', 'rotate(' + app.degrees + 'deg)')
+	var shift = app.glyphShift
+	$('#rendered').css('transform', 'rotate(' + app.degrees + 'deg) translate(' + shift.x + 'px, ' + shift.y + 'px)')
 	dial.css('--degrees', app.degrees + 'deg')
 	dial.attr('aria-valuenow', app.degrees)
 	dial.attr('data-bs-original-title', label)
@@ -759,10 +878,24 @@ pgm.apply_rotation = function() {
 	return app.degrees
 }
 
+pgm.clear_selection = function() {
+	var selection = window.getSelection()
+	if (selection && selection.removeAllRanges) selection.removeAllRanges()
+	return ''
+}
+
+pgm.block_select = function(response) {
+	response.preventDefault()
+	return false
+}
+
 pgm.rotate_down = function(response) {
 	var event = response.originalEvent || response
 	app.rotating = true
+	$('body').addClass('is-rotating')
 	$('#rotate').addClass('is-dragging')
+	$(document).on('selectstart', pgm.block_select)
+	pgm.clear_selection()
 	if (response.currentTarget.setPointerCapture && event.pointerId != null) {
 		response.currentTarget.setPointerCapture(event.pointerId)
 	}
@@ -774,13 +907,17 @@ pgm.rotate_down = function(response) {
 pgm.rotate_move = function(response) {
 	if (!app.rotating) return app.degrees
 	response.preventDefault()
+	pgm.clear_selection()
 	app.degrees = pgm.rotate_degrees(response)
 	return pgm.apply_rotation()
 }
 
 pgm.rotate_up = function(response) {
 	app.rotating = false
+	$('body').removeClass('is-rotating')
 	$('#rotate').removeClass('is-dragging')
+	$(document).off('selectstart', pgm.block_select)
+	pgm.clear_selection()
 	return app.degrees
 }
 
@@ -796,7 +933,7 @@ pgm.rotate_key = function(response) {
 pgm.init = function() {
 	$('#rotate').on('pointerdown', pgm.rotate_down)
 	$('#rotate').on('pointermove', pgm.rotate_move)
-	$('#rotate').on('pointerup', pgm.rotate_up)
+	$('#rotate').on('pointerup pointercancel', pgm.rotate_up)
 	$('#rotate').on('keydown', pgm.rotate_key)
 	$('#block-search').on('input', pgm.search_blocks)
 	$('#blocks').on('click', 'button', pgm.click_block)

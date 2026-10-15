@@ -820,5 +820,54 @@ select earned
 from grade
 where gradeid=@gradeid
 go
+create or alter proc q.merge_unicode
+(@id uniqueidentifier
+,@actid int
+,@qsort int
+,@pollname nvarchar(max)
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+declare @qid int=(select qid from q where q_act=@actid and qsort=@qsort)
+if @qid is null begin
+	insert into q(q_act,qsort) values(@actid,@qsort)
+	select @qid=scope_identity()
+end
+declare @gradeid int=(select gradeid from grade where grade_usr=@usrid and grade_act=@actid)
+if @gradeid is null begin
+	insert into grade(grade_usr,grade_act) values(@usrid,@actid)
+	select @gradeid=scope_identity()
+end
+declare @pollid int=(
+	select pollid 
+	from poll 
+	join grade on poll_grade=gradeid
+	where poll_grade=@gradeid
+	and poll_q=@qid
+	and pollname = @pollname
+)
+if @pollid is null begin
+	insert into poll(poll_grade,poll_q,pollname,pollStart) values(@gradeid,@qid,@pollname,getdate())
+	select @pollid=scope_identity()
+end
+update poll set
+ pollEnd=getdate()
+where pollid=@pollid
+
+declare @answered int=(
+	select count(*) 
+	from poll 
+	where poll_grade=@gradeid
+)
+update grade set
+ earned=@answered
+where gradeid=@gradeid
+and @answered <= 100
+select earned
+from grade
+where gradeid=@gradeid
+go
+declare @actid int=328
+execute q.merge_unicode '19C76747-5CF9-449C-9A52-FEF8906AD52E',@actid,1,'U+1F468 U+1F3FB U+200D U+2764 U+FE0F U+200D U+1F48B U+200D U+1F468 U+1F3FB'
+select * from act
 
 select * from usr
