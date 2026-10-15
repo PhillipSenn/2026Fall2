@@ -35,7 +35,13 @@ act = usr('act.where_usr')
 						<button name="actid" formaction="#actlink#" class="btn-link" value="#actid#">#actname#</button>
 					</td>
 					<td class="text-end">
-						#earned#
+						<cfif request.usr.isAdmin>
+							<button formaction="Admin/act.cfm" name="actid" value="#actid#">
+								#earned#
+							</button>
+						<cfelse>
+							#earned#
+						</cfif>
 					</td>
 				</tr>
 			</cfloop>

@@ -68,7 +68,7 @@ function onRequestStart(targetPage) {
 	}
 	if (FindNoCase('/admin/',request.cginame)) {
 		if (!structKeyExists(cookie,'admin')) {
-			dump(cookie)
+			writedump(cookie)
 			return false
 		}
 	}
@@ -77,7 +77,6 @@ function onRequestStart(targetPage) {
 
 function onRequest(targetPage) {
 	include '/Inc/cfm/exec.cfm'
-	include '/Inc/cfm/dump.cfm'
 	include targetPage
 }
 /*

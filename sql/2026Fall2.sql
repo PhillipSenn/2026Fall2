@@ -866,8 +866,18 @@ select earned
 from grade
 where gradeid=@gradeid
 go
+--create schema usrs authorization dbo
+create or alter proc usrs.where_act
+(@actid int
+) as
+select firstname,earned
+from usr
+left join grade on grade_usr=usrid and grade_act=@actid
+order by usrname
+go
+/*
 declare @actid int=328
 execute q.merge_unicode '19C76747-5CF9-449C-9A52-FEF8906AD52E',@actid,1,'U+1F468 U+1F3FB U+200D U+2764 U+FE0F U+200D U+1F48B U+200D U+1F468 U+1F3FB'
 select * from act
-
 select * from usr
+*/
