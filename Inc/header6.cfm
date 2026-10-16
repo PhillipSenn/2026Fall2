@@ -44,15 +44,15 @@ if (request.bootstrap) {
 	fontStack = ''
 	fontSize = ''
 	styleRules = ''
-	if (structKeyExists(request, 'fontFamily') && len(request.fontFamily)) {
+	if (structKeyExists(request, 'usr') && !isNull(request.usr.fontFamily) && len(request.usr.fontFamily)) {
+		fontName = request.usr.fontFamily
+	} else if (structKeyExists(request, 'fontFamily') && len(request.fontFamily)) {
 		fontName = request.fontFamily
-	} else if (structKeyExists(cookie, 'fontFamily')) {
-		fontName = cookie.fontFamily
 	}
-	if (structKeyExists(request, 'fontSize') && len(request.fontSize)) {
+	if (structKeyExists(request, 'usr') && !isNull(request.usr.fontSize) && len(request.usr.fontSize)) {
+		fontSize = request.usr.fontSize
+	} else if (structKeyExists(request, 'fontSize') && len(request.fontSize)) {
 		fontSize = request.fontSize
-	} else if (structKeyExists(cookie, 'fontSize')) {
-		fontSize = cookie.fontSize
 	}
 	if (len(fontName)) {
 		builtinFile = expandPath(request.home & 'Fonts/builtin.json')

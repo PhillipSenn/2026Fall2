@@ -23,16 +23,11 @@ current = ''
 previewStack = ''
 sizes = [12,14,16,18,20,24,28,32,36,48,64,72]
 fontSize = 16
-if (structKeyExists(cookie, 'fontFamily')) {
-	current = cookie.fontFamily
+if (!isNull(request.usr.fontFamily) && len(request.usr.fontFamily)) {
+	current = request.usr.fontFamily
 }
-if (structKeyExists(cookie, 'fontSize') && arrayFind(sizes, val(cookie.fontSize))) {
-	fontSize = val(cookie.fontSize)
-}
-if (cgi.request_method == 'POST' && structKeyExists(form, 'fontSize') && arrayFind(sizes, val(form.fontSize))) {
-	cfcookie(name='fontSize', value=form.fontSize, expires='never', httponly=true, samesite='lax', domain=cgi.server_name, path='/2026Fall2/')
-	fontSize = val(form.fontSize)
-	saved = true
+if (!isNull(request.usr.fontSize) && arrayFind(sizes, val(request.usr.fontSize))) {
+	fontSize = val(request.usr.fontSize)
 }
 if (cgi.request_method == 'POST' && structKeyExists(form, 'fontFamily')) {
 	allowed = false
@@ -50,9 +45,12 @@ if (cgi.request_method == 'POST' && structKeyExists(form, 'fontFamily')) {
 			}
 		}
 	}
-	if (allowed) {
-		cfcookie(name='fontFamily', value=form.fontFamily, expires='never', httponly=true, samesite='lax', domain=cgi.server_name, path='/2026Fall2/')
+	if (allowed && structKeyExists(form, 'fontSize') && arrayFind(sizes, val(form.fontSize))) {
+		fontSize = val(form.fontSize)
+		usr('usr.update_font',[form.fontFamily,fontSize])
 		current = form.fontFamily
+		querySetCell(request.usr, 'fontFamily', current)
+		querySetCell(request.usr, 'fontSize', fontSize)
 		saved = true
 	}
 }
@@ -75,6 +73,9 @@ function cssGeneric(category) {
 </cfscript>
 
 <cfoutput>
+<cfif saved>
+	<button class="home nav-link" formaction="#request.home#">Home</button>
+</cfif>
 <form class="card">
 	<div class="card-header bg-primary-subtle">
 		Which font do you want as your default?
@@ -108,6 +109,9 @@ function cssGeneric(category) {
 						<option>Handwriting</option>
 						<option>Monospace</option>
 					</select>
+					<div>
+						<button>Save</button>
+					</div>
 				</div>
 			</div>
 		</div>

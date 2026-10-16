@@ -14,6 +14,8 @@ create table usr
 ,voiceName nvarchar(200)
 ,isAdmin int default 0
 ,wordname varchar(20)
+,fontFamily nvarchar(max) default 'Noto Serif'
+,fontSize int
 )
 go
 alter table usr add wordname varchar(20)
