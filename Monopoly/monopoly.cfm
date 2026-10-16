@@ -1,7 +1,7 @@
 <cfscript>
 request.container = 'container-fluid'
 request.jqueryui = true
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 </cfscript>
 
 <cfoutput>
@@ -234,4 +234,4 @@ include '/Inc/header.cfm'
 	</div>
 </div>
 </cfoutput>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">

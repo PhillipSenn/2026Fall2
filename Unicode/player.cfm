@@ -1,5 +1,5 @@
 <cfscript>
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 if (structKeyExists(form,'codePoint')) {
     usr('usr.codePoint', form.codePoint)
 	writeoutput('<button class="home nav-link" formaction="' & request.home & '">Home</button>')
@@ -87,5 +87,5 @@ if (structKeyExists(form,'codePoint')) {
 	</form>
 </div>
 <button class="nav-link">#actname#</button>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

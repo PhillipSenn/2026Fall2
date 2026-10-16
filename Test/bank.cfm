@@ -9,7 +9,7 @@ if (structKeyExists(form,'ansid')) {
 }
 request.progress.anim = true
 //request.progress.bar = false
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 if (StructKeyExists(form,'pollid')) {
 	usr('poll.update_poll',form.pollid)
 }
@@ -302,5 +302,5 @@ cfloop(query="qry") {
 </form>
 <div hidden id="wrong">#wrong#</div>
 <button class="nav-link" formaction="#request.dir#">#actname#</button>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

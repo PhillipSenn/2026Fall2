@@ -1,5 +1,5 @@
 <cfscript>
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 q = exec('q.where_act',form.actid)
 </cfscript>
 
@@ -19,5 +19,5 @@ q = exec('q.where_act',form.actid)
 <input hidden name="actid" value="#actid#">
 <input hidden name="id" value="#request.usr.id#">
 <button class="nav-link" formaction="#request.dir#">#actname#</button>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

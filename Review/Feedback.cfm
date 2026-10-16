@@ -1,5 +1,5 @@
 <cfscript>
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 guess = usr('guess.where_q',form.qid)
 q = exec('q.where_q',form.qid)
 ans = exec('ans.where_q',form.qid)
@@ -39,5 +39,5 @@ ans = exec('ans.where_q',form.qid)
 </form>
 <a class="nav-link" href="#request.scriptname#">Feedback for: #actname#</a>
 <script src="/Inc/js/autosize.js"></script>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

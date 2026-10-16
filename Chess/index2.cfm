@@ -1,7 +1,7 @@
 <cfscript>
 request.container = 'container-xl'
 request.progress.bar = false
-include '/Inc/header.cfm';
+include '/Inc/header6.cfm';
 files = ['a','b','c','d','e','f','g','h'];
 // Unicode: white ♖♘♗♕♔♙ then black ♜♞♝♛♚♟
 start = {
@@ -85,4 +85,4 @@ Legal destinations are marked when you select a piece.
 		<button class="nav-link">#actname#</button>
 	</cfoutput>
 </cfif>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">

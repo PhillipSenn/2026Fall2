@@ -1,5 +1,5 @@
 ﻿<cfscript>
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 </cfscript>
 
 <cfoutput>
@@ -3941,5 +3941,5 @@ include '/Inc/header.cfm'
 	<input hidden name="id" value="#request.usr.id#">
 </form>
 <button class="nav-link">Table Of Contents</button>
-<cfinclude template="/Inc/footer.cfm"></li>
+<cfinclude template="/Inc/footer6.cfm"></li>
 </cfoutput>

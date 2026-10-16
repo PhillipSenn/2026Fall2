@@ -7,7 +7,7 @@ if (StructKeyExists(form,'qid')) {
 	}
 }
 request.flush = false
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 disabled = 'disabled'
 q = usr('poll.unanswered',form.actid)
 if (!q.recordcount) {
@@ -76,5 +76,5 @@ ans = exec('ans.where_q',q.qid)
 	</div>
 </div>
 <button class="nav-link" formaction="#request.serverdir#">#actname#</button>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

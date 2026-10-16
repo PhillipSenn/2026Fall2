@@ -1,7 +1,7 @@
 <cfscript>
 request.title = 'ITIS'
 request.progress.bar = false
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 </cfscript>
 
 <cfoutput>
@@ -13,5 +13,5 @@ include '/Inc/header.cfm'
 	<input hidden name="id" value="#request.usr.id#">
 	<input hidden name="actid" value="#form.actid#">
 </form>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

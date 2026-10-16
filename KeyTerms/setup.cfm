@@ -6,7 +6,7 @@ q = usr('q.keyTerms',form.actid) // All the unanswered questions that have > 1 a
 if (!q.recordCount) {
 	location('../home.cfm?id=' & request.usr.id, false)
 }
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 qs = exec('q.where_ans_gt_1',form.actid) // All the questions that have > 1 available answers.
 ans = exec('ans.where_q',q.qid)
 </cfscript>
@@ -53,5 +53,5 @@ ans = exec('ans.where_q',q.qid)
 	<input hidden name="id" value="#request.usr.id#">
 </form>
 <a class="nav-link" href="#request.script_name#">#actname#</a>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

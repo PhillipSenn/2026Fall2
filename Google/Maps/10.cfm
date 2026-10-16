@@ -1,7 +1,7 @@
 <cfscript>
 request.container = ''
 request.navbar=false
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 param url.actid=178;
 latlng = exec('latlng.where_act',url.actid)
 </cfscript>
@@ -46,6 +46,6 @@ latlng = exec('latlng.where_act',url.actid)
 </table>
 <script src="google-maps.js"></script>
 <script src="twemoji.js"></script>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
    
 </cfoutput>

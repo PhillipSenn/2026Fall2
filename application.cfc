@@ -13,10 +13,9 @@ this.serialization.dateTimeFormat = 'iso8601' // 2025-12-20T13:45:00Z
 
 function onRequestStart(targetPage) {
 	setting showdebugoutput=false;
-//	request.root = this.root // C:\inetpub\wwwroot\PhillipSenn\2026Fall2\
-//	cfheader(name='Content-Type', value='text/html; charset=utf-8')
 	structAppend(form,url,false)
 	request.home = '/2026Fall2/' // Trailing slash so that everywhere it's used we don't need a slash
+	include '/server.cfm'
 	if (structKeyExists(form,'id') and len(form.id) == 36 
 		and Mid(form.id,9,1) == '-'
 		and Mid(form.id,14,1) == '-'

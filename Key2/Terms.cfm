@@ -1,5 +1,5 @@
 <cfscript>
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 q = usr('q.usr_act',form.actid) // All questions
 // A started poll is not a finished answer. Score counts pollEnd only.
 finishedPoll = queryExecute(
@@ -61,5 +61,5 @@ cfloop(query=finishedPoll) {
 	<input hidden name="actid" value="#actid#">
 </div>
 <button class="nav-link" formaction="#request.dir#">#actname#</button>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

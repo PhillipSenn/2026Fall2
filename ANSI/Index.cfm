@@ -1,5 +1,5 @@
 <cfscript>
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 controls = [
 	'NUL Null',
 	'SOH Start of heading',
@@ -278,5 +278,5 @@ for (emptyCode in [129, 141, 143, 144, 157]) {
 	</div>
 </div>
 <button class="nav-link">#actname#</button>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

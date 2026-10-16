@@ -2,7 +2,7 @@
 if (isDefined('form.reset')) {
 	usr('poll.reset_act',form.actid)
 }
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 </cfscript>
 
 <cfoutput query="act">
@@ -33,5 +33,5 @@ You are to reword the question, <strong>not answer it</strong>.
 	</div>
 </form>
 <button class="nav-link">#actname#</button>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

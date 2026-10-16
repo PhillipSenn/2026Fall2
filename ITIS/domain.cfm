@@ -1,7 +1,7 @@
 <cfscript>
 request.title = 'domain'
 request.progress.bar = false
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 domain = queryExecute(
 	"select * from domain order by domainname"
 )
@@ -35,5 +35,5 @@ Ducks:  Eukaryota → Animalia → Chordata → Aves → Anseriformes → Anatid
 	</div>
 </form>
 <button class="nav-link" formaction="domain.cfm">Domain</button>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

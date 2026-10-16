@@ -1,5 +1,5 @@
 <cfoutput>
-<cfinclude template="/Inc/header.cfm">
+<cfinclude template="/Inc/header6.cfm">
 <div class="card shadow">
 	<div class="card-header bg-primary-subtle">Log in</div>
 	<form method="post">
@@ -15,5 +15,5 @@
 		</div>
 	</form>
 </div>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

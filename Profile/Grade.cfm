@@ -1,5 +1,5 @@
 <cfscript>
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 include '/passwords/gmail.cfm'
 act = usr('act.where_usr')
 </cfscript>
@@ -64,6 +64,6 @@ act = usr('act.where_usr')
 	useSSL="true">
 	#str#
 </cfmail>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>
 

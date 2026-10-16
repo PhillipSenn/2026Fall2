@@ -4,7 +4,7 @@
 if (structKeyExists(form,'qid')) {
 	usr('poll.merge_q',form.qid)
 }
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 qs = exec('q.where_act',form.actid)
 q = usr('poll.unanswered',form.actid) // Includes all unanswered questions
 if (q.recordCount) {
@@ -86,5 +86,5 @@ if (q.recordCount) {
 	</form>
 </cfif>
 <button class="nav-link" formaction="#request.dir#">#actname#</button>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

@@ -1,6 +1,6 @@
 <cfscript>
 request.cache = '?cache=' & TimeFormat(now(),'Hmmss');
-include '/Inc/header.cfm';
+include '/Inc/header6.cfm';
 // Holes per row, top point through bottom point. 121 holes.
 rows = [1, 2, 3, 4, 13, 12, 11, 10, 9, 10, 11, 12, 13, 4, 3, 2, 1];
 </cfscript>
@@ -57,5 +57,5 @@ rows = [1, 2, 3, 4, 13, 12, 11, 10, 9, 10, 11, 12, 13, 4, 3, 2, 1];
 </div>
 
 <button class="nav-link">#actname#</button>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

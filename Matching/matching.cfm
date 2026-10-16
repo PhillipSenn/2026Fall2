@@ -2,7 +2,7 @@
 if (isDefined('form.reset')) {
 	usr('guess.reset_act',form.actid)
 }
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 ans = usr('ans.where_act', form.actid)
 choices = []
 guessed = {}
@@ -56,5 +56,5 @@ for (i = arrayLen(choices); i > 1; i--) {
 	</div>
 </form>
 <button class="nav-link" formaction="#request.dir#">#actname#</button>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

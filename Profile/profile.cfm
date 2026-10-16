@@ -1,5 +1,5 @@
 <cfscript>
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 if (structKeyExists(form, 'firstname')) {
 	usr('usr.update_firstname', form.firstname)
 	usr('usr.update_wordname', form.wordname)
@@ -47,5 +47,5 @@ if (!len(mark)) {
 		<input hidden name="id" value="#request.usr.id#">
 	</form>
 </div>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

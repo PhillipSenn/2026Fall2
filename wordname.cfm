@@ -1,5 +1,5 @@
 <cfscript>
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 if (structKeyExists(form, 'wordname')) {
 	usr('usr.update_wordname', form.wordname)
 	location(request.home & '?id=' & request.usr.id, false)
@@ -26,5 +26,5 @@ word = exec('word.random20')
 		<input type="hidden" name="id" value="#request.usr.id#">
 	</form>
 </div>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

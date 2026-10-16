@@ -1,7 +1,7 @@
 <cfscript>
+param form.actid=322;
 request.container = 'container-fluid';
-request.progress.bar = false;
-include '/Inc/header.cfm';
+include '/Inc/header6.cfm';
 </cfscript>
 
 <cfoutput query="act">
@@ -195,5 +195,5 @@ include '/Inc/header.cfm';
 	</div>
 </div>
 <button class="nav-link">#actname#</button>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

@@ -2,7 +2,7 @@
 if (StructKeyExists(form,'ansid')) {
 	usr('guess.merge_ans_name',[form.ansid,form.guessname])
 }
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 q = usr('guess.where_act',form.actid)
 // q left join guess
 tscore = 0
@@ -62,5 +62,5 @@ tscore = 0
 	<input hidden name="id" value="#request.usr.id#">
 </form>
 <button class="nav-link" formaction="#request.dir#">#actname#</button>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

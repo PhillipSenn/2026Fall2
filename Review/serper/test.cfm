@@ -1,5 +1,5 @@
 <cfscript>
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 </cfscript>
 
 <cfoutput>
@@ -8,5 +8,5 @@ include '/Inc/header.cfm'
 	<input name="ansname" value="the Internet of Things">
 	<button>Save</button>
 </form>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

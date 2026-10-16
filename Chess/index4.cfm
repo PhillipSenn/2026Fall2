@@ -1,5 +1,5 @@
 <cfscript>
-include '/Inc/header.cfm';
+include '/Inc/header6.cfm';
 files = ['a','b','c','d','e','f','g','h'];
 // Unicode: white ♖♘♗♕♔♙ then black ♜♞♝♛♚♟
 start = {
@@ -72,6 +72,6 @@ If they checkmate, then their progress goes to 100%"</div>
 	</div>
 </div>
 <button class="nav-link">#actname#</button>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>
 

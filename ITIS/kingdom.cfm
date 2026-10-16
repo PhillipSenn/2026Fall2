@@ -1,7 +1,7 @@
 <cfscript>
 request.title = 'kingdom'
 request.progress.bar = false
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 path = queryExecute(
 	"select domainid, domainname
 	from domain
@@ -29,5 +29,5 @@ kingdom = queryExecute(
 </form>
 <button class="nav-link" formaction="domain.cfm">Domain</button>
 <button class="nav-link" formaction="kingdom.cfm?domainid=#path.domainid#">Kingdom</button>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

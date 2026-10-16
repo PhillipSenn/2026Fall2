@@ -1,5 +1,5 @@
 ﻿<cfscript>
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 guess = queryexecute('select 
 guessid,usrid,gradeid,actid,qid,ansid,ansname,guessname
 	,earned
@@ -50,5 +50,5 @@ order by guessid desc')
 	</div>
 </div>
 <a class="nav-link" href="#request.script_name#">Guess</a>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

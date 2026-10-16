@@ -1,6 +1,6 @@
 <cfscript>
 setting showdebugoutput=false;
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 q = exec('q.where_act',form.actid)
 spaces = [
 	{id: 20, c: 1, r: 1, side: 'corner', bar: '', name: 'Free Parking', price: '', kind: 'parking', icon: 'bi-p-square-fill'}
@@ -91,4 +91,4 @@ spaces = [
 	</div>
 </div>
 
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">

@@ -1,6 +1,6 @@
 <cfscript>
 form.actid=0
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 act = usr('act.where_usr')
 </cfscript>
 
@@ -14,8 +14,8 @@ act = usr('act.where_usr')
 			<thead>
 				<tr>
 					<cfif request.usr.isAdmin>
-						<th class="text-end">Sort</th>
 						<th classs="text-center">Hide</th>
+						<th class="text-end">Sort</th>
 					</cfif>
 					<th>Chapter</th>
 					<th>Category</th>
@@ -26,8 +26,8 @@ act = usr('act.where_usr')
 			<cfloop query="act">
 				<tr data-actid="#actid#">
 					<cfif request.usr.isAdmin>
-						<td class="text-end actsort" contenteditable>#actsort#</td>
 						<td class="text-center isHidden" contenteditable>#isHidden#</td>
+						<td class="text-end actsort" contenteditable>#actsort#</td>
 					</cfif>
 					<td>#grpname#</td>
 					<td>#catname#</td>
@@ -52,5 +52,5 @@ act = usr('act.where_usr')
 	</div>
 	<input hidden name="id" value="#request.usr.id#">
 </div>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

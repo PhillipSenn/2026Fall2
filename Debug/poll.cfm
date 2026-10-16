@@ -1,5 +1,5 @@
 <cfscript>
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 guess = queryexecute('select 
 from poll
 left join grade on guess_grade=gradeid
@@ -43,5 +43,5 @@ order by pollid desc')
 	</div>
 </div>
 <button class="nav-link">Poll</a>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

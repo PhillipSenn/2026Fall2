@@ -1,5 +1,5 @@
 <cfscript>
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 usr('guess.reset_act',form.actid)
 </cfscript>
 
@@ -8,5 +8,5 @@ usr('guess.reset_act',form.actid)
     <input hidden name="actid" value="#actid#">
     <input name="id" value="#request.usr.id#">
 </form>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

@@ -1,7 +1,7 @@
 <cfscript>
 request.title = 'breed'
 request.progress.bar = false
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 path = queryExecute(
 	"select domainid,domainname
 		,kingdomid,kingdomname
@@ -81,5 +81,5 @@ if (path.speciesname == 'Canis familiaris') {
 <button class="nav-link" formaction="genus.cfm?familyid=#path.familyid#">Genus</button>
 <button class="nav-link" formaction="species.cfm?genusid=#path.genusid#">Species</button>
 <button class="nav-link" formaction="breed.cfm?speciesid=#path.speciesid#">Breed</button>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

@@ -4,7 +4,7 @@ request.container = '';
 request.body = 'rts-body';
 request.bootstrap = false;
 request.header = { css: false };
-include '/Inc/header.cfm';
+include '/Inc/header6.cfm';
 </cfscript>
 
 <section class="rts-demo" aria-label="RTS movement demo">
@@ -17,4 +17,4 @@ include '/Inc/header.cfm';
 	</div>
 </section>
 
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">

@@ -1,7 +1,7 @@
 <cfscript>
 request.title = 'class'
 request.progress.bar = false
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 path = queryExecute(
 	"select domainid, domainname, kingdomid, kingdomname, phylumid, phylumname
 	from phylum
@@ -35,5 +35,5 @@ class = queryExecute(
 <button class="nav-link" formaction="kingdom.cfm?domainid=#path.domainid#">Kingdom</button>
 <button class="nav-link" formaction="phylum.cfm?kingdomid=#path.kingdomid#">Phylum</button>
 <button class="nav-link" formaction="class.cfm?phylumid=#path.phylumid#">Class</button>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

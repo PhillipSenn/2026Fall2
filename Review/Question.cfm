@@ -2,7 +2,7 @@
 if (StructKeyExists(form,'ansid')) {
 	usr('guess.merge_ans_name',[form.ansid,form.guessname])
 }
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 q = usr('q.unanswered',form.actid)
 if (q.recordcount) {
 	ans = exec('ans.where_q',q.qid)
@@ -58,5 +58,5 @@ if (q.recordcount) {
 </form>
 <script src="/Inc/js/autosize.js"></script>
 <button class="nav-link" formaction="#request.dir#">#actname#</button>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

@@ -202,6 +202,9 @@ where q_act=@actid
 and poll_q is null
 order by qsort,qid
 go
+exec poll.unanswered '19C76747-5CF9-449C-9A52-FEF8906AD52E',292
+select * from usr
+
 create or alter proc ans.where_q
 (@qid int
 ) as

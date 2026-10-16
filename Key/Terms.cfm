@@ -1,6 +1,6 @@
 <cfscript>
 setting showdebugoutput=false;
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 qs = exec('q.where_act',form.actid) // All questions
 keyTerms = usr('poll.unanswered',form.actid) // order by qsort,qid
 unanswered = usr('poll.unanswered_keyTerms',form.actid) 
@@ -90,5 +90,5 @@ writedump(cat)
 	</cfloop>
 </div>
 <button class="nav-link" formaction="#request.dir#">#actname#</a>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

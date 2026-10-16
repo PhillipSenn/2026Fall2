@@ -1,5 +1,5 @@
 <cfscript>
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 q = usr('q.usr_act',form.actid)
 totalSeconds = 0
 firstStart = ""
@@ -68,5 +68,5 @@ lastEnd = ""
 	<input hidden name="id" value="#request.usr.id#">
 </form>
 <button class="nav-link" formaction="#request.serverdir#">#actname#</button>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

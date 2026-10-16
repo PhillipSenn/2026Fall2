@@ -4,7 +4,7 @@ request.container = 'container-fluid'
 if (isDefined('form.reset')) {
 	usr('poll.reset_act',form.actid)
 }
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 poll = usr('poll.unanswered', form.actid)
 </cfscript>
 
@@ -39,5 +39,5 @@ poll = usr('poll.unanswered', form.actid)
 <input hidden name="id" value="#request.usr.id#">
 <input hidden name="actid" value="#actid#">
 <button class="nav-link">#actname#</button>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

@@ -1,7 +1,7 @@
 <cfscript>
 request.container = 'container-fluid'
 setting showdebugoutput=false;
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 usr = queryExecute("select usrid, firstname, id from usr order by usrname")
 </cfscript>
 
@@ -22,5 +22,5 @@ usr = queryExecute("select usrid, firstname, id from usr order by usrname")
 		</ol>
 	</aside>
 </div>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

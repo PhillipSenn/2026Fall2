@@ -1,9 +1,9 @@
 <cfscript>
 usrs = exec('usrs.where_act',form.actid)
+include '/Inc/header6.cfm'
 </cfscript>
 
 <cfoutput query="act">
-<cfinclude template="/Inc/header.cfm">
 <div class="card">
     <div class="card-header">
         actid: #actid#
@@ -28,5 +28,5 @@ usrs = exec('usrs.where_act',form.actid)
     </div>
 </div>
 <button class="nav-link">Scores</button>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

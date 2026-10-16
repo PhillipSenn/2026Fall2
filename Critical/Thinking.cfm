@@ -2,7 +2,7 @@
 if (isDefined('form.pollname')) {
 	usr('poll.merge_q',[form.qid,form.pollname])
 }
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 cat = exec('cat.where_cat',act.catid)
 q = usr('poll.unanswered',form.actid)
 if (!q.recordcount) {
@@ -62,5 +62,5 @@ poll = usr('poll.start_q',[q.qid,q.qname])
 </div>
 <button class="nav-link" formaction="#request.dir#">#cat.catname#</button>
 <button class="nav-link" formaction="#request.dir#">#actname#</button>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

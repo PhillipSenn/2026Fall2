@@ -1,5 +1,5 @@
 <cfscript>
-include '/Inc/header.cfm'
+include '/Inc/header6.cfm'
 cat = exec('cat.where_cat',act.catid)
 q = exec('q.where_act',form.actid)
 </cfscript>
@@ -25,5 +25,5 @@ q = exec('q.where_act',form.actid)
 </div>
 <button class="nav-link" formaction="#request.dir#">#actname#</button>
 <button class="nav-link" formaction="#request.dir#">#cat.catname#</button>
-<cfinclude template="/Inc/footer.cfm">
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>
