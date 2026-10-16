@@ -12,6 +12,7 @@ this.serialization = {}
 this.serialization.dateTimeFormat = 'iso8601' // 2025-12-20T13:45:00Z
 
 function onRequestStart(targetPage) {
+	setting showdebugoutput=false;
 //	request.root = this.root // C:\inetpub\wwwroot\PhillipSenn\2026Fall2\
 //	cfheader(name='Content-Type', value='text/html; charset=utf-8')
 	structAppend(form,url,false)

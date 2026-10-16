@@ -63,6 +63,6 @@ ans = exec('ans.where_q',q.qid)
 		</form>
 	</div>
 </div>
-<button class="nav-link" name="actid" value="#actid#" formaction="#request.serverdir#">#actname#</button>
+<button class="nav-link" formaction="#request.serverdir#">#actname#</button>
 <cfinclude template="/Inc/footer.cfm">
 </cfoutput>

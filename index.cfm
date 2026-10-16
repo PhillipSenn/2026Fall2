@@ -1,4 +1,5 @@
 <cfscript>
+request.progress.bar = false
 include '/Inc/header.cfm'
 act = usr('act.where_usr')
 </cfscript>
@@ -6,10 +7,9 @@ act = usr('act.where_usr')
 <cfoutput>
 <form class="card">
 	<div class="card-header bg-primary-subtle">
-		
+		<button class="btn-link" formaction="toc.cfm?accordion">Table Of Contents (TOC)</button>
 	</div>
 	<div class="card-body">
-		<button class="btn-link" formaction="toc.cfm?accordion">Table Of Contents (TOC)</button>
 		<table>
 			<thead>
 				<tr>
@@ -36,7 +36,7 @@ act = usr('act.where_usr')
 					</td>
 					<td class="text-end">
 						<cfif request.usr.isAdmin>
-							<button formaction="Admin/act.cfm" name="actid" value="#actid#">
+							<button formaction="Admin/act.cfm" name="actid" value="#actid#" class="btn-outline-info">
 								#earned#
 							</button>
 						<cfelse>

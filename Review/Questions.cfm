@@ -61,6 +61,6 @@ tscore = 0
 	<input hidden name="actid" value="#form.actid#">
 	<input hidden name="id" value="#request.usr.id#">
 </form>
-<button class="nav-link" name="actid" value="#actid#" formaction="#request.dir#">#actname#</button>
+<button class="nav-link" formaction="#request.dir#">#actname#</button>
 <cfinclude template="/Inc/footer.cfm">
 </cfoutput>

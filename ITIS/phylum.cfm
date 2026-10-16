@@ -29,8 +29,8 @@ phylum = queryExecute(
 	<input hidden name="id" value="#request.usr.id#">
 	<input hidden name="actid" value="#form.actid#">
 </form>
-<button class="nav-link" name="actid" value="#actid#" formaction="domain.cfm">Domain</button>
-<button class="nav-link" name="actid" value="#actid#" formaction="kingdom.cfm?domainid=#path.domainid#">Kingdom</button>
-<button class="nav-link" name="actid" value="#actid#" formaction="phylum.cfm?kingdomid=#path.kingdomid#">Phylum</button>
+<button class="nav-link" formaction="domain.cfm">Domain</button>
+<button class="nav-link" formaction="kingdom.cfm?domainid=#path.domainid#">Kingdom</button>
+<button class="nav-link" formaction="phylum.cfm?kingdomid=#path.kingdomid#">Phylum</button>
 <cfinclude template="/Inc/footer.cfm">
 </cfoutput>

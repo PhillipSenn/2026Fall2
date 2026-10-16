@@ -100,6 +100,9 @@ writeoutput('<body class="' & request.body & '">')
 				<ul id="main-navbar" class="navbar-nav me-auto">
 				</ul>
 			</cfif>
+			<cfif structKeyExists(form,'actid')>
+				<input hidden name="actid" value="#form.actid#">
+			</cfif>
 		</form>
 	</nav>
 	<cfif isDefined('grade')>
@@ -121,7 +124,6 @@ writeoutput('<body class="' & request.body & '">')
 				</div>
 			</div>
 		</cfif>
-		<input type="hidden" name="actid" value="#form.actid#"> <!--- fetch uses actid --->
 	</cfif>
 </div>
 </cfif>

@@ -38,6 +38,6 @@ ans = exec('ans.where_q', form.qid)
 		</div>
 	</div>
 </div>
-<button class="nav-link" name="actid" value="#actid#" formaction="#request.serverdir#">#actname#</button>
+<button class="nav-link" formaction="#request.serverdir#">#actname#</button>
 <cfinclude template="/Inc/footer.cfm">
 </cfoutput>

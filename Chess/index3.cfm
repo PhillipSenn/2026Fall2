@@ -81,6 +81,6 @@ start = {
 		</form>
 	</div>
 </div>
-<button class="nav-link" name="actid" value="#actid#">#actname#</button>
+<button class="nav-link">#actname#</button>
 <cfinclude template="/Inc/footer.cfm">
 </cfoutput>

@@ -35,11 +35,11 @@ family = queryExecute(
 	<input hidden name="id" value="#request.usr.id#">
 	<input hidden name="actid" value="#form.actid#">
 </form>
-<button class="nav-link" name="actid" value="#actid#" formaction="domain.cfm">Domain</button>
-<button class="nav-link" name="actid" value="#actid#" formaction="kingdom.cfm?domainid=#path.domainid#">Kingdom</button>
-<button class="nav-link" name="actid" value="#actid#" formaction="phylum.cfm?kingdomid=#path.kingdomid#">Phylum</button>
-<button class="nav-link" name="actid" value="#actid#" formaction="class.cfm?phylumid=#path.phylumid#">Class</button>
-<button class="nav-link" name="actid" value="#actid#" formaction="ord.cfm?classid=#path.classid#">Order</button>
-<button class="nav-link" name="actid" value="#actid#" formaction="family.cfm?ordid=#path.ordid#">Family</button>
+<button class="nav-link" formaction="domain.cfm">Domain</button>
+<button class="nav-link" formaction="kingdom.cfm?domainid=#path.domainid#">Kingdom</button>
+<button class="nav-link" formaction="phylum.cfm?kingdomid=#path.kingdomid#">Phylum</button>
+<button class="nav-link" formaction="class.cfm?phylumid=#path.phylumid#">Class</button>
+<button class="nav-link" formaction="ord.cfm?classid=#path.classid#">Order</button>
+<button class="nav-link" formaction="family.cfm?ordid=#path.ordid#">Family</button>
 <cfinclude template="/Inc/footer.cfm">
 </cfoutput>

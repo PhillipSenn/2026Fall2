@@ -875,9 +875,30 @@ from usr
 left join grade on grade_usr=usrid and grade_act=@actid
 order by usrname
 go
+create or alter proc grade.add_earned
+(@id uniqueidentifier
+,@actid int
+,@points int
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+declare @gradeid int=(select gradeid from grade where grade_usr=@usrid and grade_act=@actid)
+if @gradeid is null begin
+	insert into grade(grade_usr,grade_act,earned) values(@usrid,@actid,0)
+	select @gradeid=scope_identity()
+end
+update grade set
+earned=case
+	when earned+@points > 100 then 100
+	else earned+@points
+	end
+where gradeid=@gradeid
+select earned
+from grade 
+where gradeid=@gradeid
+go
 /*
 declare @actid int=328
 execute q.merge_unicode '19C76747-5CF9-449C-9A52-FEF8906AD52E',@actid,1,'U+1F468 U+1F3FB U+200D U+2764 U+FE0F U+200D U+1F48B U+200D U+1F468 U+1F3FB'
 select * from act
-select * from usr
 */
+select * from usr

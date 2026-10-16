@@ -34,6 +34,6 @@ Ducks:  Eukaryota → Animalia → Chordata → Aves → Anseriformes → Anatid
 </pre>
 	</div>
 </form>
-<button class="nav-link" name="actid" value="#actid#" formaction="domain.cfm">Domain</button>
+<button class="nav-link" formaction="domain.cfm">Domain</button>
 <cfinclude template="/Inc/footer.cfm">
 </cfoutput>

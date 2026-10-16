@@ -130,7 +130,7 @@ function btn() {
 	$(this).removeClass('btn-outline-primary')
 		.addClass('btn-primary')
 	app.button = $(this)
-	var url = 'Poll/merge_q.cfm'
+	var url = '../Poll/merge_q.cfm'
 	var form = {}
 	form.body = new URLSearchParams()
 	form.body.set('id', app.id)

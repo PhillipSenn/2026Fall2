@@ -28,6 +28,6 @@ include '/Inc/header.cfm'
 		<input hidden name="actid" value="#actid#">
 	</div>
 </form>
-<button class="nav-link" name="actid" value="#actid#">#actname#</button>
+<button class="nav-link">#actname#</button>
 <cfinclude template="/Inc/footer.cfm">
 </cfoutput>

@@ -1,0 +1,109 @@
+main {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+
+.card:has([name="reset"]) {
+	display: none;
+}
+
+.sea {
+	position: relative;
+	flex-grow: 1;
+	min-height: 0;
+	overflow: hidden;
+	container-type: inline-size;
+}
+
+.qname {
+	position: absolute;
+	left: 100%;
+	white-space: nowrap;
+	animation-name: sail;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
+
+#qdesc {
+	flex: 1 1 auto;
+	min-width: 0;
+	height: 3em;
+	line-height: 1.5;
+	overflow: auto;
+	white-space: normal;
+}
+
+@keyframes sail {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(calc(-100cqi - 100%));
+	}
+}
+
+.launcher,
+.torpedo {
+	position: absolute;
+	width: 12px;
+	height: 28px;
+	margin-left: -6px;
+	border-radius: 8px 8px 2px 2px;
+	background: #212529;
+	z-index: 3;
+	pointer-events: none;
+}
+
+.launcher {
+	left: 50%;
+	bottom: 0;
+	transform: translateY(12px);
+}
+
+.duck {
+	display: inline-block;
+	position: relative;
+	width: 42px;
+	height: 32px;
+}
+
+.duck-body {
+	position: absolute;
+	left: 12px;
+	bottom: 1px;
+	width: 28px;
+	height: 18px;
+	background: #ffd000;
+	border-radius: 50%;
+}
+
+.duck-head {
+	position: absolute;
+	left: 4px;
+	top: 2px;
+	width: 16px;
+	height: 16px;
+	background: #ffe14a;
+	border-radius: 50%;
+}
+
+.duck-beak {
+	position: absolute;
+	left: 0;
+	top: 10px;
+	border-top: 4px solid transparent;
+	border-bottom: 4px solid transparent;
+	border-right: 9px solid #f90;
+}
+
+.duck-eye {
+	position: absolute;
+	left: 6px;
+	top: 6px;
+	width: 5px;
+	height: 5px;
+	background: #fff;
+	border-radius: 50%;
+	box-shadow: -2px 1px 0 #222;
+}
