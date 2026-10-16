@@ -1,5 +1,5 @@
 <cfscript>
-request.progress.bar = false
+form.actid=0
 include '/Inc/header.cfm'
 act = usr('act.where_usr')
 </cfscript>

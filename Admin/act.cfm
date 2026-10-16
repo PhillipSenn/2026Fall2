@@ -2,10 +2,11 @@
 usrs = exec('usrs.where_act',form.actid)
 </cfscript>
 
-<cfoutput>
+<cfoutput query="act">
 <cfinclude template="/Inc/header.cfm">
 <div class="card">
     <div class="card-header">
+        actid: #actid#
     </div>
     <div class="card-body">
         <table>
