@@ -10,7 +10,7 @@ word = exec('word.random20')
 
 <cfoutput>
 <div class="card shadow">
-	<div class="card-header bg-primary-subtle">
+	<div class="card-header bg-subtle-primary">
 		Choose a password.
 	</div>
 	<form>

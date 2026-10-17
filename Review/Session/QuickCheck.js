@@ -1,13 +1,21 @@
-﻿var url = 'groq.cfm'
-var form = {}
-form.body = new URLSearchParams()
-form.body.set('id', app.id)
-form.body.set('qname','Subject: ' + $('#catname').text() + '. Question: ' + $('#qname').text())
+﻿$('#answer').on('toggle', askGroq)
 
-fetch(url,form)
-	.then(text_done)
-	.then(sendToWikipedia)
-	.catch(caught(url))
+function askGroq(event) {
+	if (!event.target.open) {
+		return
+	}
+	$('#answer').off('toggle', askGroq)
+	var url = 'groq.cfm'
+	var form = {}
+	form.body = new URLSearchParams()
+	form.body.set('id', app.id)
+	form.body.set('qname','Subject: ' + $('#catname').text() + '. Question: ' + $('#qname').text())
+
+	fetch(url,form)
+		.then(text_done)
+		.then(sendToWikipedia)
+		.catch(caught(url))
+}
 
 function sendToWikipedia(answer) {
 	if (answer) {

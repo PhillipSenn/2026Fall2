@@ -5,7 +5,7 @@ include '/Inc/header6.cfm'
 <cfoutput query="act">
 <form action="matching.cfm">
 	<div class="card">
-		<div class="card-header bg-primary-subtle">
+		<div class="card-header bg-subtle-primary">
 		</div>
 		<div class="card-body">
 			I'm trying to make this course a little better than reading a textbook, so pick a keyword on the left and it's description on the right.

@@ -50,14 +50,14 @@ if (path.speciesname == 'Canis familiaris') {
 
 <cfoutput query="act">
 <form class="card">
-	<div class="card-header bg-primary-subtle">Domain: #path.domainname#</div>
-	<div class="card-header bg-primary-subtle">Kingdom: #path.kingdomname#</div>
-	<div class="card-header bg-primary-subtle">Phylum: #path.phylumname#</div>
-	<div class="card-header bg-primary-subtle">Class: #path.classname#</div>
-	<div class="card-header bg-primary-subtle">Order: #path.ordname#</div>
-	<div class="card-header bg-primary-subtle">Family: #path.familyname#</div>
-	<div class="card-header bg-primary-subtle">Genus: #path.genusname#</div>
-	<div class="card-header bg-primary-subtle">Species: #path.speciesname#</div>
+	<div class="card-header bg-subtle-primary">Domain: #path.domainname#</div>
+	<div class="card-header bg-subtle-primary">Kingdom: #path.kingdomname#</div>
+	<div class="card-header bg-subtle-primary">Phylum: #path.phylumname#</div>
+	<div class="card-header bg-subtle-primary">Class: #path.classname#</div>
+	<div class="card-header bg-subtle-primary">Order: #path.ordname#</div>
+	<div class="card-header bg-subtle-primary">Family: #path.familyname#</div>
+	<div class="card-header bg-subtle-primary">Genus: #path.genusname#</div>
+	<div class="card-header bg-subtle-primary">Species: #path.speciesname#</div>
 	<div class="card-body">
 		<cfloop query="breed">
 			<div>

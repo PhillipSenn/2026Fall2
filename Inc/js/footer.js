@@ -83,7 +83,7 @@ function caught(url) {
 		console.log('Status:', error.status || 'unknown')
 		console.log('Message:', error.message)
 		console.log('Stack:', error.stack)
-		$('.card-header').removeClass('bg-primary-subtle')
+		$('.card-header').removeClass('bg-subtle-primary')
 			.addClass('bg-danger')
 			.text('Fetch to ' + url + ' failed: ' + error.message)
 		debugger // It could be because you're on the wrong server.

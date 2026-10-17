@@ -6,7 +6,7 @@ include '/Inc/header6.cfm'
 
 <cfoutput>
 <form class="card" action="domain.cfm">
-	<div class="card-header bg-primary-subtle">ITIS</div>
+	<div class="card-header bg-subtle-primary">ITIS</div>
 	<div class="card-body">
 		<button class="btn-link">Domain</button>
 	</div>

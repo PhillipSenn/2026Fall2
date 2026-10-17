@@ -36,7 +36,7 @@ ans = exec('ans.where_q',q.qid)
 <div class="row">
 	<div class="col-8">
 		<form class="card">
-			<div class="card-header bg-primary-subtle">
+			<div class="card-header bg-subtle-primary">
 				#q.qname#
 			</div>
 			<div class="card-body">

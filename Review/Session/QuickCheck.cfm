@@ -17,7 +17,7 @@ if (q.recordCount) {
 <cfoutput query="act">
 <cfif q.recordcount>
 	<form class="card flex-grow-1">
-		<div class="card-header bg-primary-subtle">
+		<div class="card-header bg-subtle-primary">
 			Question #qs.recordcount-q.recordCount+1#/#qs.recordCount#
 		</div>
 		<div class="card-body">
@@ -26,45 +26,39 @@ if (q.recordCount) {
 					#q.qname#
 				</div>
 				<div class="col-6">
-					<div class="accordion" id="answerAccordion">
-						<div class="accordion-item">
-							<h2 class="accordion-header">
-								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="##answer">
-									Groq's answer
-								</button>
-							</h2>
-							<div id="answer" class="accordion-collapse collapse" data-bs-parent="##answerAccordion">
-								<div class="accordion-body">
-									<div class="card">
-										<div class="card-body" id="ansname"></div>
-										<div class="card-footer">
-											<button name="qid" value="#q.qid#" class="mt-2">Save</button>
-										</div>
-										<div class="card-body" id="imgname">
-										</div>
+					<div class="accordion">
+						<details class="accordion-item" name="answers" id="answer">
+							<summary class="accordion-header">
+								Groq's answer
+								<svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m2 5 6 6 6-6"/></svg>
+							</summary>
+							<div class="accordion-body">
+								<div class="card">
+									<div class="card-body" id="ansname"></div>
+									<div class="card-footer">
+										<button name="qid" value="#q.qid#" class="mt-2">Save</button>
+									</div>
+									<div class="card-body" id="imgname">
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="accordion-item">
-							<h2 class="accordion-header">
-								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="##textbook-answer">
-									Textbook's answer
-								</button>
-							</h2>
-							<div id="textbook-answer" class="accordion-collapse collapse" data-bs-parent="##answerAccordion">
-								<div class="accordion-body">
-									<div class="card">
-										<div class="card-body">
-											#ans.ansname#
-										</div>
-										<div class="card-footer">
-											<button name="qid" value="#q.qid#" class="mt-2">Save</button>
-										</div>
+						</details>
+						<details class="accordion-item" name="answers">
+							<summary class="accordion-header">
+								Textbook's answer
+								<svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m2 5 6 6 6-6"/></svg>
+							</summary>
+							<div class="accordion-body">
+								<div class="card">
+									<div class="card-body">
+										#ans.ansname#
+									</div>
+									<div class="card-footer">
+										<button name="qid" value="#q.qid#" class="mt-2">Save</button>
 									</div>
 								</div>
 							</div>
-						</div>
+						</details>
 					</div>
 				</div>
 			</div>
@@ -75,9 +69,9 @@ if (q.recordCount) {
 	<div hidden id="catname">#cat.catname#</div>
 <cfelse>
 	<form class="card">
-		<div class="card-header bg-primary-subtle">
+		<div class="card-header bg-subtle-primary">
 			You did it!
-			<button class="float-end btn-outline-danger" name="actid" value="#actid#" formaction="reset.cfm">Reset</a>
+			<button class="float-end btn-outline theme-danger" name="actid" value="#actid#" formaction="reset.cfm">Reset</a>
 		</div>
 		<div class="card-body">
 			<button class="btn-success" formaction="#request.home#">Finished!</button>

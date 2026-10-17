@@ -16,7 +16,7 @@ start = {
 <div class="row">
 	<div class="col-8">
 		<div class="card">
-			<div class="card-header bg-primary-subtle d-flex justify-content-end align-items-center">
+			<div class="card-header bg-subtle-primary d-flex justify-content-end align-items-center">
 				<span class="d-flex gap-2">
 					<button type="button" id="flip" class="btn btn-sm btn-outline-secondary">Flip</button>
 					<button type="button" id="reset" class="btn btn-sm btn-outline-secondary">Reset</button>
@@ -59,7 +59,7 @@ start = {
 	</div>
 	<div class="col-4">
 		<form class="card h-100" action="index3.cfm">
-			<div class="card-header bg-primary-subtle">"enforce chess rules"</div>
+			<div class="card-header bg-subtle-primary">"enforce chess rules"</div>
 			<div class="card-body">
 index2 now follows chess rules. A piece can only move to a legal square, and only on that side's turn.
 <ul>

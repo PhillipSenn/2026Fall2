@@ -12,7 +12,7 @@ if (q.recordcount) {
 <cfoutput query="act">
 <form class="card">
 	<cfif q.recordcount>
-		<div class="card-header bg-primary-subtle">
+		<div class="card-header bg-subtle-primary">
 			Review Questions
 		</div>
 		<div class="card-body">
@@ -41,9 +41,9 @@ if (q.recordcount) {
 			<textarea autofocus name="guessname"></textarea>
 		</div>
 	<cfelse>
-		<div class="card-header bg-primary-subtle">
+		<div class="card-header bg-subtle-primary">
 			Review Questions
-			<button class="float-end btn-outline-danger" formaction="reset.cfm">Reset</button>
+			<button class="float-end btn-outline theme-danger" formaction="reset.cfm">Reset</button>
 		</div>
 		<div class="card-body display-1">
 			You did it!

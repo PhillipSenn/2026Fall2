@@ -8,7 +8,7 @@ q = exec('q.where_act',form.actid)
 <div class="row">
 	<div class="col-6 mx-auto">
 		<form class="card">
-			<div class="card-header bg-primary-subtle">
+			<div class="card-header bg-subtle-primary">
 				For classroom discussion
 			</div>
 		</form>

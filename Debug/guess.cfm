@@ -14,7 +14,7 @@ order by guessid desc')
 
 <cfoutput>
 <div class="card">
-	<div class="card-header bg-primary-subtle">
+	<div class="card-header bg-subtle-primary">
 	</div>
 	<div class="card-body">
 		<table>

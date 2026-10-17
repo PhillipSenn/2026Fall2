@@ -203,8 +203,8 @@ cfloop(query="qry") {
 		</div>
 	<cfelse>
 		<div class="card">
-			<div class="card-header bg-primary-subtle">
-				<button formaction="../reset.cfm" class="btn-outline-danger float-end btn-sm">Reset</button>
+			<div class="card-header bg-subtle-primary">
+				<button formaction="../reset.cfm" class="btn-outline theme-danger float-end btn-sm">Reset</button>
 			</div>
 			<div class="card-body">
 				<table>

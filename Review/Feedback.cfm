@@ -8,7 +8,7 @@ ans = exec('ans.where_q',form.qid)
 <cfoutput query="act">
 <form action="Questions.cfm">
 	<div class="card">
-		<div class="card-header bg-primary-subtle">
+		<div class="card-header bg-subtle-primary">
 			#q.qname#
 		</div>
 		<div class="card-body">

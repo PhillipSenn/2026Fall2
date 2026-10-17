@@ -5,7 +5,7 @@ include '/Inc/header6.cfm'
 <cfoutput query="act">
 <form action="blank.cfm">
 	<div class="card">
-		<div class="card-header bg-primary-subtle">
+		<div class="card-header bg-subtle-primary">
 		</div>
 		<div class="card-body">
 			Fill-in-the-blank

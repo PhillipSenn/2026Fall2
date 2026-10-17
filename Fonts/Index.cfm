@@ -77,7 +77,7 @@ function cssGeneric(category) {
 	<button class="home nav-link" formaction="#request.home#">Home</button>
 </cfif>
 <form class="card">
-	<div class="card-header bg-primary-subtle">
+	<div class="card-header bg-subtle-primary">
 		Which font do you want as your default?
 	</div>
 	<div class="card-body">

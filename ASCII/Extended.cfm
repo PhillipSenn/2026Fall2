@@ -301,7 +301,7 @@ for (code = 0; code <= 255; code++) {
 
 <cfoutput query="act">
 <div class="card">
-	<div class="card-header bg-primary-subtle">
+	<div class="card-header bg-subtle-primary">
 		Extended ASCII
 	</div>
 	<div class="card-body">

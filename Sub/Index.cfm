@@ -11,7 +11,7 @@ poll = usr('poll.unanswered', form.actid)
 <cfoutput query="act">
 <div class="card" data-earned="#grade.earned#">
 	<form class="card-header">
-		<button name="reset" class="btn-outline-danger">Reset</button>
+		<button name="reset" class="btn-outline theme-danger">Reset</button>
 		<input hidden name="id" value="#request.usr.id#">
 		<input hidden name="actid" value="#actid#">
 	</form>

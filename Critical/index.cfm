@@ -8,10 +8,10 @@ include '/Inc/header6.cfm'
 <cfoutput query="act">
 <form>
 	<div class="card">
-		<div class="card-header bg-primary-subtle">
+		<div class="card-header bg-subtle-primary">
 You are to reword the question, <strong>not answer it</strong>.
 			<cfif grade.earned ge 100>
-				<button name="reset" class="float-end btn-outline-danger">Reset</a>
+				<button name="reset" class="float-end btn-outline theme-danger">Reset</a>
 			</cfif>
 		</div>
 		<div class="card-body">
