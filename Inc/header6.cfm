@@ -6,7 +6,7 @@
 <cfscript>
 param request.cache='';
 param request.cache = '?cache=' & TimeFormat(now(),'Hmmss');
-param request.container = 'container';
+param request.container = 'md:container';
 param request.title = 'CSC175';
 param request.ico = 'https://www.lr.edu/sites/default/files/favicon.ico';
 param request.top = 'sticky-top';

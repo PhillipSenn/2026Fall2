@@ -1,7 +1,7 @@
 ﻿component {
 this.name = 'lr2026Fall2'
 this.datasource = 'lr2026Fall2'
-//this.sessionmanagement = false
+this.sessionmanagement = true
 this.tag.location.addtoken = false
 this.nullSupport = true
 
@@ -15,7 +15,9 @@ function onRequestStart(targetPage) {
 	setting showdebugoutput=false;
 	structAppend(form,url,false)
 	request.home = '/2026Fall2/' // Trailing slash so that everywhere it's used we don't need a slash
-	include '/server.cfm'
+	if (!structKeyExists(form, 'id') && structKeyExists(session, 'id')) {
+		form.id = session.id
+	}
 	if (structKeyExists(form,'id') and len(form.id) == 36 
 		and Mid(form.id,9,1) == '-'
 		and Mid(form.id,14,1) == '-'
@@ -26,10 +28,12 @@ function onRequestStart(targetPage) {
 			cfprocresult(name='request.usr')
 		}
 		if (!request.usr.recordcount) {
+			structDelete(session, 'id')
 			setting showdebugoutput=false;
 			writeoutput("Invalid user")
 			return false
 		}
+		session.id = form.id
 	}
 	request.cginame = getPageContext().getRequest().getServletPath()
 	request.dir = getDirectoryFromPath(request.cgiName)
@@ -45,6 +49,7 @@ function onRequestStart(targetPage) {
 				cfprocresult(name='loginUser')
 			}
 			if (loginUser.recordCount) {
+				session.id = loginUser.id
 				loginUrl = cgi.script_name & '?id=' & loginUser.id
 				if (len(cgi.query_string)) {
 					loginUrl &= '&' & cgi.query_string

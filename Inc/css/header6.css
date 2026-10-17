@@ -79,7 +79,8 @@ table.cfdebug {
 	font-family: consolas;
 }
 .navbar-brand {
-	color: #a31f34
+	color: #a31f34;
+	font-size: inherit;
 }
 .card-header:not(.d-flex) {
 	display: block;
