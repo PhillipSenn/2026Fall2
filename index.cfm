@@ -46,7 +46,7 @@ for (band = 1; band <= 10; band++) {
 						<td>#grpname#</td>
 						<td>#catname#</td>
 						<td>
-							<button name="actid" formaction="#actlink#" class="btn-link" value="#actid#">#actname#</button>
+							<a href="#actlink#?actid=#actid#">#actname#</a>
 						</td>
 						<td class="text-end">
 							<cfif request.usr.isAdmin>
@@ -104,7 +104,7 @@ for (band = 1; band <= 10; band++) {
 									<td>#grpname#</td>
 									<td>#catname#</td>
 									<td>
-										<button name="actid" formaction="#actlink#" class="btn-link" value="#actid#">#actname#</button>
+										<a href="#actlink#?actid=#actid#">#actname#</a>
 									</td>
 									<td class="text-end">
 										<cfif request.usr.isAdmin>

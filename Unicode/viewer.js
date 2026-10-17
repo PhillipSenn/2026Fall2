@@ -6,32 +6,31 @@ var TONES = [0, 0x1F3FB, 0x1F3FC, 0x1F3FD, 0x1F3FE, 0x1F3FF]
 var GRID_MAX = 1024
 var WINDOW = 128
 var TEXT = [
-	'text-primary',
-	'text-secondary',
-	'text-success',
-	'text-info',
-	'text-warning',
-	'text-danger',
-	'text-light',
-	'text-dark',
-	'text-black',
-	'text-white',
-	'text-body',
-	'text-muted',
-	'text-black-50',
-	'text-white-50',
-	'text-body-secondary',
-	'text-body-tertiary',
-	'text-body-emphasis',
-	'text-reset',
-	'text-primary-emphasis',
-	'text-secondary-emphasis',
-	'text-success-emphasis',
-	'text-info-emphasis',
-	'text-warning-emphasis',
-	'text-danger-emphasis',
-	'text-light-emphasis',
-	'text-dark-emphasis'
+	'fg-primary',
+	'fg-accent',
+	'fg-secondary',
+	'fg-success',
+	'fg-info',
+	'fg-warning',
+	'fg-danger',
+	'fg-inverse',
+	'fg-black',
+	'fg-white',
+	'fg-body',
+	'fg-1',
+	'fg-2',
+	'fg-3',
+	'fg-4',
+	'fg-bg',
+	'fg-reset',
+	'fg-emphasis-primary',
+	'fg-emphasis-accent',
+	'fg-emphasis-secondary',
+	'fg-emphasis-success',
+	'fg-emphasis-info',
+	'fg-emphasis-warning',
+	'fg-emphasis-danger',
+	'fg-emphasis-inverse'
 ]
 
 var CATEGORY = {
@@ -467,11 +466,13 @@ pgm.click_cell = function(response) {
 }
 
 pgm.hover_tip = function(element) {
+	if (typeof bootstrap === 'undefined' || !bootstrap.Tooltip) return element
 	new bootstrap.Tooltip(element, {trigger: 'hover'})
 	return element
 }
 
 pgm.clear_tips = function(holder) {
+	if (typeof bootstrap === 'undefined' || !bootstrap.Tooltip) return holder
 	holder.find('[title], [data-bs-original-title]').each(dispose_tip)
 	return holder
 	function dispose_tip() {
@@ -870,7 +871,7 @@ pgm.apply_rotation = function() {
 	dial.css('--degrees', app.degrees + 'deg')
 	dial.attr('aria-valuenow', app.degrees)
 	dial.attr('data-bs-original-title', label)
-	tip = bootstrap.Tooltip.getInstance(dial[0])
+	tip = typeof bootstrap !== 'undefined' && bootstrap.Tooltip ? bootstrap.Tooltip.getInstance(dial[0]) : null
 	if (tip && tip.tip) {
 		inner = tip.tip.querySelector('.tooltip-inner')
 		if (inner) inner.textContent = label

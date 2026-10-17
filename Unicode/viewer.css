@@ -200,12 +200,11 @@ body.is-rotating {
 	color: #fff !important;
 }
 
-#colors button.text-warning.active span,
-#colors button.text-light.active span,
-#colors button.text-white.active span,
-#colors button.text-white-50.active span,
-#colors button.text-info.active span {
-	color: #333 !important;
+#colors button.fg-warning.active span,
+#colors button.fg-info.active span,
+#colors button.fg-white.active span,
+#colors button.fg-bg.active span {
+	color: var(--bs-gray-900) !important;
 }
 
 #grid {

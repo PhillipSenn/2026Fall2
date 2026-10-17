@@ -68,6 +68,10 @@ uses = [
 	'Separated one record from the next.',
 	'Separated fields inside a record.'
 ]
+function binary(code) {
+	var bits = formatBaseN(code, 2)
+	return repeatString('0', 7 - len(bits)) & bits
+}
 </cfscript>
 
 <cfoutput query="act">
@@ -81,6 +85,7 @@ uses = [
 		<table class="table table-sm table-striped mb-0">
 			<thead>
 				<tr>
+					<th>Binary</th>
 					<th class="text-end">Decimal</th>
 					<th>Character</th>
 					<th>Description</th>
@@ -91,6 +96,7 @@ uses = [
 				<cfloop from="0" to="31" index="code">
 					<cfset control = controls[code + 1]>
 					<tr>
+						<td class="font-monospace">#binary(code)#</td>
 						<td class="text-end">#code#</td>
 						<td>#listFirst(control, " ")#</td>
 						<td>#listRest(control, " ")#</td>
@@ -99,6 +105,7 @@ uses = [
 				</cfloop>
 				<cfloop from="32" to="126" index="code">
 					<tr>
+						<td class="font-monospace">#binary(code)#</td>
 						<td class="text-end">#code#</td>
 						<td><cfif code eq 32>space<cfelse>#encodeForHTML(chr(code))#</cfif></td>
 						<td></td>
@@ -106,6 +113,7 @@ uses = [
 					</tr>
 				</cfloop>
 				<tr>
+					<td class="font-monospace">#binary(127)#</td>
 					<td class="text-end">127</td>
 					<td>DEL</td>
 					<td>Delete</td>

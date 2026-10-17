@@ -211,6 +211,10 @@ extraUse[173] = 'Marks a place where a word may be split at the end of a line.'
 for (emptyCode in [129, 141, 143, 144, 157]) {
 	extraUse[emptyCode] = 'This number was left empty in the Windows ANSI set.'
 }
+function binary(code) {
+	var bits = formatBaseN(code, 2)
+	return repeatString('0', 8 - len(bits)) & bits
+}
 </cfscript>
 
 <cfoutput query="act">
@@ -225,6 +229,7 @@ for (emptyCode in [129, 141, 143, 144, 157]) {
 		<table class="table table-sm table-striped mb-0">
 			<thead>
 				<tr>
+					<th>Binary</th>
 					<th class="text-end">Decimal</th>
 					<th class="text-center">Character</th>
 					<th>Description</th>
@@ -235,6 +240,7 @@ for (emptyCode in [129, 141, 143, 144, 157]) {
 				<cfloop from="0" to="31" index="code">
 					<cfset control = controls[code + 1]>
 					<tr>
+						<td class="font-monospace">#binary(code)#</td>
 						<td class="text-end">#code#</td>
 						<td class="text-center">#listFirst(control, " ")#</td>
 						<td>#listRest(control, " ")#</td>
@@ -243,6 +249,7 @@ for (emptyCode in [129, 141, 143, 144, 157]) {
 				</cfloop>
 				<cfloop from="32" to="126" index="code">
 					<tr>
+						<td class="font-monospace">#binary(code)#</td>
 						<td class="text-end">#code#</td>
 						<td class="text-center"><cfif code eq 32>space<cfelse>#encodeForHTML(chr(code))#</cfif></td>
 						<td></td>
@@ -250,6 +257,7 @@ for (emptyCode in [129, 141, 143, 144, 157]) {
 					</tr>
 				</cfloop>
 				<tr>
+					<td class="font-monospace">#binary(127)#</td>
 					<td class="text-end">127</td>
 					<td class="text-center">DEL</td>
 					<td>Delete</td>
@@ -259,6 +267,7 @@ for (emptyCode in [129, 141, 143, 144, 157]) {
 					<cfset point = code gte 160 ? code : points[code - 127]>
 					<cfset wiki = point ? "https://en.wikipedia.org/wiki/" & encodeForURL(chr(point)) : "">
 					<tr>
+						<td class="font-monospace">#binary(code)#</td>
 						<td class="text-end"><cfif point><a href="#wiki#">#code#</a><cfelse>#code#</cfif></td>
 						<td class="text-center">
 							<cfif code eq 160>

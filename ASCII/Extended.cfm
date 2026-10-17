@@ -297,6 +297,10 @@ for (code = 0; code <= 255; code++) {
 		wiki: wiki
 	})
 }
+function binary(code) {
+	var bits = formatBaseN(code, 2)
+	return repeatString('0', 8 - len(bits)) & bits
+}
 </cfscript>
 
 <cfoutput query="act">
@@ -309,6 +313,7 @@ for (code = 0; code <= 255; code++) {
 		<table class="table table-sm table-striped mb-0">
 			<thead>
 				<tr>
+					<th>Binary</th>
 					<th class="text-end">Decimal</th>
 					<th class="text-center">Character</th>
 					<th>Description</th>
@@ -318,6 +323,7 @@ for (code = 0; code <= 255; code++) {
 			<tbody>
 				<cfloop query="extended">
 					<tr>
+						<td class="font-monospace">#binary(code)#</td>
 						<td class="text-end"><a href="#wiki#">#code#</a></td>
 						<td class="text-center">#encodeForHTML(glyph)#</td>
 						<td>#description#</td>
