@@ -14,7 +14,7 @@ include '/Inc/header6.cfm'
 				<cfif StructKeyExists(url,'accordion')>
 					<button formaction="toc.cfm?accordion">
 					Accordion View
-					</div>
+					</button>
 					<button formaction="toc.cfm" class="btn-outline theme-secondary">
 					List View
 					</button>
@@ -22,7 +22,7 @@ include '/Inc/header6.cfm'
 					<button formaction="toc.cfm?accordion" class="btn-outline theme-secondary">
 					Accordion View
 					</button>
-					<button formaction="toc.cfm?">
+					<button formaction="toc.cfm">
 					List View
 					</button>
 				</cfif>
@@ -3941,5 +3941,5 @@ include '/Inc/header6.cfm'
 	<input hidden name="id" value="#request.usr.id#">
 </form>
 <button class="nav-link">Table Of Contents</button>
-<cfinclude template="/Inc/footer6.cfm"></li>
+<cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

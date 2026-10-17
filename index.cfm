@@ -24,6 +24,7 @@ for (band = 1; band <= 10; band++) {
 	</div>
 	<div class="card-body">
 		<cfif listView>
+			<a href="toc.cfm?accordion">Table Of Contents (TOC)</a>
 			<table>
 				<thead>
 					<tr>
