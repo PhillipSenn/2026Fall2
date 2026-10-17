@@ -98,10 +98,24 @@ if ($('textarea').length) {
 	}
 }
 
-pgm.tooltip = function(element) {
-	new bootstrap.Tooltip(element)
+pgm.tooltip = function(element, options) {
+	function create_tip() {
+		if (!element.isConnected) return element
+		bootstrap.Tooltip.getOrCreateInstance(element, options || {})
+		return element
+	}
+	if (window.bootstrap && bootstrap.Tooltip) return create_tip()
+	document.addEventListener('bootstrap-ready', create_tip)
+	return element
 }
-document.querySelectorAll('[title]').forEach(pgm.tooltip)
+
+function each_title(element) {
+	pgm.tooltip(element)
+}
+function init_tooltips() {
+	document.querySelectorAll('[title]').forEach(each_title)
+}
+document.addEventListener('bootstrap-ready', init_tooltips)
 
 //var end = performance.now()
 //console.log((performance.now() - app.start).toFixed(0) + 'ms')

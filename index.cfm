@@ -18,7 +18,7 @@ for (band = 1; band <= 10; band++) {
 <form class="card">
 	<div class="card-header">
 		<div class="btn-group" role="group" aria-label="View">
-			<button name="view" value="accordion" formaction="index.cfm"<cfif listView> class="btn-outline theme-secondary"</cfif>>Accordion</button>
+			<button name="view" value="accordion" formaction="index.cfm"<cfif listView> class="btn-outline theme-secondary"</cfif>>Focused</button>
 			<button name="view" value="list" formaction="index.cfm?view=list"<cfif !listView> class="btn-outline theme-secondary"</cfif>>List View</button>
 		</div>
 	</div>

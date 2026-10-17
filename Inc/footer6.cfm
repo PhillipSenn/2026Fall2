@@ -6,7 +6,7 @@ writeOutput('</main>' & chr(10))
 param request.bootstrap = true;
 if (request.bootstrap) {
 	//getbootstrap.com/docs/6.0/guides/quickstart/
-	writeoutput('<script type="module" src="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/js/bootstrap.bundle.js"></script>' & chr(10))
+	writeoutput('<script type="module" src="' & request.home & 'Inc/js/bootstrap.js?cache=' & TimeFormat(now(),'Hmmss') & '"></script>' & chr(10))
 }
 param request.jQuery = '';
 if (request.jQuery == 'none') {

@@ -5,33 +5,35 @@ var TONES = [0, 0x1F3FB, 0x1F3FC, 0x1F3FD, 0x1F3FE, 0x1F3FF]
 
 var GRID_MAX = 1024
 var WINDOW = 128
-var TEXT = [
-	'fg-primary',
-	'fg-accent',
-	'fg-secondary',
-	'fg-success',
-	'fg-info',
-	'fg-warning',
-	'fg-danger',
-	'fg-inverse',
-	'fg-black',
-	'fg-white',
-	'fg-body',
-	'fg-1',
-	'fg-2',
-	'fg-3',
-	'fg-4',
-	'fg-bg',
-	'fg-reset',
-	'fg-emphasis-primary',
-	'fg-emphasis-accent',
-	'fg-emphasis-secondary',
-	'fg-emphasis-success',
-	'fg-emphasis-info',
-	'fg-emphasis-warning',
-	'fg-emphasis-danger',
-	'fg-emphasis-inverse'
+var THEMES = [
+	'primary',
+	'accent',
+	'secondary',
+	'success',
+	'info',
+	'warning',
+	'danger',
+	'inverse',
+	'black',
+	'white',
+	'body',
+	'1',
+	'2',
+	'3',
+	'4'
 ]
+var THEME_CONTRAST = {
+	primary: 'fg-contrast-primary',
+	accent: 'fg-contrast-accent',
+	secondary: 'fg-contrast-secondary',
+	success: 'fg-contrast-success',
+	info: 'fg-contrast-info',
+	warning: 'fg-contrast-warning',
+	danger: 'fg-contrast-danger',
+	inverse: 'fg-contrast-inverse',
+	black: 'fg-white',
+	white: 'fg-black'
+}
 
 var CATEGORY = {
 	Lu: 'Letter, uppercase',
@@ -466,9 +468,7 @@ pgm.click_cell = function(response) {
 }
 
 pgm.hover_tip = function(element) {
-	if (typeof bootstrap === 'undefined' || !bootstrap.Tooltip) return element
-	new bootstrap.Tooltip(element, {trigger: 'hover'})
-	return element
+	return pgm.tooltip(element, {trigger: 'hover'})
 }
 
 pgm.clear_tips = function(holder) {
@@ -515,26 +515,41 @@ pgm.show_earned = function(response) {
 pgm.build_colors = function() {
 	var holder = $('#colors')
 	var i
-	var button
 	holder.empty()
-	for (i = 0; i < TEXT.length; i = i + 1) {
-		button = $('<button type="button"></button>')
-		button.addClass(TEXT[i])
-		button.attr('data-text', TEXT[i])
-		$('<span></span>').text('.' + TEXT[i]).appendTo(button)
-		holder.append(button)
+	for (i = 0; i < THEMES.length; i = i + 1) {
+		holder.append(pgm.theme_group(THEMES[i]))
 	}
-	return TEXT.length
+	return THEMES.length
+}
+
+pgm.theme_group = function(theme) {
+	var row = $('<div class="color-theme"></div>')
+	var group = $('<div class="btn-group btn-group-sm" role="group"></div>')
+	var fg = $('<button type="button" class="btn btn-sm">fg</button>')
+	var bg = $('<button type="button" class="btn btn-sm">bg</button>')
+	row.append($('<span class="color-theme-name"></span>').text(theme))
+	group.attr('aria-label', theme)
+	fg.addClass('fg-' + theme)
+		.attr('data-kind', 'fg')
+		.attr('data-class', 'fg-' + theme)
+	bg.addClass('bg-' + theme)
+		.attr('data-kind', 'bg')
+		.attr('data-class', 'bg-' + theme)
+	if (THEME_CONTRAST[theme]) bg.addClass(THEME_CONTRAST[theme])
+	group.append(fg, bg)
+	row.append(group)
+	return row
 }
 
 pgm.click_color = function(response) {
 	var button = $(this)
-	var name = button.attr('data-text')
+	var kind = button.attr('data-kind')
+	var name = button.attr('data-class')
 	var rendered = $('#rendered')
 	var i
-	$('#colors button').removeClass('active')
+	$('#colors button[data-kind="' + kind + '"]').removeClass('active')
 	button.addClass('active')
-	for (i = 0; i < TEXT.length; i = i + 1) rendered.removeClass(TEXT[i])
+	for (i = 0; i < THEMES.length; i = i + 1) rendered.removeClass(kind + '-' + THEMES[i])
 	rendered.addClass(name)
 	return name
 }
@@ -636,6 +651,7 @@ pgm.build_blocks = function() {
 		button.attr('title', 'U+' + pgm.hex(block.start, 4) + '–U+' + pgm.hex(block.end, 4))
 		button.text(block.name)
 		holder.append(button)
+		pgm.tooltip(button[0])
 	}
 	if (app.gridStart >= 0) pgm.mark_blocks(app.gridStart)
 	if (app.search) pgm.mark_block_matches()
@@ -865,17 +881,13 @@ pgm.apply_rotation = function() {
 	var dial = $('#rotate')
 	var label = app.degrees + ' degrees'
 	var tip
-	var inner
 	var shift = app.glyphShift
 	$('#rendered').css('transform', 'rotate(' + app.degrees + 'deg) translate(' + shift.x + 'px, ' + shift.y + 'px)')
 	dial.css('--degrees', app.degrees + 'deg')
 	dial.attr('aria-valuenow', app.degrees)
 	dial.attr('data-bs-original-title', label)
 	tip = typeof bootstrap !== 'undefined' && bootstrap.Tooltip ? bootstrap.Tooltip.getInstance(dial[0]) : null
-	if (tip && tip.tip) {
-		inner = tip.tip.querySelector('.tooltip-inner')
-		if (inner) inner.textContent = label
-	}
+	if (tip) tip.setContent({'.tooltip-inner': label})
 	return app.degrees
 }
 

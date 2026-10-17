@@ -214,10 +214,10 @@ fetch('https://cdn.jsdelivr.net/npm/unicode-emoji-json@0.8.0/data-by-emoji.json'
 	})
 
 function initTooltips() {
-    var tooltipList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-    for (var i = 0; i < tooltipList.length; i = i + 1) {
-        new bootstrap.Tooltip(tooltipList[i])
-    }
+	dom.container.find('[title]').each(each_tooltip)
+	function each_tooltip() {
+		pgm.tooltip(this)
+	}
 }
 
 
