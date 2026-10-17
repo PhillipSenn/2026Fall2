@@ -2,6 +2,7 @@
 form.actid=0
 include '/Inc/header6.cfm'
 act = usr('act.where_usr')
+listView = structKeyExists(form, 'view') && form.view == 'list'
 sections = [{title: 'New', low: 0, high: 9999, open: false, blank: true}]
 for (band = 1; band <= 10; band++) {
 	arrayAppend(sections, {
@@ -15,7 +16,51 @@ for (band = 1; band <= 10; band++) {
 
 <cfoutput>
 <form class="card">
+	<div class="card-header">
+		<div class="btn-group" role="group" aria-label="View">
+			<button name="view" value="accordion" formaction="index.cfm"<cfif listView> class="btn-outline-secondary"</cfif>>Accordion</button>
+			<button name="view" value="list" formaction="index.cfm?view=list"<cfif !listView> class="btn-outline-secondary"</cfif>>List View</button>
+		</div>
+	</div>
 	<div class="card-body">
+		<cfif listView>
+			<table>
+				<thead>
+					<tr>
+						<cfif request.usr.isAdmin>
+							<th classs="text-center">Hide</th>
+							<th class="text-end">Sort</th>
+						</cfif>
+						<th>Chapter</th>
+						<th>Category</th>
+						<th>Assignment</th>
+						<th class="text-end">Earned</th>
+					</tr>
+				</thead>
+				<cfloop query="act">
+					<tr data-actid="#actid#">
+						<cfif request.usr.isAdmin>
+							<td class="text-center isHidden" contenteditable>#isHidden#</td>
+							<td class="text-end actsort" contenteditable>#actsort#</td>
+						</cfif>
+						<td>#grpname#</td>
+						<td>#catname#</td>
+						<td>
+							<button name="actid" formaction="#actlink#" class="btn-link" value="#actid#">#actname#</button>
+						</td>
+						<td class="text-end">
+							<cfif request.usr.isAdmin>
+								<button formaction="Admin/act.cfm" name="actid" value="#actid#" class="btn-outline-info">
+									#earned#
+								</button>
+							<cfelse>
+								#earned#
+							</cfif>
+						</td>
+					</tr>
+				</cfloop>
+			</table>
+		<cfelse>
 		<div class="accordion">
 			<cfloop array="#sections#" index="section">
 				<cfset low = section.low>
@@ -77,6 +122,7 @@ for (band = 1; band <= 10; band++) {
 				</details>
 			</cfloop>
 		</div>
+		</cfif>
 	</div>
 	<div class="card-footer">
 		<button formaction="Debug/guess.cfm">Guess</button>
