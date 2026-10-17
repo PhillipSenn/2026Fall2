@@ -37,8 +37,8 @@ function gradeLevel() {
 function setSave(save) {
 	$('#save')
 		.prop('disabled', !save)
-		.toggleClass('btn-primary', save)
-		.toggleClass('btn-outline-primary', !save)
+		.toggleClass('btn-solid', save)
+		.toggleClass('btn-outline', !save)
 }
 
 function canSave(grade, meaningPreserved) {

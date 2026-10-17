@@ -20,9 +20,9 @@ label {
 /*
 https://charliepark.org/bootstrap_buttons/
 */
-.CharliePark.btn-primary,
-.CharliePark.btn-outline-primary:hover,
-.CharliePark.btn-outline-primary.active {
+.CharliePark.btn-solid.theme-primary,
+.CharliePark.btn-outline.theme-primary:hover,
+.CharliePark.btn-outline.theme-primary.active {
 	--bs-btn-color: #333;
 	--bs-btn-border-color: #5493a4;
 	--bs-btn-hover-color: #333;

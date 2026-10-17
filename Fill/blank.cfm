@@ -56,7 +56,7 @@ ans = exec('ans.where_q',q.qid)
 				</cfloop>
 			</div>
 			<div class="card-footer">
-				<button name="qid" value="#q.qid#" class="btn-outline-success" #disabled#>Next</button>
+				<button name="qid" value="#q.qid#" class="btn-outline theme-success" #disabled#>Next</button>
 			</div>
 			<input hidden name="actid" value="#form.actid#">
 			<input hidden name="id" value="#request.usr.id#">

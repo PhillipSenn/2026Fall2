@@ -74,7 +74,7 @@ if (q.recordCount) {
 			<button class="float-end btn-outline theme-danger" name="actid" value="#actid#" formaction="reset.cfm">Reset</a>
 		</div>
 		<div class="card-body">
-			<button class="btn-success" formaction="#request.home#">Finished!</button>
+			<button class="btn-solid theme-success" formaction="#request.home#">Finished!</button>
 		</div>
 		<input hidden name="id" value="#request.usr.id#">
 	</form>

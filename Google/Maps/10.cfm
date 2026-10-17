@@ -15,7 +15,7 @@ latlng = exec('latlng.where_act',url.actid)
                 Phillip departed Egypt for United States
             </div>
         </div>
-        <button class="btn btn-outline-light" id="toggleSidebar">
+        <button class="btn btn-outline theme-inverse fg-white border-white" id="toggleSidebar">
             Info
         </button>
     </div>

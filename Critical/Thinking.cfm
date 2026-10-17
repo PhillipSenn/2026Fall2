@@ -50,8 +50,8 @@ poll = usr('poll.start_q',[q.qid,q.qname])
 				</div>
 			</div>
 			<div class="card-footer">
-				<button type="button" id="askAI" class="btn btn-outline-secondary me-2" disabled>Ask AI</button>
-				<button id="save" class="btn btn-outline-primary" disabled>Save</button>
+				<button type="button" id="askAI" class="btn btn-outline theme-secondary me-2" disabled>Ask AI</button>
+				<button id="save" class="btn btn-outline theme-primary" disabled>Save</button>
 			</div>
 			<input hidden name="actid" value="#actid#">
 			<input hidden name="id" value="#request.usr.id#">

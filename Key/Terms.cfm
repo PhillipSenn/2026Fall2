@@ -45,7 +45,7 @@ writedump(cat)
 				<div class="col-4">
 					<cfloop query="keyTerms">
 						<!--- This is the list of key terms --->
-						<button type="button" class="btn-outline-primary d-block mb-2 keyTerm#qid#" value="#qid#">#qname#</button>
+						<button type="button" class="btn-outline theme-primary d-block mb-2 keyTerm#qid#" value="#qid#">#qname#</button>
 					</cfloop>
 				</div>
 			</div>

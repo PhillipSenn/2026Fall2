@@ -16,7 +16,7 @@ include '/Inc/header6.cfm'
             </div>
         </div>
 
-        <button class="btn btn-outline-light" id="toggleSidebar">
+        <button class="btn btn-outline theme-inverse fg-white border-white" id="toggleSidebar">
             Info
         </button>
 

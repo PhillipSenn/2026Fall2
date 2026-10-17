@@ -19,22 +19,25 @@ cfloop(query=finishedPoll) {
 
 <cfoutput query="act">
 <div class="card">
-	<div class="card-header bg-subtle-primary">
-	</div>
+	<form class="card-header bg-subtle-primary">
+		<button class="float-end btn-solid theme-primary">Pass</button>
+		<input hidden name="id" value="#request.usr.id#">
+		<input hidden name="actid" value="#actid#">
+	</form>
 	<div class="card-body">
 		<div class="row">
 			<div id="key-term-prompt" class="col-8">
 				<div id="qid"></div>
-				<figure>
+				<figure class="border ps-4">
 					<a id="wikipedia-link" target="_blank">
 						<img id="wikipedia" class="img-thumbnail mt-3 d-none" alt="">
 					</a>
-					<figcaption></figcaption>
+					<figcaption class="small mt-4"></figcaption>
 				</figure>
 			</div>
 			<div class="col-4">
 				<cfloop query="q">
-					<div><button class="btn-outline-primary<cfif structKeyExists(finished, qid)> d-none</cfif>" value="#qid#">#qname#</button></div>
+					<div class="mb-2"><button class="btn-outline theme-primary<cfif structKeyExists(finished, qid)> d-none</cfif>" value="#qid#">#qname#</button></div>
 				</cfloop>
 			</div>
 		</div>
@@ -57,8 +60,6 @@ cfloop(query=finishedPoll) {
 			</tbody>
 		</table>
 	</div>
-	<input hidden name="id" value="#request.usr.id#">
-	<input hidden name="actid" value="#actid#">
 </div>
 <button class="nav-link" formaction="#request.dir#">#actname#</button>
 <cfinclude template="/Inc/footer6.cfm">

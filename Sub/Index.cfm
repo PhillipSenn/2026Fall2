@@ -9,6 +9,12 @@ poll = usr('poll.unanswered', form.actid)
 </cfscript>
 
 <cfoutput query="act">
+<style>
+.qname.text-danger,
+.qname.fg-danger {
+	color: var(--bs-red-600);
+}
+</style>
 <div class="card" data-earned="#grade.earned#">
 	<form class="card-header">
 		<button name="reset" class="btn-outline theme-danger">Reset</button>
@@ -23,7 +29,7 @@ poll = usr('poll.unanswered', form.actid)
 	<div class="launcher" id="launcher"></div>
 </div>
 <div class="card mt-auto sticky-bottom">
-	<div class="card-body d-flex align-items-center gap-3">
+	<div class="card-body d-flex flex-row align-items-center gap-3">
 		<div id="qdesc" class="flex-grow-1">#poll.qdesc[1]#</div>
 		<span class="qdesc-keys text-nowrap" title="Up and down arrows">
 			<i class="bi bi-arrow-up"></i>

@@ -49,7 +49,7 @@ spaces = [
 <div class="card">
 	<div class="card-header bg-subtle-primary d-flex justify-content-between align-items-center gap-2">
 		<span>Click any name to change it. Edits are saved in this browser.</span>
-		<button type="button" id="reset" class="btn btn-sm btn-outline-secondary">Reset names</button>
+		<button type="button" id="reset" class="btn btn-sm btn-outline theme-secondary">Reset names</button>
 	</div>
 	<div class="card-body">
 		<div class="board" id="board" lang="en" aria-label="LRopoly board">

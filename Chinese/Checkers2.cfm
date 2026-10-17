@@ -12,9 +12,9 @@ rows = [1, 2, 3, 4, 13, 12, 11, 10, 9, 10, 11, 12, 13, 4, 3, 2, 1];
 		<div class="card">
 			<div class="card-header bg-subtle-primary d-flex justify-content-end align-items-center">
 				<span class="d-flex gap-2">
-					<button type="button" id="end" class="btn btn-sm btn-outline-secondary" hidden>End turn</button>
-					<button type="button" id="flip" class="btn btn-sm btn-outline-secondary">Flip</button>
-					<button type="button" id="reset" class="btn btn-sm btn-outline-secondary">Reset</button>
+					<button type="button" id="end" class="btn btn-sm btn-outline theme-secondary" hidden>End turn</button>
+					<button type="button" id="flip" class="btn btn-sm btn-outline theme-secondary">Flip</button>
+					<button type="button" id="reset" class="btn btn-sm btn-outline theme-secondary">Reset</button>
 				</span>
 			</div>
 			<div class="card-body">
@@ -37,10 +37,10 @@ rows = [1, 2, 3, 4, 13, 12, 11, 10, 9, 10, 11, 12, 13, 4, 3, 2, 1];
 			<div class="card-header bg-subtle-primary">"Ask for ## of players. Implement turn based play according to chinese checkers rules."</div>
 			<div class="card-body">
 				<div class="d-flex flex-wrap gap-2" id="players">
-					<button type="button" class="btn btn-outline-secondary" data-players="2">2</button>
-					<button type="button" class="btn btn-outline-secondary" data-players="3">3</button>
-					<button type="button" class="btn btn-outline-secondary" data-players="4">4</button>
-					<button type="button" class="btn btn-outline-secondary" data-players="6">6</button>
+					<button type="button" class="btn btn-outline theme-secondary" data-players="2">2</button>
+					<button type="button" class="btn btn-outline theme-secondary" data-players="3">3</button>
+					<button type="button" class="btn btn-outline theme-secondary" data-players="4">4</button>
+					<button type="button" class="btn btn-outline theme-secondary" data-players="6">6</button>
 				</div>
 				<p class="mt-3 mb-2">Each player moves one marble into the point across the board. A turn is one step into a neighboring hole, or a chain of jumps over adjacent marbles. Jumped marbles stay on the board. A marble that has entered its opposite point stays inside that point.</p>
 				<p class="mb-0" id="setup-note">2 play from opposite points. 3 play from every other point. 4 play as two pairs of opposites. 6 use every point.</p>

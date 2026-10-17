@@ -28,7 +28,7 @@ tscore = 0
 				<cfloop query="q">
 					<tr>
 						<td class="text-center">
-							<button name="qid" value="#qid#" class="btn-outline-primary">
+							<button name="qid" value="#qid#" class="btn-outline theme-primary">
 								#currentRow#
 							</button>
 						</td>

@@ -38,35 +38,35 @@ function sameColumn(a, b) {
 function select(button) {
 	var column = button.parent()
 	column.find('button:not(:disabled)')
-		.removeClass('btn-primary')
+		.removeClass('btn-solid theme-primary')
 		.addClass(resting(column))
-	button.removeClass('btn-outline-primary btn-outline-secondary btn-danger')
-		.addClass('btn-primary')
+	button.removeClass('btn-outline theme-primary btn-outline theme-secondary btn-solid theme-danger')
+		.addClass('btn-solid theme-primary')
 	picked = button
 }
 
 function lock(button) {
 	button.prop('disabled', true)
-		.removeClass('btn-primary btn-outline-primary btn-outline-secondary btn-danger')
-		.addClass('btn-success')
+		.removeClass('btn-solid theme-primary btn-outline theme-primary btn-outline theme-secondary btn-solid theme-danger')
+		.addClass('btn-solid theme-success')
 }
 
 function flash(button) {
 	var column = button.parent()
-	button.removeClass('btn-outline-primary btn-outline-secondary')
-		.addClass('btn-danger')
+	button.removeClass('btn-outline theme-primary btn-outline theme-secondary')
+		.addClass('btn-solid theme-danger')
 	setTimeout(function () {
 		if (!button.prop('disabled')) {
-			button.removeClass('btn-danger').addClass(resting(column))
+			button.removeClass('btn-solid theme-danger').addClass(resting(column))
 		}
 	}, 600)
 }
 
 function resting(column) {
 	if (column.attr('id') === 'questions') {
-		return 'btn-outline-primary'
+		return 'btn-outline theme-primary'
 	}
-	return 'btn-outline-secondary'
+	return 'btn-outline theme-secondary'
 }
 
 function showEarned(text) {

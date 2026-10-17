@@ -373,11 +373,11 @@ pgm.render_tones = function() {
 	holder.removeAttr('hidden')
 	for (i = 0; i < TONES.length; i = i + 1) {
 		tone = TONES[i]
-		button = $('<button type="button" class="btn btn-outline-secondary"></button>')
+		button = $('<button type="button" class="btn btn-outline theme-secondary"></button>')
 		button.attr('data-tone', tone)
 		button.attr('title', pgm.character_name(tone || point))
 		button.text(tone ? pgm.safe_glyph(point) + String.fromCodePoint(tone) : pgm.safe_glyph(point))
-		if (tone === app.tone) button.removeClass('btn-outline-secondary').addClass('active btn-primary')
+		if (tone === app.tone) button.removeClass('btn-outline theme-secondary').addClass('active btn-solid theme-primary')
 		holder.append(button)
 		pgm.hover_tip(button[0])
 	}
@@ -394,8 +394,8 @@ pgm.click_tone = function(response) {
 
 pgm.mark_grid = function() {
 	var point = app.points[app.selected]
-	$('#grid button').removeClass('active btn-primary').addClass('btn-outline-secondary')
-	$('#grid button').filter(is_point).removeClass('btn-outline-secondary').addClass('active btn-primary')
+	$('#grid button').removeClass('active btn-solid theme-primary').addClass('btn-outline theme-secondary')
+	$('#grid button').filter(is_point).removeClass('btn-outline theme-secondary').addClass('active btn-solid theme-primary')
 	return point
 	function is_point() {
 		return +$(this).attr('data-point') === point
@@ -428,7 +428,7 @@ pgm.render_grid = function(block) {
 	app.gridEnd = block.end
 	for (point = block.start; point <= block.end; point = point + 1) {
 		if (pgm.is_surrogate(point)) continue
-		button = $('<button type="button" class="btn btn-outline-secondary"></button>')
+		button = $('<button type="button" class="btn btn-outline theme-secondary"></button>')
 		button.attr('data-point', point)
 		button.attr('title', pgm.character_name(point))
 		button.text(pgm.cell_text(point))
@@ -628,7 +628,7 @@ pgm.build_blocks = function() {
 	for (i = 0; i < app.blocks.length; i = i + 1) {
 		block = app.blocks[i]
 		if (block.start >= 0xD800 && block.end <= 0xDFFF) continue
-		button = $('<button type="button" class="btn btn-outline-primary"></button>')
+		button = $('<button type="button" class="btn btn-outline theme-primary"></button>')
 		button.attr('data-start', block.start)
 		button.attr('data-end', block.end)
 		button.attr('aria-pressed', 'false')

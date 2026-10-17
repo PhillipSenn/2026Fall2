@@ -302,8 +302,8 @@
 		});
 		document.querySelectorAll('#players button').forEach(function (button) {
 			const on = Number(button.dataset.players) === count;
-			button.classList.toggle('btn-secondary', on);
-			button.classList.toggle('btn-outline-secondary', !on);
+			button.classList.toggle('btn-solid', on);
+			button.classList.toggle('btn-outline', !on);
 		});
 		render();
 		showTurn();

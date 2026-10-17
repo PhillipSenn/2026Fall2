@@ -111,9 +111,9 @@ cfloop(query="qry") {
 								<div class="col-1 border ps-1">
 									<label for="SpeechSynthesisUtterance" class="d-block">&nbsp;</label>
 									<cfif request.usr.SpeechSynthesisUtterance>
-										<button type="button" name="SpeechSynthesisUtterance" class="btn-outline-primary bi-volume-up" value="1"></button>
+										<button type="button" name="SpeechSynthesisUtterance" class="btn-outline theme-primary bi-volume-up" value="1"></button>
 									<cfelse>
-										<button type="button" name="SpeechSynthesisUtterance" class="btn-outline-primary bi-volume-mute" value="0"></button>
+										<button type="button" name="SpeechSynthesisUtterance" class="btn-outline theme-primary bi-volume-mute" value="0"></button>
 									</cfif>
 								</div>
 							</div>

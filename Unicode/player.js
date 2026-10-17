@@ -96,7 +96,7 @@ function render() {
 }
 
 function addEmoji(emoji) {
-	var btn = $('<button class="btn btn-light"></button>')
+	var btn = $('<button class="btn btn-solid theme-secondary"></button>')
 
 	btn.text(emoji)
 	btn.data('emoji',emoji)
@@ -124,7 +124,7 @@ function showSkinTonePicker() {
 }
 
 function addSkinToneButton(emoji,tone) {
-	var btn = $('<button class="btn btn-light"></button>')
+	var btn = $('<button class="btn btn-solid theme-secondary"></button>')
 
 	btn.text(emoji)
 	btn.data('tone',tone)

@@ -11,8 +11,8 @@ rows = [1, 2, 3, 4, 13, 12, 11, 10, 9, 10, 11, 12, 13, 4, 3, 2, 1];
 		<div class="card">
 			<div class="card-header bg-subtle-primary d-flex justify-content-end align-items-center">
 				<span class="d-flex gap-2">
-					<button type="button" id="rotate" class="btn btn-sm btn-outline-secondary">Rotate</button>
-					<button type="button" id="reset" class="btn btn-sm btn-outline-secondary">Reset</button>
+					<button type="button" id="rotate" class="btn btn-sm btn-outline theme-secondary">Rotate</button>
+					<button type="button" id="reset" class="btn btn-sm btn-outline theme-secondary">Reset</button>
 				</span>
 			</div>
 			<div class="card-body">
@@ -35,12 +35,12 @@ rows = [1, 2, 3, 4, 13, 12, 11, 10, 9, 10, 11, 12, 13, 4, 3, 2, 1];
 			<div class="card-header bg-subtle-primary">One player</div>
 			<div class="card-body">
 				<div class="d-flex flex-wrap gap-2" id="players">
-					<button type="button" class="btn-outline-secondary" data-players="1">1</button>
-					<button type="button" class="btn-outline-secondary" data-players="2">2</button>
-					<button type="button" class="btn-outline-secondary" data-players="3">3</button>
-					<button type="button" class="btn-outline-secondary" data-players="4">4</button>
-					<button type="button" class="btn-outline-secondary" data-players="5">5</button>
-					<button type="button" class="btn-outline-secondary" data-players="6">6</button>
+					<button type="button" class="btn-outline theme-secondary" data-players="1">1</button>
+					<button type="button" class="btn-outline theme-secondary" data-players="2">2</button>
+					<button type="button" class="btn-outline theme-secondary" data-players="3">3</button>
+					<button type="button" class="btn-outline theme-secondary" data-players="4">4</button>
+					<button type="button" class="btn-outline theme-secondary" data-players="5">5</button>
+					<button type="button" class="btn-outline theme-secondary" data-players="6">6</button>
 				</div>
 				<p class="mt-3 mb-2">What color do you want to be?</p>
 				<div class="d-flex flex-wrap gap-2" id="colors">

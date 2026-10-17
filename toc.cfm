@@ -1,4 +1,4 @@
-﻿<cfscript>
+<cfscript>
 include '/Inc/header6.cfm'
 </cfscript>
 
@@ -15,11 +15,11 @@ include '/Inc/header6.cfm'
 					<button formaction="toc.cfm?accordion">
 					Accordion View
 					</div>
-					<button formaction="toc.cfm" class="btn-outline-secondary">
+					<button formaction="toc.cfm" class="btn-outline theme-secondary">
 					List View
 					</button>
 				<cfelse>
-					<button formaction="toc.cfm?accordion" class="btn-outline-secondary">
+					<button formaction="toc.cfm?accordion" class="btn-outline theme-secondary">
 					Accordion View
 					</button>
 					<button formaction="toc.cfm?">

@@ -15,7 +15,7 @@ $('.btn-link:not([type="button"])')
 
 function correctDown() {
 	$(this).removeClass('btn-link')
-		.addClass('btn-success')
+		.addClass('btn-solid theme-success')
 }
 
 $('input[type=checkbox]').on('change', checkbox)

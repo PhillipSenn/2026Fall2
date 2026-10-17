@@ -18,8 +18,8 @@ start = {
 		<div class="card">
 			<div class="card-header bg-subtle-primary d-flex justify-content-end align-items-center">
 				<span class="d-flex gap-2">
-					<button type="button" id="flip" class="btn btn-sm btn-outline-secondary">Flip</button>
-					<button type="button" id="reset" class="btn btn-sm btn-outline-secondary">Reset</button>
+					<button type="button" id="flip" class="btn btn-sm btn-outline theme-secondary">Flip</button>
+					<button type="button" id="reset" class="btn btn-sm btn-outline theme-secondary">Reset</button>
 				</span>
 			</div>
 			<div class="card-body">

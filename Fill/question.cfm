@@ -30,7 +30,7 @@ ans = exec('ans.where_q', form.qid)
 			</div>
 			<div class="card-footer">
 				<form action="results.cfm">
-					<button class="btn-outline-primary">Back to results</button>
+					<button class="btn-outline theme-primary">Back to results</button>
 					<input hidden name="actid" value="#form.actid#">
 					<input hidden name="id" value="#request.usr.id#">
 				</form>

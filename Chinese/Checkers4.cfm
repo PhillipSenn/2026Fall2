@@ -12,8 +12,8 @@ rows = [1, 2, 3, 4, 13, 12, 11, 10, 9, 10, 11, 12, 13, 4, 3, 2, 1];
 		<div class="card">
 			<div class="card-header bg-subtle-primary d-flex justify-content-end align-items-center">
 				<span class="d-flex gap-2">
-					<button type="button" id="flip" class="btn btn-sm btn-outline-secondary">Flip</button>
-					<button type="button" id="reset" class="btn btn-sm btn-outline-secondary">Reset</button>
+					<button type="button" id="flip" class="btn btn-sm btn-outline theme-secondary">Flip</button>
+					<button type="button" id="reset" class="btn btn-sm btn-outline theme-secondary">Reset</button>
 				</span>
 			</div>
 			<div class="card-body">
@@ -36,10 +36,10 @@ rows = [1, 2, 3, 4, 13, 12, 11, 10, 9, 10, 11, 12, 13, 4, 3, 2, 1];
 			<div class="card-header bg-subtle-primary">One player</div>
 			<div class="card-body">
 				<div class="d-flex flex-wrap gap-2" id="players">
-					<button type="button" class="btn btn-outline-secondary" data-players="2">2</button>
-					<button type="button" class="btn btn-outline-secondary" data-players="3">3</button>
-					<button type="button" class="btn btn-outline-secondary" data-players="4">4</button>
-					<button type="button" class="btn btn-outline-secondary" data-players="6">6</button>
+					<button type="button" class="btn btn-outline theme-secondary" data-players="2">2</button>
+					<button type="button" class="btn btn-outline theme-secondary" data-players="3">3</button>
+					<button type="button" class="btn btn-outline theme-secondary" data-players="4">4</button>
+					<button type="button" class="btn btn-outline theme-secondary" data-players="6">6</button>
 				</div>
 				<p class="mt-3 mb-2">You play the marbles at the bottom. This starts with only your marbles, so you can try moves with no opponent. Drag a marble onto a highlighted hole, or click the marble and then the hole. Flip rotates the colors. You stay in the bottom seat.</p>
 				<p class="mb-0" id="setup-note">Choose 2, 3, 4, or 6 players to add the computer. You stay at the bottom.</p>

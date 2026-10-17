@@ -40,7 +40,7 @@ for (i = arrayLen(choices); i > 1; i--) {
 				<cfloop query="ans">
 					<cfset matched = structKeyExists(guessed, ans.ansid)>
 					<button type="button" data-ansid="#ans.ansid#"
-						class="d-block w-100 mb-2 text-start #matched ? 'btn-success' : 'btn-outline-primary'#"
+						class="d-block w-100 mb-2 text-start #matched ? 'btn-solid theme-success' : 'btn-outline theme-primary'#"
 						<cfif matched>disabled</cfif>>#encodeForHtml(ans.qname)#</button>
 				</cfloop>
 			</div>
@@ -48,7 +48,7 @@ for (i = arrayLen(choices); i > 1; i--) {
 				<cfloop array="#choices#" index="choice">
 					<cfset matched = structKeyExists(guessed, choice.ansid)>
 					<button type="button" data-ansid="#choice.ansid#"
-						class="d-block w-100 mb-2 text-start #matched ? 'btn-success' : 'btn-outline-secondary'#"
+						class="d-block w-100 mb-2 text-start #matched ? 'btn-solid theme-success' : 'btn-outline theme-secondary'#"
 						<cfif matched>disabled</cfif>>#encodeForHtml(choice.ansname)#</button>
 				</cfloop>
 			</div>

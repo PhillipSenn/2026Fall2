@@ -3,17 +3,14 @@ var dom = {} // Document Object Model
 pgm.init = function() {
 	function each_navlink() { // .home.nav-link needs to be moved into #main-navbar
 		if ($(this).closest('nav').length) return
-		if ($(this).hasClass('btn-primary')) {
-			$(this).removeClass('btn-primary')
+		if ($(this).hasClass('theme-primary')) {
+			$(this).removeClass('btn-solid theme-primary')
 				.addClass('btn-link')
 		}
 		$(this).wrap('<li class="nav-item"></li>')
 		$(this).parent().appendTo('#main-navbar')
 	}
-	$('button').addClass('btn')
-	x = $('.btn:not([class*="btn-"]):not([class*="bg-"])')
-	console.log(x)
-	$('.btn:not([class*="btn-"]):not([class*="bg-"])').addClass('btn-primary CharliePark')
+	$('button:not([class*="btn-"]):not([class*="bg-"])').addClass('btn-solid theme-primary CharliePark')
 	$('.nav-link').each(each_navlink)
 
 	dom.home = $('.home.nav-link')

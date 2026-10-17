@@ -1,4 +1,4 @@
-﻿pgm.json = function(response) {
+pgm.json = function(response) {
 	if (!response.ok) {
 		throw new Error('HTTP ' + response.status + ' ' + response.statusText)
 	}
@@ -20,8 +20,8 @@ app.offset = $('.container.sticky-top').outerHeight()
 	
 
 function init() {
-	$('.btn-warning').removeClass('btn-warning')
-		.addClass('btn-outline-primary')
+	$('.btn-solid.theme-warning').removeClass('btn-solid theme-warning')
+		.addClass('btn-outline theme-primary')
 
 	// Pop the next description off the list
 	var next = {}
@@ -50,8 +50,8 @@ function init() {
 
 	$('#slider').slideDown('slow','swing',done)
 	function done() {
-		$('.keyTerm' + app.qid).removeClass('btn-outline-primary')
-			.addClass('btn-primary')
+		$('.keyTerm' + app.qid).removeClass('btn-outline theme-primary')
+			.addClass('btn-solid theme-primary')
 		$('html, body').animate({
 			scrollTop: $('.keyTerm' + app.qid).offset().top - app.offset
 		}, 1500)
@@ -59,8 +59,8 @@ function init() {
 }
 
 
-$(document).on('click','button.btn-outline-primary',btn)
-$(document).on('click','button.btn-primary',btn)
+$(document).on('click','button.btn-outline.theme-primary',btn)
+$(document).on('click','button.btn-solid.theme-primary',btn)
 function btn(myEvent) {
 	if (+$(this).val() === app.qid) {
 		$(this).removeClass('d-block')
@@ -76,8 +76,8 @@ function btn(myEvent) {
 			.then(pct_done)
 			.catch(caught(url))
 	} else {
-		$(this).removeClass('btn-outline-primary btn-primary')
-			.addClass('btn-warning')
+		$(this).removeClass('btn-outline theme-primary btn-solid theme-primary')
+			.addClass('btn-solid theme-warning')
 	}
 }
 

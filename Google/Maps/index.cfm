@@ -17,14 +17,14 @@
         <li><a href="9.cfm">Make airports clickable</a></li>
         <li>Define a player Unicode: 
             <form action="../../Unicode/player.cfm">
-                <button name="id" class="btn-primary" value="19C76747-5CF9-449C-9A52-FEF8906AD52E">Player 1</button>
-                <button name="id" class="btn-secondary" value="21E468EC-A70C-46F5-BB9F-5B5A21F7F32F">Player 2</button>
+                <button name="id" class="btn-solid theme-primary" value="19C76747-5CF9-449C-9A52-FEF8906AD52E">Player 1</button>
+                <button name="id" class="btn-solid theme-secondary" value="21E468EC-A70C-46F5-BB9F-5B5A21F7F32F">Player 2</button>
             </form>
         </li>
         <li>Todo: Multiple players
             <form action="11.cfm">
-                <button type="button" class="btn-primary" disabled>Player 1</button>
-                <button name="id" class="btn-secondary" value="21E468EC-A70C-46F5-BB9F-5B5A21F7F32F">Player 2</button>
+                <button type="button" class="btn-solid theme-primary" disabled>Player 1</button>
+                <button name="id" class="btn-solid theme-secondary" value="21E468EC-A70C-46F5-BB9F-5B5A21F7F32F">Player 2</button>
             </form>
         </li>
         <li>Todo: Add commodities</li>

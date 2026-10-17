@@ -1,12 +1,12 @@
-﻿dom.terms = $('#terms')
+dom.terms = $('#terms')
 
 $('.card-body a').each(each)
 
 var terms = dom.terms.find('li').get()
 
 if (!terms.length) {
-	$('[name=qid]').removeClass('btn-outline-success')
-		.addClass('btn-success')
+	$('[name=qid]').removeClass('btn-outline theme-success')
+		.addClass('btn-solid theme-success')
 		.prop('disabled',false)
 	$('.col-4').hide()
 }
@@ -84,8 +84,8 @@ function dropTerm(event,ui) {
 		function done() {
 			ui.draggable.closest('li').remove()
 			if (dom.terms.find('li').length === 0) {
-				$('[name=qid]').removeClass('btn-outline-success')
-					.addClass('btn-success')
+				$('[name=qid]').removeClass('btn-outline theme-success')
+					.addClass('btn-solid theme-success')
 					.prop('disabled',false)
 					
 				$('.col-4 .card-header').addClass('bg-success-subtle').text('Next!')

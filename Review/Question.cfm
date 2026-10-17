@@ -49,7 +49,7 @@ if (q.recordcount) {
 			You did it!
 		</div>
 		<div class="card-footer">
-			<button formaction="questions.cfm" class="btn-success">Finished!</button>
+			<button formaction="questions.cfm" class="btn-solid theme-success">Finished!</button>
 		</div>
 	</cfif>
 	<input hidden name="actid" value="#form.actid#">

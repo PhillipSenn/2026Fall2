@@ -110,7 +110,7 @@ writeoutput('<body class="' & request.body & '">')
 <cfif request.navbar>
 <div class="#request.container# #request.top#">
 	<nav class="navbar navbar-expand bg-body py-0" data-bs-theme="dark">
-		<a class="navbar-brand ms-3 me-1" href="https://lr.edu" target="_self">
+		<a class="navbar-brand ms-5 me-1" href="https://lr.edu" target="_self">
 			LR
 			<!---
 			<img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Lenoir-rhyne_logo_from_NCAA.svg" alt="Logo" height="32">

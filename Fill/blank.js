@@ -94,8 +94,8 @@ function scrollToCursor() {
 
 function enableNext() {
 	$('[name=qid]')
-		.removeClass('btn-outline-success')
-		.addClass('btn-success')
+		.removeClass('btn-outline theme-success')
+		.addClass('btn-solid theme-success')
 		.prop('disabled', false)
 	if (slots.length) {
 		scrollToNext()
@@ -127,7 +127,7 @@ function scrollToNext() {
 
 function nextReady() {
 	var next = $('[name=qid]')
-	return next.length && !next.prop('disabled') && next.hasClass('btn-success')
+	return next.length && !next.prop('disabled') && next.hasClass('theme-success')
 }
 
 function bonk() {

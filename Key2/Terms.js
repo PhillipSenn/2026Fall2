@@ -1,7 +1,7 @@
 function init() {
 	//console.log('init')
-	$('button.btn-warning').removeClass('btn-warning')
-		.addClass('btn-outline-primary')
+	$('button.btn-solid.theme-warning').removeClass('btn-solid theme-warning')
+		.addClass('btn-outline theme-primary')
 
 	var rows = $('#qids tbody tr').filter(function() {
 		return !this.hasAttribute('data-pollid')
@@ -101,6 +101,29 @@ function picture(qname, qdesc, qid) {
 	}
 }
 
+$(document).on('keydown', hint_down)
+$(document).on('keyup', hint_up)
+$(window).on('blur', hint_up)
+
+function hint_down(response) {
+	if (response.key !== 'Alt') return
+	if (response.repeat) return
+	response.preventDefault()
+	correct_button().addClass('hint')
+}
+
+function hint_up(response) {
+	if (response.key && response.key !== 'Alt') return
+	$('.col-4 button').removeClass('hint')
+}
+
+function correct_button() {
+	return $('.col-4 button').filter(match_qid).filter(':visible')
+	function match_qid() {
+		return +$(this).val() === app.qid
+	}
+}
+
 $(document).on('click', 'a.rownum', show_row)
 function show_row(event) {
 	//console.log('show_row')
@@ -113,22 +136,22 @@ function show_row(event) {
 	$('.col-4 button').addClass('d-none')
 	$('.col-4 button').filter(function() {
 		return +$(this).val() === app.qid
-	}).removeClass('d-none btn-warning btn-primary')
-		.addClass('btn-outline-primary')
+	}).removeClass('d-none btn-solid theme-warning btn-solid theme-primary')
+		.addClass('btn-outline theme-primary')
 		.show()
 	picture(row.children('td').eq(1).text(), row.children('td').eq(2).text(), app.qid)
 }
 
-$(document).on('click', 'button.btn-outline-primary', btn)
+$(document).on('click', 'button.btn-outline.theme-primary', btn)
 function btn() {
 	//console.log('btn')
 	if (+$(this).val() !== app.qid) {
-		$(this).removeClass('btn-outline-primary')
-			.addClass('btn-warning')
+		$(this).removeClass('btn-outline theme-primary')
+			.addClass('btn-solid theme-warning')
 		return
 	}
-	$(this).removeClass('btn-outline-primary')
-		.addClass('btn-primary')
+	$(this).removeClass('btn-outline theme-primary')
+		.addClass('btn-solid theme-primary')
 	app.button = $(this)
 	var url = '../Poll/merge_q.cfm'
 	var form = {}

@@ -207,10 +207,10 @@ function mark_wrong(el) {
 	if (timer) {
 		window.clearTimeout(timer)
 	}
-	el.addClass('text-danger')
+	el.addClass('fg-danger')
 	el.data('dangerTimer', window.setTimeout(clear_danger, 15000))
 	function clear_danger() {
-		el.removeClass('text-danger')
+		el.removeClass('fg-danger')
 		el.removeData('dangerTimer')
 	}
 }
@@ -221,7 +221,7 @@ function current_qid() {
 
 function flash_right(el) {
 	var qid = el.attr('data-qid')
-	el.removeClass('text-danger text-success').addClass('sunk')
+	el.removeClass('fg-danger fg-success').addClass('sunk')
 	el.empty().append(make_duck())
 	el.delay(700).fadeOut(500, remove_qname)
 	remove_question(qid)

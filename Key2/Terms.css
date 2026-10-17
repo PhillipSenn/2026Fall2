@@ -1,7 +1,13 @@
+button.hint {
+	background-color: var(--bs-warning-bg);
+	border-color: var(--bs-warning-bg);
+	color: var(--bs-warning-contrast);
+}
+
 @media (min-width: 768px) {
 	#key-term-prompt {
 		position: sticky;
-		top: 56px;
+		top: 5rem;
 		align-self: flex-start;
 	}
 }
