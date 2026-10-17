@@ -85,9 +85,7 @@ tscore = 0
 					</cfloop>
 					<tr>
 						<td class="text-center">
-							<button name="qid" value="#qid#" class="btn-outline theme-primary">
-								#currentRow#
-							</button>
+							#currentRow#
 						</td>
 						<td>
 							#qname#
