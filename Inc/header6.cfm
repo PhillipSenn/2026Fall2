@@ -152,7 +152,7 @@ writeoutput('<body class="' & request.body & '">')
 		<cfif request.progress.bar>
 			<div class="row">
 				<div class="col">
-					<div class="progress border-start border-end">
+					<div class="progress">
 						<div class="progress-bar #request.progress.color#" role="progressbar" 
 							aria-valuenow="#grade.earned#"
 							aria-valuemin="0" 
