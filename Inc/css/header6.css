@@ -62,13 +62,17 @@ code {
 .card-header[data-bs-toggle="collapse"] {
 	cursor: pointer;
 }
+.navbar-brand .bi-house-fill {
+	color: gray;
+}
+.navbar-brand:hover .bi-house-fill,
+.navbar-brand:focus-visible .bi-house-fill {
+	color: white;
+}
 #main-navbar > .nav-item {
 	display: flex;
 	align-items: center;
 	font-size:16px;
-}
-#main-navbar .nav-link {
-	padding-inline-end: 0;
 }
 #main-navbar > .nav-item:not(:last-child):after {
 	content: "\2022";

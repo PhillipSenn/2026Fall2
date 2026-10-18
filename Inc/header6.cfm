@@ -110,20 +110,23 @@ writeoutput('<body class="' & request.body & '">')
 <cfif request.navbar>
 <div class="#request.container# #request.top#">
 	<nav class="navbar navbar-expand bg-body py-0" data-bs-theme="dark">
-		<a class="bi bi-house-fill navbar-brand ms-5 me-1" href="#request.home#">
+		<a class="ms-5 me-0 navbar-brand" href="#request.home#" aria-label="Home">
+		<i class="bi bi-house-fill"></i>
 		</a>
 		<form class="d-flex flex-grow-1 align-items-center">
 			<ul id="main-navbar" class="navbar-nav me-auto">
 				<cfif form.actid>
+					<cfif len(act.grpname)>
+						<li class="nav-item">
+							<a class="nav-link" href="#request.dir#?actid=#form.actid#">#act.grpname#</a>
+						</li>
+					</cfif>
 					<li class="nav-item">
-						<a class="nav-link" href="#request.dir#?actid=#form.actid#">#act.grpname#</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#cgi.query_string#?actid=#form.actid#">#act.actname#</a>
+						<a class="nav-link" href="#cgi.script_name#?actid=#form.actid#">#act.actname#</a>
 					</li>
 					<cfif len(act.catname)>
 						<li class="nav-item">
-							<a class="nav-link" href="#cgi.query_string#?actid=#form.actid#">#act.catname#</a>
+							<a class="nav-link" href="#cgi.script_name#?actid=#form.actid#">#act.catname#</a>
 						</li>
 					</cfif>
 				</cfif>

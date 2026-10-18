@@ -25,25 +25,29 @@ create or alter proc act.where_usr
 ) as
 declare @usrid int=(select usrid from usr where id=@id)
 declare @isAdmin int=(select isAdmin from usr where usrid=@usrid)
-select actid,actname,actsort,actlink
-	,grpname
-	,catname
-	,earned
-	,isHidden
+drop table if exists #act
+create table #act
+(ord int identity primary key
+,actid int
+)
+insert #act(actid)
+select actid
 from act
-left join grp on act_grp=grpid
-left join cat on act_cat=catid
-
-outer apply (
-	select earned
-	from grade
-	where grade_usr=@usrid
-	and grade_act=actid
-) grade
-where isHidden = 0 or @isAdmin=1
+where isHidden=0 or @isAdmin=1
 order by isHidden,actsort,actid
+select act.actid,act.actname,act.actsort,act.actlink
+	,grp.grpname
+	,cat.catname
+	,grade.earned
+	,act.isHidden
+from #act
+inner join act on act.actid=#act.actid
+left join grp on act.act_grp=grp.grpid
+left join cat on act.act_cat=cat.catid
+left join grade on grade.grade_usr=@usrid and grade.grade_act=act.actid
+order by #act.ord
 go
---exec act.where_usr '19C76747-5CF9-449C-9A52-FEF8906AD52E'
+exec act.where_usr '19C76747-5CF9-449C-9A52-FEF8906AD52E'
 
 create or alter proc act.where_act
 (@actid int
