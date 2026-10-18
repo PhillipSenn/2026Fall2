@@ -110,8 +110,7 @@ writeoutput('<body class="' & request.body & '">')
 <cfif request.navbar>
 <div class="#request.container# #request.top#">
 	<nav class="navbar navbar-expand bg-body py-0" data-bs-theme="dark">
-		<a class="navbar-brand ms-5 me-1" href="#request.home#">
-			CSC715
+		<a class="bi bi-house-fill navbar-brand ms-5 me-1" href="#request.home#">
 		</a>
 		<form class="d-flex flex-grow-1 align-items-center">
 			<ul id="main-navbar" class="navbar-nav me-auto">
