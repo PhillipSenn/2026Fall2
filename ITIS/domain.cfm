@@ -34,6 +34,5 @@ Ducks:  Eukaryota → Animalia → Chordata → Aves → Anseriformes → Anatid
 </pre>
 	</div>
 </form>
-<button class="nav-link" formaction="domain.cfm">Domain</button>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

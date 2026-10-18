@@ -49,8 +49,11 @@ create or alter proc act.where_act
 (@actid int
 ) as
 select actid,actname,actdesc
-	,act_cat as catid
+	,catid,catname
+	,grpname
 from act
+left join cat on act_cat=catid
+left join grp on act_grp=grpid
 where actid=@actid
 go
 create or alter proc act.update_sort
@@ -150,6 +153,46 @@ select earned
 from grade
 where gradeid=@gradeid
 go
+
+
+create or alter proc guess.merge_ans0 -- All answers are considered "correct"
+(@id uniqueidentifier
+,@ansid int
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+declare @qid int=(select ans_q from ans where ansid=@ansid)
+declare @actid int=(select q_act from q where qid=@qid)
+
+declare @gradeid int=(select gradeid from grade where grade_usr=@usrid and grade_act=@actid)
+if @gradeid is null begin
+	insert into grade(grade_usr,grade_act) values(@usrid,@actid)
+	select @gradeid=scope_identity()
+end
+delete from guess where guessid in(
+	select guessid
+	from guess
+	join grade on guess_grade=gradeid
+	join ans on guess_ans=ansid
+	where grade_usr=@usrid
+	and ans_q=@qid
+)
+insert into guess(guess_grade,guess_ans) values(@gradeid,@ansid)
+declare @possible int=(select count(*) from q where q_act=@actid)
+declare @answered int=(
+	select count(distinct ans_q) 
+	from guess 
+	join ans on guess_ans=ansid
+	where guess_grade=@gradeid
+)
+update grade set
+ earned=ceiling(100.0 * @answered / @possible)
+where gradeid=@gradeid
+select earned
+from grade
+where gradeid=@gradeid
+go
+
+
 create or alter proc usr.codePoint
 (@id uniqueidentifier
 ,@codePoint varchar(50)

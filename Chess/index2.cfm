@@ -79,10 +79,4 @@ Legal destinations are marked when you select a piece.
 	</div>
 </div>
 </cfoutput>
-
-<cfif isDefined('act') and act.recordCount>
-	<cfoutput query="act">
-		<button class="nav-link">#actname#</button>
-	</cfoutput>
-</cfif>
 <cfinclude template="/Inc/footer6.cfm">

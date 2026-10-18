@@ -75,6 +75,5 @@ ans = exec('ans.where_q',q.qid)
 		</div>
 	</div>
 </div>
-<button class="nav-link" formaction="#request.serverdir#">#actname#</button>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

@@ -73,9 +73,6 @@ function cssGeneric(category) {
 </cfscript>
 
 <cfoutput>
-<cfif saved>
-	<button class="home nav-link" formaction="#request.home#">Home</button>
-</cfif>
 <form class="card">
 	<div class="card-header bg-subtle-primary">
 		Which font do you want as your default?
@@ -145,6 +142,5 @@ function cssGeneric(category) {
 	<input hidden name="id" value="#request.usr.id#">
 	<input hidden name="actid" value="#form.actid#">
 </form>
-<button class="nav-link" formaction="#request.dir#">#act.actname#</button>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

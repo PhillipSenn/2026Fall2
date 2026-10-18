@@ -1,7 +1,7 @@
 <cfoutput>
 <cfinclude template="/Inc/header6.cfm">
 <div class="card shadow">
-	<div class="card-header bg-subtle-primary">Log in</div>
+	<div class="card-header bg-subtle-primary">Login</div>
 	<form method="post">
 		<div class="card-body">
 			<label for="password">Password</label>
@@ -11,7 +11,7 @@
 			</cfif>
 		</div>
 		<div class="card-footer text-end">
-			<button>Log in</button>
+			<button>Login</button>
 		</div>
 	</form>
 </div>

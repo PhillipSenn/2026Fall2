@@ -128,6 +128,5 @@ function binary(code) {
 <p><iframe width="560" height="315" src="https://www.youtube.com/embed/S81GyMKH7zw?si=RW8IaaUNE-5DXSA_&amp;start=360" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 	</div>
 </div>
-<button class="nav-link">#actname#</button>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

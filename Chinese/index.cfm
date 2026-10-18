@@ -56,6 +56,5 @@ rows = [1, 2, 3, 4, 13, 12, 11, 10, 9, 10, 11, 12, 13, 4, 3, 2, 1];
 	</div>
 </div>
 
-<button class="nav-link">#actname#</button>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

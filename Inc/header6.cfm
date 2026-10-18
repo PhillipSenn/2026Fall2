@@ -110,20 +110,26 @@ writeoutput('<body class="' & request.body & '">')
 <cfif request.navbar>
 <div class="#request.container# #request.top#">
 	<nav class="navbar navbar-expand bg-body py-0" data-bs-theme="dark">
-		<a class="navbar-brand ms-5 me-1" href="https://lr.edu" target="_self">
-			LR
-			<!---
-			<img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Lenoir-rhyne_logo_from_NCAA.svg" alt="Logo" height="32">
-			--->
+		<a class="navbar-brand ms-5 me-1" href="#request.home#">
+			CSC715
 		</a>
 		<form class="d-flex flex-grow-1 align-items-center">
-			<cfif StructKeyExists(request,'usr')>
-				<ul id="main-navbar" class="navbar-nav me-auto">
+			<ul id="main-navbar" class="navbar-nav me-auto">
+				<cfif form.actid>
 					<li class="nav-item">
-						<button formaction="#request.home#" class="btn-link nav-link">CSC175</button>
+						<a class="nav-link" href="#request.dir#?actid=#form.actid#">#act.grpname#</a>
 					</li>
-				</ul>
-
+					<li class="nav-item">
+						<a class="nav-link" href="#cgi.query_string#?actid=#form.actid#">#act.actname#</a>
+					</li>
+					<cfif len(act.catname)>
+						<li class="nav-item">
+							<a class="nav-link" href="#cgi.query_string#?actid=#form.actid#">#act.catname#</a>
+						</li>
+					</cfif>
+				</cfif>
+			</ul>
+			<cfif StructKeyExists(request,'usr')>
 				<ul class="navbar-nav ms-auto me-3">
 					<li class="nav-item position-relative">
 						<a class="nav-link" href="JavaScript:" role="button" data-bs-toggle="menu" data-bs-placement="bottom-end" aria-expanded="false">

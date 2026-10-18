@@ -27,6 +27,5 @@ include '/Inc/header6.cfm'
         </table>
     </div>
 </div>
-<button class="nav-link">Scores</button>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

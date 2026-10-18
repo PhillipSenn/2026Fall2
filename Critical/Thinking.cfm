@@ -60,7 +60,5 @@ poll = usr('poll.start_q',[q.qid,q.qname])
 		</div>
 	</form>
 </div>
-<button class="nav-link" formaction="#request.dir#">#cat.catname#</button>
-<button class="nav-link" formaction="#request.dir#">#actname#</button>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

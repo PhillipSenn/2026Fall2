@@ -65,6 +65,7 @@ code {
 #main-navbar > .nav-item {
 	display: flex;
 	align-items: center;
+	font-size:16px;
 }
 #main-navbar .nav-link {
 	padding-inline-end: 0;
@@ -77,10 +78,6 @@ code {
 table.cfdebug {
 	display: none;
 	font-family: consolas;
-}
-.navbar-brand {
-	color: #a31f34;
-	font-size: inherit;
 }
 .card-header:not(.d-flex) {
 	display: block;

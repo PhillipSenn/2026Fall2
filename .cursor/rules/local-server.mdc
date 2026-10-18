@@ -7,4 +7,6 @@ alwaysApply: true
 
 When testing this project in the browser, use `https://PhillipSenn.dev/2026Fall2/`.
 
-Example: `https://PhillipSenn.dev/2026Fall2/Marbles/marbles.cfm?id=237DB729-5FCE-4569-A914-CDDB5D2E8422`
+Always log in by including `id=19C76747-5CF9-449C-9A52-FEF8906AD52E` on the URL.
+
+Example: `https://PhillipSenn.dev/2026Fall2/?id=19C76747-5CF9-449C-9A52-FEF8906AD52E`

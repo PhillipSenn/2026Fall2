@@ -61,6 +61,5 @@ cfloop(query=finishedPoll) {
 		</table>
 	</div>
 </div>
-<button class="nav-link" formaction="#request.dir#">#actname#</button>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

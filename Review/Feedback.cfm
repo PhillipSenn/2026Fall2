@@ -37,7 +37,6 @@ ans = exec('ans.where_q',form.qid)
 	<input hidden name="actid" value="#form.actid#">
 	<input hidden name="id" value="#request.usr.id#">
 </form>
-<a class="nav-link" href="#request.scriptname#">Feedback for: #actname#</a>
 <script src="/Inc/js/autosize.js"></script>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

@@ -23,7 +23,5 @@ q = exec('q.where_act',form.actid)
 		<input hidden name="id" value="#request.usr.id#">
 	</div>
 </div>
-<button class="nav-link" formaction="#request.dir#">#actname#</button>
-<button class="nav-link" formaction="#request.dir#">#cat.catname#</button>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

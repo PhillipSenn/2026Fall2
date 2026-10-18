@@ -42,6 +42,5 @@ order by pollid desc')
 		</table>
 	</div>
 </div>
-<button class="nav-link">Poll</a>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

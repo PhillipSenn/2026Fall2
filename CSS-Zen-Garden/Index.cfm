@@ -14,6 +14,5 @@ include '/Inc/header6.cfm'
 	</div>
 	<input hidden name="id" value="#request.usr.id#" />
 </div>
-<a class="nav-link" href="#request.script_name#">#actname#</a>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

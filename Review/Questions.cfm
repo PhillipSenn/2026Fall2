@@ -1,6 +1,6 @@
 <cfscript>
 if (StructKeyExists(form,'ansid')) {
-	usr('guess.merge_ans',[form.ansid,1])
+	usr('guess.merge_ans0',form.ansid)
 }
 request.container = 'container-fluid'
 include '/Inc/header6.cfm'
@@ -69,11 +69,13 @@ tscore = 0
 				<cfloop query="q">
 					<cfset rowChoices = []>
 					<cfset rowScore = 0>
+					<cfset maxChosen = 0>
 					<cfset voteWarning = false>
 					<cfif structKeyExists(choiceMap, qid)>
 						<cfset rowChoices = choiceMap[qid]>
 					</cfif>
 					<cfloop array="#rowChoices#" index="choice">
+						<cfset maxChosen = max(maxChosen, choice.chosen)>
 						<cfif choice.mine>
 							<cfset rowScore = choice.chosen>
 						</cfif>
@@ -84,7 +86,7 @@ tscore = 0
 						</cfif>
 					</cfloop>
 					<tr>
-						<td class="text-center">
+						<td class="text-end">
 							#currentRow#
 						</td>
 						<td>
@@ -97,6 +99,9 @@ tscore = 0
 									<cfset choiceClass = "answer btn-outline theme-primary">
 									<cfif choice.mine>
 										<cfset choiceClass = "answer btn-solid theme-subtle theme-primary">
+										<cfif choice.chosen eq maxChosen>
+											<cfset choiceClass = "answer btn-solid theme-subtle theme-success">
+										</cfif>
 										<cfif voteWarning>
 											<cfset choiceClass = "answer btn-solid theme-subtle theme-warning">
 										</cfif>
@@ -117,11 +122,8 @@ tscore = 0
 			</tbody>
 			<tfoot>
 				<tr>
-					<th class="text-end">#q.recordcount#</th>
-					<th>Questions</th>
-					<cfif maxChoices>
-						<th colspan="#maxChoices#"></th>
-					</cfif>
+					<th></th>
+					<th colspan="#maxChoices+1#">Total
 					<th class="text-end">
 						#tscore#
 					</th>
@@ -134,6 +136,5 @@ tscore = 0
 	<input hidden name="actid" value="#form.actid#">
 	<input hidden name="id" value="#request.usr.id#">
 </form>
-<button class="nav-link" formaction="#request.dir#">#actname#</button>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

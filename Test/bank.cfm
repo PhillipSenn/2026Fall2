@@ -301,6 +301,5 @@ cfloop(query="qry") {
 	<input hidden name="id" value="#request.usr.id#">
 </form>
 <div hidden id="wrong">#wrong#</div>
-<button class="nav-link" formaction="#request.dir#">#actname#</button>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

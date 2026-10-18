@@ -18,6 +18,5 @@ q = exec('q.where_act',form.actid)
 </cfloop>
 <input hidden name="actid" value="#actid#">
 <input hidden name="id" value="#request.usr.id#">
-<button class="nav-link" formaction="#request.dir#">#actname#</button>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

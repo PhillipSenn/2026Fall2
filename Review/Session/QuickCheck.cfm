@@ -79,6 +79,5 @@ if (q.recordCount) {
 		<input hidden name="id" value="#request.usr.id#">
 	</form>
 </cfif>
-<button class="nav-link" formaction="#request.dir#">#actname#</button>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

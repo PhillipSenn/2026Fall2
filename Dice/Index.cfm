@@ -65,6 +65,5 @@ include '/Inc/header6.cfm';
 		</div>
 	</div>
 </div>
-<button class="nav-link">#actname#</button>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

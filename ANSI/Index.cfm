@@ -286,6 +286,5 @@ function binary(code) {
 		</table>
 	</div>
 </div>
-<button class="nav-link">#actname#</button>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

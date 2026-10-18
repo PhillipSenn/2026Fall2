@@ -2,7 +2,6 @@
 include '/Inc/header6.cfm'
 if (structKeyExists(form,'codePoint')) {
     usr('usr.codePoint', form.codePoint)
-	writeoutput('<button class="home nav-link" formaction="' & request.home & '">Home</button>')
 }
 </cfscript>
 
@@ -86,6 +85,5 @@ if (structKeyExists(form,'codePoint')) {
 		<input hidden name="id" value="#request.usr.id#">
 	</form>
 </div>
-<button class="nav-link">#actname#</button>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

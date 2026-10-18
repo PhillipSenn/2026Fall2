@@ -3940,6 +3940,5 @@ include '/Inc/header6.cfm'
 	</div>
 	<input hidden name="id" value="#request.usr.id#">
 </form>
-<button class="nav-link">Table Of Contents</button>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

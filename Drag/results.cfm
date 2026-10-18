@@ -67,6 +67,5 @@ lastEnd = ""
 	<input hidden name="actid" value="#form.actid#">
 	<input hidden name="id" value="#request.usr.id#">
 </form>
-<button class="nav-link" formaction="#request.serverdir#">#actname#</button>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

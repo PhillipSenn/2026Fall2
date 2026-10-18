@@ -33,8 +33,8 @@ for (band = 1; band <= 10; band++) {
 							<th class="text-end">Sort</th>
 						</cfif>
 						<th>Chapter</th>
-						<th>Category</th>
 						<th>Assignment</th>
+						<th>Category</th>
 						<th class="text-end">Earned</th>
 					</tr>
 				</thead>
@@ -45,10 +45,10 @@ for (band = 1; band <= 10; band++) {
 							<td class="text-end actsort" contenteditable>#actsort#</td>
 						</cfif>
 						<td>#grpname#</td>
-						<td>#catname#</td>
 						<td>
 							<a href="#actlink#?actid=#actid#">#actname#</a>
 						</td>
+						<td>#catname#</td>
 						<td class="text-end">
 							<cfif request.usr.isAdmin>
 								<button formaction="Admin/act.cfm" name="actid" value="#actid#" class="btn-outline theme-info">
@@ -91,8 +91,8 @@ for (band = 1; band <= 10; band++) {
 										<th class="text-end">Sort</th>
 									</cfif>
 									<th>Chapter</th>
-									<th>Category</th>
 									<th>Assignment</th>
+									<th>Category</th>
 									<th class="text-end">Earned</th>
 								</tr>
 							</thead>
@@ -103,10 +103,10 @@ for (band = 1; band <= 10; band++) {
 										<td class="text-end actsort" contenteditable>#actsort#</td>
 									</cfif>
 									<td>#grpname#</td>
-									<td>#catname#</td>
 									<td>
 										<a href="#actlink#?actid=#actid#">#actname#</a>
 									</td>
+									<td>#catname#</td>
 									<td class="text-end">
 										<cfif request.usr.isAdmin>
 											<button formaction="Admin/act.cfm" name="actid" value="#actid#" class="btn-outline theme-info">

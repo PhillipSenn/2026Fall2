@@ -44,6 +44,5 @@ poll = usr('poll.unanswered', form.actid)
 </div>
 <input hidden name="id" value="#request.usr.id#">
 <input hidden name="actid" value="#actid#">
-<button class="nav-link">#actname#</button>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

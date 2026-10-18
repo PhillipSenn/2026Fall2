@@ -52,6 +52,5 @@ ans = exec('ans.where_q',q.qid)
 	<input hidden name="actid" value="#form.actid#">
 	<input hidden name="id" value="#request.usr.id#">
 </form>
-<a class="nav-link" href="#request.script_name#">#actname#</a>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

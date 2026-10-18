@@ -89,6 +89,5 @@ writedump(cat)
 		</cfif>
 	</cfloop>
 </div>
-<button class="nav-link" formaction="#request.dir#">#actname#</a>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

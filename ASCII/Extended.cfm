@@ -337,6 +337,5 @@ function binary(code) {
 		<img class="img-fluid" src="https://upload.wikimedia.org/wikipedia/commons/6/69/IBM_PC_5150.jpg">
 	</div>
 </div>
-<button class="nav-link">#actname#</button>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

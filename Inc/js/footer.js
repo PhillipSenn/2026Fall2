@@ -1,17 +1,17 @@
 var dom = {} // Document Object Model
 
 pgm.init = function() {
-	function each_navlink() { // .home.nav-link needs to be moved into #main-navbar
-		if ($(this).closest('nav').length) return
-		if ($(this).hasClass('theme-primary')) {
-			$(this).removeClass('btn-solid theme-primary')
-				.addClass('btn-link')
-		}
-		$(this).wrap('<li class="nav-item"></li>')
-		$(this).parent().appendTo('#main-navbar')
-	}
+//	function each_navlink() { // .home.nav-link needs to be moved into #main-navbar
+//		if ($(this).closest('nav').length) return
+//		if ($(this).hasClass('theme-primary')) {
+//			$(this).removeClass('btn-solid theme-primary')
+//				.addClass('btn-link')
+//		}
+//		$(this).wrap('<li class="nav-item"></li>')
+//		$(this).parent().appendTo('#main-navbar')
+//	}
 	$('button:not([class*="btn-"]):not([class*="bg-"])').addClass('btn-solid theme-primary CharliePark')
-	$('.nav-link').each(each_navlink)
+//	$('.nav-link').each(each_navlink)
 
 	dom.home = $('.home.nav-link')
 	if (dom.home.length) {

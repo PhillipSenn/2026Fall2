@@ -32,6 +32,5 @@ You are to reword the question, <strong>not answer it</strong>.
 		<input hidden name="actid" value="#actid#">
 	</div>
 </form>
-<button class="nav-link">#actname#</button>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

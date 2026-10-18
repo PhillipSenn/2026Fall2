@@ -49,6 +49,5 @@ order by guessid desc')
 		</table>
 	</div>
 </div>
-<a class="nav-link" href="#request.script_name#">Guess</a>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>
