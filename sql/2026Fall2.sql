@@ -1002,6 +1002,69 @@ update usr set
 ,fontSize = @fontSize
 where id=@id
 go
+create or alter proc ans.connections
+(@actid int
+) as
+select sum(connections) as totalConnections
+from(
+	select ansname
+		,count(*)-1 as connections
+	from ans
+	join q on ans_q=qid
+	where q_act=@actid
+	group by ansname
+	having count(*) > 1
+) x
+go
+--exec ans.connections 336
+go
+
+create or alter proc guess.merge_relationships
+(@id uniqueidentifier
+,@ansid int
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+declare @qid int=(select ans_q from ans where ansid=@ansid)
+declare @actid int=(select q_act from q where qid=@qid)
+
+declare @gradeid int=(select gradeid from grade where grade_usr=@usrid and grade_act=@actid)
+if @gradeid is null begin
+	insert into grade(grade_usr,grade_act) values(@usrid,@actid)
+	select @gradeid=scope_identity()
+end
+declare @guessid int=(
+	select guessid 
+	from guess 
+	join grade on guess_grade=gradeid 
+	where grade_usr=@usrid
+	and guess_ans=@ansid
+)
+if @guessid is null begin
+	insert into guess(guess_grade,guess_ans) values(@gradeid,@ansid)
+end
+declare @possible int=(select sum(connections) as totalConnections
+from(
+	select ansname
+		,count(*)-1 as connections
+	from ans
+	join q on ans_q=qid
+	where q_act=@actid
+	group by ansname
+	having count(*) > 1
+) x
+)
+declare @answered int=(
+	select count(guess_ans) 
+	from guess 
+	where guess_grade=@gradeid
+)
+update grade set
+ earned=ceiling(100.0 * @answered / @possible)
+where gradeid=@gradeid
+select earned
+from grade
+where gradeid=@gradeid
+go
 /*
 declare @actid int=328
 execute q.merge_unicode '19C76747-5CF9-449C-9A52-FEF8906AD52E',@actid,1,'U+1F468 U+1F3FB U+200D U+2764 U+FE0F U+200D U+1F48B U+200D U+1F468 U+1F3FB'

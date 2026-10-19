@@ -125,9 +125,11 @@ for (band = 1; band <= 10; band++) {
 		</div>
 		</cfif>
 	</div>
-	<div class="card-footer">
-		<button formaction="Debug/guess.cfm">Guess</button>
-	</div>
+	<cfif request.usr.isAdmin>
+		<div class="card-footer">
+			<button formaction="Debug/guess.cfm">Guess</button>
+		</div>
+	</cfif>
 	<input hidden name="id" value="#request.usr.id#">
 </form>
 <cfinclude template="/Inc/footer6.cfm">

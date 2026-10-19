@@ -8,14 +8,12 @@ include '/Inc/header6.cfm';
 <div class="rel-window">
 	<div id="rel-canvas"></div>
 </div>
-<div class="modal fade" id="phonetype-modal" tabindex="-1" aria-labelledby="phonetype-title" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="phonetype-title">phonetype</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
+<dialog class="dialog" id="phonetype-modal" aria-labelledby="phonetype-title">
+	<div class="dialog-header">
+		<h5 class="dialog-title" id="phonetype-title">phonetype</h5>
+		<button type="button" class="btn-close" data-bs-dismiss="dialog" aria-label="Close"></button>
+	</div>
+	<div class="dialog-body">
 				<table>
 					<thead>
 						<tr>
@@ -42,18 +40,14 @@ include '/Inc/header6.cfm';
 						</tr>
 					</tbody>
 				</table>
-			</div>
-		</div>
 	</div>
-</div>
-<div class="modal fade" id="term-modal" tabindex="-1" aria-labelledby="term-title" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="term-title">term</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
+</dialog>
+<dialog class="dialog" id="term-modal" aria-labelledby="term-title">
+	<div class="dialog-header">
+		<h5 class="dialog-title" id="term-title">term</h5>
+		<button type="button" class="btn-close" data-bs-dismiss="dialog" aria-label="Close"></button>
+	</div>
+	<div class="dialog-body">
 				<table>
 					<thead>
 						<tr>
@@ -76,18 +70,14 @@ include '/Inc/header6.cfm';
 						</tr>
 					</tbody>
 				</table>
-			</div>
-		</div>
 	</div>
-</div>
-<div class="modal fade" id="course-modal" tabindex="-1" aria-labelledby="course-title" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="course-title">course</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
+</dialog>
+<dialog class="dialog" id="course-modal" aria-labelledby="course-title">
+	<div class="dialog-header">
+		<h5 class="dialog-title" id="course-title">course</h5>
+		<button type="button" class="btn-close" data-bs-dismiss="dialog" aria-label="Close"></button>
+	</div>
+	<div class="dialog-body">
 				<table>
 					<thead>
 						<tr>
@@ -102,18 +92,14 @@ include '/Inc/header6.cfm';
 						</tr>
 					</tbody>
 				</table>
-			</div>
-		</div>
 	</div>
-</div>
-<div class="modal fade" id="curriculum-modal" tabindex="-1" aria-labelledby="curriculum-title" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="curriculum-title">Curriculum</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
+</dialog>
+<dialog class="dialog" id="curriculum-modal" aria-labelledby="curriculum-title">
+	<div class="dialog-header">
+		<h5 class="dialog-title" id="curriculum-title">Curriculum</h5>
+		<button type="button" class="btn-close" data-bs-dismiss="dialog" aria-label="Close"></button>
+	</div>
+	<div class="dialog-body">
 				<table>
 					<thead>
 						<tr>
@@ -148,18 +134,14 @@ include '/Inc/header6.cfm';
 						</tr>
 					</tbody>
 				</table>
-			</div>
-		</div>
 	</div>
-</div>
-<div class="modal fade" id="classlevel-modal" tabindex="-1" aria-labelledby="classlevel-title" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="classlevel-title">ClassLevel</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
+</dialog>
+<dialog class="dialog" id="classlevel-modal" aria-labelledby="classlevel-title">
+	<div class="dialog-header">
+		<h5 class="dialog-title" id="classlevel-title">ClassLevel</h5>
+		<button type="button" class="btn-close" data-bs-dismiss="dialog" aria-label="Close"></button>
+	</div>
+	<div class="dialog-body">
 				<table>
 					<thead>
 						<tr>
@@ -190,9 +172,7 @@ include '/Inc/header6.cfm';
 						</tr>
 					</tbody>
 				</table>
-			</div>
-		</div>
 	</div>
-</div>
+</dialog>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

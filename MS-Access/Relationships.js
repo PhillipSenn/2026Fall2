@@ -361,7 +361,16 @@
 	}
 
 	function showLookupModal(id) {
-		bootstrap.Modal.getOrCreateInstance(document.getElementById(id)).show();
+		if (!(window.bootstrap && bootstrap.Dialog)) {
+			document.addEventListener('bootstrap-ready', openWhenReady);
+			return;
+		}
+		bootstrap.Dialog.getOrCreateInstance(document.getElementById(id)).show();
+
+		function openWhenReady() {
+			document.removeEventListener('bootstrap-ready', openWhenReady);
+			showLookupModal(id);
+		}
 	}
 
 	document.addEventListener('pointermove', onPointerMove);
