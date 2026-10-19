@@ -276,7 +276,7 @@ for (code = 0; code <= 255; code++) {
 		wiki = 'https://en.wikipedia.org/wiki/' & encodeForURL(glyph)
 	} else {
 		point = points[code - 127]
-		glyph = code == 255 ? '&nbsp;' : chr(point)
+		glyph = code == 255 ? ' ' : chr(point)
 		description = names[code - 127]
 		wiki = 'https://en.wikipedia.org/wiki/' & encodeForURL(chr(point))
 		if (code >= 176 && code <= 178) {
@@ -286,7 +286,7 @@ for (code = 0; code <= 255; code++) {
 		} else if (code >= 219 && code <= 223) {
 			usage = 'Filled part or all of a character cell, used for bars and solid boxes.'
 		} else if (code == 255) {
-			usage = 'Drew a blank. Word processors treated it as a space that does not break a line.'
+			usage = 'Blank. Word processors treated it as a space that does not break a line.'
 		}
 	}
 	queryAddRow(extended, {
@@ -299,7 +299,7 @@ for (code = 0; code <= 255; code++) {
 }
 function binary(code) {
 	var bits = formatBaseN(code, 2)
-	return repeatString('0', 8 - len(bits)) & bits
+	return right('00000000' & bits, 8)
 }
 </cfscript>
 
@@ -323,11 +323,11 @@ function binary(code) {
 			<tbody>
 				<cfloop query="extended">
 					<tr>
-						<td class="font-monospace">#binary(code)#</td>
-						<td class="text-end"><a href="#wiki#">#code#</a></td>
-						<td class="text-center">#encodeForHTML(glyph)#</td>
-						<td>#description#</td>
-						<td>#usage#</td>
+						<td class="font-monospace">#binary(extended.code)#</td>
+						<td class="text-end"><a href="#wiki#">#extended.code#</a></td>
+						<td class="text-center">#encodeForHTML(extended.glyph)#</td>
+						<td>#extended.description#</td>
+						<td>#extended.usage#</td>
 					</tr>
 				</cfloop>
 			</tbody>

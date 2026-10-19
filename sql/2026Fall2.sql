@@ -1070,4 +1070,21 @@ declare @actid int=328
 execute q.merge_unicode '19C76747-5CF9-449C-9A52-FEF8906AD52E',@actid,1,'U+1F468 U+1F3FB U+200D U+2764 U+FE0F U+200D U+1F48B U+200D U+1F468 U+1F3FB'
 select * from act
 */
+create or alter view ansview as
+select ansid,ansname,ansdesc,correct
+	,qid,qname,qdesc,qsort,qhref
+	,actid,actname,actdesc,actlink,actsort,isHidden
+	,grpid,grpname
+	,catid,catname
+from ans
+left join q on ans_q=qid
+left join act on q_act=actid
+left join grp on act_grp=grpid
+left join cat on act_cat=catid
+go
+select * from ansview
+where actname is null
+
+
+
 select * from usr
