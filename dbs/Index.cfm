@@ -106,8 +106,21 @@ include '/Inc/header6.cfm';
 </cfscript>
 
 <cfoutput query="act">
-<div class="rel-window">
-	<div id="rel-canvas"></div>
+<div class="card">
+	<div class="card-header bg-subtle-primary">
+	</div>
+	<div class="card-body">
+		<div id="rel-canvas"></div>
+		<div class="rel-side">
+			<div id="rel-fields" aria-label="Fields">
+				<p class="rel-fields-hint">Drop fields here</p>
+			</div>
+			<div id="sql-stmt"></div>
+		</div>
+	</div>
+	<div class="card-footer">
+		<table id="rel-results"></table>
+	</div>
 </div>
 <script type="application/json" id="rel-data">#relJson#</script>
 <cfloop array="#lookupTables#" index="table">

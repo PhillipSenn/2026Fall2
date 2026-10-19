@@ -12,7 +12,7 @@ this.serialization = {}
 this.serialization.dateTimeFormat = 'iso8601' // 2025-12-20T13:45:00Z
 
 function onRequestStart(targetPage) {
-	//setting showdebugoutput=false;
+	setting showdebugoutput=false;
 	structAppend(form,url,false)
 	request.home = '/2026Fall2/' // Trailing slash so that everywhere it's used we don't need a slash
 	if (!structKeyExists(form, 'id') && structKeyExists(session, 'id')) {

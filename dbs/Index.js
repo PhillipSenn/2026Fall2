@@ -32,6 +32,11 @@
 
 	const joins = new Map();
 	const canvas = document.getElementById('rel-canvas');
+	const sidebar = document.getElementById('rel-fields');
+	const headerTitle = $('.card-header').text();
+	let ghost = null;
+	let headerNotice = null;
+	let resultRequest = 0;
 	const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 	const joinLayer = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 	const rubber = document.createElementNS('http://www.w3.org/2000/svg', 'line');
@@ -81,6 +86,10 @@
 				if (field.pk || foreign) {
 					row.setAttribute('role', 'button');
 					row.addEventListener('pointerdown', onFieldPointerDown);
+				} else {
+					row.classList.add('is-column');
+					row.setAttribute('role', 'button');
+					row.addEventListener('pointerdown', onColumnPointerDown);
 				}
 				box.appendChild(row);
 			});
@@ -254,12 +263,31 @@
 			moveRubber(event.clientX, event.clientY);
 			return;
 		}
+		if (drag.type === 'column') {
+			moveGhost(event.clientX, event.clientY);
+			markSidebar(event.clientX, event.clientY);
+			return;
+		}
 		const rect = canvas.getBoundingClientRect();
 		const x = Math.max(0, event.clientX - rect.left - drag.dx + canvas.scrollLeft);
 		const y = Math.max(0, event.clientY - rect.top - drag.dy + canvas.scrollTop);
 		drag.table.style.left = x + 'px';
 		drag.table.style.top = y + 'px';
+		sizeSurface();
 		drawJoins();
+	}
+
+	function sizeSurface() {
+		let width = canvas.clientWidth;
+		let height = canvas.clientHeight;
+		canvas.querySelectorAll('.rel-table').forEach(measureTable);
+		svg.style.width = width + 'px';
+		svg.style.height = height + 'px';
+
+		function measureTable(table) {
+			width = Math.max(width, table.offsetLeft + table.offsetWidth + 24);
+			height = Math.max(height, table.offsetTop + table.offsetHeight + 24);
+		}
 	}
 
 	function onPointerUp(event) {
@@ -271,12 +299,361 @@
 			if (over && isPartner(drag.key, over.dataset.key)) {
 				joins.set(joinId(drag.key, over.dataset.key), [drag.key, over.dataset.key]);
 				saveRelationship(drag.key, over.dataset.key);
+				writeSql();
 			}
 			hideRubber();
 			clearFieldState();
 			drawJoins();
+		} else if (drag.type === 'column') {
+			const key = drag.key;
+			const over = pointInSidebar(event.clientX, event.clientY);
+			const accepted = over && canDropField(key);
+			sidebar.classList.remove('is-hot', 'is-blocked');
+			if (accepted) {
+				addChip(key);
+				removeGhost();
+			} else {
+				revertGhost(key);
+				if (over) {
+					showNoRelationship();
+				}
+			}
 		}
 		drag = null;
+	}
+
+	function onColumnPointerDown(event) {
+		if (event.button !== 0 || drag) {
+			return;
+		}
+		event.preventDefault();
+		event.stopPropagation();
+		drag = {
+			type: 'column',
+			key: event.currentTarget.dataset.key,
+			pointerId: event.pointerId
+		};
+		event.currentTarget.setPointerCapture(event.pointerId);
+		showGhost(fieldName(drag.key), event.clientX, event.clientY);
+		markSidebar(event.clientX, event.clientY);
+	}
+
+	function showGhost(key, clientX, clientY) {
+		ghost = document.createElement('div');
+		ghost.className = 'rel-ghost';
+		ghost.appendChild(document.createTextNode(key));
+		document.body.appendChild(ghost);
+		moveGhost(clientX, clientY);
+	}
+
+	function moveGhost(clientX, clientY) {
+		ghost.style.left = (clientX + 12) + 'px';
+		ghost.style.top = (clientY + 12) + 'px';
+	}
+
+	function removeGhost() {
+		if (ghost) {
+			ghost.remove();
+			ghost = null;
+		}
+	}
+
+	function showNoRelationship() {
+		clearTimeout(headerNotice);
+		$('.card-header').removeClass('bg-subtle-primary').addClass('bg-subtle-danger').text('No relationship built');
+		headerNotice = setTimeout(restoreHeader, 3000);
+	}
+
+	function restoreHeader() {
+		$('.card-header').removeClass('bg-subtle-danger').addClass('bg-subtle-primary').text(headerTitle);
+		headerNotice = null;
+	}
+
+	function revertGhost(key) {
+		const field = fieldBox(key);
+		const moving = ghost;
+		if (!moving || !field) {
+			removeGhost();
+			return;
+		}
+		const rect = field.getBoundingClientRect();
+		const current = moving.getBoundingClientRect();
+		if (Math.abs(current.left - rect.left) < 2 && Math.abs(current.top - rect.top) < 2) {
+			removeGhost();
+			return;
+		}
+		moving.classList.add('is-reverting');
+		moving.style.left = rect.left + 'px';
+		moving.style.top = rect.top + 'px';
+		moving.addEventListener('transitionend', finishRevert);
+
+		function finishRevert(event) {
+			if (event.propertyName !== 'left') {
+				return;
+			}
+			moving.removeEventListener('transitionend', finishRevert);
+			if (ghost === moving) {
+				removeGhost();
+			}
+		}
+	}
+
+	function markSidebar(clientX, clientY) {
+		const over = pointInSidebar(clientX, clientY);
+		const allowed = over && canDropField(drag.key);
+		sidebar.classList.toggle('is-hot', allowed);
+		sidebar.classList.toggle('is-blocked', over && !allowed);
+	}
+
+	function pointInSidebar(clientX, clientY) {
+		const rect = sidebar.getBoundingClientRect();
+		return clientX >= rect.left && clientX <= rect.right && clientY >= rect.top && clientY <= rect.bottom;
+	}
+
+	function fieldName(key) {
+		return key.slice(key.indexOf('.') + 1);
+	}
+
+	function tableName(key) {
+		return key.slice(0, key.indexOf('.'));
+	}
+
+	function canDropField(key) {
+		const selected = [];
+		const allowed = {};
+		let grew = true;
+		sidebar.querySelectorAll('.rel-chip').forEach(readChip);
+		if (!selected.length) {
+			return true;
+		}
+		selected.forEach(allowTable);
+		while (grew) {
+			grew = false;
+			joins.forEach(allowJoined);
+		}
+		return !!allowed[tableName(key)];
+
+		function readChip(chip) {
+			selected.push(tableName(chip.dataset.key));
+		}
+
+		function allowTable(name) {
+			allowed[name] = true;
+		}
+
+		function allowJoined(pair) {
+			const left = tableName(pair[0]);
+			const right = tableName(pair[1]);
+			if (allowed[left] && !allowed[right]) {
+				allowed[right] = true;
+				grew = true;
+			}
+			if (allowed[right] && !allowed[left]) {
+				allowed[left] = true;
+				grew = true;
+			}
+		}
+	}
+
+	function addChip(key) {
+		if (sidebar.querySelector('.rel-chip[data-key="' + CSS.escape(key) + '"]')) {
+			return;
+		}
+		const chip = document.createElement('div');
+		const label = document.createElement('span');
+		const remove = document.createElement('button');
+		chip.className = 'rel-chip';
+		chip.dataset.key = key;
+		label.appendChild(document.createTextNode(fieldName(key)));
+		remove.type = 'button';
+		remove.className = 'rel-chip-remove';
+		remove.setAttribute('aria-label', 'Remove ' + fieldName(key));
+		remove.appendChild(document.createTextNode('\u00d7'));
+		remove.addEventListener('click', onRemoveChip);
+		chip.appendChild(label);
+		chip.appendChild(remove);
+		sidebar.appendChild(chip);
+		syncHint();
+		writeSql();
+	}
+
+	function onRemoveChip(event) {
+		event.currentTarget.closest('.rel-chip').remove();
+		syncHint();
+		writeSql();
+	}
+
+	function writeSql() {
+		const chips = [];
+		const sql = sqlText(readChips());
+		$('#sql-stmt').text(sql);
+		loadResults(sql, readChips());
+
+		function readChips() {
+			chips.length = 0;
+			sidebar.querySelectorAll('.rel-chip').forEach(readChip);
+			return chips;
+		}
+
+		function readChip(chip) {
+			chips.push(chip.dataset.key);
+		}
+	}
+
+	function loadResults(sql, chips) {
+		const requestId = ++resultRequest;
+		if (!sql) {
+			clearResults();
+			return;
+		}
+		const url = 'results.cfm';
+		const form = {};
+		form.body = new URLSearchParams();
+		form.body.set('id', app.id);
+		form.body.set('sql', sql);
+		form.body.set('fields', chips.join(','));
+		fetch(url, form)
+			.then(json_done)
+			.then(show)
+			.catch(caught(url));
+
+		function show(response) {
+			if (requestId === resultRequest) {
+				showResults(response);
+			}
+			return response;
+		}
+	}
+
+	function clearResults() {
+		document.getElementById('rel-results').replaceChildren();
+	}
+
+	function showResults(response) {
+		const columns = response.columns || response.COLUMNS || [];
+		const records = response.rows || response.ROWS || [];
+		const table = document.getElementById('rel-results');
+		const thead = document.createElement('thead');
+		const tbody = document.createElement('tbody');
+		const headRow = document.createElement('tr');
+		columns.forEach(addHead);
+		thead.appendChild(headRow);
+		records.forEach(addRecord);
+		table.replaceChildren(thead, tbody);
+
+		function addHead(column) {
+			const th = document.createElement('th');
+			if (isNumeric(column)) {
+				th.className = 'text-end';
+			}
+			th.appendChild(document.createTextNode(columnName(column)));
+			headRow.appendChild(th);
+		}
+
+		function addRecord(record) {
+			const tr = document.createElement('tr');
+			record.forEach(addCell);
+			tbody.appendChild(tr);
+
+			function addCell(value, index) {
+				const td = document.createElement('td');
+				if (columns[index] && isNumeric(columns[index])) {
+					td.className = 'text-end';
+				}
+				td.appendChild(document.createTextNode(value));
+				tr.appendChild(td);
+			}
+		}
+	}
+
+	function columnName(column) {
+		if (column.name !== undefined) {
+			return column.name;
+		}
+		return column.NAME;
+	}
+
+	function isNumeric(column) {
+		const numeric = column.numeric !== undefined ? column.numeric : column.NUMERIC;
+		return numeric === true || numeric === 1 || numeric === 'true' || numeric === 'YES';
+	}
+
+	function sqlText(chips) {
+		const fields = [];
+		const tables = [];
+		const included = {};
+		const lines = [];
+		if (!chips.length) {
+			return '';
+		}
+		chips.forEach(collect);
+		lines.push('select ' + fields.join(','));
+		lines.push('from ' + tables[0]);
+		included[tables[0]] = true;
+		tables.forEach(addTable);
+		return lines.join('\n');
+
+		function collect(key) {
+			const table = tableName(key);
+			fields.push(fieldName(key));
+			if (tables.indexOf(table) === -1) {
+				tables.push(table);
+			}
+		}
+
+		function addTable(table) {
+			if (included[table]) {
+				return;
+			}
+			joinPath(included, table).forEach(appendJoin);
+		}
+
+		function appendJoin(step) {
+			lines.push('join ' + step.table + ' on ' + step.left + '=' + step.right);
+			included[step.table] = true;
+		}
+	}
+
+	function joinPath(included, target) {
+		const seen = {};
+		const queue = [];
+		let current = null;
+		Object.keys(included).forEach(seed);
+		while (queue.length) {
+			current = queue.shift();
+			if (current.table === target) {
+				return current.steps;
+			}
+			joins.forEach(consider);
+		}
+		return [];
+
+		function seed(name) {
+			seen[name] = true;
+			queue.push({table: name, steps: []});
+		}
+
+		function consider(pair) {
+			const leftTable = tableName(pair[0]);
+			const rightTable = tableName(pair[1]);
+			if (leftTable === current.table && !seen[rightTable]) {
+				enqueue(rightTable, pair[0], pair[1]);
+			}
+			if (rightTable === current.table && !seen[leftTable]) {
+				enqueue(leftTable, pair[1], pair[0]);
+			}
+		}
+
+		function enqueue(table, left, right) {
+			const steps = current.steps.slice();
+			seen[table] = true;
+			steps.push({table: table, left: left, right: right});
+			queue.push({table: table, steps: steps});
+		}
+	}
+
+	function syncHint() {
+		sidebar.querySelector('.rel-fields-hint').hidden = !!sidebar.querySelector('.rel-chip');
 	}
 
 	function saveRelationship(sourceKey, targetKey) {
@@ -360,6 +737,7 @@
 
 	layoutTables();
 	renderTables();
+	sizeSurface();
 	drawJoins();
 
 	function layoutTables() {

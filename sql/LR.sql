@@ -110,7 +110,10 @@ create table term
 ,termname nvarchar(max)
 )
 go
-insert into term(termname) values('Mini-term II')
+insert into term(termname) values('Fall')
+insert into term(termname) values('Spring')
+insert into term(termname) values('Fall Mini-term II')
+insert into term(termname) values('Spring Mini-term I')
 go
 create table avail
 (availid int identity primary key
@@ -133,15 +136,6 @@ insert into phonetype(phonetypename) values
 ,('Work')
 ,('Fax')
 ,('Other')
-go
-select * from student
-select * from classLevel
-select * from course
-select * from enrollment
-select * from curriculum
-select * from avail
-select * from phonetype
-select * from term
 go
 use lr2026Fall2
 --insert into act(actname,actlink) values('Database Relationships','dbs/') -- 336
@@ -217,3 +211,13 @@ go
 declare @curriculumid int=(select curriculumid from curriculum where curriculumname='Criminal Justice')
 update student set curriculumid=@curriculumid where studentname='Zane'
 go
+select * from student
+join classLevel on student.classLevelid=classLevel.classLevelid
+update student set phonetypeid=2
+select * from classLevel
+select * from course
+select * from enrollment
+select * from curriculum
+select * from avail
+select * from phonetype
+select * from term
