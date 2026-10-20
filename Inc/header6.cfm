@@ -111,22 +111,24 @@ writeoutput('<body class="' & request.body & '">')
 <div class="#request.container# #request.top#">
 	<nav class="navbar navbar-expand bg-body py-0" data-bs-theme="dark">
 		<a class="ms-5 me-0 navbar-brand" href="#request.home#" aria-label="Home">
-		<i class="bi bi-house-fill"></i>
+		CSC175
 		</a>
 		<form class="d-flex flex-grow-1 align-items-center">
 			<ul id="main-navbar" class="navbar-nav me-auto">
 				<cfif form.actid>
 					<cfif len(act.grpname)>
 						<li class="nav-item">
-							<a class="nav-link" href="#request.dir#?actid=#form.actid#">#act.grpname#</a>
+							<a class="nav-link" href="#request.home#grp/?actid=#act.actid#">#act.grpname#</a>
 						</li>
 					</cfif>
-					<li class="nav-item">
-						<a class="nav-link" href="#cgi.script_name#?actid=#form.actid#">#act.actname#</a>
-					</li>
-					<cfif len(act.catname)>
+					<cfif !findNoCase('/grp',request.dir) and !findNoCase('/cat',request.dir)>
 						<li class="nav-item">
-							<a class="nav-link" href="#cgi.script_name#?actid=#form.actid#">#act.catname#</a>
+							<a class="nav-link" href="#cgi.script_name#?actid=#form.actid#">#act.actname#</a>
+						</li>
+					</cfif>
+					<cfif !findNoCase('/grp',request.dir) and len(act.catname)>
+						<li class="nav-item">
+							<a class="nav-link" href="#request.home#cat?actid=#form.actid#">#act.catname#</a>
 						</li>
 					</cfif>
 				</cfif>

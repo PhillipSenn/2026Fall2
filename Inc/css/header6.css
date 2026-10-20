@@ -62,6 +62,13 @@ code {
 .card-header[data-bs-toggle="collapse"] {
 	cursor: pointer;
 }
+.navbar-brand:has(+ form #main-navbar > .nav-item)::after {
+	content: "\2022";
+	margin-left: .35rem;
+	color: rgba(255, 255, 255, .75);
+	font-size: 16px;
+	font-weight: 400;
+}
 .navbar-brand .bi-house-fill {
 	color: gray;
 }
