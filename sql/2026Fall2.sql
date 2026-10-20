@@ -1100,10 +1100,13 @@ left join grade on grade_usr=@usrid and grade_act=actid
 where act_cat=@catid
 order by actsort,actid
 go
+select * from usr
+
+
+
 select * from ansview
 where actname is null
 
 
 
-select * from usr
 select * from grp

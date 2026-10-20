@@ -6,7 +6,6 @@ cat = usr('act.where_cat', act.catid)
 <cfoutput query="act">
 <div class="card">
 	<div class="card-header theme-primary theme-subtle">
-		#catname#
 	</div>
 	<div class="card-body">
 		<table>

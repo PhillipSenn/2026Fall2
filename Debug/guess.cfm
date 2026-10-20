@@ -1,6 +1,8 @@
 ﻿<cfscript>
 include '/Inc/header6.cfm'
-guess = queryexecute('select 
+usrs = exec('usr.list')
+selectedUsrid = val(form.usrid ?: '')
+sql = 'select 
 guessid,usrid,gradeid,actid,qid,ansid,ansname,guessname
 	,earned
 from guess
@@ -8,13 +10,28 @@ left join grade on guess_grade=gradeid
 left join usr on grade_usr=usrid
 left join act on grade_act=actid
 left join ans on guess_ans=ansid
-left join q on ans_q=qid
-order by guessid desc')
+left join q on ans_q=qid'
+if (selectedUsrid) {
+	sql &= '
+where usrid = :usrid'
+}
+sql &= '
+order by guessid desc'
+guess = queryexecute(sql, selectedUsrid ? {usrid: {value: selectedUsrid, cfsqltype: 'cf_sql_integer'}} : {})
 </cfscript>
 
 <cfoutput>
 <div class="card">
 	<div class="card-header theme-primary theme-subtle">
+		<form method="get">
+			<select name="usrid" id="usrid" class="form-control" onchange="this.form.submit()">
+				<option value="">All</option>
+				<cfloop query="usrs">
+					<option value="#usrid#"<cfif usrid eq selectedUsrid> selected</cfif>>#encodeForHtml(firstname)#</option>
+				</cfloop>
+			</select>
+			<input type="hidden" name="id" value="#request.usr.id#">
+		</form>
 	</div>
 	<div class="card-body">
 		<table>
