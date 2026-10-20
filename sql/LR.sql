@@ -113,7 +113,6 @@ go
 insert into term(termname) values('Fall')
 insert into term(termname) values('Spring')
 insert into term(termname) values('Fall Mini-term II')
-insert into term(termname) values('Spring Mini-term I')
 go
 create table avail
 (availid int identity primary key
@@ -141,7 +140,7 @@ use lr2026Fall2
 --insert into act(actname,actlink) values('Database Relationships','dbs/') -- 336
 declare @qid int
 declare @actid int=336
-update act set actname='Database Relationships',actlink='dbs/' where actid=336
+--update act set actname='Database Relationships',actlink='dbs/' where actid=336
 insert into q(q_act,qname) values(@actid,'student')
 select @qid=scope_identity()
 insert into ans(ans_q,ansname) values(@qid,'studentid')
@@ -186,6 +185,9 @@ insert into ans(ans_q,ansname) values(@qid,'classLevelname')
 insert into ans(ans_q,ansname) values(@qid,'minCredits')
 insert into ans(ans_q,ansname) values(@qid,'maxCredits')
 select * from q where q_act=336
+go
+
+use lr
 select * from curriculum
 declare @classLevelid int=(select classLevelid from classLevel where classLevelname='Freshman')
 update student set classLevelid=@classLevelid
