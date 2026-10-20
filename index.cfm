@@ -1,6 +1,7 @@
 <cfscript>
 form.actid=0
 include '/Inc/header6.cfm'
+flush;
 act = usr('act.where_usr')
 listView = structKeyExists(form, 'view') && form.view == 'list'
 sections = [{title: 'New', low: 0, high: 9999, open: false, blank: true}]

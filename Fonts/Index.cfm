@@ -18,7 +18,6 @@ for (font in fonts) {
 	}
 }
 fonts = ordered
-saved = false
 current = ''
 previewStack = ''
 sizes = [12,14,16,18,20,24,28,32,36,48,64,72]
@@ -51,7 +50,7 @@ if (cgi.request_method == 'POST' && structKeyExists(form, 'fontFamily')) {
 		current = form.fontFamily
 		querySetCell(request.usr, 'fontFamily', current)
 		querySetCell(request.usr, 'fontSize', fontSize)
-		saved = true
+		location(request.home,false)
 	}
 }
 for (font in builtins) {
@@ -78,11 +77,6 @@ function cssGeneric(category) {
 		Which font do you want as your default?
 	</div>
 	<div class="card-body">
-		<cfif saved>
-			<p>Your default font is #current#.</p>
-		<cfelseif len(current)>
-			<p>Your default font is #current#. Pick another one below to change it.</p>
-		</cfif>
 		<div class="font-try">
 			<div class="row">
 				<div class="col">
