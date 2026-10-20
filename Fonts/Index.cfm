@@ -87,7 +87,7 @@ function cssGeneric(category) {
 			<div class="row">
 				<div class="col">
 					<label for="fontSize">Size</label>
-					<select name="fontSize" id="fontSize" class="form-select">
+					<select name="fontSize" id="fontSize" class="form-control">
 						<cfloop array="#sizes#" index="size">
 							<option value="#size#"<cfif size == fontSize> selected</cfif>>#size#</option>
 						</cfloop>
@@ -98,7 +98,7 @@ function cssGeneric(category) {
 					<label for="font-search">Search</label>
 					<input id="font-search" class="form-control" type="search" autocomplete="off" placeholder="Search #numberFormat(arrayLen(fonts))# Google Fonts">
 					<label for="font-category">Category</label>
-					<select id="font-category" class="form-select">
+					<select id="font-category" class="form-control">
 						<option value="">All</option>
 						<option>Sans Serif</option>
 						<option>Serif</option>

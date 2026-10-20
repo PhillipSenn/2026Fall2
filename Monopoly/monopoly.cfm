@@ -163,10 +163,10 @@ include '/Inc/header6.cfm'
 			<div class="col-1">
 				<img src="gif/shoe.gif" class="draggable" width="50px">
 			</div>
-			<div class="offset-1 col-1 display-1">
+			<div class="offset-1 col-1 fs-6xl fw-light">
 				&##9861;
 			</div>
-			<div class="col-1 display-1">
+			<div class="col-1 fs-6xl fw-light">
 				&##9861;
 			</div>
 			<!---

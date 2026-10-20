@@ -73,7 +73,7 @@ if (structKeyExists(form,'codePoint')) {
 
 			<h5>Selected Character</h5>
 
-			<div id="selectedCharacter" class="display-4"></div>
+			<div id="selectedCharacter" class="fs-5xl fw-light"></div>
 			<div>CodePoint: <span id="textCodePoint"></span></div>
 		</div>
 	</div>

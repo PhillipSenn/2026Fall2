@@ -29,13 +29,13 @@ if (!len(mark)) {
 			</button>
 		</div>
 		<div class="card-body">
-			<p class="lead mb-3">Hello, <span class="profile-firstname">#encodeForHtml(request.usr.firstname)#</span>.</p>
+			<p class="fs-lg fw-light mb-3">Hello, <span class="profile-firstname">#encodeForHtml(request.usr.firstname)#</span>.</p>
 			<label for="firstname">First name</label>
 			<input type="text" name="firstname" id="firstname" class="form-control" required autofocus
 				value="#encodeForHtmlAttribute(request.usr.firstname)#">
 			<div class="form-text">This is the name shown in the menu.</div>
 			<label for="wordname" class="mt-3">Word name</label>
-			<select name="wordname" id="wordname" class="form-select" required>
+			<select name="wordname" id="wordname" class="form-control" required>
 				<cfloop query="word">
 					<option value="#encodeForHtmlAttribute(wordname)#">#encodeForHtml(wordname)#</option>
 				</cfloop>

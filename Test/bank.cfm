@@ -126,16 +126,16 @@ cfloop(query="qry") {
 								<cfloop query="ans">
 									<li>
 										<cfif FindNoCase('Select all ',qname)>
-											<div class="form-check">
+											<div class="form-field">
 												<cfif correct>
-													<input class="form-check-input" type="checkbox" name="ansids" id="ans#ansid#" value="#ansid#">
-													<label class="form-check-label" for="ans#ansid#">
+													<input class="check" type="checkbox" name="ansids" id="ans#ansid#" value="#ansid#">
+													<label for="ans#ansid#">
 														#ansname#
 													</label>
 												<cfelse>
 													<!---  class="ansid" for fetch statement --->
-													<input class="ansid form-check-input" type="checkbox" tabindex="-1" value="#ansid#">
-													<label class="form-check-label">
+													<input class="ansid check" type="checkbox" tabindex="-1" value="#ansid#">
+													<label>
 														#ansname#
 													</label>
 												</cfif>
@@ -167,16 +167,16 @@ cfloop(query="qry") {
 								<cfloop query="ans">
 									<li>
 										<cfif FindNoCase('Select all ',qname)>
-											<div class="form-check">
+											<div class="form-field">
 												<cfif correct>
-													<input class="form-check-input" type="checkbox" name="ansids" id="ans#ansid#" value="#ansid#">
-													<label class="form-check-label" for="ans#ansid#">
+													<input class="check" type="checkbox" name="ansids" id="ans#ansid#" value="#ansid#">
+													<label for="ans#ansid#">
 														#ansname#
 													</label>
 												<cfelse>
 													<!---  class="ansid" for fetch statement --->
-													<input class="ansid form-check-input" type="checkbox" tabindex="-1" value="#ansid#">
-													<label class="form-check-label">
+													<input class="ansid check" type="checkbox" tabindex="-1" value="#ansid#">
+													<label>
 														#ansname#
 													</label>
 												</cfif>
@@ -229,9 +229,9 @@ cfloop(query="qry") {
 								<td>
 									<cfif ListLen(correct_ansnames,'|') gt 1>
 										<cfloop list="#correct_ansnames#" item="ansname" delimiters="|">
-											<div class="form-check">
-												<input class="form-check-input" type="checkbox" checked>
-												<label class="form-check-label">
+											<div class="form-field">
+												<input class="check" type="checkbox" checked>
+												<label>
 													#ansname#
 												</label>
 											</div>
@@ -246,9 +246,9 @@ cfloop(query="qry") {
 								<td>
 									<cfif ListLen(correct_ansnames,'|') gt 1>
 										<cfloop list="#incorrect_ansnames#" item="ansname" delimiters="|">
-											<div class="form-check">
-												<input class="form-check-input" type="checkbox" checked>
-												<label class="form-check-label">
+											<div class="form-field">
+												<input class="check" type="checkbox" checked>
+												<label>
 													#ansname#
 												</label>
 											</div>

@@ -6,7 +6,7 @@ ans = exec('ans.where_q', form.qid)
 
 <cfoutput query="act">
 <div class="row">
-	<div class="col-lg-6 mx-lg-auto">
+	<div class="lg:col-6 lg:mx-auto">
 		<div class="card">
 			<div class="card-header theme-primary theme-subtle">
 				#q.qname#

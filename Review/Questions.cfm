@@ -108,7 +108,7 @@ tscore = 0
 									</cfif>
 									<button name="ansid" value="#choice.ansid#" class="#choiceClass#">
 										<span>#choice.ansname#</span>
-										<span class="badge bg-secondary fg-contrast-secondary">#choice.chosen#</span>
+										<span class="badge theme-secondary">#choice.chosen#</span>
 									</button>
 								</cfif>
 							</td>

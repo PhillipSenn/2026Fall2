@@ -7,7 +7,7 @@ latlng = exec('latlng.where_act',url.actid)
 </cfscript>
 
 <cfoutput >
-<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+<nav class="navbar lg:navbar-expand bg-black" data-bs-theme="dark">
     <div class="container-fluid">
         <a href="index.cfm" class="navbar-brand">Airport Map</a>
         <div class="ticker-container">

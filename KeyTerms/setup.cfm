@@ -12,8 +12,13 @@ ans = exec('ans.where_q',q.qid)
 </cfscript>
 
 <cfoutput query="act">
+<style>
+#slideDown figcaption a.hover\:underline-80:hover {
+	text-decoration-line: underline;
+}
+</style>
 <div class="card">
-	<div class="card-header theme-primary theme-subtle display-6">
+	<div class="card-header theme-primary theme-subtle fs-3xl fw-light">
 		#q.qname#
 		<div class="float-end">
 			#qs.recordCount-q.recordCount+1# / #qs.recordCount#
@@ -33,14 +38,14 @@ ans = exec('ans.where_q',q.qid)
 					<cfset src = 'https://upload.wikimedia.org/wikipedia/commons/' & ansdesc>
 				</cfif>
 				<cfset fragment = q.qhref & '##:~:text=' & URLEncodedFormat(ansname)>
-				<div class="col-6 col-md-4 col-lg-3">
+				<div class="col-6 md:col-4 lg:col-3">
 					<figure>
 						<button name="ansid" value="#ansid#" class="bg-transparent">
 							<img src="#src#" class="img-thumbnail">
 						</button>
 						<figcaption>
 							<a target="_blank" href="#fragment#"
-							class="link-dark link-underline-opacity-0 link-underline-opacity-75-hover">
+							class="fg-body text-decoration-none hover:underline-80">
 								#ansname#
 							</a>
 						</figcaption>

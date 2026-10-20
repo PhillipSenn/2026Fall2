@@ -13,13 +13,13 @@ ans = exec('ans.where_q',form.qid)
 		</div>
 		<div class="card-body">
 			<cfloop query="ans">
-				<div class="form-check">
+				<div class="form-field">
 					<cfset checked = "">
 					<cfif guess.guess_ans eq ansid>
 						<cfset checked = "checked">
 					</cfif>
-					<input class="form-check-input" type="radio" name="ansid" value="#ansid#" id="ans#ansid#" #checked#>
-					<label class="form-check-label" for="ans#ansid#">
+					<input class="radio" type="radio" name="ansid" value="#ansid#" id="ans#ansid#" #checked#>
+					<label for="ans#ansid#">
 						#ansname#
 					</label>
 				</div>

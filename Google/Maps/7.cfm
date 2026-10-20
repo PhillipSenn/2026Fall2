@@ -4,7 +4,7 @@ request.navbar=false
 include '/Inc/header6.cfm'
 </cfscript>
 
-<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+<nav class="navbar lg:navbar-expand bg-black" data-bs-theme="dark">
 
     <div class="container-fluid">
 

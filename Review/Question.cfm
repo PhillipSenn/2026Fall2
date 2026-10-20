@@ -22,9 +22,9 @@ if (q.recordcount) {
 				</div>
 				<div class="col-4 border-start">
 					<cfloop query="ans">
-						<div class="col-12 form-check">
-							<input class="form-check-input me-2" type="radio" name="ansid" value="#ansid#" id="ans#ansid#">
-							<label class="form-check-label" for="ans#ansid#">
+						<div class="col-12 form-field">
+							<input class="radio" type="radio" name="ansid" value="#ansid#" id="ans#ansid#">
+							<label for="ans#ansid#">
 								#ansname#
 							</label>
 						</div>
@@ -45,7 +45,7 @@ if (q.recordcount) {
 			Review Questions
 			<button class="float-end btn-outline theme-danger" formaction="reset.cfm">Reset</button>
 		</div>
-		<div class="card-body display-1">
+		<div class="card-body fs-6xl fw-light">
 			You did it!
 		</div>
 		<div class="card-footer">

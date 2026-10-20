@@ -1,6 +1,6 @@
 <cfscript>
-//request.body = 'bg-body-tertiary min-vh-100 d-flex flex-column'
-//request.container = 'container-sm flex-grow-1 d-flex'
+//request.body = 'bg-1 min-vh-100 d-flex flex-column'
+//request.container = 'sm:container flex-grow-1 d-flex'
 if (structKeyExists(form,'qid')) {
 	usr('poll.merge_q',form.qid)
 }

@@ -36,7 +36,7 @@ for (i = arrayLen(choices); i > 1; i--) {
 	</div>
 	<div class="card-body">
 		<div class="row g-3">
-			<div class="col-md-4" id="questions">
+			<div class="md:col-4" id="questions">
 				<cfloop query="ans">
 					<cfset matched = structKeyExists(guessed, ans.ansid)>
 					<button type="button" data-ansid="#ans.ansid#"
@@ -44,7 +44,7 @@ for (i = arrayLen(choices); i > 1; i--) {
 						<cfif matched>disabled</cfif>>#encodeForHtml(ans.qname)#</button>
 				</cfloop>
 			</div>
-			<div class="col-md-8" id="answers">
+			<div class="md:col-8" id="answers">
 				<cfloop array="#choices#" index="choice">
 					<cfset matched = structKeyExists(guessed, choice.ansid)>
 					<button type="button" data-ansid="#choice.ansid#"

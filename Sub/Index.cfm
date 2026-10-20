@@ -1,5 +1,5 @@
 <cfscript>
-request.body = 'bg-body-tertiary d-flex flex-column min-vh-100'
+request.body = 'bg-1 d-flex flex-column min-vh-100'
 request.container = 'container-fluid'
 if (isDefined('form.reset')) {
 	usr('poll.reset_act',form.actid)
