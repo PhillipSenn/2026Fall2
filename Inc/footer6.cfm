@@ -30,7 +30,7 @@ if (request.footer.js) {
 //writeoutput('<h1>#request.pgmDir#</h1>')
 //writeoutput('<h1>#request.pgmname#</h1>')
 //writeoutput('<h1>#fileExists(request.pgmDir & request.pgmName & '.js')#</h1>')
-if (fileExists(request.pgmDir & request.pgmName & '.js')) {
+if (structKeyExists(request,'usr') AND fileExists(request.pgmDir & request.pgmName & '.js')) {
 	writeoutput('<script src="' & request.pgmName & '.js' & request.cache & '"></script>' & chr(10))
 }
 //writeOutput('<div hidden id="serverfile">' & request.serverFile & '</div>' & chr(10))
