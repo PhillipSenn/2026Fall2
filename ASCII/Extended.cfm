@@ -305,7 +305,7 @@ function binary(code) {
 
 <cfoutput query="act">
 <div class="card">
-	<div class="card-header bg-subtle-primary">
+	<div class="card-header theme-primary theme-subtle">
 		Extended ASCII
 	</div>
 	<div class="card-body">

@@ -17,8 +17,8 @@ phylum = queryExecute(
 
 <cfoutput query="act">
 <form class="card" action="class.cfm">
-	<div class="card-header bg-subtle-primary">domain: #path.domainname#</div>
-	<div class="card-header bg-subtle-primary">kingdom: #path.kingdomname#</div>
+	<div class="card-header theme-primary theme-subtle">domain: #path.domainname#</div>
+	<div class="card-header theme-primary theme-subtle">kingdom: #path.kingdomname#</div>
 	<div class="card-body">
 		<cfloop query="phylum">
 			<div>

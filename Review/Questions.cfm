@@ -49,7 +49,7 @@ tscore = 0
 
 <cfoutput query="act">
 <form class="card">
-	<div class="card-header bg-subtle-primary">
+	<div class="card-header theme-primary theme-subtle">
 		Review Questions
 		<button class="btn-sm float-end btn-outline theme-danger" formaction="reset.cfm">Reset</button>
 	</div>

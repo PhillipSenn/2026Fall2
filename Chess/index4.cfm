@@ -14,7 +14,7 @@ start = {
 <div class="row">
 	<div class="col-8">
 		<div class="card">
-			<div class="card-header bg-subtle-primary d-flex justify-content-end align-items-center">
+			<div class="card-header theme-primary theme-subtle d-flex justify-content-end align-items-center">
 				<span class="d-flex gap-2">
 					<button type="button" id="flip" class="btn btn-sm btn-outline theme-secondary">Flip</button>
 					<button type="button" id="reset" class="btn btn-sm btn-outline theme-secondary">Reset</button>
@@ -57,7 +57,7 @@ start = {
 	</div>
 	<div class="col-4">
 		<form class="card h-100" action="index2.cfm">
-			<div class="card-header bg-subtle-primary">"If they capture a piece, then their progress goes up by the value of that piece.
+			<div class="card-header theme-primary theme-subtle">"If they capture a piece, then their progress goes up by the value of that piece.
 If they checkmate, then their progress goes to 100%"</div>
 			<div class="card-body">
 			</div>

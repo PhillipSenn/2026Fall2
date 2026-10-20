@@ -360,12 +360,12 @@
 
 	function showNoRelationship() {
 		clearTimeout(headerNotice);
-		$('.card-header').removeClass('bg-subtle-primary').addClass('bg-subtle-danger').text('No relationship built');
+		$('.card-header').removeClass('theme-primary theme-subtle').addClass('bg-subtle-danger').text('No relationship built');
 		headerNotice = setTimeout(restoreHeader, 3000);
 	}
 
 	function restoreHeader() {
-		$('.card-header').removeClass('bg-subtle-danger').addClass('bg-subtle-primary').text(headerTitle);
+		$('.card-header').removeClass('bg-subtle-danger').addClass('theme-primary theme-subtle').text(headerTitle);
 		headerNotice = null;
 	}
 

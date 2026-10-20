@@ -1,26 +1,29 @@
 <cfscript>
 include '/Inc/header6.cfm'
-act = usr('act.where_cat', act.catid)
+cat = usr('act.where_cat', act.catid)
 </cfscript>
 
-<cfoutput>
+<cfoutput query="act">
 <div class="card">
+	<div class="card-header theme-primary theme-subtle">
+		#catname#
+	</div>
 	<div class="card-body">
 		<table>
 			<thead>
 				<tr>
+					<th>Chapter</th>
 					<th>Assignment</th>
-					<th>Group</th>
 					<th class="text-end">Earned</th>
 				</tr>
 			</thead>
-			<cfloop query="act">
+			<cfloop query="cat">
 				<tr>
 					<td>
-						<a href="#request.home##actlink#?id=#request.usr.id#&actid=#actid#">#actname#</a>
+						#grpname#
 					</td>
 					<td>
-						#grpname#
+						<a href="#request.home##actlink#?id=#request.usr.id#&actid=#actid#">#actname#</a>
 					</td>
 					<td class="text-end">
 						#earned#

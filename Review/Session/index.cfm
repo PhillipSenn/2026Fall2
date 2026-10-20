@@ -5,7 +5,7 @@ include '/Inc/header6.cfm'
 <cfoutput query="act">
 <form>
 	<div class="card">
-		<div class="card-header bg-subtle-primary">
+		<div class="card-header theme-primary theme-subtle">
 			<cfif grade.earned ge 100>
 				<button name="reset" class="float-end btn-outline theme-danger">Reset</button>
 			</cfif>

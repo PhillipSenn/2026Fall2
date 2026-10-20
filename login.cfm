@@ -1,7 +1,7 @@
 <cfoutput>
 <cfinclude template="/Inc/header6.cfm">
 <div class="card shadow">
-	<div class="card-header bg-subtle-primary">Login</div>
+	<div class="card-header theme-primary theme-subtle">Login</div>
 	<form method="post">
 		<div class="card-body">
 			<label for="password">Password</label>

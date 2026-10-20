@@ -5,7 +5,7 @@ q = exec('q.where_act',form.actid)
 
 <cfoutput query="act">
 <form class="card">
-	<div class="card-header bg-subtle-primary">
+	<div class="card-header theme-primary theme-subtle">
 		To be discussed aloud
 	</div>
 </form>

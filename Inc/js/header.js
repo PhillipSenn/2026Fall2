@@ -3,7 +3,7 @@
 
 pgm = {}
 pgm.resolve = function() {	
-	document.querySelector('main').style.opacity = 1
+//	document.querySelector('main').style.opacity = 1
 	if (document.querySelector('.cfdebug')) {
 		document.querySelector('.cfdebug').style.display = 'table'
 	}

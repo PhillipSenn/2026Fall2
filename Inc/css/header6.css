@@ -1,12 +1,9 @@
 /*
-body {
-	font-family:"Times New Roman", Times, serif;
-}
-*/
 main {
 	opacity: 0;
 	transition: opacity 1s ease 1s;
 }
+*/
 .progress {
 	border-radius: 0;
 }

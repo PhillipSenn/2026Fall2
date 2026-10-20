@@ -20,11 +20,11 @@ family = queryExecute(
 
 <cfoutput query="act">
 <form class="card" action="genus.cfm">
-	<div class="card-header bg-subtle-primary">domain: #path.domainname#</div>
-	<div class="card-header bg-subtle-primary">kingdom: #path.kingdomname#</div>
-	<div class="card-header bg-subtle-primary">phylum: #path.phylumname#</div>
-	<div class="card-header bg-subtle-primary">class: #path.classname#</div>
-	<div class="card-header bg-subtle-primary">ord: #path.ordname#</div>
+	<div class="card-header theme-primary theme-subtle">domain: #path.domainname#</div>
+	<div class="card-header theme-primary theme-subtle">kingdom: #path.kingdomname#</div>
+	<div class="card-header theme-primary theme-subtle">phylum: #path.phylumname#</div>
+	<div class="card-header theme-primary theme-subtle">class: #path.classname#</div>
+	<div class="card-header theme-primary theme-subtle">ord: #path.ordname#</div>
 	<div class="card-body">
 		<cfloop query="family">
 			<div>

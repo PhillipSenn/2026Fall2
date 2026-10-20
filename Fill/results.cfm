@@ -8,7 +8,7 @@ lastEnd = ""
 
 <cfoutput query="act">
 <form action="question.cfm" class="card">
-	<div class="card-header bg-subtle-primary">
+	<div class="card-header theme-primary theme-subtle">
 		#actname# complete
 	</div>
 	<div class="card-body">

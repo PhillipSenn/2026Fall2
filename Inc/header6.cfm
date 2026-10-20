@@ -178,7 +178,4 @@ writeoutput('<body class="' & request.body & '">')
 </div>
 </cfif>
 </cfoutput>
-<cfif false and request.flush>
-	<cfflush> <!--- Can only be done if there will be no location url=request.home & 'x.cfm' --->
-</cfif>
 <main class="<cfoutput>#request.container#</cfoutput>">

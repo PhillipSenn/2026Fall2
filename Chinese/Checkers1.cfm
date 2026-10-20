@@ -10,7 +10,7 @@ rows = [1, 2, 3, 4, 13, 12, 11, 10, 9, 10, 11, 12, 13, 4, 3, 2, 1];
 <div class="row">
 	<div class="col-8">
 		<div class="card">
-			<div class="card-header bg-subtle-primary d-flex justify-content-end align-items-center">
+			<div class="card-header theme-primary theme-subtle d-flex justify-content-end align-items-center">
 				<span class="d-flex gap-2">
 					<button type="button" id="flip" class="btn btn-sm btn-outline theme-secondary">Flip</button>
 					<button type="button" id="reset" class="btn btn-sm btn-outline theme-secondary">Reset</button>
@@ -56,7 +56,7 @@ rows = [1, 2, 3, 4, 13, 12, 11, 10, 9, 10, 11, 12, 13, 4, 3, 2, 1];
 	</div>
 	<div class="col-4">
 		<form class="card h-100">
-			<div class="card-header bg-subtle-primary">"Create a Chinese Checkers board"</div>
+			<div class="card-header theme-primary theme-subtle">"Create a Chinese Checkers board"</div>
 			<div class="card-body">
 			</div>
 			<div class="card-footer">

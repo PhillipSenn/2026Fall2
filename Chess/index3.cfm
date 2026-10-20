@@ -15,7 +15,7 @@ start = {
 <div class="row">
 	<div class="col-8">
 		<div class="card">
-			<div class="card-header bg-subtle-primary d-flex justify-content-end align-items-center">
+			<div class="card-header theme-primary theme-subtle d-flex justify-content-end align-items-center">
 				<span class="d-flex gap-2">
 					<button type="button" id="flip" class="btn btn-sm btn-outline theme-secondary">Flip</button>
 					<button type="button" id="reset" class="btn btn-sm btn-outline theme-secondary">Reset</button>
@@ -58,7 +58,7 @@ start = {
 	</div>
 	<div class="col-4">
 		<form class="card h-100">
-			<div class="card-header bg-subtle-primary">"Make this a one-player game"</div>
+			<div class="card-header theme-primary theme-subtle">"Make this a one-player game"</div>
 			<div class="card-body">
 				index3 is now a one-player game. You play the side at the bottom of the board, and the computer plays the side at the top.
 				<ul>
@@ -67,7 +67,7 @@ start = {
 				<li><b>Flip</b> again, or <b>Reset</b>, puts White back at the bottom and cancels a computer move that has not happened yet.
 				</ul>
 			</div>
-			<div class="card-header bg-subtle-primary">"Explain the logic for how the computer decides which move to make next."</div>
+			<div class="card-header theme-primary theme-subtle">"Explain the logic for how the computer decides which move to make next."</div>
 			<div class="card-body">
 				<p>The computer looks only one move ahead. It lists every legal move.
 				<p>If any move is a capture, it chooses only from the captures.

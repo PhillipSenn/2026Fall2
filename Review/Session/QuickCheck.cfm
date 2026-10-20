@@ -17,7 +17,7 @@ if (q.recordCount) {
 <cfoutput query="act">
 <cfif q.recordcount>
 	<form class="card flex-grow-1">
-		<div class="card-header bg-subtle-primary">
+		<div class="card-header theme-primary theme-subtle">
 			Question #qs.recordcount-q.recordCount+1#/#qs.recordCount#
 		</div>
 		<div class="card-body">
@@ -69,7 +69,7 @@ if (q.recordCount) {
 	<div hidden id="catname">#cat.catname#</div>
 <cfelse>
 	<form class="card">
-		<div class="card-header bg-subtle-primary">
+		<div class="card-header theme-primary theme-subtle">
 			You did it!
 			<button class="float-end btn-outline theme-danger" name="actid" value="#actid#" formaction="reset.cfm">Reset</a>
 		</div>

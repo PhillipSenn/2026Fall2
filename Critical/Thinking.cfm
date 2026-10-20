@@ -15,7 +15,7 @@ poll = usr('poll.start_q',[q.qid,q.qname])
 <div class="row">
 	<div class="col">
 		<div class="card">
-			<div class="card-header bg-subtle-primary">
+			<div class="card-header theme-primary theme-subtle">
 				Textbook AI grade: <span id="original-grade"></span>
 			</div>
 			<div class="card-body">
@@ -30,7 +30,7 @@ poll = usr('poll.start_q',[q.qid,q.qname])
 	</div>
 	<form class="col">
 		<div class="card">
-			<div class="card-header bg-subtle-primary text-muted">
+			<div class="card-header theme-primary theme-subtle text-muted">
 				Flesch-Kincaid Grade: <span id="Flesch-Kincaid"></span> (not used)
 			</div>
 			<div class="card-body">

@@ -5,7 +5,7 @@ include '/Inc/header6.cfm'
 <cfoutput query="act">
 <form action="question.cfm">
 	<div class="card">
-		<div class="card-header bg-subtle-primary">
+		<div class="card-header theme-primary theme-subtle">
 			Review Questions
 		</div>
 		<div class="card-body">

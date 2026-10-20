@@ -74,7 +74,7 @@ function cssGeneric(category) {
 
 <cfoutput>
 <form class="card">
-	<div class="card-header bg-subtle-primary">
+	<div class="card-header theme-primary theme-subtle">
 		Which font do you want as your default?
 	</div>
 	<div class="card-body">

@@ -25,7 +25,7 @@ for (i = arrayLen(choices); i > 1; i--) {
 
 <cfoutput query="act">
 <form class="card">
-	<div class="card-header bg-subtle-primary">
+	<div class="card-header theme-primary theme-subtle">
 		<cfif grade.earned ge 100>
 			<button class="float-end btn-outline theme-danger" name="reset">Reset</button>
 			<input hidden name="id" value="#request.usr.id#">

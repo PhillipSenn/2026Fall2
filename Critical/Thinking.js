@@ -16,7 +16,7 @@ function nopaste(response) {
 		header.data('label', header.text())
 	}
 	header.text('Paste has been disabled')
-		.removeClass('bg-subtle-primary')
+		.removeClass('theme-primary theme-subtle')
 		.addClass('bg-danger-subtle')
 	clearTimeout(nopaste.timer)
 	nopaste.timer = setTimeout(restore, 2000)
@@ -24,7 +24,7 @@ function nopaste(response) {
 	function restore() {
 		header.text(header.data('label'))
 			.removeClass('bg-danger-subtle')
-			.addClass('bg-subtle-primary')
+			.addClass('theme-primary theme-subtle')
 	}
 }
 

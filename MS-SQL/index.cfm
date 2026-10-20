@@ -6,7 +6,7 @@ include '/Inc/header6.cfm'
 
 <cfoutput>
 <form class="card" action="Relationships.cfm">
-	<div class="card-header bg-subtle-primary">MS-SQL</div>
+	<div class="card-header theme-primary theme-subtle">MS-SQL</div>
 	<div class="card-body">
 		<button class="btn-link">Relationships</button>
 	</div>

@@ -16,7 +16,7 @@ start = {
 <div class="row">
 	<div class="col-8">
 		<div class="card">
-			<div class="card-header bg-subtle-primary d-flex justify-content-end align-items-center">
+			<div class="card-header theme-primary theme-subtle d-flex justify-content-end align-items-center">
 				<span class="d-flex gap-2">
 					<button type="button" id="flip" class="btn btn-sm btn-outline theme-secondary">Flip</button>
 					<button type="button" id="reset" class="btn btn-sm btn-outline theme-secondary">Reset</button>
@@ -52,7 +52,7 @@ start = {
 	</div>
 	<div class="col-4">
 		<form class="card h-100" action="index2.cfm">
-			<div class="card-header bg-subtle-primary">"create a chessboard"</div>
+			<div class="card-header theme-primary theme-subtle">"create a chessboard"</div>
 			<div class="card-body">
 Chess/index now shows a chessboard in the starting position, with white at the bottom and files a–h and ranks 1–8 labeled.
 <ul>

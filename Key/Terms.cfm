@@ -19,7 +19,7 @@ writedump(cat)
 
 <cfoutput query="act">
 <form class="card">
-	<div class="card-header bg-subtle-primary">
+	<div class="card-header theme-primary theme-subtle">
 	</div>
 	<div class="card-body">
 		<cfif unanswered.recordcount>

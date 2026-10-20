@@ -13,7 +13,7 @@ ans = exec('ans.where_q',q.qid)
 
 <cfoutput query="act">
 <div class="card">
-	<div class="card-header bg-subtle-primary display-6">
+	<div class="card-header theme-primary theme-subtle display-6">
 		#q.qname#
 		<div class="float-end">
 			#qs.recordCount-q.recordCount+1# / #qs.recordCount#
