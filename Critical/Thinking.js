@@ -148,9 +148,9 @@ function showAI(response) {
 
 function setTone(el, pass) {
 	$(el)
-		.removeClass('text-success text-danger')
-		.toggleClass('text-success', pass === true)
-		.toggleClass('text-danger', pass === false)
+		.removeClass('fg-success fg-danger')
+		.toggleClass('fg-success', pass === true)
+		.toggleClass('fg-danger', pass === false)
 }
 
 function enableAsk() {

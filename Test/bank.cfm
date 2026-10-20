@@ -257,7 +257,7 @@ cfloop(query="qry") {
 										<ol class="mb-0">
 											<cfloop list="#incorrect_ansnames#" item="ansname" delimiters="|" index="i">
 												<cfif i gt 1>
-													<li class="text-danger">#ansname#</li>
+													<li class="fg-danger">#ansname#</li>
 												<cfelse>
 													<li>#ansname#</li>
 												</cfif>

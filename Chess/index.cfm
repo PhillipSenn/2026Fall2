@@ -46,7 +46,7 @@ start = {
 					</cfloop>
 				</cfloop>
 				</div>
-				<p class="chess-hint text-center text-body-secondary mb-0 mt-3">Click a piece, then a square. You can also drag a piece.</p>
+				<p class="chess-hint text-center fg-2 mb-0 mt-3">Click a piece, then a square. You can also drag a piece.</p>
 			</div>
 		</div>
 	</div>

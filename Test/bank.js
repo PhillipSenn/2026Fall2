@@ -3,11 +3,11 @@ $('.btn-link[type="button"]')
 //	.on('mouseup mouseleave', incorrectUp)
 
 function incorrectDown() {
-	$(this).addClass('text-danger')
+	$(this).addClass('fg-danger')
 }
 
 function incorrectUp() {
-	$(this).removeClass('text-danger')
+	$(this).removeClass('fg-danger')
 }
 
 $('.btn-link:not([type="button"])')
@@ -21,7 +21,7 @@ function correctDown() {
 $('input[type=checkbox]').on('change', checkbox)
 
 function checkbox() {
-	$('label[for="' + this.id + '"]').toggleClass('text-success', this.checked)
+	$('label[for="' + this.id + '"]').toggleClass('fg-success', this.checked)
 	var answers = $('input[name=ansids]').length
 	var checked = $('input[name=ansids]:checked').length
 

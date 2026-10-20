@@ -30,7 +30,7 @@ poll = usr('poll.start_q',[q.qid,q.qname])
 	</div>
 	<form class="col">
 		<div class="card">
-			<div class="card-header theme-primary theme-subtle text-muted">
+			<div class="card-header theme-primary theme-subtle fg-2">
 				Flesch-Kincaid Grade: <span id="Flesch-Kincaid"></span> (not used)
 			</div>
 			<div class="card-body">

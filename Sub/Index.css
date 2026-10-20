@@ -25,7 +25,6 @@ main {
 	animation-iteration-count: infinite;
 }
 
-.qname.text-danger,
 .qname.fg-danger {
 	color: var(--bs-red-600);
 }

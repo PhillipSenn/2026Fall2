@@ -44,7 +44,7 @@ start = {
 					</cfloop>
 				</cfloop>
 				</div>
-				<p id="status" class="chess-hint text-center text-body-secondary mb-0 mt-3">White to move.</p>
+				<p id="status" class="chess-hint text-center fg-2 mb-0 mt-3">White to move.</p>
 				<div id="promote" class="promote" hidden>
 					<span>Promote to</span>
 					<button type="button" class="btn btn-sm btn-outline theme-secondary" data-type="Q"></button>

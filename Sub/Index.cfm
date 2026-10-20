@@ -10,7 +10,6 @@ poll = usr('poll.unanswered', form.actid)
 
 <cfoutput query="act">
 <style>
-.qname.text-danger,
 .qname.fg-danger {
 	color: var(--bs-red-600);
 }

@@ -53,8 +53,8 @@ function renderResults(highlightValue) {
 	});
 
 	document.querySelectorAll('.result-percent').forEach((badge) => {
-		badge.classList.remove('text-bg-primary');
-		badge.classList.add('text-bg-secondary');
+		badge.classList.remove('bg-primary', 'fg-contrast-primary');
+		badge.classList.add('bg-secondary', 'fg-contrast-secondary');
 	});
 	document.querySelectorAll('.result-bar').forEach((bar) => {
 		bar.classList.remove('bg-primary');
@@ -62,8 +62,8 @@ function renderResults(highlightValue) {
 	});
 	if (highlightValue) {
 		const result = document.querySelector(`#rollResults [data-total="${highlightValue}"] .result-percent`);
-		result.classList.remove('text-bg-secondary');
-		result.classList.add('text-bg-primary');
+		result.classList.remove('bg-secondary', 'fg-contrast-secondary');
+		result.classList.add('bg-primary', 'fg-contrast-primary');
 		const resultBar = document.querySelector(`#rollResults [data-total="${highlightValue}"] .result-bar`);
 		resultBar.classList.remove('bg-secondary');
 		resultBar.classList.add('bg-primary');
@@ -79,8 +79,8 @@ function recordResult(value, render = true) {
 
 function clearResultHighlight() {
 	document.querySelectorAll('.result-percent').forEach((badge) => {
-		badge.classList.remove('text-bg-primary');
-		badge.classList.add('text-bg-secondary');
+		badge.classList.remove('bg-primary', 'fg-contrast-primary');
+		badge.classList.add('bg-secondary', 'fg-contrast-secondary');
 	});
 	document.querySelectorAll('.result-bar').forEach((bar) => {
 		bar.classList.remove('bg-primary');

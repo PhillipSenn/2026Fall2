@@ -26,7 +26,7 @@ rows = [1, 2, 3, 4, 13, 12, 11, 10, 9, 10, 11, 12, 13, 4, 3, 2, 1];
 						</div>
 					</cfloop>
 				</div>
-				<p id="status" class="text-center text-body-secondary mb-0 mt-3">Try a move.</p>
+				<p id="status" class="text-center fg-2 mb-0 mt-3">Try a move.</p>
 			</div>
 		</div>
 	</div>

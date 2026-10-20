@@ -34,7 +34,7 @@ include '/Inc/header6.cfm';
 					</div>
 					<button id="rollButton">Roll Dice</button>
 				</div>
-				<p id="rollStatus" class="text-body-secondary mt-2 mb-0" role="status" aria-live="polite"></p>
+				<p id="rollStatus" class="fg-2 mt-2 mb-0" role="status" aria-live="polite"></p>
 			</div>
 			<aside class="col-md-2 mt-4 mt-md-0 text-start" aria-labelledby="results-heading">
 				<div class="card">
@@ -46,12 +46,12 @@ include '/Inc/header6.cfm';
 									<div class="progress-bar bg-secondary result-bar" role="progressbar" aria-label="Total #rollTotal#: 0%" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="width: 0%"></div>
 								</div>
 								<span class="result-count me-2">0</span>
-								<span class="badge text-bg-secondary result-percent">0%</span>
+								<span class="badge bg-secondary fg-contrast-secondary result-percent">0%</span>
 							</li>
 						</cfloop></cfoutput>
 						<li class="list-group-item d-flex justify-content-between align-items-center result-total">
 							<span>Total</span>
-							<span id="resultsTotal" class="badge text-bg-dark">0</span>
+							<span id="resultsTotal" class="badge bg-black fg-white">0</span>
 						</li>
 					</ol>
 					<div class="card-footer">
