@@ -14,7 +14,7 @@ if (!q.recordcount) {
 	param form.qid=0;
 	q = exec('poll.gt_q',[form.actid,form.qid])
 	if (!q.recordcount) {
-		location('../home.cfm?id=' & request.usr.id, false)
+		location(request.home, false)
 	}
 }
 polls = usr('q.usr_act',form.actid)

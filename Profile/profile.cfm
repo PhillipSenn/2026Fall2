@@ -3,7 +3,7 @@ include '/Inc/header6.cfm'
 if (structKeyExists(form, 'firstname')) {
 	usr('usr.update_firstname', form.firstname)
 	usr('usr.update_wordname', form.wordname)
-	location('home.cfm?id=' & request.usr.id, false)
+	location(request.home, false)
 }
 
 word = exec('word.random20')

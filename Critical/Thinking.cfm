@@ -6,7 +6,7 @@ include '/Inc/header6.cfm'
 cat = exec('cat.where_cat',act.catid)
 q = usr('poll.unanswered',form.actid)
 if (!q.recordcount) {
-	location('../home.cfm?id=' & request.usr.id, false)
+	location(request.home, false)
 }
 poll = usr('poll.start_q',[q.qid,q.qname])
 </cfscript>
