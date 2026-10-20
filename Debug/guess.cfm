@@ -3,8 +3,7 @@ include '/Inc/header6.cfm'
 usrs = exec('usr.list')
 selectedUsrid = val(form.usrid ?: '')
 sql = 'select 
-guessid,usrid,gradeid,actid,qid,ansid,ansname,guessname
-	,earned
+guessid,usrid,gradeid,actid,actname,qid,qname,ansid,ansname,guessname
 from guess
 left join grade on guess_grade=gradeid
 left join usr on grade_usr=usrid
@@ -45,7 +44,6 @@ guess = queryexecute(sql, selectedUsrid ? {usrid: {value: selectedUsrid, cfsqlty
 					<th>ansname</th>
 					<th>guessname</th>
 					<th class="text-end">gradeid</th>
-					<th class="text-end">Earned</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -53,13 +51,12 @@ guess = queryexecute(sql, selectedUsrid ? {usrid: {value: selectedUsrid, cfsqlty
 					<tr>
 						<td class="text-end">#guessid#</td>
 						<td class="text-end"><a href="usr.cfm?usrid=#usrid#">#usrid#</a></td>
-						<td class="text-end"><a href="act.cfm?actid=#actid#">#actid#</a></td>
-						<td class="text-end"><a href="q.cfm?qid=#qid#">#qid#</a></td>
+						<td class="text-end"><a href="act.cfm?actid=#actid#" title="#encodeForHtmlAttribute(actname)#">#actid#</a></td>
+						<td class="text-end"><a href="q.cfm?qid=#qid#" title="#encodeForHtmlAttribute(qname)#">#qid#</a></td>
 						<td class="text-end"><a href="ans.cfm?ansid=#ansid#">#ansid#</a></td>
 						<td>#ansname#</td>
 						<td>#guessname#</td>
 						<td class="text-end"><a href="grade.cfm?gradeid=#gradeid#">#gradeid#</a></td>
-						<td class="text-end">#earned#</td>
 					</tr>
 				</cfloop>
 			</tbody>
