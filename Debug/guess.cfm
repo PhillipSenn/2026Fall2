@@ -22,7 +22,7 @@ guess = queryexecute(sql, selectedUsrid ? {usrid: {value: selectedUsrid, cfsqlty
 <cfoutput>
 <div class="card">
 	<div class="card-header theme-primary theme-subtle">
-		<form method="get">
+		<form>
 			<select name="usrid" id="usrid" class="form-control" onchange="this.form.submit()">
 				<option value="">All</option>
 				<cfloop query="usrs">
