@@ -1110,3 +1110,7 @@ where actname is null
 
 
 select * from grp
+select * from guess
+declare @guessStart datetime2(0)=getdate()
+print @guessStart
+

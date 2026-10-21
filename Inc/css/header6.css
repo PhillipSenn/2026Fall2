@@ -1,9 +1,15 @@
+body {
+	font-family: "Noto Serif", serif;
+	font-optical-sizing: auto;
+	font-weight:normal;
+	font-style: normal;
+	font-variation-settings: "wdth" 100;
+}
 label, .cursor-pointer {
 	cursor:pointer
 }
 /*
 https://charliepark.org/bootstrap_buttons/
-*/
 .CharliePark.btn-solid.theme-primary,
 .CharliePark.btn-outline.theme-primary:hover,
 .CharliePark.btn-outline.theme-primary.active {
@@ -22,6 +28,7 @@ https://charliepark.org/bootstrap_buttons/
 	text-shadow: 0 1px 1px rgba(255, 255, 255, .49);
 	-webkit-font-smoothing: antialiased;
 }
+*/
 
 fieldset, legend {
 	all: revert;
@@ -53,11 +60,10 @@ code {
 	font-size: 16px;
 	font-weight: 400;
 }
-.navbar-brand .bi-house-fill {
+.navbar-brand {
 	color: gray;
 }
-.navbar-brand:hover .bi-house-fill,
-.navbar-brand:focus-visible .bi-house-fill {
+.navbar-brand:hover {
 	color: white;
 }
 #main-navbar > .nav-item {
@@ -90,4 +96,13 @@ table.cfdebug {
 	border-right: .3em solid transparent;
 	border-bottom: 0;
 	border-left: .3em solid transparent;
+}
+
+.btn-styled,
+.navbar {
+	--bs-btn-gradient-start: rgba(255, 255, 255, 0.45);
+	--bs-btn-gradient-end: rgba(0, 0, 0, 0.35);
+}
+.navbar {
+	background-image: linear-gradient(to bottom, var(--bs-btn-gradient-end), var(--bs-btn-gradient-start));
 }

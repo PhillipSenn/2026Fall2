@@ -35,9 +35,7 @@ if (request.jQueryUI  != 'none') {
 }
 param request.bootstrap = true;
 if (request.bootstrap) {
-	writeoutput('<link	rel="preconnect" href="https://fonts.googleapis.com">' & chr(10))
-	writeoutput('<link	rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' & chr(10))
-	writeoutput('<link	rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap">' & chr(10))
+	writeoutput('<link	rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap">' & chr(10))
 	writeoutput('<link	rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.css">' & chr(10))
 	writeoutput('<link	rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.css">' & chr(10))
 	fontName = ''
@@ -111,7 +109,7 @@ writeoutput('<body class="' & request.body & '">')
 <div class="#request.container# #request.top#">
 	<nav class="navbar navbar-expand bg-body py-0" data-bs-theme="dark">
 		<a class="ms-5 me-0 navbar-brand" href="#request.home#" aria-label="Home">
-		CSC175
+			CSC175
 		</a>
 		<form class="d-flex flex-grow-1 align-items-center">
 			<ul id="main-navbar" class="navbar-nav me-auto">

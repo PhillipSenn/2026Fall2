@@ -3,7 +3,7 @@ include '/Inc/header6.cfm'
 </cfscript>
 
 <cfoutput query="act">
-<form action="bank.cfm">
+<div>
 	<div class="card">
 		<div class="card-header theme-primary theme-subtle">
 		</div>
@@ -16,11 +16,9 @@ include '/Inc/header6.cfm'
 			#actdesc#
 		</div>
 		<div class="card-footer">
-			<button>Ready!</button>
+			<a class="btn" href="bank.cfm?actid=#actid#">Ready!</a>
 		</div>
-		<input hidden name="id" value="#request.usr.id#">
-		<input hidden name="actid" value="#actid#">
 	</div>
-</form>
+</div>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

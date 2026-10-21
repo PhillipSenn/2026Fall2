@@ -225,7 +225,7 @@ cfloop(query="qry") {
 								<td class="text-end">
 									<button class="btn-link" name="qid" value="#qid#">#currentRow#</button>
 								</td>
-								<td>#qdesc#</td>
+								<td>#qname#</td>
 								<td>
 									<cfif ListLen(correct_ansnames,'|') gt 1>
 										<cfloop list="#correct_ansnames#" item="ansname" delimiters="|">

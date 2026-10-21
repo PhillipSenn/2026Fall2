@@ -10,7 +10,8 @@ pgm.init = function() {
 //		$(this).wrap('<li class="nav-item"></li>')
 //		$(this).parent().appendTo('#main-navbar')
 //	}
-	$('button:not([class*="btn-"]):not([class*="bg-"])').addClass('btn-solid theme-primary CharliePark')
+	$('button:not([class*="btn-"]):not([class*="bg-"])').addClass('btn-solid theme-primary btn-styled')
+	$('a.btn:not([class*="btn-"]):not([class*="bg-"])').addClass('btn-solid theme-primary btn-styled')
 //	$('.nav-link').each(each_navlink)
 
 	dom.home = $('.home.nav-link')

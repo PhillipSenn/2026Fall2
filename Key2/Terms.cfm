@@ -20,7 +20,7 @@ cfloop(query=finishedPoll) {
 <cfoutput query="act">
 <div class="card">
 	<form class="card-header theme-primary theme-subtle">
-		<button class="float-end btn-solid theme-primary">Pass</button>
+		<button class="float-end">Pass</button>
 		<input hidden name="id" value="#request.usr.id#">
 		<input hidden name="actid" value="#actid#">
 	</form>
