@@ -1,0 +1,67 @@
+pixels = 10
+enemy = {}
+enemy.w = 20
+enemy.h = 20
+enemy.x = 0
+enemy.y = 140
+
+function draw() {
+if (array[37]) {
+	if (player.x - pixels >= 0) {
+		player.x -= pixels
+	}
+}
+if (array[38]) {
+	if (player.y - pixels >= 0) {
+		player.y -= pixels
+	}
+}
+if (array[39]) {
+	if (player.x + img.width + pixels <= canvas.width) {
+		player.x += pixels
+	} else {
+		metalClang.play()
+	}
+}
+if (array[40]) {
+	if (player.y + img.height + pixels <= canvas.height) {
+		player.y += pixels
+	}
+}
+
+context.fillStyle = 'white'
+context.fillRect(0,0,canvas.width,canvas.height)
+
+context.fillStyle = 'DarkGoldenrod'
+context.fillRect(enemy.x, enemy.y, enemy.w, enemy.h)
+context.drawImage(img, player.x, player.y)
+
+enemy.x -= 3
+if (enemy.x < 0) {
+	enemy.x = canvas.width
+	enemy.y = Math.random()*canvas.height
+}
+
+// Collision detection
+if (player.x + img.width > enemy.x) {
+	if (player.x < enemy.x + enemy.w) {
+		if (player.y + img.height > enemy.y) {
+			if (player.y < enemy.y + enemy.h) {
+				hurt.play()
+				update_score()
+				enemy.x = canvas.width
+				enemy.y = Math.random()*canvas.height
+			}
+		}
+	}
+}
+requestAnimationFrame(draw)
+}
+
+player = {}
+player.x = 0
+player.y = 100
+img=document.getElementById('player')
+canvas = document.getElementById('canvas')
+context = canvas.getContext('2d')
+

@@ -8,7 +8,7 @@
 <title>Dulles Airport Map - Controlled Zoom</title>
 
 <!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.css" rel="stylesheet">
 
 <style>
 
@@ -53,38 +53,45 @@ html, body{
 
 <!-- NAVBAR -->
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar lg:navbar-expand bg-black" data-bs-theme="dark">
   <div class="container-fluid">
 
     <a class="navbar-brand" href="#">Airport Map</a>
 
-    <button class="navbar-toggler" type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarMain">
-
-      <span class="navbar-toggler-icon"></span>
-
+    <button class="btn-icon navbar-toggler" type="button"
+      data-bs-toggle="drawer"
+      data-bs-target="#navbarMain"
+      aria-controls="navbarMain"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarMain">
+    <dialog class="drawer drawer-end" id="navbarMain" aria-labelledby="navbarMainTitle">
+      <div class="drawer-header">
+        <h5 class="drawer-title" id="navbarMainTitle">Navigation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
+      </div>
+      <div class="drawer-body">
 
-      <ul class="navbar-nav me-auto">
+        <ul class="nav navbar-nav me-auto">
 
-        <li class="nav-item">
-          <a class="nav-link active" href="#">Map</a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Map</a>
+          </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="#">Airports</a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Airports</a>
+          </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="#">Flights</a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Flights</a>
+          </li>
 
-      </ul>
+        </ul>
 
-    </div>
+      </div>
+    </dialog>
 
   </div>
 </nav>
@@ -98,13 +105,13 @@ html, body{
 
     <!-- MAP -->
 
-    <div class="col-md-9 p-0">
+    <div class="md:col-9 p-0">
       <div id="map"></div>
     </div>
 
     <!-- SIDEBAR -->
 
-    <div class="col-md-3 bg-light border-start p-4">
+    <div class="md:col-3 bg-1 border-start p-4">
 
       <h5 class="fw-semibold">Map Info</h5>
 
@@ -112,7 +119,7 @@ html, body{
 
       <div id="zoomValue" class="zoom-display">--</div>
 
-      <div class="text-muted mt-4">
+      <div class="fg-2 mt-4">
         Minimum Zoom: 3<br>
         Initial Zoom: 3
       </div>
@@ -198,7 +205,7 @@ initMap()
 
 <!-- Bootstrap JS -->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/js/bootstrap.bundle.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,25 @@
+﻿<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+<script>
+var last = performance.now()
+var frames = 0
+
+function showFPS(){
+	var now = performance.now()
+	frames++
+	if (now - last >= 1000) {
+		console.log('FPS:', frames)
+		frames = 0
+		last = now
+	}
+	requestAnimationFrame(showFPS)
+}
+requestAnimationFrame(showFPS)
+</script>
+</body>
+</html>

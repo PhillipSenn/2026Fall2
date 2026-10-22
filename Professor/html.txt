@@ -1,0 +1,2 @@
+<audio src="hurt.wav"   id="collision"></audio>
+<img   src="player.png" id="prof" hidden>

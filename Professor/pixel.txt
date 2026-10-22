@@ -1,0 +1,55 @@
+key = []
+onkeydown = function(response) {
+	dom.which_key.text(response.keyCode)
+	key[response.keyCode] = true
+}
+
+onkeyup = function(response) {
+	key[response.keyCode] = false
+}
+
+requestAnimationFrame(draw)
+
+x = 0
+y = 140
+w = 20
+h = 20
+function draw() {
+  if (key[37]) prof.x = prof.x - 10
+  if (key[38]) prof.y = prof.y - 10
+  if (key[39]) prof.x = prof.x + 10
+  if (key[40]) prof.y = prof.y + 10
+  context.fillStyle = 'white'
+  context.fillRect(0,0,canvas.width,canvas.height)
+  context.fillStyle = 'DarkGoldenrod'
+  context.fillRect(x, y, w, h)
+  context.drawImage(img, prof.x, prof.y)
+  x = x - 3
+  if (x < 0) {
+    x = canvas.width
+    y = Math.random()*canvas.height
+  }
+
+// Collision detection
+  if (prof.x + img.width > x) {
+    if (prof.x < x + w) {
+      if (prof.y + img.height > y) {
+        if (prof.y < y + h) {
+          collision.play()
+          update_score()
+          x = canvas.width
+          y = Math.random()*canvas.height
+        }
+      }
+    }
+  }
+  requestAnimationFrame(draw)
+}
+
+prof = {}
+prof.x = 0
+prof.y = 100
+img=document.getElementById('prof')
+canvas = document.getElementById('canvas')
+context = canvas.getContext('2d')
+
