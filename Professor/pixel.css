@@ -1,9 +1,0 @@
-﻿main {
-	margin-bottom:0px;
-}
-.accordion-button::after{
-	display: none !important;
-}
-.form-control, .btn {
-	font-size:16px !important;
-}

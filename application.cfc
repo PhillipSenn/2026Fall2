@@ -10,6 +10,7 @@ this.root	= getDirectoryFromPath(this.app) // C:\inetpub\wwwroot\PhillipSenn\202
 this.mappings['/inc'] = this.root & 'inc\' // C:\inetpub\wwwroot\PhillipSenn\2026Fall2\inc\
 this.serialization = {}
 this.serialization.dateTimeFormat = 'iso8601' // 2025-12-20T13:45:00Z
+this.scriptProtect = 'url,cookie,cgi'
 
 function onRequestStart(targetPage) {
 	setting showdebugoutput=false;

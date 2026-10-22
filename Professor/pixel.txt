@@ -1,6 +1,6 @@
 key = []
 onkeydown = function(response) {
-	dom.which_key.text(response.keyCode)
+	$('#which-key').text(response.keyCode)
 	key[response.keyCode] = true
 }
 

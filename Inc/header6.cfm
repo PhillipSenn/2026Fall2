@@ -4,8 +4,6 @@
 <meta charset="utf-8">
 <meta	name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <cfscript>
-param request.cache='';
-param request.cache = '?cache=' & TimeFormat(now(),'Hmmss');
 param request.container = 'md:container';
 param request.title = 'CSC175';
 param request.ico = 'https://www.lr.edu/sites/default/files/favicon.ico';
@@ -77,10 +75,10 @@ if (request.bootstrap) {
 	}
 }
 if (request.header.css) {
-	writeoutput('<link	rel="stylesheet" href="' & request.home & 'Inc/css/header6.css' & request.cache & '">' & chr(10))
+	writeoutput('<link	rel="stylesheet" href="' & request.home & 'Inc/css/header6.css">' & chr(10))
 }
 if (fileExists(request.pgmDir & request.pgmName & '.css')) {
-	writeoutput('<link	rel="stylesheet" href="' & request.pgmName & '.css' & request.cache & '">' & chr(10))
+	writeoutput('<link	rel="stylesheet" href="' & request.pgmName & '.css">' & chr(10))
 }
 writeoutput('<link	rel="icon"		 href="' & request.ico & '">' & chr(10))
 param form.actid=0;

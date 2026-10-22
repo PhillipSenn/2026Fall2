@@ -1,0 +1,12 @@
+﻿main {
+	margin-bottom:0px;
+}
+summary.accordion-header {
+	list-style: none;
+}
+summary.accordion-header::-webkit-details-marker {
+	display: none;
+}
+.form-control, .btn {
+	font-size:16px !important;
+}

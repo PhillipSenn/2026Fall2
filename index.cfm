@@ -10,7 +10,7 @@ for (band = 1; band <= 10; band++) {
 		title: 'Week ' & band,
 		low: band * 10000,
 		high: band * 10000 + 9999,
-		open: band == 2
+		open: band == 3
 	})
 }
 </cfscript>
