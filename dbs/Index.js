@@ -148,24 +148,69 @@
 
 	function drawJoins() {
 		joinLayer.replaceChildren();
-		joins.forEach(function (pair) {
-			const from = fieldBox(pair[0]);
-			const to = fieldBox(pair[1]);
-			if (!from || !to) {
-				return;
-			}
-			const fromRect = from.getBoundingClientRect();
-			const toRect = to.getBoundingClientRect();
-			const start = anchor(from, toRect.left + toRect.width / 2);
-			const end = anchor(to, fromRect.left + fromRect.width / 2);
-			const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-			line.setAttribute('class', 'rel-line');
-			line.setAttribute('x1', start.x);
-			line.setAttribute('y1', start.y);
-			line.setAttribute('x2', end.x);
-			line.setAttribute('y2', end.y);
-			joinLayer.appendChild(line);
-		});
+		joins.forEach(drawJoin);
+	}
+
+	function drawJoin(pair) {
+		const from = fieldBox(pair[0]);
+		const to = fieldBox(pair[1]);
+		let fromRect = null;
+		let toRect = null;
+		let start = null;
+		let end = null;
+		let gap = null;
+		if (!from || !to) {
+			return;
+		}
+		fromRect = from.getBoundingClientRect();
+		toRect = to.getBoundingClientRect();
+		start = anchor(from, toRect.left + toRect.width / 2);
+		end = anchor(to, fromRect.left + fromRect.width / 2);
+		gap = markGap(start, end);
+		appendLine(pointAlong(start, end, gap.line), pointAlong(end, start, gap.line));
+		joinLayer.appendChild(relationMark(pointAlong(start, end, gap.mark), manySide(from)));
+		joinLayer.appendChild(relationMark(pointAlong(end, start, gap.mark), manySide(to)));
+	}
+
+	function manySide(field) {
+		return field.classList.contains('is-fk');
+	}
+
+	function markGap(start, end) {
+		const length = Math.hypot(end.x - start.x, end.y - start.y);
+		if (length < 40) {
+			return {mark: 0, line: 0};
+		}
+		return {mark: 11, line: 18};
+	}
+
+	function pointAlong(from, to, distance) {
+		const dx = to.x - from.x;
+		const dy = to.y - from.y;
+		const length = Math.hypot(dx, dy) || 1;
+		return {
+			x: from.x + dx / length * distance,
+			y: from.y + dy / length * distance
+		};
+	}
+
+	function appendLine(start, end) {
+		const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+		line.setAttribute('class', 'rel-line');
+		line.setAttribute('x1', start.x);
+		line.setAttribute('y1', start.y);
+		line.setAttribute('x2', end.x);
+		line.setAttribute('y2', end.y);
+		joinLayer.appendChild(line);
+	}
+
+	function relationMark(point, many) {
+		const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+		text.setAttribute('class', 'rel-mark' + (many ? ' is-many' : ' is-one'));
+		text.setAttribute('x', point.x);
+		text.setAttribute('y', point.y);
+		text.appendChild(document.createTextNode(many ? '\u221e' : '1'));
+		return text;
 	}
 
 	function hideRubber() {
