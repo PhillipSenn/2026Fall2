@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050505">
+  <title>Boink</title>
+  <link rel="stylesheet" href="boink.css">
+</head>
+<body>
+  <main class="cabinet">
+    <header>
+      <p class="eyebrow">ATARI ST • 1985 DEMO REIMAGINED</p>
+      <h1>BOINK</h1>
+      <p class="tagline">A bouncing ball, a checkerboard floor, and far too much enthusiasm.</p>
+    </header>
+
+    <section class="screen-frame" aria-label="Boink animation">
+      <canvas id="boink" width="960" height="600">
+        Your browser needs canvas support to play Boink.
+      </canvas>
+      <div class="scanlines" aria-hidden="true"></div>
+      <div class="screen-glare" aria-hidden="true"></div>
+    </section>
+
+    <section class="controls" aria-label="Animation controls">
+      <button id="toggle" type="button">Pause</button>
+      <button id="sound" type="button" aria-pressed="true">Sound: On</button>
+      <label for="speed">Velocity <input id="speed" type="range" min="0.35" max="1.8" value="1" step="0.05"></label>
+      <output id="status">RUNNING • 60 FPS</output>
+    </section>
+
+    <footer>
+      <span>PRESS SPACE TO PAUSE</span>
+      <span>CLICK SCREEN FOR FULLSCREEN</span>
+    </footer>
+  </main>
+  <script src="boink.js"></script>
+</body>
+</html>

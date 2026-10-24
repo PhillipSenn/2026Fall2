@@ -2,17 +2,8 @@
 	user-select: none;
 }
 
-.card-body {
-	display: flex;
-	flex-direction: row;
-	align-items: stretch;
-	min-width: 0;
-	padding: 0;
-}
-
 #rel-canvas {
 	position: relative;
-	flex: 1 1 auto;
 	height: 720px;
 	min-width: 0;
 	overflow: auto;
@@ -24,10 +15,16 @@
 .rel-side {
 	display: flex;
 	flex-direction: column;
-	flex: 0 0 36rem;
 	min-width: 0;
-	border-left: 1px solid #6d6d6d;
+	border-top: 1px solid #6d6d6d;
 	background: #fff;
+}
+
+@media (width >= 1024px) {
+	.rel-side {
+		border-top: 0;
+		border-left: 1px solid #6d6d6d;
+	}
 }
 
 #rel-fields {
@@ -99,9 +96,8 @@
 }
 
 #sql-stmt {
-	flex: 0 0 auto;
+	flex: 1 1 auto;
 	min-height: 7rem;
-	max-height: 40%;
 	overflow: auto;
 	border-top: 1px solid #6d6d6d;
 	padding: 8px;

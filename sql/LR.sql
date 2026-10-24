@@ -7,8 +7,6 @@ use LR
 create table student
 (studentid int identity primary key
 ,studentname nvarchar(max)
-,phone varchar(max)
-,phonetypeid int
 ,curriculumid int
 ,classLevelid int
 )
@@ -124,18 +122,6 @@ declare @courseid int=(select courseid from course where coursename='CSC175')
 declare @termid int=(select termid from term where termname='Mini-term II')
 insert into avail(courseid,termid) values(@courseid,@termid)
 go
-create table phonetype
-(phonetypeid int identity primary key
-,phonetypename nvarchar(max)
-)
-go
-insert into phonetype(phonetypename) values
- ('Home')
-,('Cell')
-,('Work')
-,('Fax')
-,('Other')
-go
 use lr2026Fall2
 --insert into act(actname,actlink) values('Database Relationships','dbs/') -- 336
 declare @qid int
@@ -145,8 +131,6 @@ insert into q(q_act,qname) values(@actid,'student')
 select @qid=scope_identity()
 insert into ans(ans_q,ansname) values(@qid,'studentid')
 insert into ans(ans_q,ansname) values(@qid,'studentname')
-insert into ans(ans_q,ansname) values(@qid,'phone')
-insert into ans(ans_q,ansname) values(@qid,'phonetypeid')
 insert into ans(ans_q,ansname) values(@qid,'curriculumid')
 insert into ans(ans_q,ansname) values(@qid,'classLevelid')
 insert into q(q_act,qname) values(@actid,'course')
@@ -170,10 +154,6 @@ select @qid=scope_identity()
 insert into ans(ans_q,ansname) values(@qid,'availid')
 insert into ans(ans_q,ansname) values(@qid,'courseid')
 insert into ans(ans_q,ansname) values(@qid,'termid')
-insert into q(q_act,qname) values(@actid,'phonetype')
-select @qid=scope_identity()
-insert into ans(ans_q,ansname) values(@qid,'phonetypeid')
-insert into ans(ans_q,ansname) values(@qid,'phonetypename')
 insert into q(q_act,qname) values(@actid,'term')
 select @qid=scope_identity()
 insert into ans(ans_q,ansname) values(@qid,'termid')
@@ -215,11 +195,11 @@ update student set curriculumid=@curriculumid where studentname='Zane'
 go
 select * from student
 join classLevel on student.classLevelid=classLevel.classLevelid
-update student set phonetypeid=2
+update student set curriculumid=7000 where studentid=1
 select * from classLevel
 select * from course
 select * from enrollment
 select * from curriculum
 select * from avail
-select * from phonetype
 select * from term
+

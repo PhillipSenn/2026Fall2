@@ -35,6 +35,41 @@ for (row in ordered) {
 	}
 }
 
+liveColumns = queryExecute(
+	"SELECT TABLE_NAME, COLUMN_NAME FROM LR.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'dbo'",
+	{},
+	{datasource: "lr2026Fall2"}
+);
+columnExists = {};
+for (row in liveColumns) {
+	columnExists[lCase(row.TABLE_NAME) & "." & lCase(row.COLUMN_NAME)] = true;
+}
+kept = [];
+for (table in tables) {
+	fields = [];
+	for (field in table.fields) {
+		if (structKeyExists(columnExists, lCase(table.id) & "." & lCase(field.name))) {
+			arrayAppend(fields, field);
+		}
+	}
+	if (arrayLen(fields)) {
+		table.fields = fields;
+		arrayAppend(kept, table);
+	}
+}
+tables = kept;
+pkColumn = {};
+for (table in tables) {
+	for (field in table.fields) {
+		if (field.pk) {
+			pkColumn[lCase(field.name)] = {
+				table: table.id,
+				name: field.name
+			};
+		}
+	}
+}
+
 pairs = [];
 outgoing = {};
 for (table in tables) {
@@ -109,13 +144,15 @@ include '/Inc/header6.cfm';
 <div class="card">
 	<div class="card-header theme-primary theme-subtle">
 	</div>
-	<div class="card-body">
-		<div id="rel-canvas"></div>
-		<div class="rel-side">
-			<div id="rel-fields" aria-label="Fields">
-				<p class="rel-fields-hint">Drop fields here</p>
+	<div class="card-body p-0">
+		<div class="row g-0">
+			<div id="rel-canvas" class="col-12 lg:col-8"></div>
+			<div class="rel-side col-12 lg:col-4">
+				<div id="rel-fields" aria-label="Fields">
+					<p class="rel-fields-hint">Drop fields here</p>
+				</div>
+				<div id="sql-stmt"></div>
 			</div>
-			<div id="sql-stmt"></div>
 		</div>
 	</div>
 	<div class="card-footer">
