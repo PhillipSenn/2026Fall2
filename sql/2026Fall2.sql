@@ -186,6 +186,47 @@ from grade
 where gradeid=@gradeid
 go
 
+create or alter proc guess.merge_pix -- Only answers with pictures are counted
+(@id uniqueidentifier
+,@ansid int
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+declare @qid int=(select ans_q from ans where ansid=@ansid)
+declare @actid int=(select q_act from q where qid=@qid)
+
+declare @gradeid int=(select gradeid from grade where grade_usr=@usrid and grade_act=@actid)
+if @gradeid is null begin
+	insert into grade(grade_usr,grade_act) values(@usrid,@actid)
+	select @gradeid=scope_identity()
+end
+declare @guessid int=(
+	select guessid 
+	from guess
+	join grade on guess_grade=gradeid
+	where grade_usr=@usrid
+	and guess_ans=@ansid
+)
+if @guessid is null begin
+	insert into guess(guess_grade,guess_ans) values(@gradeid,@ansid)
+	select @guessid=scope_identity()
+end
+declare @possible int=(
+	select count(*) 
+	from ans
+	join q on ans_q=qid
+	where q_act=@actid
+	and ansdesc is not null
+)
+declare @answered int=(
+	select count(*) 
+	from guess 
+	where guess_grade=@gradeid
+)
+update grade set
+ earned=ceiling(100.0 * @answered / @possible)
+where gradeid=@gradeid
+go
+
 
 create or alter proc usr.codePoint
 (@id uniqueidentifier
@@ -469,6 +510,85 @@ on ans_q=qid
 where ans_q is null
 order by rowNumber
 go
+--drop proc ans.answered_pix
+--(@id uniqueidentifier
+--,@actid int
+--) as
+--declare @usrid int=(select usrid from usr where id=@id)
+--select top 1 ansid
+--from ans
+--join (
+--	select guess_ans
+--	from guess
+--	join grade on guess_grade=gradeid
+--	where grade_usr=@usrid
+--) guess
+--on guess_ans=ansid
+--join q on ans_q=qid
+--where q_act=@actid
+--and ansdesc is not null
+--order by ansid desc
+--go
+--exec ans.answered_pix '19C76747-5CF9-449C-9A52-FEF8906AD52E',340 
+create or alter proc ans.unanswered_pix
+(@id uniqueidentifier
+,@actid int
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+select top 1 ansid,ansname,ansdesc
+	,qid,qname
+from ans
+left join (
+	select guess_ans
+	from guess
+	join grade on guess_grade=gradeid
+	where grade_usr=@usrid
+) guess
+on guess_ans=ansid
+join q on ans_q=qid
+where q_act=@actid
+and ansdesc is not null
+and guess_ans is null
+order by ansid
+go
+--exec ans.unanswered_pix '19C76747-5CF9-449C-9A52-FEF8906AD52E',340 
+--go
+create or alter proc ans.unanswered_rnd
+(@id uniqueidentifier
+,@actid int
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+select ansid,ansdesc
+from ans
+left join (
+	select guess_ans
+	from guess
+	join grade on guess_grade=gradeid
+	where grade_usr=@usrid
+) guess
+on guess_ans=ansid
+join q on ans_q=qid
+where q_act=@actid
+and ansdesc is not null
+and guess_ans is null
+order by newid()
+go
+--exec ans.unanswered_rnd '19C76747-5CF9-449C-9A52-FEF8906AD52E',340 
+create or alter proc guess.where_act_pix
+(@id uniqueidentifier
+,@actid int
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+select ansid
+from guess
+join ans on guess_ans=ansid
+join q on ans_q=qid
+where q_act=@actid
+order by ansid desc
+go
+--exec guess.where_act_pix '19C76747-5CF9-449C-9A52-FEF8906AD52E',340 
+
+
 create or alter proc guess.where_act
 (@id uniqueidentifier
 ,@actid int
@@ -1100,10 +1220,11 @@ left join grade on grade_usr=@usrid and grade_act=actid
 where act_cat=@catid
 order by actsort,actid
 go
+set nocount on
 select * from usr
 
 
-
+/*
 select * from ansview
 where actname is null
 
@@ -1114,3 +1235,4 @@ select * from guess
 declare @guessStart datetime2(0)=getdate()
 print @guessStart
 
+*/

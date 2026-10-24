@@ -1,0 +1,54 @@
+.pix-choices {
+	display: flex;
+	flex-wrap: wrap;
+	gap: .5rem;
+	align-content: flex-start;
+	margin-top: 1rem;
+}
+.pix-side {
+	margin-top: 0;
+}
+.pix-choice {
+	width: 12rem;
+	height: 9rem;
+	object-fit: contain;
+	background: #fff;
+	cursor: grab;
+	position: relative;
+	z-index: 1;
+	transition: transform .15s ease;
+}
+.pix-choices .pix-choice:hover:not(.pix-dragging) {
+	transform: scale(1.75);
+	z-index: 5;
+}
+.pix-choice.pix-dragging {
+	opacity: .35;
+	transform: none;
+}
+.pix-ghost {
+	object-fit: contain;
+	background: #fff;
+	transition: left .45s ease, top .45s ease;
+	z-index: 40;
+	pointer-events: none;
+}
+.card-footer {
+	min-height: 7.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--bs-body-bg, #fff);
+}
+.pix-hint {
+	color: var(--bs-secondary-color, #6c757d);
+}
+.card-footer.pix-over {
+	outline: 2px dashed var(--bs-primary, #0d6efd);
+	outline-offset: -6px;
+}
+.card-footer.pix-filled .pix-choice {
+	width: 22rem;
+	height: 16rem;
+	cursor: default;
+}
