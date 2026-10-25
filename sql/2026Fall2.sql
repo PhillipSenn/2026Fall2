@@ -1220,10 +1220,47 @@ left join grade on grade_usr=@usrid and grade_act=actid
 where act_cat=@catid
 order by actsort,actid
 go
+create or alter proc poll.on_this_day -- 366 possible, 100 max.
+(@id uniqueidentifier
+,@qid int
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+declare @actid int=(select q_act from q where qid=@qid)
+declare @gradeid int=(select gradeid from grade where grade_usr=@usrid and grade_act=@actid)
+if @gradeid is null begin
+	insert into grade(grade_usr,grade_act) values(@usrid,@actid)
+	select @gradeid=scope_identity()
+end
+declare @pollid int=(
+	select pollid 
+	from poll 
+	join grade on poll_grade=gradeid
+	where poll_grade=@gradeid
+	and poll_q=@qid
+)
+if @pollid is null begin
+	insert into poll(poll_grade,poll_q,pollStart) values(@gradeid,@qid,getdate())
+	select @pollid=scope_identity()
+end
+update poll set
+ pollEnd=getdate()
+where pollid=@pollid
+
+declare @answered int=(
+	select count(*) 
+	from poll 
+	where poll_grade=@gradeid
+)
+update grade set
+ earned=@answered -- earned=earned+1, earned + 1
+where gradeid=@gradeid
+and @answered <= 100
+select earned
+from grade
+where gradeid=@gradeid
+go
 set nocount on
 select * from usr
-
-
 /*
 select * from ansview
 where actname is null
@@ -1236,3 +1273,5 @@ declare @guessStart datetime2(0)=getdate()
 print @guessStart
 
 */
+select * from q where q_act=341
+

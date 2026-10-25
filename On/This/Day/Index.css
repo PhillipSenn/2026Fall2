@@ -1,0 +1,122 @@
+.otd {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+.otd-sidebar {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+.otd-main {
+	min-width: 0;
+}
+@media (min-width: 992px) {
+	.otd {
+		flex-direction: row-reverse;
+		align-items: flex-start;
+	}
+	.otd-sidebar {
+		position: sticky;
+		top: 4.75rem;
+		width: max-content;
+	}
+	.otd-main {
+		flex: 1 1 auto;
+	}
+}
+.otd-sections {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: .25rem;
+}
+.month-grid,
+.day-grid {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: .25rem;
+	width: max-content;
+}
+.month-grid .btn-group > .btn {
+	flex: 0 0 4.5rem;
+	width: 4.5rem;
+}
+.day-year {
+	width: calc(7 * 3rem - 6px);
+	margin-bottom: .25rem;
+	text-align: center;
+	font-weight: 600;
+	line-height: 1.5rem;
+}
+.day-week {
+	display: flex;
+}
+.day-week > span {
+	flex: 0 0 3rem;
+	width: 3rem;
+	margin-left: -1px;
+	text-align: center;
+	line-height: 1.5rem;
+}
+.day-week > span:first-child {
+	margin-left: 0;
+}
+.day-grid > .btn-group {
+	margin-left: calc(var(--day-lead, 0) * (3rem - 1px));
+}
+.day-grid .btn-group > .btn {
+	flex: 0 0 3rem;
+	width: 3rem;
+}
+.accordion figure {
+	margin: 0;
+}
+.accordion figure a {
+	display: inline-block;
+}
+.accordion figcaption {
+	font-family: sans-serif;
+	font-size: 14.144px;
+}
+.accordion-item:has(.show) {
+	z-index: 4;
+}
+.accordion-item:has(.show)::details-content {
+	overflow: visible;
+}
+.otd-entry {
+	position: relative;
+}
+.otd-entry:has(.show) {
+	z-index: 4;
+}
+.otd-copy {
+	min-width: 0;
+}
+.ask-toggle {
+	padding: .3rem .7rem;
+	border: 0;
+	border-radius: .375rem;
+	background: transparent;
+	font: inherit;
+	line-height: inherit;
+	color: inherit;
+}
+.ask-toggle::after {
+	content: "";
+	display: inline-block;
+	margin-left: .5em;
+	vertical-align: .15em;
+	border-right: .3em solid transparent;
+	border-bottom: .3em solid;
+	border-left: .3em solid transparent;
+}
+.yearFound {
+	cursor: pointer;
+}
+.yearFound:hover,
+.yearFound.is-active {
+	text-decoration: underline;
+}
