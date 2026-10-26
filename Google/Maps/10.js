@@ -187,6 +187,11 @@ function createAirport(label, title, lat, lng, countryName, countryCode, stateNa
 
     $('#speed').text('0');
 
+    function clearRoute() {
+        route.setPath([]);
+        return route;
+    }
+
     function showSpeed() {
         var distanceMeters = google.maps.geometry.spherical.computeDistanceBetween(start, end);
         var speedMph = distanceMeters / duration * 2.23694;
@@ -206,9 +211,11 @@ function createAirport(label, title, lat, lng, countryName, countryCode, stateNa
         $('#flight').text(departed + ' \u2192 ' + code);
         var distanceMeters = google.maps.geometry.spherical.computeDistanceBetween(start, end);
         if (distanceMeters < 1000) {
+            clearRoute();
             setPlaneOffset(true);
             plane.position = end;
-            paintTurn(planeIcon, planeHeading);
+            planeHeading = null;
+            planeIcon.style.transform = 'rotate(0deg)';
             flying = false;
             $('#speed').text('0');
             postFlight(end.lat(), end.lng(), true);
@@ -248,7 +255,7 @@ function createAirport(label, title, lat, lng, countryName, countryCode, stateNa
             .catch(caught('plane.cfm'));
     }
     function flight_done(response) {
-        console.log(response)
+        return readFlightsDone(response);
     }
 
     function flightHeading(from, to, fraction, previous) {
@@ -314,8 +321,10 @@ function createAirport(label, title, lat, lng, countryName, countryCode, stateNa
         }
         /* snap perfectly onto the airport */
         plane.position = end;
+        clearRoute();
         setPlaneOffset(true);
-        paintTurn(planeIcon, planeHeading);
+        planeHeading = null;
+        planeIcon.style.transform = 'rotate(0deg)';
         flying = false;
         framing = false;
         departed = destinationCode;
@@ -352,6 +361,9 @@ function createAirport(label, title, lat, lng, countryName, countryCode, stateNa
     var otherStudents = {};
 
     function readFlights() {
+        if (flying) {
+            return;
+        }
         fetch('plane.cfm?id=' + encodeURIComponent(app.id), { method: 'get' })
             .then(text_done)
             .then(readFlightsDone)
@@ -473,7 +485,7 @@ function createAirport(label, title, lat, lng, countryName, countryCode, stateNa
                 content: label,
                 zIndex: 500,
                 gmpClickable: true,
-                anchorLeft: 'calc(-50% + 28px)',
+                anchorLeft: '-50%',
                 anchorTop: '-50%'
             });
             marker.addListener('click', toggleStudentTip);
@@ -505,11 +517,10 @@ function createAirport(label, title, lat, lng, countryName, countryCode, stateNa
         var move = studentMoves[studentId];
         if (distance < 100) {
             marker.position = end;
-            if (move) {
-                move.done = true;
-            }
+            parkStudent(marker, move);
             return;
         }
+        setStudentOffset(marker, false);
         if (!move) {
             move = { running: false };
             studentMoves[studentId] = move;
@@ -555,6 +566,24 @@ function createAirport(label, title, lat, lng, countryName, countryCode, stateNa
             current.marker.position = current.end;
             current.running = false;
         }
+    }
+
+    function setStudentOffset(marker, parked) {
+        marker.anchorLeft = parked ? 'calc(-50% + 28px)' : '-50%';
+        return marker.anchorLeft;
+    }
+
+    function parkStudent(marker, move) {
+        var icon = marker.content.querySelector('.student-plane');
+        if (move) {
+            move.done = true;
+            move.heading = null;
+        }
+        setStudentOffset(marker, true);
+        if (icon) {
+            icon.style.transform = 'rotate(0deg)';
+        }
+        return icon;
     }
 
     function studentTip(firstname, destination) {
@@ -675,8 +704,9 @@ function createAirport(label, title, lat, lng, countryName, countryCode, stateNa
     plane.title = placeText(destinationName, destinationCity, destinationCountry);
     if (!origin.resumed) {
         postFlight(origin.lat, origin.lng, true);
+    } else {
+        readFlights();
     }
-    readFlights();
     setInterval(readFlights, 3000);
     setInterval(pumpPlane, 1000);
 

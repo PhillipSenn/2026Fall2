@@ -24,7 +24,7 @@ param name="form.postedat" default="0";
 				<cfset currentAt = val(saved.POSTEDAT)>
 			</cfif>
 		</cfif>
-		<cfif incomingAt >= currentAt>
+		<cfif incomingAt GTE currentAt>
 			<cfset application.flight[request.usr.id] = {
 				id: request.usr.id,
 				firstname: request.usr.firstname,
