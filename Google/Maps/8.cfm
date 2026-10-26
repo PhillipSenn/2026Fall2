@@ -2,8 +2,7 @@
 request.container = ''
 request.navbar=false
 include '/Inc/header6.cfm'
-param url.actid=178;
-latlng = exec('latlng.where_act',url.actid)
+airport = queryExecute('select * from airport')
 </cfscript>
 
 <cfoutput >
@@ -33,14 +32,14 @@ latlng = exec('latlng.where_act',url.actid)
 
 </div>
 <table id="airports" hidden>
-<cfloop query="latlng">
+<cfloop query="airport">
     <tr>
-        <td>#latlngname#</td>
-        <td>#latlngdesc#</td>
+        <td>#airportcode#</td>
+        <td>#airportname#</td>
         <td>#lat#</td>
         <td>#lng#</td>
-        <td>#countryName#</td>
-        <td>#countryCode#</td>
+        <td>#countryname#</td>
+        <td>#countrycode#</td>
     </tr>
 </cfloop>
 </table>

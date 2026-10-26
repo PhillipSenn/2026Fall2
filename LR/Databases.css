@@ -1,0 +1,9 @@
+#databases .rank {
+	width: 5rem;
+}
+#databases td {
+	vertical-align: top;
+}
+#databases .qname {
+	font-weight: 600;
+}

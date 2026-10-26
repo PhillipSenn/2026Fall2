@@ -1259,6 +1259,50 @@ select earned
 from grade
 where gradeid=@gradeid
 go
+create or alter proc poll.merge_top5
+(@id uniqueidentifier
+,@qid int
+,@pollname int
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+declare @actid int=(select q_act from q where qid=@qid)
+
+declare @gradeid int=(select gradeid from grade where grade_usr=@usrid and grade_act=@actid)
+if @gradeid is null begin
+	insert into grade(grade_usr,grade_act) values(@usrid,@actid)
+	select @gradeid=scope_identity()
+end
+
+declare @pollid int=(
+	select pollid 
+	from poll 
+	join grade on poll_grade=gradeid
+	where poll_grade=@gradeid
+	and poll_q=@qid
+)
+if @pollid is null begin
+	insert into poll(poll_grade,poll_q) values(@gradeid,@qid)
+	select @pollid=scope_identity()
+end
+update poll set
+ pollEnd=getdate()
+,pollname=cast(@pollname as varchar)
+where pollid=@pollid
+
+declare @possible int=5
+declare @answered int=(
+	select count(*) 
+	from poll 
+	where poll_grade=@gradeid
+)
+update grade set
+ earned=iif(ceiling(100.0 * @answered / @possible) > 100, 100, ceiling(100.0 * @answered / @possible))
+where gradeid=@gradeid
+select earned
+from grade
+where gradeid=@gradeid
+go
+
 set nocount on
 select * from usr
 /*
@@ -1271,7 +1315,7 @@ select * from grp
 select * from guess
 declare @guessStart datetime2(0)=getdate()
 print @guessStart
-
-*/
+select * from act order by actid desc
 select * from q where q_act=341
+*/
 

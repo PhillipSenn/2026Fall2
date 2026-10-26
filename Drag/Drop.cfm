@@ -69,7 +69,7 @@ ans = exec('ans.where_q',q.qid)
 				Drag from here
 			</div>
 			<div class="card-body">
-				<ul id="terms">
+				<ul id="terms" class="list-unstyled">
 				</ul>
 			</div>
 		</div>
