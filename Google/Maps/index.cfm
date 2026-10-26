@@ -15,7 +15,7 @@
         <li><a href="7.cfm">Now use ColdFusion</a> (<a href="7.htm">Source</a>)</li>
         <li><a href="8.cfm">Add airports using SQL Server</a></li>
         <li><a href="9.cfm">Make airports clickable</a></li>
-        <li><a href="10.cfm">New Navbar</a></li>
+        <li><a href="10.cfm">Multiplayer</a></li>
         <!---
         <li>Define a player Unicode: 
             <form action="../../Unicode/player.cfm">

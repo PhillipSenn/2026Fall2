@@ -2,7 +2,7 @@
 request.container = ''
 request.navbar=false
 include '/Inc/header6.cfm'
-airport = queryExecute('select * from airport where isActive=1 and statename is null')
+airport = queryExecute('select * from airport where isActive=1 and statename is null and countrycode <> ''SCT''')
 </cfscript>
 
 <cfoutput >
