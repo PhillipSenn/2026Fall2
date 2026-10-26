@@ -15,6 +15,8 @@
         <li><a href="7.cfm">Now use ColdFusion</a> (<a href="7.htm">Source</a>)</li>
         <li><a href="8.cfm">Add airports using SQL Server</a></li>
         <li><a href="9.cfm">Make airports clickable</a></li>
+        <li><a href="10.cfm">New Navbar</a></li>
+        <!---
         <li>Define a player Unicode: 
             <form action="../../Unicode/player.cfm">
                 <button name="id" class="btn-solid theme-primary" value="19C76747-5CF9-449C-9A52-FEF8906AD52E">Player 1</button>
@@ -29,6 +31,7 @@
         </li>
         <li>Todo: Add commodities</li>
         <li>Todo: Allow players to buy/sell commodities at airports</li>
+        --->
         </ol>
     </div>
 </div>

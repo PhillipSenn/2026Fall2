@@ -1,0 +1,117 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+#showFlights {
+    position: absolute;
+    z-index: 5;
+    top: 12px;
+    right: 56px;
+}
+
+.flight-row {
+    border-bottom: 1px solid #ddd;
+    padding: 8px 0;
+}
+
+.flight-row strong {
+    display: block;
+}
+
+#map {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+}
+
+
+.airplane {
+    font-size: 26px;
+    transform-origin: center;
+    position: relative;
+    z-index: 1000;
+}
+
+.student-marker {
+    position: relative;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.student-tip {
+    display: none;
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 4px);
+    transform: translateX(-50%);
+    background: #fff;
+    border: 1px solid #222;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+    color: #111;
+    font-size: 12px;
+    line-height: 1.2;
+    padding: 4px 8px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.student-marker.open .student-tip {
+    display: block;
+}
+
+.student-plane {
+    display: inline-block;
+    transform-origin: center;
+}
+
+.student-name {
+    font-weight: 700;
+}
+
+.student-destination {
+    font-size: 11px;
+}
+
+.airport-marker {
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+}
+
+/* flag */
+
+.airport-marker img {
+
+    width: 24px;
+    height: auto;
+
+    display: block;
+
+    transition: transform 0.15s ease;
+
+}
+
+.airport-marker:hover img {
+    transform: scale(1.2);
+}
+.airport-marker img {
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
+}

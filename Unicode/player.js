@@ -70,6 +70,10 @@ function buildEmojiList() {
 	var code
 	var emoji
 
+	if (state.start === 0x1F680) {
+		list.push('\u2708\uFE0F')
+	}
+
 	for(code = state.start; code <= state.end; code = code + 1) {
 		emoji = String.fromCodePoint(code)
 

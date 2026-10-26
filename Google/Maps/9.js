@@ -19,7 +19,7 @@ async function initMap() {
 
     const map = new Map(document.getElementById("map"), {
 
-        zoom: 12,
+        zoom: 3.6,
         minZoom: 3,
         center: hickory,
         gestureHandling: "greedy",
@@ -34,6 +34,17 @@ async function initMap() {
         }
 
     });
+
+    function setStartZoom() {
+        if (map.get('isFractionalZoomEnabled') !== true) {
+            return;
+        }
+        map.setZoom(3.6);
+        google.maps.event.removeListener(startZoomListener);
+    }
+
+    var startZoomListener = map.addListener('isfractionalzoomenabled_changed', setStartZoom);
+    setStartZoom();
 
     /* ROUTE LINE */
 
