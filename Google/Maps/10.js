@@ -1,6 +1,6 @@
 async function initMap() {
 
-    let hickory = { lat: 35.74115, lng: -81.38955, name: 'Hickory Regional', country: '' };
+    let hickory = { lat: 35.74115, lng: -81.38955, name: 'Hickory Regional', city: 'Hickory', country: '' };
     $('#airports tr').each(findHickory);
     function findHickory() {
         var cells = $(this).find('td');
@@ -11,12 +11,15 @@ async function initMap() {
             lat: parseFloat(cells.eq(2).text()),
             lng: parseFloat(cells.eq(3).text()),
             name: cells.eq(1).text().replace(/^\s+|\s+$/g, ''),
+            city: cells.eq(8).text().replace(/^\s+|\s+$/g, ''),
             country: cells.eq(4).text().replace(/^\s+|\s+$/g, '')
         };
         if (!hickory.country) {
             hickory.country = cells.eq(6).text().replace(/^\s+|\s+$/g, '');
         }
     }
+
+    var origin = savedOrigin(hickory);
 
     const { Map } = await google.maps.importLibrary("maps");
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
@@ -83,10 +86,11 @@ async function initMap() {
         var countryCode = cells.eq(5).text();
         var stateName = cells.eq(6).text();
         var stateCode = cells.eq(7).text().replace(/^\s+|\s+$/g, '');
+        var cityName = cells.eq(8).text().replace(/^\s+|\s+$/g, '');
 
-        createAirport(code, name, lat, lng, countryName, countryCode, stateName, stateCode);
+        createAirport(code, name, lat, lng, countryName, countryCode, stateName, stateCode, cityName);
     }
-function createAirport(label, title, lat, lng, countryName, countryCode, stateName, stateCode) {
+function createAirport(label, title, lat, lng, countryName, countryCode, stateName, stateCode, cityName) {
 
     const pos = {
         lat: lat,
@@ -121,7 +125,7 @@ function createAirport(label, title, lat, lng, countryName, countryCode, stateNa
 
     marker.addListener('click', clickAirport);
     function clickAirport(response) {
-        return flyTo(pos, label, title, countryName);
+        return flyTo(pos, label, title, countryName, cityName);
     }
     return marker;
 
@@ -142,31 +146,42 @@ function createAirport(label, title, lat, lng, countryName, countryCode, stateNa
     /* AIRPLANE */
 
     const planeEl = document.createElement("div");
+    const planeIcon = document.createElement("span");
     planeEl.style.fontSize = "24px";
-    planeEl.textContent = iconFromCodePoint(document.getElementById('usrCodePoint').textContent);
     planeEl.className = "airplane";
+    planeIcon.className = "airplane-icon";
+    planeIcon.textContent = iconFromCodePoint(document.getElementById('usrCodePoint').textContent);
+    planeEl.appendChild(planeIcon);
 
     const plane = new AdvancedMarkerElement({
         map: map,
-        position: hickory,
+        position: origin,
         content: planeEl,
         zIndex: 1000,
-        anchorLeft: "-50%",
+        anchorLeft: "calc(-50% + 28px)",
         anchorTop: "-50%"
     });
 
+    function setPlaneOffset(parked) {
+        plane.anchorLeft = parked ? 'calc(-50% + 28px)' : '-50%';
+        return plane.anchorLeft;
+    }
+
     /* GREAT CIRCLE ANIMATION */
 
-    let start = new google.maps.LatLng(hickory);
-    let end = new google.maps.LatLng(hickory);
+    let start = new google.maps.LatLng(origin);
+    let end = new google.maps.LatLng(origin);
 
     const duration = 30; // seconds
 
     let startTime = null;
     let flying = false;
-    let departed = 'HKY';
+    let framing = false;
+    let planeHeading = null;
+    let departed = origin.iata || 'HKY';
     let destinationCode = '';
     let destinationName = '';
+    let destinationCity = '';
     let destinationCountry = '';
     let flightPostAt = 0;
 
@@ -179,29 +194,35 @@ function createAirport(label, title, lat, lng, countryName, countryCode, stateNa
         return speedMph;
     }
 
-    function flyTo(destination, code, name, country) {
+    function flyTo(destination, code, name, country, city) {
         start = new google.maps.LatLng(plane.position);
         end = new google.maps.LatLng(destination);
         route.setPath([start, end]);
         destinationCode = code;
         destinationName = name.replace(/^\s+|\s+$/g, '');
+        destinationCity = String(city || '').replace(/^\s+|\s+$/g, '');
         destinationCountry = country.replace(/^\s+|\s+$/g, '');
+        plane.title = placeText(destinationName, destinationCity, destinationCountry);
         $('#flight').text(departed + ' \u2192 ' + code);
-        startTime = null;
         var distanceMeters = google.maps.geometry.spherical.computeDistanceBetween(start, end);
         if (distanceMeters < 1000) {
+            setPlaneOffset(true);
             plane.position = end;
-            planeEl.style.transform = 'rotate(0deg)';
+            paintTurn(planeIcon, planeHeading);
             flying = false;
             $('#speed').text('0');
             postFlight(end.lat(), end.lng(), true);
             return destination;
         }
+        startTime = Date.now();
+        planeHeading = null;
+        setPlaneOffset(false);
         showSpeed();
         postFlight(start.lat(), start.lng(), true);
         if (!flying) {
             flying = true;
-            requestAnimationFrame(animatePlane);
+            framing = true;
+            requestAnimationFrame(framePlane);
         }
         return destination;
     }
@@ -216,9 +237,11 @@ function createAirport(label, title, lat, lng, countryName, countryCode, stateNa
         form.body = new URLSearchParams();
         form.body.set('id', app.id);
         form.body.set('airportname', destinationName);
+        form.body.set('cityname', destinationCity);
         form.body.set('countryname', destinationCountry);
         form.body.set('latitude', latitude);
         form.body.set('longitude', longitude);
+        form.body.set('postedat', String(nowMs));
         fetch('plane.cfm', form)
             .then(text_done)
             .then(flight_done)
@@ -228,48 +251,102 @@ function createAirport(label, title, lat, lng, countryName, countryCode, stateNa
         console.log(response)
     }
 
-    function animatePlane(timestamp) {
-
-        if (!startTime) startTime = timestamp;
-
-        const elapsed = (timestamp - startTime) / 1000;
-
-        const fraction = Math.min(elapsed / duration, 1);
-
-        const position =
-            google.maps.geometry.spherical.interpolate(start, end, fraction);
-
-        plane.position = position;
-
-        /* compute heading slightly ahead of current position */
-
-        const nextFraction = Math.min(fraction + 0.001, 1);
-
-        const nextPosition =
-            google.maps.geometry.spherical.interpolate(start, end, nextFraction);
-
-        const heading =
-            google.maps.geometry.spherical.computeHeading(position, nextPosition);
-
-        /* correction because airplane emoji isn't aligned with north */
-
-        planeEl.style.transform = `rotate(${heading - 40}deg)`;
-        if (fraction < 1) {
-
-            postFlight(position.lat(), position.lng(), false);
-            requestAnimationFrame(animatePlane);
-
-        } else {
-
-            /* snap perfectly onto the airport */
-
-            plane.position = end;
-
-            planeEl.style.transform = "rotate(0deg)";
-            flying = false;
-            departed = destinationCode;
-            postFlight(end.lat(), end.lng(), true);
+    function flightHeading(from, to, fraction, previous) {
+        var step = 0.01;
+        var originFraction = fraction;
+        var ahead = fraction + step;
+        var origin;
+        var target;
+        var distance;
+        var heading;
+        var delta;
+        if (ahead > 1) {
+            originFraction = Math.max(fraction - step, 0);
+            ahead = fraction;
         }
+        origin = google.maps.geometry.spherical.interpolate(from, to, originFraction);
+        target = google.maps.geometry.spherical.interpolate(from, to, ahead);
+        distance = google.maps.geometry.spherical.computeDistanceBetween(origin, target);
+        if (distance < 500) {
+            if (previous !== null && !isNaN(previous)) {
+                return previous;
+            }
+            heading = google.maps.geometry.spherical.computeHeading(from, to);
+        } else {
+            heading = google.maps.geometry.spherical.computeHeading(origin, target);
+        }
+        if (isNaN(heading)) {
+            return previous === null ? 0 : previous;
+        }
+        if (previous === null || isNaN(previous)) {
+            return heading;
+        }
+        delta = heading - previous;
+        while (delta > 180) {
+            delta -= 360;
+        }
+        while (delta < -180) {
+            delta += 360;
+        }
+        return previous + delta;
+    }
+
+    function paintTurn(icon, heading) {
+        var angle = 0;
+        if (heading !== null && !isNaN(heading)) {
+            angle = heading - 40;
+        }
+        icon.style.transform = 'rotate(' + angle + 'deg)';
+        return angle;
+    }
+
+    function animatePlane(response) {
+        var elapsed = (Date.now() - startTime) / 1000;
+        var fraction = Math.min(elapsed / duration, 1);
+        var position = google.maps.geometry.spherical.interpolate(start, end, fraction);
+        plane.position = position;
+        planeHeading = flightHeading(start, end, fraction, planeHeading);
+        /* correction because airplane emoji isn't aligned with north */
+        paintTurn(planeIcon, planeHeading);
+        if (fraction < 1) {
+            postFlight(position.lat(), position.lng(), false);
+            return response;
+        }
+        /* snap perfectly onto the airport */
+        plane.position = end;
+        setPlaneOffset(true);
+        paintTurn(planeIcon, planeHeading);
+        flying = false;
+        framing = false;
+        departed = destinationCode;
+        postFlight(end.lat(), end.lng(), true);
+        return response;
+    }
+
+    function framePlane(response) {
+        framing = false;
+        if (!flying) {
+            return response;
+        }
+        animatePlane(response);
+        if (!flying) {
+            return response;
+        }
+        framing = true;
+        requestAnimationFrame(framePlane);
+        return response;
+    }
+
+    function pumpPlane(response) {
+        if (!flying) {
+            return response;
+        }
+        animatePlane(response);
+        if (flying && !framing) {
+            framing = true;
+            requestAnimationFrame(framePlane);
+        }
+        return response;
     }
 
     var otherStudents = {};
@@ -345,10 +422,11 @@ function createAirport(label, title, lat, lng, countryName, countryCode, stateNa
         var place = document.createElement('div');
         var position = document.createElement('div');
         var airportname = flightField(row, 'airportname');
+        var cityname = cityForFlight(airportname, flightField(row, 'cityname'));
         var countryname = flightField(row, 'countryname');
         item.className = 'flight-row';
         name.textContent = flightField(row, 'firstname');
-        place.textContent = countryname ? airportname + ', ' + countryname : airportname;
+        place.textContent = placeText(airportname, cityname, countryname);
         position.textContent = formatCoord(flightField(row, 'latitude')) + ', ' + formatCoord(flightField(row, 'longitude'));
         item.appendChild(name);
         item.appendChild(place);
@@ -368,10 +446,11 @@ function createAirport(label, title, lat, lng, countryName, countryCode, stateNa
         var studentId = String(flightField(row, 'id') || key);
         var firstname = flightField(row, 'firstname');
         var airportname = flightField(row, 'airportname');
+        var cityname = cityForFlight(airportname, flightField(row, 'cityname'));
         var countryname = flightField(row, 'countryname');
         var latitude = parseFloat(flightField(row, 'latitude'));
         var longitude = parseFloat(flightField(row, 'longitude'));
-        var destination = airportname;
+        var destination = placeText(airportname, cityname, countryname);
         var marker;
         var label;
         if (!row || studentId.toLowerCase() === String(app.id).toLowerCase()) {
@@ -379,9 +458,6 @@ function createAirport(label, title, lat, lng, countryName, countryCode, stateNa
         }
         if (isNaN(latitude) || isNaN(longitude)) {
             return;
-        }
-        if (countryname) {
-            destination = airportname + ', ' + countryname;
         }
         studentId = studentId.toLowerCase();
         seen[studentId] = true;
@@ -397,7 +473,7 @@ function createAirport(label, title, lat, lng, countryName, countryCode, stateNa
                 content: label,
                 zIndex: 500,
                 gmpClickable: true,
-                anchorLeft: '-50%',
+                anchorLeft: 'calc(-50% + 28px)',
                 anchorTop: '-50%'
             });
             marker.addListener('click', toggleStudentTip);
@@ -443,6 +519,9 @@ function createAirport(label, title, lat, lng, countryName, countryCode, stateNa
         move.end = end;
         move.startTime = null;
         move.done = false;
+        if (move.heading === undefined) {
+            move.heading = null;
+        }
         if (!move.running) {
             move.running = true;
             requestAnimationFrame(stepStudent);
@@ -451,8 +530,6 @@ function createAirport(label, title, lat, lng, countryName, countryCode, stateNa
             var current = studentMoves[studentId];
             var fraction;
             var position;
-            var nextPosition;
-            var heading;
             var planeIcon;
             if (!current || current.done) {
                 if (current) {
@@ -465,12 +542,11 @@ function createAirport(label, title, lat, lng, countryName, countryCode, stateNa
             }
             fraction = Math.min((timestamp - current.startTime) / 3000, 1);
             position = google.maps.geometry.spherical.interpolate(current.start, current.end, fraction);
-            nextPosition = google.maps.geometry.spherical.interpolate(current.start, current.end, Math.min(fraction + 0.001, 1));
-            heading = google.maps.geometry.spherical.computeHeading(position, nextPosition);
+            current.heading = flightHeading(current.start, current.end, fraction, current.heading);
             current.marker.position = position;
             planeIcon = current.marker.content.querySelector('.student-plane');
             if (planeIcon) {
-                planeIcon.style.transform = 'rotate(' + (heading - 40) + 'deg)';
+                paintTurn(planeIcon, current.heading);
             }
             if (fraction < 1) {
                 requestAnimationFrame(stepStudent);
@@ -533,6 +609,53 @@ function createAirport(label, title, lat, lng, countryName, countryCode, stateNa
         }
     }
 
+    function cityForFlight(airportname, cityname) {
+        var city = String(cityname || '').replace(/^\s+|\s+$/g, '');
+        if (city) {
+            return city;
+        }
+        return cityFromAirport(airportname);
+    }
+
+    function cityFromAirport(airportname) {
+        var found = '';
+        var wanted = String(airportname || '').replace(/^\s+|\s+$/g, '').toLowerCase();
+        if (!wanted) {
+            return '';
+        }
+        $('#airports tr').each(matchCity);
+        function matchCity() {
+            var name = $(this).find('td').eq(1).text().replace(/^\s+|\s+$/g, '').toLowerCase();
+            if (name === wanted) {
+                found = $(this).find('td').eq(8).text().replace(/^\s+|\s+$/g, '');
+            }
+        }
+        return found;
+    }
+
+    function placeText(airportname, cityname, countryname) {
+        var parts = [];
+        pushPlace(parts, airportname);
+        pushPlace(parts, cityname);
+        pushPlace(parts, countryname);
+        return parts.join(', ');
+    }
+
+    function pushPlace(parts, value) {
+        var text = String(value || '').replace(/^\s+|\s+$/g, '');
+        var i;
+        if (!text) {
+            return parts;
+        }
+        for (i = 0; i < parts.length; i++) {
+            if (parts[i].toLowerCase() === text.toLowerCase()) {
+                return parts;
+            }
+        }
+        parts.push(text);
+        return parts;
+    }
+
     function flightField(row, name) {
         if (!row) {
             return '';
@@ -546,15 +669,51 @@ function createAirport(label, title, lat, lng, countryName, countryCode, stateNa
         return '';
     }
 
-    destinationName = hickory.name;
-    destinationCountry = hickory.country;
-    postFlight(hickory.lat, hickory.lng, true);
+    destinationName = origin.name;
+    destinationCity = origin.city;
+    destinationCountry = origin.country;
+    plane.title = placeText(destinationName, destinationCity, destinationCountry);
+    if (!origin.resumed) {
+        postFlight(origin.lat, origin.lng, true);
+    }
     readFlights();
     setInterval(readFlights, 3000);
+    setInterval(pumpPlane, 1000);
 
 }
 
 $(initMap);
+
+function savedOrigin(fallback) {
+    var lat = parseFloat($('#savedLat').text());
+    var lng = parseFloat($('#savedLng').text());
+    var name;
+    var origin;
+    if (isNaN(lat) || isNaN(lng)) {
+        fallback.resumed = false;
+        fallback.iata = 'HKY';
+        return fallback;
+    }
+    name = $('#savedAirport').text().replace(/^\s+|\s+$/g, '');
+    origin = {
+        lat: lat,
+        lng: lng,
+        name: name || fallback.name,
+        city: $('#savedCity').text().replace(/^\s+|\s+$/g, ''),
+        country: $('#savedCountry').text().replace(/^\s+|\s+$/g, ''),
+        resumed: true,
+        iata: ''
+    };
+    $('#airports tr').each(matchSavedAirport);
+    return origin;
+    function matchSavedAirport() {
+        var cells = $(this).find('td');
+        var airportName = cells.eq(1).text().replace(/^\s+|\s+$/g, '');
+        if (airportName.toLowerCase() === origin.name.toLowerCase()) {
+            origin.iata = cells.eq(0).text().replace(/^\s+|\s+$/g, '');
+        }
+    }
+}
 
 function iconFromCodePoint(codePoint) {
     var parts = String(codePoint || '').split('-');
@@ -574,10 +733,24 @@ function iconFromCodePoint(codePoint) {
 }
 
 function flagSrc(countryCode, stateCode) {
+    var code = String(countryCode || '').replace(/^\s+|\s+$/g, '').toUpperCase();
     if (stateCode) {
         return 'https://flagcdn.com/w40/us-' + stateCode.toLowerCase() + '.png';
     }
-    return countryCode_twemoji(countryCode.toUpperCase());
+    if (code === 'SCT') {
+        return subdivision_twemoji('gbsct');
+    }
+    return countryCode_twemoji(code);
+}
+
+function subdivision_twemoji(iso) {
+    var arr = ['1f3f4'];
+    var i;
+    for (i = 0; i < iso.length; i++) {
+        arr.push((0xE0000 + iso.charCodeAt(i)).toString(16));
+    }
+    arr.push('e007f');
+    return 'https://twemoji.maxcdn.com/v/latest/72x72/' + arr.join('-') + '.png';
 }
 
 function countryCode_twemoji(code) {

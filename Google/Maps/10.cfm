@@ -4,6 +4,48 @@ request.progress.bar = false
 request.container = 'container-fluid'
 include '/Inc/header6.cfm'
 airport = queryExecute('select * from airport where isActive=1')
+savedFlight = {}
+savedLat = ""
+savedLng = ""
+savedAirport = ""
+savedCity = ""
+savedCountry = ""
+function flightValue(row, key) {
+	if (!isStruct(row)) {
+		return ""
+	}
+	if (structKeyExists(row, key) && !isNull(row[key])) {
+		return row[key]
+	}
+	if (structKeyExists(row, uCase(key)) && !isNull(row[uCase(key)])) {
+		return row[uCase(key)]
+	}
+	return ""
+}
+if (structKeyExists(application, "flight") && isStruct(application.flight)) {
+	cflock(scope="application", type="readonly", timeout="5") {
+		if (structKeyExists(application.flight, request.usr.id)) {
+			savedFlight = duplicate(application.flight[request.usr.id])
+		} else {
+			for (flightId in application.flight) {
+				if (uCase(flightId) == uCase(request.usr.id)) {
+					savedFlight = duplicate(application.flight[flightId])
+					break
+				}
+			}
+		}
+	}
+	savedLat = flightValue(savedFlight, "latitude")
+	savedLng = flightValue(savedFlight, "longitude")
+	if (!isNumeric(savedLat) || !isNumeric(savedLng)) {
+		savedLat = ""
+		savedLng = ""
+	} else {
+		savedAirport = flightValue(savedFlight, "airportname")
+		savedCity = flightValue(savedFlight, "cityname")
+		savedCountry = flightValue(savedFlight, "countryname")
+	}
+}
 </cfscript>
 
 <cfoutput >
@@ -17,6 +59,11 @@ airport = queryExecute('select * from airport where isActive=1')
     <div class="drawer-body" id="flightRows"></div>
 </dialog>
 <span id="flight" hidden>HKY</span>
+<span id="savedLat" hidden>#encodeForHtml(savedLat)#</span>
+<span id="savedLng" hidden>#encodeForHtml(savedLng)#</span>
+<span id="savedAirport" hidden>#encodeForHtml(savedAirport)#</span>
+<span id="savedCity" hidden>#encodeForHtml(savedCity)#</span>
+<span id="savedCountry" hidden>#encodeForHtml(savedCountry)#</span>
 <span id="speed" hidden>0</span>
 <span id="usrCodePoint" hidden>#encodeForHtml(request.usr.codePoint)#</span>
 <table id="airports" hidden>
@@ -30,6 +77,7 @@ airport = queryExecute('select * from airport where isActive=1')
         <td>#countrycode#</td>
         <td>#statename#</td>
         <td>#statecode#</td>
+        <td>#cityname#</td>
     </tr>
 </cfloop>
 </table>

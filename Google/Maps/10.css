@@ -43,9 +43,13 @@ main {
 
 .airplane {
     font-size: 26px;
-    transform-origin: center;
     position: relative;
     z-index: 1000;
+}
+
+.airplane-icon {
+    display: inline-block;
+    transform-origin: center center;
 }
 
 .student-marker {

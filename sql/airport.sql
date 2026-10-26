@@ -6,6 +6,7 @@ create table airport
 ,airportname nvarchar(max)
 ,lat decimal(9,5)
 ,lng decimal(9,5)
+,cityname nvarchar(max)
 ,countryname nvarchar(max)
 ,countrycode varchar(3)
 ,isActive int default 1
@@ -462,6 +463,34 @@ values('AWK','Wake Island Airfield',19.2836,166.6367,'Wake Island','UM')
 
 insert into airport(iata,airportname,lat,lng,statename,statecode)
 values('MDY','Henderson Field',28.2017,-177.3806,'Midway Atoll','UM')
+
+
+insert into airport(iata,airportname,lat,lng,countryname,countrycode)
+values('EDI','Edinburgh Airport',55.9500,-3.3725,'Scotland','SCT')
+
+insert into airport(iata,airportname,lat,lng,countryname,countrycode) values('EDI','Edinburgh Airport',55.9500,-3.3725,'Scotland','SCT')
+insert into airport(iata,airportname,lat,lng,countryname,countrycode) values('GLA','Glasgow Airport',55.8719,-4.4331,'Scotland','SCT')
+insert into airport(iata,airportname,lat,lng,countryname,countrycode) values('ABZ','Aberdeen International Airport',57.2019,-2.1978,'Scotland','SCT')
+insert into airport(iata,airportname,lat,lng,countryname,countrycode) values('PIK','Glasgow Prestwick Airport',55.5094,-4.5867,'Scotland','SCT')
+insert into airport(iata,airportname,lat,lng,countryname,countrycode) values('INV','Inverness Airport',57.5425,-4.0475,'Scotland','SCT')
+insert into airport(iata,airportname,lat,lng,countryname,countrycode) values('DND','Dundee Airport',56.4525,-3.0258,'Scotland','SCT')
+insert into airport(iata,airportname,lat,lng,countryname,countrycode) values('KOI','Kirkwall Airport',58.9578,-2.9050,'Scotland','SCT')
+insert into airport(iata,airportname,lat,lng,countryname,countrycode) values('LSI','Sumburgh Airport',59.8789,-1.2956,'Scotland','SCT')
+insert into airport(iata,airportname,lat,lng,countryname,countrycode) values('SYY','Stornoway Airport',58.2156,-6.3311,'Scotland','SCT')
+insert into airport(iata,airportname,lat,lng,countryname,countrycode) values('BEB','Benbecula Airport',57.4811,-7.3628,'Scotland','SCT')
+insert into airport(iata,airportname,lat,lng,countryname,countrycode) values('BRR','Barra Airport',57.0228,-7.4431,'Scotland','SCT')
+insert into airport(iata,airportname,lat,lng,countryname,countrycode) values('ILY','Islay Airport',55.6819,-6.2567,'Scotland','SCT')
+insert into airport(iata,airportname,lat,lng,countryname,countrycode) values('TRE','Tiree Airport',56.4992,-6.8692,'Scotland','SCT')
+insert into airport(iata,airportname,lat,lng,countryname,countrycode) values('CAL','Campbeltown Airport',55.4372,-5.6864,'Scotland','SCT')
+insert into airport(iata,airportname,lat,lng,countryname,countrycode) values('WIC','Wick John O''Groats Airport',58.4589,-3.0931,'Scotland','SCT')
+insert into airport(iata,airportname,lat,lng,countryname,countrycode) values('OBN','Oban Airport',56.4636,-5.4000,'Scotland','SCT')
+insert into airport(iata,airportname,lat,lng,countryname,countrycode) values('PPW','Papa Westray Airport',59.3511,-2.9003,'Scotland','SCT')
+insert into airport(iata,airportname,lat,lng,countryname,countrycode) values('WRY','Westray Airport',59.3503,-2.9500,'Scotland','SCT')
+insert into airport(iata,airportname,lat,lng,countryname,countrycode) values('NRL','North Ronaldsay Airport',59.3675,-2.4344,'Scotland','SCT')
+insert into airport(iata,airportname,lat,lng,countryname,countrycode) values('EOI','Eday Airport',59.1906,-2.7722,'Scotland','SCT')
+insert into airport(iata,airportname,lat,lng,countryname,countrycode) values('NDY','Sanday Airport',59.2503,-2.5767,'Scotland','SCT')
+insert into airport(iata,airportname,lat,lng,countryname,countrycode) values('SOY','Stronsay Airport',59.1553,-2.6414,'Scotland','SCT')
+
 select iata,count(*)
 from airport
 group by iata
@@ -479,3 +508,5 @@ from airport
 order by iata
 
 */
+select * from act
+order by actid desc
