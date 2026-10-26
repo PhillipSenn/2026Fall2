@@ -1,6 +1,6 @@
 -- Extracted from index.htm; descriptions are plain text, with SQL quotes escaped.
-insert into act(actname,actlink) values('LR Library Databases','LR/Databases/')
-declare @actid int=scope_identity()
+--insert into act(actname,actlink) values('LR Library Databases','LR/Databases/')
+declare @actid int=342 -- scope_identity()
 insert into q(q_act,qname,qdesc) values(@actid,N'ABI/INFORM Collection',N'The most comprehensive ABI/INFORM™ database, this comprises ABI/INFORM Global, ABI/INFORM Trade and Industry, and ABI/INFORM Dateline. The database features thousands of full-text journals, dissertations, working papers, key business and economics periodicals such as the Economist, country-and industry-focused reports, and downloadable data. Its international coverage gives researchers a complete picture of companies and business trends around the world.')
 insert into q(q_act,qname,qdesc) values(@actid,N'Academic Search Premier',N'A popular resource found in many scholarly settings worldwide, Academic Search Premier is a leading multidisciplinary research database. It provides acclaimed full-text journals, magazines, and other valuable resources that cover the expansive academic disciplines offered in colleges and universities. This comprehensive content includes both PDF backfiles and searchable cited references.')
 insert into q(q_act,qname,qdesc) values(@actid,N'AccessAPN',N'AccessAPN is a comprehensive online resource from McGraw Hill in partnership with Sigma Theta Tau. The database features a wide range of content of interest to students in Advanced Practice Nursing programs, as well as other nursing programs, public health, and health administration programs.')
@@ -177,10 +177,10 @@ insert into q(q_act,qname,qdesc) values(@actid,N'Washington Post',N'This publica
 insert into q(q_act,qname,qdesc) values(@actid,N'Wildlife and Ecology Studies Worldwide',N'Wildlife and Ecology Studies Worldwide is the largest index to literature about wild mammals, birds, reptiles and amphibians. It covers many wildlife subjects including individual species, habitat types, wildlife behavior, ecotourism and zoology.')
 insert into q(q_act,qname,qdesc) values(@actid,N'Wiley Online Library',N'Multidisciplinary collection of online resources covering life, health and physical sciences, social science, and the humanities.')
 insert into q(q_act,qname,qdesc) values(@actid,N'WorldCat',N'Search the collections and services of more than 10,000 libraries worldwide.')
+select * from q where q_act=342
 
 select * from act
 order by actid desc
-select * from q where q_act=342
 
 go
 

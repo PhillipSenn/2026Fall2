@@ -13,6 +13,7 @@ pgm.init = function() {
 	$('button:not([class*="btn-"]):not([class*="bg-"])').addClass('btn-solid theme-primary btn-styled')
 	$('a.btn:not([class*="btn-"]):not([class*="bg-"])').addClass('btn-solid theme-primary btn-styled')
 	$('.nav-link').each(each_navlink)
+	$('.theme-primary').addClass('hover-lift')
 
 	dom.home = $('.home.nav-link')
 	if (dom.home.length) {
@@ -141,3 +142,4 @@ function cfdebug() {
 	$('hr').remove()
 	$('.cfdebuglge').remove()
 }
+

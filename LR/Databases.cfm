@@ -1,6 +1,5 @@
 <cfscript>
 param form.actid = 342;
-request.container = 'container-fluid';
 include '/Inc/header6.cfm';
 q = queryExecute(
 	"SELECT q.qid, q.qname, q.qdesc, poll.pollname
@@ -25,37 +24,39 @@ q = queryExecute(
 </cfscript>
 
 <cfoutput>
-<div class="card">
-	<div class="card-header theme-primary theme-subtle d-flex justify-content-between align-items-center gap-3">
-		<span>Type a number to move that database to the top. Databases with no number stay at the bottom, in alphabetical order.</span>
-		<a href="Top5.cfm?actid=#val(form.actid)#">Top 5</a>
-	</div>
-	<div class="card-body">
-		<table id="databases">
-			<thead>
-				<tr>
-					<th class="text-end">Rank</th>
-					<th>Database</th>
-					<th>Description</th>
-				</tr>
-			</thead>
-			<tbody>
-				<cfloop query="q">
-					<cfset ranked = !isNull(pollname) && isNumeric(pollname) && val(pollname) gt 0>
-					<cfset descText = "">
-					<cfif !isNull(qdesc)>
-						<cfset descText = replace(encodeForHTML(qdesc), "&lt;br&gt;", "<br>", "all")>
-					</cfif>
-					<tr data-qid="#qid#" data-qname="#encodeForHTMLAttribute(qname)#">
-						<td class="text-end">
-							<input class="rank" type="number" min="1" step="1" inputmode="numeric" autocomplete="off" aria-label="Rank for #encodeForHTMLAttribute(qname)#"<cfif ranked> value="#val(pollname)#" data-saved="#val(pollname)#"</cfif>>
-						</td>
-						<td class="qname">#encodeForHTML(qname)#</td>
-						<td class="qdesc">#descText#</td>
+<div class="mx-auto" style="max-width: 1024px">
+	<div class="card">
+		<div class="card-header theme-primary theme-subtle d-flex justify-content-between align-items-center gap-3">
+			<span>Type a number to move that database to the top. Databases with no number stay at the bottom, in alphabetical order.</span>
+			<a href="Top5.cfm?actid=#val(form.actid)#">Top 5</a>
+		</div>
+		<div class="card-body">
+			<table id="databases">
+				<thead>
+					<tr>
+						<th class="text-end">Rank</th>
+						<th>Database</th>
+						<th>Description</th>
 					</tr>
-				</cfloop>
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					<cfloop query="q">
+						<cfset ranked = !isNull(pollname) && isNumeric(pollname) && val(pollname) gt 0>
+						<cfset descText = "">
+						<cfif !isNull(qdesc)>
+							<cfset descText = replace(encodeForHTML(qdesc), "&lt;br&gt;", "<br>", "all")>
+						</cfif>
+						<tr data-qid="#qid#" data-qname="#encodeForHTMLAttribute(qname)#">
+							<td class="text-end">
+								<input class="rank" type="number" min="1" step="1" inputmode="numeric" autocomplete="off" aria-label="Rank for #encodeForHTMLAttribute(qname)#"<cfif ranked> value="#val(pollname)#" data-saved="#val(pollname)#"</cfif>>
+							</td>
+							<td class="qname">#encodeForHTML(qname)#</td>
+							<td class="qdesc">#descText#</td>
+						</tr>
+					</cfloop>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>
 <cfinclude template="/Inc/footer6.cfm">

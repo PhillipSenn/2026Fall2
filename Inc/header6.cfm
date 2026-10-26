@@ -18,7 +18,7 @@ param request.progress.width = 0;
 
 param request.flush = true;
 param request.script_name = cgi.script_name;
-writeoutput('<script src="' & request.home & 'Inc/js/header.js"></script>' & chr(10))
+writeoutput('<script src="' & request.home & 'Inc/js/header6.js"></script>' & chr(10))
 if (Len(cgi.query_string)) {
 	request.script_name &= '?' & cgi.query_string
 }
@@ -106,7 +106,7 @@ writeoutput('<body class="' & request.body & '">')
 <cfif request.navbar>
 <div class="#request.container# #request.top#">
 	<nav class="navbar navbar-expand bg-body py-0" data-bs-theme="dark">
-		<a class="ms-5 me-0 navbar-brand" href="#request.home#" aria-label="Home">
+		<a class="ms-5 me-0 navbar-brand" href="#request.home#<cfif structKeyExists(request,'usr')>?id=#request.usr.id#</cfif>" aria-label="Home">
 			CSC175
 		</a>
 		<form class="d-flex flex-grow-1 align-items-center">
