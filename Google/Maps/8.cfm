@@ -2,7 +2,7 @@
 request.container = ''
 request.navbar=false
 include '/Inc/header6.cfm'
-airport = queryExecute('select * from airport')
+airport = queryExecute('select * from airport where isActive=1 and statename is null')
 </cfscript>
 
 <cfoutput >
@@ -34,7 +34,7 @@ airport = queryExecute('select * from airport')
 <table id="airports" hidden>
 <cfloop query="airport">
     <tr>
-        <td>#airportcode#</td>
+        <td>#iata#</td>
         <td>#airportname#</td>
         <td>#lat#</td>
         <td>#lng#</td>

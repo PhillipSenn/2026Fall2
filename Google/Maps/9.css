@@ -4,7 +4,7 @@
 }
 
 
-.plane {
+.airplane {
     font-size: 26px;
     transform-origin: center;
     position: relative;
@@ -14,6 +14,7 @@
 .airport-marker {
     position: relative;
     z-index: 1;
+    cursor: pointer;
 }
 
 /* flag */
@@ -21,7 +22,7 @@
 .airport-marker img {
 
     width: 24px;
-    height: 24px;
+    height: auto;
 
     display: block;
 
