@@ -147,13 +147,12 @@ function readViews(batch, scores) {
 		titlesUrl &= encodeForURL(replace(title, ' ', '_', 'all'))
 	}
 	try {
-		cfhttp(
-			url = 'https://en.wikipedia.org/w/api.php?action=query&prop=pageviews&format=json&titles=' & titlesUrl,
-			method = 'get',
-			result = 'viewResult',
-			timeout = 30,
-			useragent = '2026Fall2 OnThisDay (https://PhillipSenn.dev/2026Fall2/On/This/Day/)'
-		);
+		http
+			url = 'https://en.wikipedia.org/w/api.php?action=query&prop=pageviews&format=json&titles=' & titlesUrl
+			method = 'get'
+			result = 'viewResult'
+			timeout = 30
+			useragent = '2026Fall2 OnThisDay';
 	} catch (any ignoreViews) {
 		return false
 	}
@@ -695,13 +694,12 @@ otdPicture = {year: 0, src: '', caption: '', href: ''}
 wikiMessage = ''
 if (sectionFilter == 'all' || sectionFilter == 'selected') {
 	try {
-		cfhttp(
-			url = 'https://en.wikipedia.org/w/index.php?title=' & encodeForURL('Wikipedia:Selected_anniversaries/' & monthNames[monthNumber] & '_' & dayNumber) & '&action=raw',
-			method = 'get',
-			result = 'wikiResult',
-			timeout = 30,
-			useragent = '2026Fall2 OnThisDay (https://PhillipSenn.dev/2026Fall2/On/This/Day/)'
-		);
+		http
+			url = 'https://en.wikipedia.org/w/index.php?title=' & encodeForURL('Wikipedia:Selected_anniversaries/' & monthNames[monthNumber] & '_' & dayNumber) & '&action=raw'
+			method = 'get'
+			result = 'wikiResult'
+			timeout = 30
+			useragent = '2026Fall2 OnThisDay';
 		if (left(wikiResult.statusCode, 3) == '200') {
 			wiki = wikiResult.fileContent
 			imageFound = mainPageImage(wiki)
@@ -731,13 +729,12 @@ if (sectionFilter == 'all' || sectionFilter == 'selected') {
 errorMessage = ''
 feed = {}
 try {
-	cfhttp(
-		url = 'https://en.wikipedia.org/api/rest_v1/feed/onthisday/' & sectionFilter & '/' & right('0' & monthNumber, 2) & '/' & right('0' & dayNumber, 2),
-		method = 'get',
-		result = 'httpResult',
-		timeout = 30,
-		useragent = '2026Fall2 OnThisDay (https://PhillipSenn.dev/2026Fall2/On/This/Day/)'
-	);
+	http
+		url = 'https://en.wikipedia.org/api/rest_v1/feed/onthisday/' & sectionFilter & '/' & right('0' & monthNumber, 2) & '/' & right('0' & dayNumber, 2)
+		method = 'get'
+		result = 'httpResult'
+		timeout = 30
+		useragent = '2026Fall2 OnThisDay';
 	if (left(httpResult.statusCode, 3) == '200' && isJSON(httpResult.fileContent)) {
 		feed = deserializeJSON(httpResult.fileContent)
 	} else {
