@@ -433,17 +433,19 @@ function linkedText(item, imageUrl) {
 		var pass = 1
 		for (pass = 1; pass <= len(haystack); pass++) {
 			pos = find(needle, haystack, startAt)
-			if (!pos || pos < startAt || pos + len(needle) <= startAt) {
+			if (pos < 1 || pos < startAt || pos + len(needle) <= startAt) {
 				break
 			}
-			if (!rangesOverlap(ranges, pos, pos + len(needle) - 1)) {
+			var foundAt = int(pos)
+			var foundEnd = foundAt + len(needle) - 1
+			if (foundAt >= 1 && foundEnd >= foundAt && !rangesOverlap(ranges, foundAt, foundEnd)) {
 				arrayAppend(ranges, {
-					startAt: pos,
-					endAt: pos + len(needle) - 1,
+					startAt: foundAt,
+					endAt: foundEnd,
 					url: link.url
 				})
 			}
-			startAt = pos + len(needle)
+			startAt = foundEnd + 1
 		}
 	}
 	var left = 1
@@ -467,14 +469,24 @@ function linkedText(item, imageUrl) {
 	var html = ''
 	var cursor = 1
 	var range = ''
-	for (range in ranges) {
-		if (range.startAt > cursor) {
-			html &= encodeForHTML(mid(text, cursor, range.startAt - cursor))
+	var index = 1
+	for (index = 1; index <= arrayLen(ranges); index++) {
+		range = ranges[index]
+		if (range.startAt >= 1 && range.endAt >= range.startAt && range.startAt <= len(text)) {
+			if (range.startAt > cursor) {
+				html &= encodeForHTML(mid(text, cursor, range.startAt - cursor))
+			}
+			var count = range.endAt - range.startAt + 1
+			if (range.startAt + count - 1 > len(text)) {
+				count = len(text) - range.startAt + 1
+			}
+			if (count >= 1) {
+				html &= '<a href="' & encodeForHTMLAttribute(range.url) & '">' & encodeForHTML(mid(text, range.startAt, count)) & '</a>'
+				cursor = range.startAt + count
+			}
 		}
-		html &= '<a href="' & encodeForHTMLAttribute(range.url) & '">' & encodeForHTML(mid(text, range.startAt, range.endAt - range.startAt + 1)) & '</a>'
-		cursor = range.endAt + 1
 	}
-	if (cursor <= len(text)) {
+	if (cursor >= 1 && cursor <= len(text)) {
 		html &= encodeForHTML(mid(text, cursor, len(text) - cursor + 1))
 	}
 	return html
