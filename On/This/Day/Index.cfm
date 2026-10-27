@@ -150,7 +150,7 @@ function readViews(batch, scores) {
 			result = 'viewResult',
 			timeout = 30,
 			useragent = '2026Fall2 OnThisDay (https://PhillipSenn.dev/2026Fall2/On/This/Day/)'
-		)
+		);
 	} catch (any ignoreViews) {
 		return
 	}
@@ -677,7 +677,7 @@ if (sectionFilter == 'all' || sectionFilter == 'selected') {
 			result = 'wikiResult',
 			timeout = 30,
 			useragent = '2026Fall2 OnThisDay (https://PhillipSenn.dev/2026Fall2/On/This/Day/)'
-		)
+		);
 		if (left(wikiResult.statusCode, 3) == '200') {
 			wiki = wikiResult.fileContent
 			imageFound = mainPageImage(wiki)
@@ -711,7 +711,7 @@ try {
 		result = 'httpResult',
 		timeout = 30,
 		useragent = '2026Fall2 OnThisDay (https://PhillipSenn.dev/2026Fall2/On/This/Day/)'
-	)
+	);
 	if (left(httpResult.statusCode, 3) == '200' && isJSON(httpResult.fileContent)) {
 		feed = deserializeJSON(httpResult.fileContent)
 	} else {
