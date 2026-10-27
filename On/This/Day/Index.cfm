@@ -430,9 +430,10 @@ function linkedText(item, imageUrl) {
 	for (link in sorted) {
 		needle = hasExact ? link.title : lCase(link.title)
 		startAt = 1
-		while (true) {
+		var pass = 1
+		for (pass = 1; pass <= len(haystack); pass++) {
 			pos = find(needle, haystack, startAt)
-			if (!pos) {
+			if (!pos || pos < startAt || pos + len(needle) <= startAt) {
 				break
 			}
 			if (!rangesOverlap(ranges, pos, pos + len(needle) - 1)) {
