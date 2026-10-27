@@ -173,21 +173,21 @@ function readViews(batch, scores) {
 			arrayAppend(list, pages[pageId])
 		}
 	}
-	var page = ''
-	for (page in list) {
-		if (!isStruct(page) || !structKeyExists(page, 'title')) {
+	var wikiPage = ''
+	for (wikiPage in list) {
+		if (!isStruct(wikiPage) || !structKeyExists(wikiPage, 'title')) {
 			continue
 		}
 		var total = 0
-		if (structKeyExists(page, 'pageviews') && isStruct(page.pageviews)) {
+		if (structKeyExists(wikiPage, 'pageviews') && isStruct(wikiPage.pageviews)) {
 			var day = ''
-			for (day in page.pageviews) {
-				if (isNumeric(page.pageviews[day])) {
-					total += val(page.pageviews[day])
+			for (day in wikiPage.pageviews) {
+				if (isNumeric(wikiPage.pageviews[day])) {
+					total += val(wikiPage.pageviews[day])
 				}
 			}
 		}
-		scores[viewKey(page.title)] = total
+		scores[viewKey(wikiPage.title)] = total
 	}
 }
 
@@ -328,20 +328,20 @@ function choosePage(item) {
 	var loose = {}
 	var looseLength = 0
 	var title = ''
-	var page = ''
-	for (page in itemPages(item)) {
-		if (!isStruct(page)) {
+	var wikiPage = ''
+	for (wikiPage in itemPages(item)) {
+		if (!isStruct(wikiPage)) {
 			continue
 		}
-		title = pageTitle(page)
+		title = pageTitle(wikiPage)
 		if (!len(title) || !len(text)) {
 			continue
 		}
 		if (find(title, text) && len(title) > bestLength) {
-			best = page
+			best = wikiPage
 			bestLength = len(title)
 		} else if (findNoCase(title, text) && len(title) > looseLength) {
-			loose = page
+			loose = wikiPage
 			looseLength = len(title)
 		}
 	}
@@ -379,20 +379,20 @@ function linkedText(item, imageUrl) {
 	var matches = []
 	var title = ''
 	var exact = false
-	var page = ''
-	for (page in itemPages(item)) {
-		if (!isStruct(page)) {
+	var wikiPage = ''
+	for (wikiPage in itemPages(item)) {
+		if (!isStruct(wikiPage)) {
 			continue
 		}
-		title = pageTitle(page)
-		if (!len(title) || !len(pageUrl(page)) || !len(text) || samePlace(pageUrl(page), imageUrl)) {
+		title = pageTitle(wikiPage)
+		if (!len(title) || !len(pageUrl(wikiPage)) || !len(text) || samePlace(pageUrl(wikiPage), imageUrl)) {
 			continue
 		}
 		exact = find(title, text) > 0
 		if (exact || findNoCase(title, text)) {
 			arrayAppend(matches, {
 				title: title,
-				url: pageUrl(page),
+				url: pageUrl(wikiPage),
 				titleLength: len(title),
 				exact: exact
 			})
