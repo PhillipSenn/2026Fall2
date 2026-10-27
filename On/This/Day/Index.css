@@ -31,6 +31,25 @@
 	align-items: flex-start;
 	gap: .25rem;
 }
+.otd-sidebar .is-waiting {
+	cursor: wait;
+	box-shadow: inset 0 0 0 2px currentColor;
+}
+.otd.is-loading {
+	cursor: wait;
+}
+.otd-status {
+	display: none;
+	margin: 0 0 .75rem;
+	font-weight: 600;
+}
+.otd.is-loading .otd-status {
+	display: block;
+}
+.otd.is-loading .otd-main .card,
+.otd.is-loading .otd-main .accordion {
+	opacity: .45;
+}
 .month-grid,
 .day-grid {
 	display: flex;

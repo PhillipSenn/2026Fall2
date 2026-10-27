@@ -1,4 +1,5 @@
 $('a[href]').each(externalLink)
+$('.otd').on('click', '.otd-sidebar button[name="section"], .otd-sidebar a.btn', waitForPage)
 
 var dayGrid = document.querySelector('.day-grid')
 if (dayGrid) {
@@ -60,6 +61,16 @@ function layoutYear(year) {
 		}
 		group.appendChild(button)
 	})
+}
+
+function waitForPage() {
+	var control = $(this)
+	var label = String(control.attr('aria-label') || control.attr('title') || control.text()).replace(/^\s+|\s+$/g, '')
+	$('.otd-sidebar .is-waiting').removeClass('is-waiting').removeAttr('aria-busy')
+	control.addClass('is-waiting').attr('aria-busy', 'true')
+	$('.otd').addClass('is-loading')
+	$('.otd-main').attr('aria-busy', 'true')
+	$('.otd-status').text('Loading ' + label + '…')
 }
 
 function externalLink() {

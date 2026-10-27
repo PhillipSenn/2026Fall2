@@ -829,6 +829,7 @@ for (section in sections) {
 	</div>
 </aside>
 <div class="otd-main">
+	<p class="otd-status" role="status"></p>
 	<div class="card mb-3">
 		<cfif len(errorMessage) || len(wikiMessage)>
 			<div class="card-body">
