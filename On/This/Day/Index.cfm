@@ -314,7 +314,7 @@ function askLinks(item, sectionKey) {
 	var question = encodeForURL(chatQuestion(item, sectionKey))
 	var html = ''
 	var service = ''
-	for (service in askServices) {
+	for (service in variables.askServices) {
 		html &= '<a class="menu-item" href="' & encodeForHTMLAttribute(service.href & question) & '">' & encodeForHTML(service.title) & '</a>'
 	}
 	return html
