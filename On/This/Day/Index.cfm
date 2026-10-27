@@ -175,19 +175,18 @@ function readViews(batch, scores) {
 	}
 	var wikiPage = ''
 	for (wikiPage in list) {
-		if (!isStruct(wikiPage) || !structKeyExists(wikiPage, 'title')) {
-			continue
-		}
-		var total = 0
-		if (structKeyExists(wikiPage, 'pageviews') && isStruct(wikiPage.pageviews)) {
-			var day = ''
-			for (day in wikiPage.pageviews) {
-				if (isNumeric(wikiPage.pageviews[day])) {
-					total += val(wikiPage.pageviews[day])
+		if (isStruct(wikiPage) && structKeyExists(wikiPage, 'title')) {
+			var total = 0
+			if (structKeyExists(wikiPage, 'pageviews') && isStruct(wikiPage.pageviews)) {
+				var day = ''
+				for (day in wikiPage.pageviews) {
+					if (isNumeric(wikiPage.pageviews[day])) {
+						total += val(wikiPage.pageviews[day])
+					}
 				}
 			}
+			scores[viewKey(wikiPage.title)] = total
 		}
-		scores[viewKey(wikiPage.title)] = total
 	}
 }
 
@@ -330,19 +329,17 @@ function choosePage(item) {
 	var title = ''
 	var wikiPage = ''
 	for (wikiPage in itemPages(item)) {
-		if (!isStruct(wikiPage)) {
-			continue
-		}
-		title = pageTitle(wikiPage)
-		if (!len(title) || !len(text)) {
-			continue
-		}
-		if (find(title, text) && len(title) > bestLength) {
-			best = wikiPage
-			bestLength = len(title)
-		} else if (findNoCase(title, text) && len(title) > looseLength) {
-			loose = wikiPage
-			looseLength = len(title)
+		if (isStruct(wikiPage)) {
+			title = pageTitle(wikiPage)
+			if (len(title) && len(text)) {
+				if (find(title, text) && len(title) > bestLength) {
+					best = wikiPage
+					bestLength = len(title)
+				} else if (findNoCase(title, text) && len(title) > looseLength) {
+					loose = wikiPage
+					looseLength = len(title)
+				}
+			}
 		}
 	}
 	if (bestLength) {
@@ -381,21 +378,19 @@ function linkedText(item, imageUrl) {
 	var exact = false
 	var wikiPage = ''
 	for (wikiPage in itemPages(item)) {
-		if (!isStruct(wikiPage)) {
-			continue
-		}
-		title = pageTitle(wikiPage)
-		if (!len(title) || !len(pageUrl(wikiPage)) || !len(text) || samePlace(pageUrl(wikiPage), imageUrl)) {
-			continue
-		}
-		exact = find(title, text) > 0
-		if (exact || findNoCase(title, text)) {
-			arrayAppend(matches, {
-				title: title,
-				url: pageUrl(wikiPage),
-				titleLength: len(title),
-				exact: exact
-			})
+		if (isStruct(wikiPage)) {
+			title = pageTitle(wikiPage)
+			if (len(title) && len(pageUrl(wikiPage)) && len(text) && !samePlace(pageUrl(wikiPage), imageUrl)) {
+				exact = find(title, text) > 0
+				if (exact || findNoCase(title, text)) {
+					arrayAppend(matches, {
+						title: title,
+						url: pageUrl(wikiPage),
+						titleLength: len(title),
+						exact: exact
+					})
+				}
+			}
 		}
 	}
 	var hasExact = false
@@ -413,10 +408,9 @@ function linkedText(item, imageUrl) {
 	var sorted = []
 	var candidate = ''
 	for (candidate in matches) {
-		if (hasExact && !candidate.exact) {
-			continue
+		if (!hasExact || candidate.exact) {
+			arrayAppend(sorted, candidate)
 		}
-		arrayAppend(sorted, candidate)
 	}
 	var i = 1
 	for (i = 1; i <= arrayLen(sorted); i++) {
@@ -557,16 +551,16 @@ function wikiLabels(markup) {
 		if (find('[', inside) || find(']', inside)) {
 			text &= mid(markup, cursor, openAt - cursor + 1)
 			cursor = openAt + 1
-			continue
-		}
-		text &= mid(markup, cursor, openAt - cursor)
-		var pipeAt = find('|', inside)
-		if (pipeAt) {
-			text &= mid(inside, pipeAt + 1, len(inside) - pipeAt)
 		} else {
-			text &= inside
+			text &= mid(markup, cursor, openAt - cursor)
+			var pipeAt = find('|', inside)
+			if (pipeAt) {
+				text &= mid(inside, pipeAt + 1, len(inside) - pipeAt)
+			} else {
+				text &= inside
+			}
+			cursor = closeAt + 2
 		}
-		cursor = closeAt + 2
 	}
 	return text
 }
