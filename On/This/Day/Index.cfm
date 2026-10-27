@@ -1,8 +1,8 @@
 <cfscript>
+param form.actid = 341;
+request.title = 'On this day'
 include '/Inc/header6.cfm'
 flush;
-param form.actid = 341
-request.title = 'On this day'
 
 monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 monthAbbreviations = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
