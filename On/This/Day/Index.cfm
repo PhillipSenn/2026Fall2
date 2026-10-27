@@ -669,6 +669,7 @@ function filePage(fileName) {
 }
 
 otdPicture = {year: 0, src: '', caption: '', href: ''}
+wikiMessage = ''
 if (sectionFilter == 'all' || sectionFilter == 'selected') {
 	try {
 		cfhttp(
@@ -700,7 +701,7 @@ if (sectionFilter == 'all' || sectionFilter == 'selected') {
 			}
 		}
 	} catch (any ignoreWiki) {
-		;
+		wikiMessage = 'Could not reach Wikipedia for the pictured anniversary.'
 	}
 }
 
@@ -800,9 +801,10 @@ for (section in sections) {
 </aside>
 <div class="otd-main">
 	<div class="card mb-3">
-		<cfif len(errorMessage)>
+		<cfif len(errorMessage) || len(wikiMessage)>
 			<div class="card-body">
-				<p class="mb-0">#encodeForHTML(errorMessage)#</p>
+				<cfif len(wikiMessage)><p class="mb-0">#encodeForHTML(wikiMessage)#</p></cfif>
+				<cfif len(errorMessage)><p class="mb-0">#encodeForHTML(errorMessage)#</p></cfif>
 			</div>
 		</cfif>
 	</div>
