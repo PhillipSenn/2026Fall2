@@ -300,21 +300,20 @@ function chatQuestion(item, sectionKey) {
 	return text
 }
 
-askServices = [
-	{title: 'ChatGPT', href: 'https://chatgpt.com/?q='},
-	{title: 'Claude', href: 'https://claude.ai/new?q='},
-	{title: 'Perplexity', href: 'https://www.perplexity.ai/search?q='},
-	{title: 'Grok', href: 'https://grok.com/?q='},
-	{title: 'DeepSeek', href: 'https://chat.deepseek.com/?q='},
-	{title: 'Google AI', href: 'https://www.google.com/search?udm=50&q='},
-	{title: 'duck.ai', href: 'https://duck.ai/chat?q='}
-]
-
 function askLinks(item, sectionKey) {
 	var question = encodeForURL(chatQuestion(item, sectionKey))
 	var html = ''
 	var service = ''
-	for (service in variables.askServices) {
+	var askServices = [
+		{title: 'ChatGPT', href: 'https://chatgpt.com/?q='},
+		{title: 'Claude', href: 'https://claude.ai/new?q='},
+		{title: 'Perplexity', href: 'https://www.perplexity.ai/search?q='},
+		{title: 'Grok', href: 'https://grok.com/?q='},
+		{title: 'DeepSeek', href: 'https://chat.deepseek.com/?q='},
+		{title: 'Google AI', href: 'https://www.google.com/search?udm=50&q='},
+		{title: 'duck.ai', href: 'https://duck.ai/chat?q='}
+	]
+	for (service in askServices) {
 		html &= '<a class="menu-item" href="' & encodeForHTMLAttribute(service.href & question) & '">' & encodeForHTML(service.title) & '</a>'
 	}
 	return html
