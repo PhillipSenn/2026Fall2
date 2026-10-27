@@ -699,7 +699,9 @@ if (sectionFilter == 'all' || sectionFilter == 'selected') {
 				}
 			}
 		}
-	} catch (any ignoreWiki) {}
+	} catch (any ignoreWiki) {
+		;
+	}
 }
 
 errorMessage = ''
