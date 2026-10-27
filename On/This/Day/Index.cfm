@@ -95,8 +95,10 @@ function chronological(rows) {
 	for (i = 1; i <= arrayLen(rows); i++) {
 		arrayAppend(indexed, {item: rows[i], index: i, year: itemYear(rows[i])})
 	}
-	for (var left = 1; left <= arrayLen(indexed); left++) {
-		for (var right = left + 1; right <= arrayLen(indexed); right++) {
+	var left = 1
+	for (left = 1; left <= arrayLen(indexed); left++) {
+		var right = left + 1
+		for (right = left + 1; right <= arrayLen(indexed); right++) {
 			if (indexed[right].year < indexed[left].year || (indexed[right].year == indexed[left].year && indexed[right].index < indexed[left].index)) {
 				var moved = indexed[left]
 				indexed[left] = indexed[right]
@@ -104,7 +106,8 @@ function chronological(rows) {
 			}
 		}
 	}
-	for (var entry in indexed) {
+	var entry = ''
+	for (entry in indexed) {
 		arrayAppend(sorted, entry.item)
 	}
 	return sorted
@@ -165,17 +168,20 @@ function readViews(batch, scores) {
 	if (isArray(pages)) {
 		list = pages
 	} else if (isStruct(pages)) {
-		for (var pageId in pages) {
+		var pageId = ''
+		for (pageId in pages) {
 			arrayAppend(list, pages[pageId])
 		}
 	}
-	for (var page in list) {
+	var page = ''
+	for (page in list) {
 		if (!isStruct(page) || !structKeyExists(page, 'title')) {
 			continue
 		}
 		var total = 0
 		if (structKeyExists(page, 'pageviews') && isStruct(page.pageviews)) {
-			for (var day in page.pageviews) {
+			var day = ''
+			for (day in page.pageviews) {
 				if (isNumeric(page.pageviews[day])) {
 					total += val(page.pageviews[day])
 				}
@@ -192,7 +198,8 @@ function popularity(rows) {
 	var batch = []
 	var title = ''
 	var key = ''
-	for (var item in rows) {
+	var item = ''
+	for (item in rows) {
 		title = pageArticle(subjectPage(item))
 		key = viewKey(title)
 		if (len(key) && !structKeyExists(seen, key)) {
@@ -229,8 +236,10 @@ function byPopularity(rows) {
 	for (i = 1; i <= arrayLen(rows); i++) {
 		arrayAppend(indexed, {item: rows[i], index: i, views: itemViews(rows[i], scores)})
 	}
-	for (var left = 1; left <= arrayLen(indexed); left++) {
-		for (var right = left + 1; right <= arrayLen(indexed); right++) {
+	var left = 1
+	for (left = 1; left <= arrayLen(indexed); left++) {
+		var right = left + 1
+		for (right = left + 1; right <= arrayLen(indexed); right++) {
 			if (indexed[right].views > indexed[left].views || (indexed[right].views == indexed[left].views && indexed[right].index < indexed[left].index)) {
 				var moved = indexed[left]
 				indexed[left] = indexed[right]
@@ -238,7 +247,8 @@ function byPopularity(rows) {
 			}
 		}
 	}
-	for (var entry in indexed) {
+	var entry = ''
+	for (entry in indexed) {
 		arrayAppend(sorted, entry.item)
 	}
 	return sorted
@@ -304,7 +314,8 @@ askServices = [
 function askLinks(item, sectionKey) {
 	var question = encodeForURL(chatQuestion(item, sectionKey))
 	var html = ''
-	for (var service in askServices) {
+	var service = ''
+	for (service in askServices) {
 		html &= '<a class="menu-item" href="' & encodeForHTMLAttribute(service.href & question) & '">' & encodeForHTML(service.title) & '</a>'
 	}
 	return html
@@ -317,7 +328,8 @@ function choosePage(item) {
 	var loose = {}
 	var looseLength = 0
 	var title = ''
-	for (var page in itemPages(item)) {
+	var page = ''
+	for (page in itemPages(item)) {
 		if (!isStruct(page)) {
 			continue
 		}
@@ -346,7 +358,8 @@ function choosePage(item) {
 }
 
 function rangesOverlap(ranges, startAt, endAt) {
-	for (var range in ranges) {
+	var range = ''
+	for (range in ranges) {
 		if (startAt <= range.endAt && endAt >= range.startAt) {
 			return true
 		}
@@ -366,7 +379,8 @@ function linkedText(item, imageUrl) {
 	var matches = []
 	var title = ''
 	var exact = false
-	for (var page in itemPages(item)) {
+	var page = ''
+	for (page in itemPages(item)) {
 		if (!isStruct(page)) {
 			continue
 		}
@@ -385,7 +399,8 @@ function linkedText(item, imageUrl) {
 		}
 	}
 	var hasExact = false
-	for (var match in matches) {
+	var match = ''
+	for (match in matches) {
 		if (match.exact) {
 			hasExact = true
 			break
@@ -396,14 +411,17 @@ function linkedText(item, imageUrl) {
 	var pos = 0
 	var startAt = 1
 	var sorted = []
-	for (var candidate in matches) {
+	var candidate = ''
+	for (candidate in matches) {
 		if (hasExact && !candidate.exact) {
 			continue
 		}
 		arrayAppend(sorted, candidate)
 	}
-	for (var i = 1; i <= arrayLen(sorted); i++) {
-		for (var j = i + 1; j <= arrayLen(sorted); j++) {
+	var i = 1
+	for (i = 1; i <= arrayLen(sorted); i++) {
+		var j = i + 1
+		for (j = i + 1; j <= arrayLen(sorted); j++) {
 			if (sorted[j].titleLength > sorted[i].titleLength) {
 				var swap = sorted[i]
 				sorted[i] = sorted[j]
@@ -415,7 +433,8 @@ function linkedText(item, imageUrl) {
 	if (!hasExact) {
 		haystack = lCase(text)
 	}
-	for (var link in sorted) {
+	var link = ''
+	for (link in sorted) {
 		needle = hasExact ? link.title : lCase(link.title)
 		startAt = 1
 		while (true) {
@@ -433,8 +452,10 @@ function linkedText(item, imageUrl) {
 			startAt = pos + len(needle)
 		}
 	}
-	for (var left = 1; left <= arrayLen(ranges); left++) {
-		for (var right = left + 1; right <= arrayLen(ranges); right++) {
+	var left = 1
+	for (left = 1; left <= arrayLen(ranges); left++) {
+		var right = left + 1
+		for (right = left + 1; right <= arrayLen(ranges); right++) {
 			if (ranges[right].startAt < ranges[left].startAt) {
 				var moved = ranges[left]
 				ranges[left] = ranges[right]
@@ -451,7 +472,8 @@ function linkedText(item, imageUrl) {
 	}
 	var html = ''
 	var cursor = 1
-	for (var range in ranges) {
+	var range = ''
+	for (range in ranges) {
 		if (range.startAt > cursor) {
 			html &= encodeForHTML(mid(text, cursor, range.startAt - cursor))
 		}
@@ -553,7 +575,8 @@ function oneSpace(markup) {
 	var text = ''
 	var previousSpace = false
 	var length = len(markup)
-	for (var i = 1; i <= length; i++) {
+	var i = 1
+	for (i = 1; i <= length; i++) {
 		var character = mid(markup, i, 1)
 		var space = character == ' ' || character == chr(9) || character == chr(10) || character == chr(13) || character == chr(12) || character == chr(11)
 		if (space) {
