@@ -2,10 +2,10 @@
 request.body = 'bg-1 d-flex flex-column min-vh-100'
 request.container = 'container-fluid'
 if (isDefined('form.reset')) {
-	usr('poll.reset_act',form.actid)
+	new dbo.proc().usr('poll.reset_act',form.actid)
 }
 include '/Inc/header6.cfm'
-poll = usr('poll.unanswered', form.actid)
+poll = new dbo.proc().usr('poll.unanswered', form.actid)
 </cfscript>
 
 <cfoutput query="act">

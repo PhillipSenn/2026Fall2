@@ -35,7 +35,7 @@ dayQuestion = queryExecute(
 	{datasource: "lr2026Fall2"}
 )
 if (dayQuestion.recordCount && structKeyExists(request, 'usr')) {
-	usr('poll.on_this_day', dayQuestion.qid)
+	new dbo.proc().usr('poll.on_this_day', dayQuestion.qid)
 }
 if (structKeyExists(cookie, 'OTD' & val(form.actid))) {
 	cfcookie(name='OTD' & val(form.actid), value='', expires='now')

@@ -1,14 +1,14 @@
 <cfscript>
 if (isDefined('form.pollname')) {
-	usr('poll.merge_q',[form.qid,form.pollname])
+	new dbo.proc().usr('poll.merge_q',[form.qid,form.pollname])
 }
 include '/Inc/header6.cfm'
-cat = exec('cat.where_cat',act.catid)
-q = usr('poll.unanswered',form.actid)
+cat = new dbo.proc().exec('cat.where_cat',act.catid)
+q = new dbo.proc().usr('poll.unanswered',form.actid)
 if (!q.recordcount) {
 	location(request.home, false)
 }
-poll = usr('poll.start_q',[q.qid,q.qname])
+poll = new dbo.proc().usr('poll.start_q',[q.qid,q.qname])
 </cfscript>
 
 <cfoutput query="act">

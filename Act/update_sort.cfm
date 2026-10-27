@@ -1,4 +1,4 @@
 <cfscript>
 setting showdebugoutput=false;
-exec('act.update_sort',[form.actid,form.actsort])
+new dbo.proc().exec('act.update_sort',[form.actid,form.actsort])
 </cfscript>

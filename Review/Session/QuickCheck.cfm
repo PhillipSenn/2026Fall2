@@ -2,15 +2,15 @@
 //request.body = 'bg-1 min-vh-100 d-flex flex-column'
 //request.container = 'sm:container flex-grow-1 d-flex'
 if (structKeyExists(form,'qid')) {
-	usr('poll.merge_q',form.qid)
+	new dbo.proc().usr('poll.merge_q',form.qid)
 }
 include '/Inc/header6.cfm'
-qs = exec('q.where_act',form.actid)
-q = usr('poll.unanswered',form.actid) // Includes all unanswered questions
+qs = new dbo.proc().exec('q.where_act',form.actid)
+q = new dbo.proc().usr('poll.unanswered',form.actid) // Includes all unanswered questions
 if (q.recordCount) {
-	usr('poll.start_q',q.qid)
-	cat = exec('cat.where_cat',act.catid)
-	ans = exec('ans.where_q',q.qid)
+	new dbo.proc().usr('poll.start_q',q.qid)
+	cat = new dbo.proc().exec('cat.where_cat',act.catid)
+	ans = new dbo.proc().exec('ans.where_q',q.qid)
 }
 </cfscript>
 

@@ -1,17 +1,17 @@
 <cfscript>
 setting showdebugoutput=false;
 include '/Inc/header6.cfm'
-qs = exec('q.where_act',form.actid) // All questions
-keyTerms = usr('poll.unanswered',form.actid) // order by qsort,qid
-unanswered = usr('poll.unanswered_keyTerms',form.actid) 
+qs = new dbo.proc().exec('q.where_act',form.actid) // All questions
+keyTerms = new dbo.proc().usr('poll.unanswered',form.actid) // order by qsort,qid
+unanswered = new dbo.proc().usr('poll.unanswered_keyTerms',form.actid) 
 	// All unanswered questions
 	// with top voted setup image for each question
 	// order by newid()
 writedump(unanswered)
 if (unanswered.recordCount) {
-	usr('poll.start_q',unanswered.qid)
+	new dbo.proc().usr('poll.start_q',unanswered.qid)
 writedump(usr)
-	cat = exec('cat.where_cat',act.catid)
+	cat = new dbo.proc().exec('cat.where_cat',act.catid)
 writedump(cat)
 
 }

@@ -1,11 +1,11 @@
 <cfscript>
 include '/Inc/header6.cfm'
 if (structKeyExists(form, 'wordname')) {
-	usr('usr.update_wordname', form.wordname)
+	new dbo.proc().usr('usr.update_wordname', form.wordname)
 	location(request.home & '?id=' & request.usr.id, false)
 }
 
-word = exec('word.random20')
+word = new dbo.proc().exec('word.random20')
 </cfscript>
 
 <cfoutput>

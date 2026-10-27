@@ -1,6 +1,6 @@
 ﻿<cfscript>
 include '/Inc/header6.cfm'
-usrs = exec('usr.list')
+usrs = new dbo.proc().exec('usr.list')
 selectedUsrid = val(form.usrid ?: '')
 sql = 'select 
 guessid,usrid,gradeid,actid,actname,qid,qname,ansid,ansname,guessname

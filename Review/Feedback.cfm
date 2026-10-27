@@ -1,8 +1,8 @@
 <cfscript>
 include '/Inc/header6.cfm'
-guess = usr('guess.where_q',form.qid)
-q = exec('q.where_q',form.qid)
-ans = exec('ans.where_q',form.qid)
+guess = new dbo.proc().usr('guess.where_q',form.qid)
+q = new dbo.proc().exec('q.where_q',form.qid)
+ans = new dbo.proc().exec('ans.where_q',form.qid)
 </cfscript>
 
 <cfoutput query="act">

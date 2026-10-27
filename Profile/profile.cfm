@@ -1,12 +1,12 @@
 <cfscript>
 include '/Inc/header6.cfm'
 if (structKeyExists(form, 'firstname')) {
-	usr('usr.update_firstname', form.firstname)
-	usr('usr.update_wordname', form.wordname)
+	new dbo.proc().usr('usr.update_firstname', form.firstname)
+	new dbo.proc().usr('usr.update_wordname', form.wordname)
 	location(request.home, false)
 }
 
-word = exec('word.random20')
+word = new dbo.proc().exec('word.random20')
 mark = ''
 points = listToArray(reReplace(request.usr.codePoint, '[^0-9A-Fa-f]+', ',', 'all'))
 for (point in points) {

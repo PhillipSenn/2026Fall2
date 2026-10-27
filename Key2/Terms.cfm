@@ -1,6 +1,6 @@
 <cfscript>
 include '/Inc/header6.cfm'
-q = usr('q.usr_act',form.actid) // All questions
+q = new dbo.proc().usr('q.usr_act',form.actid) // All questions
 // A started poll is not a finished answer. Score counts pollEnd only.
 finishedPoll = queryExecute(
 	"select pollid, poll_q

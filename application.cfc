@@ -8,6 +8,7 @@ this.nullSupport = true
 this.app	= getCurrentTemplatePath() // C:\inetpub\wwwroot\PhillipSenn\2026Fall2\application.cfc
 this.root	= getDirectoryFromPath(this.app) // C:\inetpub\wwwroot\PhillipSenn\2026Fall2\
 this.mappings['/inc'] = this.root & 'inc\' // C:\inetpub\wwwroot\PhillipSenn\2026Fall2\inc\
+this.mappings['/dbo'] = this.root & 'dbo\' // C:\inetpub\wwwroot\PhillipSenn\2026Fall2\dbo\
 this.serialization = {}
 this.serialization.dateTimeFormat = 'iso8601' // 2025-12-20T13:45:00Z
 this.scriptProtect = 'url,cookie,cgi'
@@ -81,11 +82,11 @@ function onRequestStart(targetPage) {
 	include '/server.cfm' // outside of request.home
 }
 
+/*
 function onRequest(targetPage) {
 	include '/Inc/cfm/exec.cfm'
 	include targetPage
 }
-/*
 function onError(exception, eventName) {
 	var source = exception
 	var message = ''

@@ -1,5 +1,5 @@
 <cfscript>
-usrs = exec('usrs.where_act',form.actid)
+usrs = new dbo.proc().exec('usrs.where_act',form.actid)
 include '/Inc/header6.cfm'
 </cfscript>
 

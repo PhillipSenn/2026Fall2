@@ -1,6 +1,6 @@
 <cfscript>
 include '/Inc/header6.cfm'
-usr('guess.reset_act',form.actid)
+new dbo.proc().usr('guess.reset_act',form.actid)
 </cfscript>
 
 <cfoutput query="act">

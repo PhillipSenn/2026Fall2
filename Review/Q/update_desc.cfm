@@ -1,1 +1,1 @@
-<cfset exec('q.update_desc',[form.qid,form.qdesc])>
+<cfset new dbo.proc().exec('q.update_desc',[form.qid,form.qdesc])>

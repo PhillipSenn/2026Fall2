@@ -83,12 +83,12 @@ if (fileExists(request.pgmDir & request.pgmName & '.css')) {
 writeoutput('<link	rel="icon"		 href="' & request.ico & '">' & chr(10))
 param form.actid=0;
 if (form.actid) {
-	act = exec('act.where_act',form.actid)
+	act = new dbo.proc().exec('act.where_act',form.actid)
 	if (act.recordcount) {
 		request.title = act.actname
 	}
 	if (structKeyExists(request,'usr')) {
-		grade = usr('grade.where_act',form.actid)
+		grade = new dbo.proc().usr('grade.where_act',form.actid)
 		if (request.progress.anim) {
 			request.progress.width = 0
 		} else {

@@ -46,7 +46,7 @@ if (cgi.request_method == 'POST' && structKeyExists(form, 'fontFamily')) {
 	}
 	if (allowed && structKeyExists(form, 'fontSize') && arrayFind(sizes, val(form.fontSize))) {
 		fontSize = val(form.fontSize)
-		usr('usr.update_font',[form.fontFamily,fontSize])
+		new dbo.proc().usr('usr.update_font',[form.fontFamily,fontSize])
 		current = form.fontFamily
 		querySetCell(request.usr, 'fontFamily', current)
 		querySetCell(request.usr, 'fontSize', fontSize)

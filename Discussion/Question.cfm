@@ -1,6 +1,6 @@
 <cfscript>
 include '/Inc/header6.cfm'
-q = exec('q.where_act',form.actid)
+q = new dbo.proc().exec('q.where_act',form.actid)
 </cfscript>
 
 <cfoutput query="act">

@@ -1,9 +1,9 @@
 <cfscript>
 if (isDefined('form.reset')) {
-	usr('guess.reset_act',form.actid)
+	new dbo.proc().usr('guess.reset_act',form.actid)
 }
 include '/Inc/header6.cfm'
-ans = usr('ans.where_act', form.actid)
+ans = new dbo.proc().usr('ans.where_act', form.actid)
 choices = []
 guessed = {}
 cfloop(query=ans) {

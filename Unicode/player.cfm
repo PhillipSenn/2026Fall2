@@ -1,7 +1,7 @@
 <cfscript>
 include '/Inc/header6.cfm'
 if (structKeyExists(form,'codePoint')) {
-    usr('usr.codePoint', form.codePoint)
+    new dbo.proc().usr('usr.codePoint', form.codePoint)
 	 location(request.home,false)
 }
 </cfscript>

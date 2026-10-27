@@ -1,7 +1,7 @@
 <cfscript>
 param form.actid = 340;
 include '/Inc/header6.cfm';
-qs = exec('q.where_act', form.actid);
+qs = new dbo.proc().exec('q.where_act', form.actid);
 imageSrc = "";
 if (qs.recordCount) {
 	if (!isNull(qs.qdesc) && len(qs.qdesc)) {
@@ -10,7 +10,7 @@ if (qs.recordCount) {
 			imageSrc = "/" & mid(imageSrc, 4, len(imageSrc) - 3);
 		}
 	}
-	ans = exec('ans.where_q', qs.qid);
+	ans = new dbo.proc().exec('ans.where_q', qs.qid);
 } else {
 	ans = queryNew("ansid,ansname");
 }

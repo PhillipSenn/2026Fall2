@@ -2,7 +2,7 @@
 param form.actid = 336;
 request.container = 'container-fluid';
 
-ans = usr('ans.where_act', form.actid);
+ans = new dbo.proc().usr('ans.where_act', form.actid);
 ordered = queryExecute(
 	"SELECT qname, ansname, ansid FROM ans ORDER BY qname, ansid",
 	{},

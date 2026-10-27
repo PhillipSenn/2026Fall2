@@ -1,6 +1,6 @@
 <cfscript>
 if (isDefined('form.reset')) {
-	usr('poll.reset_act',form.actid)
+	new dbo.proc().usr('poll.reset_act',form.actid)
 }
 include '/Inc/header6.cfm'
 </cfscript>

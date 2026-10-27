@@ -1,6 +1,6 @@
 <cfscript>
 include '/Inc/header6.cfm'
-q = usr('q.usr_act',form.actid)
+q = new dbo.proc().usr('q.usr_act',form.actid)
 totalSeconds = 0
 firstStart = ""
 lastEnd = ""
@@ -23,7 +23,7 @@ lastEnd = ""
 			</thead>
 			<tbody>
 				<cfloop query="q">
-					<cfset ans = exec('ans.where_q', qid)>
+					<cfset ans = new dbo.proc().exec('ans.where_q', qid)>
 					<cfset elapsedSeconds = 0>
 					<cfif isDate(pollStart) and isDate(pollEnd)>
 						<cfset elapsedSeconds = DateDiff('s', pollStart, pollEnd)>

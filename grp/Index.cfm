@@ -1,6 +1,6 @@
 <cfscript>
 include '/Inc/header6.cfm'
-act = usr('act.where_grp', act.grpid)
+act = new dbo.proc().usr('act.where_grp', act.grpid)
 </cfscript>
 
 <cfoutput>

@@ -1,10 +1,10 @@
 <cfscript>
 if (StructKeyExists(form,'ansid')) {
-	usr('guess.merge_ans0',form.ansid)
+	new dbo.proc().usr('guess.merge_ans0',form.ansid)
 }
 request.container = 'container-fluid'
 include '/Inc/header6.cfm'
-q = usr('guess.where_act',form.actid)
+q = new dbo.proc().usr('guess.where_act',form.actid)
 choices = queryExecute("
 	select q.qid
 		,ans.ansid

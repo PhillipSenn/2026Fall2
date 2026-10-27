@@ -1,5 +1,5 @@
 <cfscript>
-usr('guess.reset_act',form.actid)
+new dbo.proc().usr('guess.reset_act',form.actid)
 </cfscript>
 
 <cfoutput>

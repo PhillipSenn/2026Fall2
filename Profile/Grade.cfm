@@ -1,7 +1,7 @@
 <cfscript>
 include '/Inc/header6.cfm'
 include '/passwords/gmail.cfm'
-act = usr('act.where_usr')
+act = new dbo.proc().usr('act.where_usr')
 </cfscript>
 
 <cfoutput>

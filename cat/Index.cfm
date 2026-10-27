@@ -1,6 +1,6 @@
 <cfscript>
 include '/Inc/header6.cfm'
-cat = usr('act.where_cat', act.catid)
+cat = new dbo.proc().usr('act.where_cat', act.catid)
 </cfscript>
 
 <cfoutput query="act">

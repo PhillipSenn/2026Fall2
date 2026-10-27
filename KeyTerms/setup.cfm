@@ -1,14 +1,14 @@
 <cfscript>
 if (StructKeyExists(form,'ansid')) {
-	usr('guess.merge_keyterm',form.ansid)
+	new dbo.proc().usr('guess.merge_keyterm',form.ansid)
 }
-q = usr('q.keyTerms',form.actid) // All the unanswered questions that have > 1 available answers
+q = new dbo.proc().usr('q.keyTerms',form.actid) // All the unanswered questions that have > 1 available answers
 if (!q.recordCount) {
 	location(request.home, false)
 }
 include '/Inc/header6.cfm'
-qs = exec('q.where_ans_gt_1',form.actid) // All the questions that have > 1 available answers.
-ans = exec('ans.where_q',q.qid)
+qs = new dbo.proc().exec('q.where_ans_gt_1',form.actid) // All the questions that have > 1 available answers.
+ans = new dbo.proc().exec('ans.where_q',q.qid)
 </cfscript>
 
 <cfoutput query="act">

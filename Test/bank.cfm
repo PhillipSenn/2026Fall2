@@ -1,20 +1,20 @@
 <cfscript>
 param form.redo=0;
 if (structKeyExists(form,'ansid')) {
-	usr('guess.merge_ans',[form.ansid,form.redo]) // And grades where correct=1
+	new dbo.proc().usr('guess.merge_ans',[form.ansid,form.redo]) // And grades where correct=1
 } else if (StructKeyExists(form,'ansids')) {
 	for (ansid in ListToArray(form.ansids)) {
-		usr('guess.merge_ans', [ansid,form.redo])
+		new dbo.proc().usr('guess.merge_ans', [ansid,form.redo])
 	}
 }
 request.progress.anim = true
 //request.progress.bar = false
 include '/Inc/header6.cfm'
 if (StructKeyExists(form,'pollid')) {
-	usr('poll.update_poll',form.pollid)
+	new dbo.proc().usr('poll.update_poll',form.pollid)
 }
 if (StructKeyExists(form,'Speech')) {
-	request.usr = usr('usr.update_SpeechSynthesisUtterance',
+	request.usr = new dbo.proc().usr('usr.update_SpeechSynthesisUtterance',
 		[form.Speech
 		,form.SpeechRate
 		,form.SpeechPitch
@@ -23,19 +23,19 @@ if (StructKeyExists(form,'Speech')) {
 	)
 }
 
-q = usr('q.test_bank',form.actid)
-unanswered = usr('q.unanswered',form.actid)
+q = new dbo.proc().usr('q.test_bank',form.actid)
+unanswered = new dbo.proc().usr('q.unanswered',form.actid)
 remaining = unanswered.recordcount
 answered = q.recordcount - unanswered.recordcount
 if (structKeyExists(form,'qid')) {
-	unanswered = exec('q.where_q',form.qid)
+	unanswered = new dbo.proc().exec('q.where_q',form.qid)
 }
 qname = unanswered.qname
 qdesc = unanswered.qdesc
 if (unanswered.recordcount) {
-	poll = usr('poll.start_q',unanswered.qid)
+	poll = new dbo.proc().usr('poll.start_q',unanswered.qid)
 	form.pollid = poll.pollid
-	ans = exec('ans.where_q',unanswered.qid)
+	ans = new dbo.proc().exec('ans.where_q',unanswered.qid)
 	length = 0
 
 	cfloop(query="ans") {
@@ -61,9 +61,9 @@ if (unanswered.recordcount) {
 			}
 		}
 	}
-	rightWrong = usr('act.rightWrong',form.actid)
+	rightWrong = new dbo.proc().usr('act.rightWrong',form.actid)
 }
-qry = usr('guess.wrong_act',form.actid)
+qry = new dbo.proc().usr('guess.wrong_act',form.actid)
 wrong = 0
 cfloop(query="qry") {
 	if (qry.qid == unanswered.qid) break;

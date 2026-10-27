@@ -1,15 +1,15 @@
 <cfscript>
 if (structKeyExists(form, 'ansid') && val(form.ansid)) {
-	usr('guess.merge_pix', form.ansid)
+	new dbo.proc().usr('guess.merge_pix', form.ansid)
 }
 request.container = 'container-fluid'
 include '/Inc/header6.cfm'
-unanswered = usr('ans.unanswered_pix', form.actid); // Top 1
+unanswered = new dbo.proc().usr('ans.unanswered_pix', form.actid); // Top 1
 if (!unanswered.recordCount) {
 	location(request.home, false)
 }
-rnd = usr('ans.unanswered_rnd', form.actid); // order by newid()
-ans = exec('ans.where_q', unanswered.qid);
+rnd = new dbo.proc().usr('ans.unanswered_rnd', form.actid); // order by newid()
+ans = new dbo.proc().exec('ans.where_q', unanswered.qid);
 param form.pixorder = "";
 available = {};
 for (i = 1; i <= rnd.recordCount; i++) {

@@ -1,7 +1,7 @@
 <cfscript>
 request.jQueryUI = 'base'
 if (StructKeyExists(form,'qid')) {
-	grade = usr('poll.merge_q',form.qid)
+	grade = new dbo.proc().usr('poll.merge_q',form.qid)
 	if (grade.earned gte 100) {
 		location('results.cfm?actid=' & form.actid & '&id=' & request.usr.id, false)
 	}
@@ -9,16 +9,16 @@ if (StructKeyExists(form,'qid')) {
 request.flush = false
 include '/Inc/header6.cfm'
 disabled = 'disabled'
-q = usr('poll.unanswered',form.actid)
+q = new dbo.proc().usr('poll.unanswered',form.actid)
 if (!q.recordcount) {
 	disabled = ''
 	param form.qid=0;
-	q = exec('poll.gt_q',[form.actid,form.qid])
+	q = new dbo.proc().exec('poll.gt_q',[form.actid,form.qid])
 	if (!q.recordcount) {
 		location(request.home, false)
 	}
 }
-polls = usr('q.usr_act',form.actid)
+polls = new dbo.proc().usr('q.usr_act',form.actid)
 started = false
 for (i = 1; i <= polls.recordcount; i++) {
 	if (polls.qid[i] == q.qid and isDate(polls.pollStart[i])) {
@@ -27,9 +27,9 @@ for (i = 1; i <= polls.recordcount; i++) {
 	}
 }
 if (!started) {
-	usr('poll.start_q',q.qid)
+	new dbo.proc().usr('poll.start_q',q.qid)
 }
-ans = exec('ans.where_q',q.qid)
+ans = new dbo.proc().exec('ans.where_q',q.qid)
 </cfscript>
 
 <cfoutput query="act">

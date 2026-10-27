@@ -1,11 +1,11 @@
 <cfscript>
 if (StructKeyExists(form,'ansid')) {
-	usr('guess.merge_ans_name',[form.ansid,form.guessname])
+	new dbo.proc().usr('guess.merge_ans_name',[form.ansid,form.guessname])
 }
 include '/Inc/header6.cfm'
-q = usr('q.unanswered',form.actid)
+q = new dbo.proc().usr('q.unanswered',form.actid)
 if (q.recordcount) {
-	ans = exec('ans.where_q',q.qid)
+	ans = new dbo.proc().exec('ans.where_q',q.qid)
 }
 </cfscript>
 

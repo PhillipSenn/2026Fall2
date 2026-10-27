@@ -1,7 +1,7 @@
 <cfscript>
 setting showdebugoutput=false;
 include '/Inc/header6.cfm'
-q = exec('q.where_act',form.actid)
+q = new dbo.proc().exec('q.where_act',form.actid)
 spaces = [
 	{id: 20, c: 1, r: 1, side: 'corner', bar: '', name: 'Free Parking', price: '', kind: 'parking', icon: 'bi-p-square-fill'}
 	,{id: 21, c: 2, r: 1, side: 'top', bar: 'red', name: 'Kentucky Avenue', price: '$220', kind: 'property', icon: ''}
