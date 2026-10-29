@@ -1,6 +1,7 @@
 <cfscript>
 request.title = 'breed'
 request.progress.bar = false
+param form.actid=323;
 include '/Inc/header6.cfm'
 path = queryExecute(
 	"select domainid,domainname
@@ -20,11 +21,13 @@ path = queryExecute(
 	join kingdom on phylum_kingdom = kingdomid
 	join domain on kingdom_domain = domainid
 	where speciesid = :speciesid",
-	{speciesid: {value: form.speciesid, cfsqltype: "cf_sql_integer"}}
+	{speciesid: {value: form.speciesid, cfsqltype: "cf_sql_integer"}},
+	{datasource: "ITIS"}
 )
 breed = queryExecute(
 	"select * from breed where breed_species = :speciesid order by breedname",
-	{speciesid: {value: form.speciesid, cfsqltype: "cf_sql_integer"}}
+	{speciesid: {value: form.speciesid, cfsqltype: "cf_sql_integer"}},
+	{datasource: "ITIS"}
 )
 anchor = ''
 if (path.speciesname == 'Canis familiaris') {

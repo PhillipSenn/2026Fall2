@@ -1,6 +1,7 @@
 <cfscript>
 request.title = 'species'
 request.progress.bar = false
+param form.actid=323;
 include '/Inc/header6.cfm'
 path = queryExecute(
 	"select domainid, domainname, kingdomid, kingdomname, phylumid, phylumname, classid, classname, ordid, ordname, familyid, familyname, genusid, genusname
@@ -12,11 +13,13 @@ path = queryExecute(
 	join kingdom on phylum_kingdom = kingdomid
 	join domain on kingdom_domain = domainid
 	where genusid = :genusid",
-	{genusid: {value: form.genusid, cfsqltype: "cf_sql_integer"}}
+	{genusid: {value: form.genusid, cfsqltype: "cf_sql_integer"}},
+	{datasource: "ITIS"}
 )
 species = queryExecute(
 	"select * from species where species_genus = :genusid order by speciesname",
-	{genusid: {value: form.genusid, cfsqltype: "cf_sql_integer"}}
+	{genusid: {value: form.genusid, cfsqltype: "cf_sql_integer"}},
+	{datasource: "ITIS"}
 )
 </cfscript>
 

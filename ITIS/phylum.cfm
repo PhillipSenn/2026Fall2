@@ -1,17 +1,20 @@
 <cfscript>
 request.title = 'phylum'
 request.progress.bar = false
+param form.actid=323;
 include '/Inc/header6.cfm'
 path = queryExecute(
 	"select domainid, domainname, kingdomid, kingdomname
 	from kingdom
 	join domain on kingdom_domain = domainid
 	where kingdomid = :kingdomid",
-	{kingdomid: {value: form.kingdomid, cfsqltype: "cf_sql_integer"}}
+	{kingdomid: {value: form.kingdomid, cfsqltype: "cf_sql_integer"}},
+	{datasource: "ITIS"}
 )
 phylum = queryExecute(
 	"select * from phylum where phylum_kingdom = :kingdomid order by phylumname",
-	{kingdomid: {value: form.kingdomid, cfsqltype: "cf_sql_integer"}}
+	{kingdomid: {value: form.kingdomid, cfsqltype: "cf_sql_integer"}},
+	{datasource: "ITIS"}
 )
 </cfscript>
 

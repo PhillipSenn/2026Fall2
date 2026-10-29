@@ -1,6 +1,7 @@
 <cfscript>
 request.title = 'ord'
 request.progress.bar = false
+param form.actid=323;
 include '/Inc/header6.cfm'
 path = queryExecute(
 	"select domainid, domainname, kingdomid, kingdomname, phylumid, phylumname, classid, classname
@@ -9,11 +10,13 @@ path = queryExecute(
 	join kingdom on phylum_kingdom = kingdomid
 	join domain on kingdom_domain = domainid
 	where classid = :classid",
-	{classid: {value: form.classid, cfsqltype: "cf_sql_integer"}}
+	{classid: {value: form.classid, cfsqltype: "cf_sql_integer"}},
+	{datasource: "ITIS"}
 )
 ord = queryExecute(
 	"select * from ord where ord_class = :classid order by ordname",
-	{classid: {value: form.classid, cfsqltype: "cf_sql_integer"}}
+	{classid: {value: form.classid, cfsqltype: "cf_sql_integer"}},
+	{datasource: "ITIS"}
 )
 </cfscript>
 

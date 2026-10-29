@@ -1,6 +1,7 @@
 <cfscript>
 request.title = 'class'
 request.progress.bar = false
+param form.actid=323;
 include '/Inc/header6.cfm'
 path = queryExecute(
 	"select domainid, domainname, kingdomid, kingdomname, phylumid, phylumname
@@ -8,11 +9,13 @@ path = queryExecute(
 	join kingdom on phylum_kingdom = kingdomid
 	join domain on kingdom_domain = domainid
 	where phylumid = :phylumid",
-	{phylumid: {value: form.phylumid, cfsqltype: "cf_sql_integer"}}
+	{phylumid: {value: form.phylumid, cfsqltype: "cf_sql_integer"}},
+	{datasource: "ITIS"}
 )
 class = queryExecute(
 	"select * from class where class_phylum = :phylumid order by classname",
-	{phylumid: {value: form.phylumid, cfsqltype: "cf_sql_integer"}}
+	{phylumid: {value: form.phylumid, cfsqltype: "cf_sql_integer"}},
+	{datasource: "ITIS"}
 )
 </cfscript>
 
