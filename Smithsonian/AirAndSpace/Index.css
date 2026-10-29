@@ -1,0 +1,46 @@
+@media (min-width: 1024px) {
+   .btn-group-vertical > #btnNext {
+      border-end-start-radius: var(--bs-btn-border-radius);
+      border-end-end-radius: var(--bs-btn-border-radius);
+   }
+}
+
+#artifactMedia { margin: 0; }
+
+.artifact-zoom {
+   position: fixed;
+   inset: 0;
+   z-index: 2000;
+   overflow: auto;
+   background: #000;
+   cursor: zoom-out;
+}
+.artifact-zoom img {
+   display: block;
+   width: auto;
+   height: auto;
+   max-width: none;
+   max-height: none;
+   margin: 0 auto;
+}
+
+.artifact-credit {
+   margin-top: 1rem;
+   padding: 0 1rem 1rem;
+   text-align: center;
+   font-size: .875rem;
+}
+.artifact-explanation { line-height: 1.8; font-size: 1.1rem; }
+.artifact-explanation p { margin-bottom: 1rem; }
+.progress { position: relative; }
+.progress-score {
+   position: absolute;
+   inset: 0;
+   z-index: 2;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-size: .75rem;
+   line-height: 1;
+   pointer-events: none;
+}

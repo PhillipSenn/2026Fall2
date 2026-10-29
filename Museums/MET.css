@@ -1,0 +1,30 @@
+.met-viewer {
+   max-width: 1100px;
+   margin: 0 auto;
+}
+
+.met-description {
+   white-space: pre-line;
+}
+
+.met-viewer .card > .card-header {
+   display: flex;
+   align-items: center;
+   min-height: 3.5rem;
+}
+
+.met-navigation {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   gap: 1rem;
+   width: 100%;
+}
+
+.met-details dt {
+   font-weight: 600;
+}
+
+.met-details dd {
+   margin-bottom: .75rem;
+}

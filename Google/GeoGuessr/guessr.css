@@ -1,0 +1,65 @@
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    background: #f5f6f8;
+}
+
+.location-page {
+    min-height: 100vh;
+    padding: 16px;
+}
+
+.location-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.location-panel {
+    min-width: 0;
+    overflow: hidden;
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+}
+
+#streetview,
+#map {
+    width: 100%;
+    height: calc(100vh - 220px);
+    min-height: 400px;
+}
+
+.location-actions {
+    margin-top: 16px;
+    padding: 16px;
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+}
+
+#coordinates {
+    font-family: Consolas, monospace;
+    font-size: 13px;
+}
+
+#message:not(:empty) {
+    margin-top: 12px;
+}
+
+@media (max-width: 800px) {
+    .location-layout {
+        grid-template-columns: 1fr;
+    }
+
+    #streetview,
+    #map {
+        height: 45vh;
+        min-height: 300px;
+    }
+}

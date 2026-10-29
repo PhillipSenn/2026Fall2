@@ -1,0 +1,1 @@
+<cfset myGoogleKey = 'AIzaSyCYcj2wHmJjm_CQDpl02mXI2qWBV-5EWoE'>

@@ -57,7 +57,7 @@
 				progressBar.classList.add('bg-success', 'progress-bar-striped', 'progress-bar-animated', 'fw-bold')
 			}
 		}
-		const url = 'grade/merge_act.cfm'
+		const url = '../Grade/merge_act.cfm'
 		const form = { body: new URLSearchParams() }
 		form.body.set('id', dom.id)
 		form.body.set('actid', dom.actid)

@@ -1,0 +1,96 @@
+@media (min-width: 1024px) {
+   .btn-group-vertical > #btnNext {
+      border-end-start-radius: var(--bs-btn-border-radius);
+      border-end-end-radius: var(--bs-btn-border-radius);
+   }
+}
+
+#apodMedia {
+   margin: 0;
+}
+
+.apod-image {
+   display: block;
+   max-width: 100%;
+   max-height: 75vh;
+   width: auto;
+   height: auto;
+   margin: 0 auto;
+   object-fit: contain;
+   cursor: zoom-in;
+}
+
+.apod-zoom {
+   position: fixed;
+   inset: 0;
+   z-index: 2000;
+   overflow: auto;
+   background: #000;
+   cursor: zoom-out;
+}
+
+.apod-zoom img {
+   display: block;
+   width: auto;
+   height: auto;
+   max-width: none;
+   max-height: none;
+   margin: 0 auto;
+}
+
+.apod-credit {
+   margin-top: 1rem;
+   padding: 0 1rem 1rem;
+   text-align: center;
+   font-size: .875rem;
+}
+
+.apod-explanation {
+   line-height: 1.8;
+   font-size: 1.1rem;
+   white-space: pre-wrap;
+   tab-size: 4;
+}
+
+.progress {
+   position: relative;
+}
+
+.progress-score {
+   position: absolute;
+   inset: 0;
+   z-index: 2;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-size: .75rem;
+   line-height: 1;
+   pointer-events: none;
+}
+
+.apod-date,
+.apod-rate-limit {
+   text-align: center;
+}
+
+.apod-rate-limit {
+   font-size: .75rem;
+   line-height: 1.3;
+   overflow-wrap: normal;
+   padding-left: .25rem;
+   padding-right: .25rem;
+}
+
+.apod-video,
+.apod-embed {
+   display: block;
+   max-width: 100%;
+   max-height: 75vh;
+   margin: 0 auto;
+}
+
+.apod-embed {
+   width: 100%;
+   aspect-ratio: 16 / 9;
+   border: 0;
+}

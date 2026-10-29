@@ -1,0 +1,80 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    background: #f5f6f8;
+}
+
+.location-page {
+    min-height: 100vh;
+    padding: 16px;
+}
+
+.location-header {
+    margin-bottom: 16px;
+}
+
+.location-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.location-panel {
+    min-width: 0;
+    overflow: hidden;
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+}
+
+.panel-heading {
+    padding: 12px 16px;
+    border-bottom: 1px solid #dee2e6;
+    font-weight: 600;
+}
+
+#streetview,
+#map {
+    width: 100%;
+    height: calc(100vh - 260px);
+    min-height: 400px;
+}
+
+.panel-footer {
+    padding: 10px 16px;
+    font-size: 13px;
+    color: #6c757d;
+}
+
+.location-actions {
+    margin-top: 16px;
+    padding: 16px;
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+}
+
+#message {
+    margin-top: 12px;
+}
+
+#coordinates {
+    font-family: Consolas, monospace;
+    font-size: 13px;
+}
+
+@media (max-width: 800px) {
+    .location-layout {
+        grid-template-columns: 1fr;
+    }
+
+    #streetview,
+    #map {
+        height: 45vh;
+        min-height: 300px;
+    }
+}

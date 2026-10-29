@@ -37,7 +37,7 @@ function update_score() {
 	if (score > 100) {
 		dom.progress_bar.text(score + '%')
 	} else {
-		var url = 'Grade/merge_act.cfm'
+		var url = '../Grade/merge_act.cfm'
 		var form = {}
 		form.body = new URLSearchParams()
 		form.body.set('id', app.id)
