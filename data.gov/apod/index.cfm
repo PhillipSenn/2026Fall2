@@ -5,7 +5,7 @@ include '/Inc/header6.cfm'
 
 <cfoutput query="act">
 <div class="row">
-      <div class="col-12 md:col-10 lg:col-5 order-2 md:order-1">
+      <div class="col-12 md:col-8 lg:col-5 order-2 md:order-1">
 
          <div class="card" id="picturePanel">
             <div class="card-header" role="status" aria-live="polite">
@@ -24,7 +24,7 @@ include '/Inc/header6.cfm'
 
       </div>
 
-      <div class="col-12 lg:col-5 order-3 lg:order-2">
+      <div class="col-12 lg:col-4 order-3 lg:order-2">
 
          <div class="accordion accordion-gap" id="apodAccordion">
 
@@ -52,43 +52,26 @@ include '/Inc/header6.cfm'
 
       </div>
 
-      <div class="col-12 md:col-2 lg:col-2 order-1 md:order-2 lg:order-3">
+      <div class="col-12 md:col-4 lg:col-3 order-1 md:order-2 lg:order-3">
          <div class="card">
-            <div id="apodDate" class="card-header apod-date text-body-secondary"></div>
-
-            <div class="card-body p-0">
-               <div class="btn-group-vertical align-self-stretch w-100" role="group" aria-label="Picture navigation">
-                  <button type="button" id="btnPrev" class="btn btn-outline-primary">
-                     &larr; Previous
-                  </button>
-
-                  <button type="button" id="btnRandom" class="btn btn-outline-primary">
-                     Random
-                  </button>
-
-                  <button type="button" id="btnToday" class="btn btn-outline-primary">
-                     Today
-                  </button>
-
-                  <button type="button" id="btnNext" class="btn btn-outline-primary">
-                     Next &rarr;
-                  </button>
-
-                  <button type="button" id="btnExplanation" class="btn btn-outline-primary lg:d-none">
-                     Explanation
-                  </button>
-               </div>
+            <div class="card-header">
+               <input id="apodDate" class="form-control apod-date" type="text" autocomplete="off" spellcheck="false" placeholder="YYYY-MM-DD" aria-label="Picture date">
             </div>
 
-            <div id="apodRateLimit" class="card-footer apod-rate-limit text-body-secondary">
-               <span id="rateLimit"></span> remaining
+            <div class="card-body p-0">
+               <div class="btn-group w-100" role="group" aria-label="Picture navigation">
+                  <button type="button" id="btnPrev" class="btn-outline theme-primary">Prev</button>
+                  <button type="button" id="btnRandom" class="btn-outline theme-primary">Rnd</button>
+                  <button type="button" id="btnNext" class="btn-outline theme-primary">Next</button>
+               </div>
+
+               <button type="button" id="btnExplanation" class="btn-outline theme-primary w-100 lg:d-none">
+                  Explanation
+               </button>
             </div>
          </div>
       </div>
    </div>
 
-   <div id="apodZoom" class="apod-zoom" hidden>
-      <img id="apodZoomImage" alt="">
-   </div>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>
