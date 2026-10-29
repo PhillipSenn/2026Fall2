@@ -1,5 +1,5 @@
 <cfscript>
-cfcontent(type='application/json; charset=utf-8')
+cfcontent(type='application/json; charset=utf-8');
 
 apiURL = 'https://science.nasa.gov/wp-json/wp/v2/apod-basic'
 firstDate = createDate(1995,6,16)
@@ -69,7 +69,7 @@ function apodRealPicture(result) {
          method='GET',
          result='htmlResult',
          timeout=30
-      )
+      );
 
       if (val(htmlResult.statusCode) == 200) {
          pictureURL = apodImageURL(htmlResult.fileContent)
@@ -112,7 +112,7 @@ try {
       method='GET',
       result='apiResult',
       timeout=30
-   )
+   );
 
    if (val(apiResult.statusCode) != 200) {
       throw(message='NASA returned HTTP ' & apiResult.statusCode)
@@ -137,7 +137,7 @@ try {
    writeOutput(serializeJSON(result))
 
 } catch (any e) {
-   cfheader(statuscode=502)
+   cfheader(statuscode=502);
 
    writeOutput(serializeJSON({
       'error': true,

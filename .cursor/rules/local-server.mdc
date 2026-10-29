@@ -10,3 +10,7 @@ When testing this project in the browser, use `https://PhillipSenn.dev/2026Fall2
 Always log in by including `id=19C76747-5CF9-449C-9A52-FEF8906AD52E` on the URL.
 
 Example: `https://PhillipSenn.dev/2026Fall2/?id=19C76747-5CF9-449C-9A52-FEF8906AD52E`
+
+PhillipSenn.com runs Lucee. PhillipSenn.dev runs Adobe ColdFusion. CFML must work on both engines. Do not treat a script that succeeds on one host as proof that it succeeds on the other.
+
+In CFScript, end a tag call such as `cfhttp()` with a semicolon. Lucee treats the next statement as the tag body when the semicolon is missing, so a following line can run before the tag's result variable exists. Adobe ColdFusion ends the call at the closing parenthesis.
