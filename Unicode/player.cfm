@@ -79,7 +79,7 @@ if (structKeyExists(form,'codePoint')) {
 		</div>
 	</div>
 	<form class="card-footer">
-		<button name="codePoint" class="btn-solid theme-primary">
+		<button name="codePoint">
 		Save
 		</button>
 		<input hidden name="actid" value="#actid#">

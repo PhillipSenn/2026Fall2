@@ -108,8 +108,6 @@ function apodDisplay(data) {
 
    apod.date = data.date
 
-   document.getElementById('explanationPanel').open = false
-
    apodShowTitle(data)
 
    $('#apodDate').val(data.date)

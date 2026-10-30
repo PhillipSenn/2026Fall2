@@ -55,10 +55,7 @@ submitted = val(url.submitted ?: 0)
             </div>
 
             <div class="col-auto">
-                <button type="button"
-                    class="btn-solid theme-primary"
-                    id="hereButton"
-                    disabled>
+                <button type="button" id="hereButton" disabled>
                     Here!
                 </button>
             </div>

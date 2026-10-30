@@ -19,7 +19,9 @@ include '/Inc/header6.cfm'
             <tbody>
                 <cfloop query="usrs">
                     <tr>
-                        <td>#firstname#</td>
+                        <td>
+                            <a href="#request.home#?id=#id#">#firstname# <span class="bi bi-person"></span></a>
+                        </td>
                         <td class="text-end">#earned#</td>
                     </tr>
                 </cfloop>

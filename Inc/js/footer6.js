@@ -10,7 +10,16 @@ pgm.init = function() {
 		$(this).wrap('<li class="nav-item"></li>')
 		$(this).parent().appendTo('#main-navbar')
 	}
-	$('button:not([class*="btn-"]):not([class*="bg-"])').addClass('btn-solid theme-primary btn-styled')
+	function each() {
+		if (!$(this).is('[class*="theme-"]')) {
+			$(this).addClass('theme-primary')
+		}
+		$(this).addClass('btn-styled')
+	}
+	
+	$('button:not([class*="btn-"]):not([class*="bg-"])').each(each)
+	$('button:not(.btn-outline, .btn-subtle, .btn-text, .btn-link)').addClass('btn-solid')
+
 	$('a.btn:not([class*="btn-"]):not([class*="bg-"])').addClass('btn-solid theme-primary btn-styled')
 	$('.nav-link').each(each_navlink)
 //	$('.theme-primary').addClass('hover-lift')

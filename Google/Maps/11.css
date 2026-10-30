@@ -1,0 +1,37 @@
+#map {
+    height: 100vh;
+    width: 100%;
+}
+
+
+.plane {
+    font-size: 26px;
+    transform-origin: center;
+    position: relative;
+    z-index: 1000;
+}
+
+.airport-marker {
+    position: relative;
+    z-index: 1;
+}
+
+/* flag */
+
+.airport-marker img {
+
+    width: 24px;
+    height: 24px;
+
+    display: block;
+
+    transition: transform 0.15s ease;
+
+}
+
+.airport-marker:hover img {
+    transform: scale(1.2);
+}
+.airport-marker img {
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
+}

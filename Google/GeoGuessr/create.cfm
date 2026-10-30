@@ -50,12 +50,7 @@ if (isDefined('form.locationName')) {
       <input type="hidden" name="zoom">
       <input type="hidden" name="panoid">
 
-      <button
-         type="button"
-         class="btn-solid theme-primary"
-         id="hereButton"
-         disabled
-      >
+      <button type="button" id="hereButton" disabled>
          Here!
       </button>
 

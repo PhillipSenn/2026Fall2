@@ -1076,7 +1076,7 @@ go
 create or alter proc usrs.where_act
 (@actid int
 ) as
-select firstname,earned
+select id,firstname,earned
 from usr
 left join grade on grade_usr=usrid and grade_act=@actid
 order by usrname

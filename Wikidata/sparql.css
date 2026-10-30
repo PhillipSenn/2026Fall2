@@ -1,0 +1,10 @@
+#wikidataExplorer #sparqlQuery {
+    min-height: 22rem;
+    resize: vertical;
+    tab-size: 2;
+}
+
+#wikidataExplorer #resultsArea td {
+    overflow-wrap: anywhere;
+    min-width: 7rem;
+}
