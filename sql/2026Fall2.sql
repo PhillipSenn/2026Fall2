@@ -314,7 +314,7 @@ declare @pollid int=(
 	and poll_q=@qid
 )
 if @pollid is null begin
-	insert into poll(poll_grade,poll_q) values(@gradeid,@qid)
+	insert into poll(poll_grade,poll_q,pollStart) values(@gradeid,@qid,getdate())
 	select @pollid=scope_identity()
 end
 update poll set

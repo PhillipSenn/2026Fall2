@@ -1,0 +1,17 @@
+/* header6.cfm and footer6.cfm load the page assets. */
+#manGame { box-sizing: border-box; display: grid; grid-template-columns: minmax(0, 1fr) clamp(140px, 25vw, 260px); gap: 12px; width: 100%; max-width: 1100px; height: 85dvh; min-height: 0; margin: 0 auto; padding: 6px; color: #eef2ff; background: #0b1020; border-radius: 10px; font-family: system-ui, sans-serif; }
+#manGame * { box-sizing: border-box; }
+#mazeSpace { min-width: 0; min-height: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #080c19; }
+#maze { display: block; max-width: 100%; max-height: 100%; flex: none; touch-action: none; }
+#manGame .man-sidebar { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; min-width: 0; min-height: 0; padding: 16px; background: #182239; border-radius: 6px; }
+#definition { font-size: clamp(14px, 1.6vw, 20px); line-height: 1.5; overflow-wrap: anywhere; margin: 0; color: #f0f3ff; }
+#termHint { color: #ffe08a; font-size: clamp(14px, 1.6vw, 20px); overflow-wrap: anywhere; }
+#soundToggle { margin-top: auto; cursor: pointer; }
+#manGame button:focus-visible, #maze:focus-visible { outline: 2px solid #ffc107; outline-offset: 2px; }
+#manGame [hidden] { display: none !important; }
+.man-modal { max-width: min(90vw, 380px); padding: 26px; border: 1px solid #506285; border-radius: 14px; background: #142039; color: #f0f3ff; box-shadow: 0 24px 90px #0009; font-family: system-ui, sans-serif; text-align: center; }
+.man-modal::backdrop { background: #030712b8; }
+.man-modal h2 { margin: 0 0 10px; font-size: 24px; color: inherit; }
+.man-modal p { margin: 0 0 20px; }
+.man-modal button { cursor: pointer; }
+@media (max-width: 550px) { #manGame { grid-template-columns: minmax(0, 1fr) 125px; gap: 6px; } #manGame .man-sidebar { padding: 10px; gap: 10px; } }
