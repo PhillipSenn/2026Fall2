@@ -24,6 +24,8 @@ body {
 }
 
 .location-panel {
+    display: flex;
+    flex-direction: column;
     min-width: 0;
     overflow: hidden;
     background: white;
@@ -40,8 +42,18 @@ body {
 #streetview,
 #map {
     width: 100%;
+    flex: 1;
     height: calc(100vh - 260px);
     min-height: 400px;
+}
+
+#mapSearch {
+    padding: 10px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+#mapSearch gmp-place-autocomplete {
+    width: 100%;
 }
 
 .panel-footer {
@@ -76,5 +88,10 @@ body {
     #map {
         height: 45vh;
         min-height: 300px;
+    }
+
+    #map {
+        height: calc(45vh - 58px);
+        min-height: 242px;
     }
 }

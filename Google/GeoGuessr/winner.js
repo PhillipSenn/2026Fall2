@@ -1,7 +1,13 @@
 var map = null;
 var bounds = null;
+var mapReady = false;
 
 function initMap() {
+    if (mapReady) {
+        return;
+    }
+
+    mapReady = true;
     bounds = new google.maps.LatLngBounds();
 
     map = new google.maps.Map($('#map')[0], {
@@ -74,4 +80,8 @@ function addGuess(guess) {
 
 function googleMapsError() {
     $('#map').text('Google Maps could not be loaded. Check your API key.');
+}
+
+if (googleMapsLoaded) {
+    initMap();
 }

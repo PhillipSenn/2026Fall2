@@ -2,7 +2,7 @@
 request.progress.bar = false
 request.container = 'container-fluid'
 include '/Inc/header6.cfm'
-geoguessr = new dbo.proc().exec('geoguessr.where_geoguessr',url.geoguessrid)
+geoguessr = new dbo.proc().exec('geoguessr.where_q',url.qid)
 
 if (!geoguessr.recordCount) {
     throw(message='Location not found.')
@@ -10,12 +10,12 @@ if (!geoguessr.recordCount) {
 
 if (isDefined('form.guessLat') && isDefined('form.guessLng')) {
     new dbo.proc().usr(
-        'guessr.merge_geo', // aka guess
-        [url.geoguessrid
+        'guessr.merge_q', // aka guess
+        [url.qid
         ,form.guessLat
         ,form.guessLng]
     )
-    location('./?actid=' & form.actid,false)
+    location('winner.cfm?actid=' & form.actid & '&qid=' & url.qid,false)
 }
 
 submitted = val(url.submitted ?: 0)
@@ -46,7 +46,7 @@ submitted = val(url.submitted ?: 0)
                 </div>
                 <div class="text-body-secondary">
                     Explore Street View, then click
-                    the map to place your marker.
+                    the map to submit your guess.
                 </div>
             </div>
 

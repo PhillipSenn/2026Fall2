@@ -1,4 +1,5 @@
 <cfscript>
+form.actid=345
 request.progress.bar = false
 request.container = 'container-fluid'
 include '/Inc/header6.cfm'
@@ -12,8 +13,10 @@ if (isDefined('form.locationName')) {
       ,form.zoom
       ,form.panoid]
    )
-   location(request.home,false)
+   new dbo.proc().usr('poll.merge_q',form.qid)
 }
+poll = new dbo.proc().usr('poll.unanswered',form.actid)
+ans = new dbo.proc().exec('ans.where_q',poll.qid)
 </cfscript>
 
 <cfoutput >
@@ -25,6 +28,7 @@ if (isDefined('form.locationName')) {
       </section>
 
       <section class="location-panel">
+         <div id="mapSearch" data-qname="#encodeForHtmlAttribute(poll.qname)#"></div>
          <div id="map"></div>
       </section>
 
@@ -59,11 +63,16 @@ if (isDefined('form.locationName')) {
          role="status"
          aria-live="polite"
       ></div>
-
+      <input hidden name="qid" value="#poll.qid#">
    </form>
+   #poll.qname#<br>
+   qdesc: #poll.qdesc#
+   <cfloop query="ans">
+      <p>#ansid#: #ansname#</p>
+   </cfloop>
 </div>
 <cfinclude template="../myGoogleKey.cfm">
-<script async onerror="googleMapsError()" src="https://maps.googleapis.com/maps/api/js?key=#myGoogleKey#&amp;callback=initMap&amp;loading=async"></script>
+<script async onerror="googleMapsError()" src="https://maps.googleapis.com/maps/api/js?key=#myGoogleKey#&amp;libraries=places&amp;callback=initMap&amp;loading=async"></script>
 <script src="/Inc/js/autosize.js"></script>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

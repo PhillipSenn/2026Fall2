@@ -126,6 +126,7 @@ function mapClicked(event) {
     }
 
     updateGuess();
+    here();
 }
 
 function markerDragged(event) {

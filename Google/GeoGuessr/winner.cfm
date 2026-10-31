@@ -1,7 +1,7 @@
 <cfscript>
 request.progress.bar = false
 include '/Inc/header6.cfm'
-geoguessr = new dbo.proc().exec('geoguessr.where_geoguessr',url.geoguessrid)
+//geoguessr = new dbo.proc().exec('geoguessr.where_q',url.qid)
 function milesBetween(lat1, lng1, lat2, lng2) {
     var earthMiles = 3958.7613
     var p = pi() / 180
@@ -15,12 +15,14 @@ function milesBetween(lat1, lng1, lat2, lng2) {
     return earthMiles * (2 * asin(sqr(a)))
 }
 
-spot = new dbo.proc().exec('geoguessr.where_geoguessr', url.geoguessrid)
+spot = new dbo.proc().exec('geoguessr.where_q', url.qid)
+q = new dbo.proc().exec('q.where_q',url.qid)
+ans = new dbo.proc().exec('ans.where_q',url.qid)
 if (!spot.recordCount) {
     throw(message='Location not found.')
 }
 
-guesses = new dbo.proc().exec('guessr.where_geo', url.geoguessrid)
+guesses = new dbo.proc().exec('guessr.where_geo', spot.geoguessrid)
 miles = []
 for (i = 1; i <= guesses.recordCount; i++) {
     arrayAppend(miles, milesBetween(
@@ -41,7 +43,8 @@ ranked = queryExecute('
 <cfoutput>
 <div class="card">
     <div class="card-header theme-primary theme-subtle">
-        #encodeForHtml(spot.locationname)#
+        #q.qname#
+        <a class="btn float-end" href="./?actid=345">Next!</a>
     </div>
     <div class="card-body">
         <table>
@@ -73,7 +76,13 @@ ranked = queryExecute('
         </table>
     </div>
 </div>
-<div id="map"></div>
+<div class="row">
+    <div class="col">
+        <img class="img-fluid" src="#q.qdesc#">
+        <p>#ans.ansname#</p>
+    </div>
+    <div class="col" id="map"></div>
+</div>
 <script>
 var spot = {
     lat: #val(spot.lat)#,
@@ -91,6 +100,12 @@ var guesses = [
 ];
 </script>
 <cfinclude template="../myGoogleKey.cfm">
+<script>
+var googleMapsLoaded = false;
+function initMap() {
+    googleMapsLoaded = true;
+}
+</script>
 <script async onerror="googleMapsError()" src="https://maps.googleapis.com/maps/api/js?key=#myGoogleKey#&amp;callback=initMap&amp;loading=async"></script>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

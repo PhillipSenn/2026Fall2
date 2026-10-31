@@ -2,6 +2,8 @@ var map = null;
 var panorama = null;
 var streetViewService = null;
 var currentMarker = null;
+var searchMarker = null;
+var placeAutocomplete = null;
 var requestNumber = 0;
 var saving = false;
 
@@ -17,7 +19,7 @@ function initMap() {
         document.getElementById('map'),
         {
             center: startLocation,
-            zoom: 15,
+            zoom: 3,
             mapTypeId: 'roadmap',
             gestureHandling: 'greedy',
             streetViewControl: true,
@@ -65,12 +67,132 @@ function initMap() {
     document.getElementById('hereButton')
         .addEventListener('click', here);
 
+    initMapSearch();
     positionChanged();
 }
 
-function mapClicked(event) {
-    var clickedLocation = event.latLng;
+function initMapSearch() {
+    var placeAutocomplete;
+    var card = $('#mapSearch');
 
+    if (
+        !card.length ||
+        !google.maps.places ||
+        !google.maps.places.PlaceAutocompleteElement
+    ) {
+        return;
+    }
+
+    placeAutocomplete = new google.maps.places.PlaceAutocompleteElement();
+    placeAutocomplete.placeholder = 'Search Google Maps';
+    placeAutocomplete.value = card.attr('data-qname') || '';
+    card.append(placeAutocomplete);
+    placeAutocomplete.addEventListener('gmp-select', mapSearchSelected);
+    searchForQuery(placeAutocomplete.value);
+}
+
+function searchForQuery(query) {
+    if (
+        !query ||
+        !google.maps.places.AutocompleteSuggestion
+    ) {
+        return;
+    }
+
+    google.maps.places.AutocompleteSuggestion
+        .fetchAutocompleteSuggestions({ input: query })
+        .then(searchSuggestions)
+        .catch(mapSearchFailed);
+}
+
+function searchSuggestions(response) {
+    var prediction;
+
+    if (!response.suggestions || !response.suggestions.length) {
+        showMessage('No location found for that search.', 'warning');
+        return;
+    }
+
+    prediction = response.suggestions[0].placePrediction;
+
+    if (!prediction) {
+        showMessage('No location found for that search.', 'warning');
+        return;
+    }
+
+    if (placeAutocomplete && prediction.text) {
+        placeAutocomplete.value = prediction.text.toString();
+    }
+
+    choosePlacePrediction(prediction);
+}
+
+function mapSearchSelected(event) {
+    if (!event.placePrediction) {
+        return;
+    }
+
+    choosePlacePrediction(event.placePrediction);
+}
+
+function choosePlacePrediction(prediction) {
+    var place = prediction.toPlace();
+
+    place.fetchFields({
+        fields: ['location', 'viewport']
+    }).then(mapSearchFetched).catch(mapSearchFailed);
+
+    function mapSearchFetched() {
+        mapSearchPlace(place);
+    }
+}
+
+function mapSearchPlace(place) {
+    if (!place.location) {
+        showMessage('No location found for that search.', 'warning');
+        return;
+    }
+
+    if (place.viewport) {
+        map.fitBounds(place.viewport);
+    } else {
+        map.setCenter(place.location);
+        map.setZoom(16);
+    }
+
+    showSearchMarker(place.location);
+    showMessage('Click the pin to choose this location.', 'info');
+}
+
+function showSearchMarker(location) {
+    if (!searchMarker) {
+        searchMarker = new google.maps.Marker({
+            position: location,
+            map: map,
+            title: 'Click to choose this location',
+            zIndex: 1000
+        });
+        searchMarker.addListener('click', searchMarkerClicked);
+        return;
+    }
+
+    searchMarker.setPosition(location);
+    searchMarker.setMap(map);
+}
+
+function searchMarkerClicked() {
+    showStreetView(searchMarker.getPosition(), 1000);
+}
+
+function mapSearchFailed() {
+    showMessage('That search could not be completed.', 'warning');
+}
+
+function mapClicked(event) {
+    showStreetView(event.latLng, 100);
+}
+
+function showStreetView(location, radius) {
     requestNumber++;
 
     var thisRequest = requestNumber;
@@ -79,42 +201,45 @@ function mapClicked(event) {
 
     streetViewService.getPanorama(
         {
-            location: clickedLocation,
-            radius: 100,
+            location: location,
+            radius: radius,
             preference:
                 google.maps.StreetViewPreference.NEAREST,
             sources: [
                 google.maps.StreetViewSource.OUTDOOR
             ]
         },
-        function(data, status) {
-            if (thisRequest !== requestNumber) {
-                return;
-            }
-
-            if (
-                status === google.maps.StreetViewStatus.OK &&
-                data &&
-                data.location &&
-                data.location.pano
-            ) {
-                panorama.setPano(data.location.pano);
-                panorama.setPov({
-                    heading: 0,
-                    pitch: 0
-                });
-
-                panorama.setVisible(true);
-                showMessage('', '');
-            } else {
-                showMessage(
-                    'No Street View found near that point. ' +
-                    'Try another road.',
-                    'warning'
-                );
-            }
-        }
+        panoramaFound
     );
+
+    function panoramaFound(data, status) {
+        if (thisRequest !== requestNumber) {
+            return;
+        }
+
+        if (
+            status === google.maps.StreetViewStatus.OK &&
+            data &&
+            data.location &&
+            data.location.pano
+        ) {
+            panorama.setPano(data.location.pano);
+            panorama.setPov({
+                heading: 0,
+                pitch: 0
+            });
+
+            panorama.setVisible(true);
+            showMessage('', '');
+            return;
+        }
+
+        showMessage(
+            'No Street View found near that point. ' +
+            'Try another road.',
+            'warning'
+        );
+    }
 }
 
 function positionChanged() {
@@ -192,15 +317,6 @@ function here() {
     var locationName =
         document.getElementById('locationName')
             .value.trim();
-
-    if (!locationName) {
-        showMessage(
-            'Please name your location.',
-            'warning'
-        );
-        document.getElementById('locationName').focus();
-        return;
-    }
 
     var location = {
         name: locationName,

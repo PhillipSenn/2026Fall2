@@ -13,7 +13,7 @@ geoguessr = new dbo.proc().usr('geoguessr.list')
         <table>
             <thead>
                 <tr>
-                    <th>Location</th>
+                    <th class="text-end">Row</th>
                     <th>First name</th>
                     <th>Results</th>
                 </tr>
@@ -21,18 +21,18 @@ geoguessr = new dbo.proc().usr('geoguessr.list')
             <tbody>
                 <cfloop query="geoguessr">
                     <tr>
-                        <td>
-                            <cfif usrid eq request.usr.usrid>
-                                #locationname# <!--- Yours --->
-                            <cfelseif len(guessr_geo)>
-                                #locationname# <!--- Guessed already --->
+                        <td class="text-end">
+                            <cfif len(guessr_geo)>
+                                #currentRow#
                             <cfelse>
-                                <a href="guessr.cfm?actid=#form.actid#&geoguessrid=#geoguessrid#">#encodeForHtml(locationname)#</a>
+                                <a href="guessr.cfm?actid=#form.actid#&qid=#qid#">#currentRow#</a>
                             </cfif>
                         </td>
                         <td>#firstname#</td>
                         <td>
-                            <a href="winner.cfm?actid=346&geoguessrid=#geoguessrid#">Results</a>
+                            <cfif len(guessr_geo)>
+                                <a href="winner.cfm?actid=345&qid=#qid#">Results</a>
+                            </cfif>
                         </td>
                     </tr>
                 </cfloop>

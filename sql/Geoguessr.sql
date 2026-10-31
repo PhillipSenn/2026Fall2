@@ -1,6 +1,7 @@
 create table geoguessr
 (geoguessrid int identity primary key
 ,geoguessr_usr int
+,geoguessr_q int
 ,locationname nvarchar(max)
 ,lat decimal(10,7)
 ,lng decimal(10,7)
@@ -27,12 +28,14 @@ values(@usrid,@locationname,@lat,@lng,@heading,@pitch,@zoom,@panoid)
 go
 select * from geoguessr
 go
-create or alter proc geoguessr.where_geoguessr -- The 1 puzzle you are trying to solve
-(@geoguessrid int
+create or alter proc geoguessr.where_q
+(@qid int
 ) as
-select *
+select geoguessrid,geoguessr_q as qid
+	,lat,lng,locationname
+	,heading,pitch,zoom,panoid
 from geoguessr
-where geoguessrid=@geoguessrid
+where geoguessr_q=@qid
 go
 create table guessr
 (guessrid int identity primary key
@@ -47,7 +50,7 @@ create or alter proc geoguessr.list
 (@id uniqueidentifier
 ) as
 declare @usrid int=(select usrid from usr where id=@id)
-select geoguessrid,locationname
+select geoguessr_q as qid,locationname
 	,usrid,firstname -- The usr that created the puzzle
 	,guessr_geo -- Whether you have tried to solve it already
 from geoguessr
@@ -62,13 +65,14 @@ order by geoguessrid
 go
 
 --create schema guessr authorization dbo
-create or alter proc guessr.merge_geo -- This is what they guessed
+create or alter proc guessr.merge_q -- This is what they guessed
 (@id uniqueidentifier
-,@geoguessrid int
+,@qid int
 ,@lat decimal(10,7)
 ,@lng decimal(10,7)
 ) as
 declare @usrid int=(select usrid from usr where id=@id)
+declare @geoguessrid int=(select geoguessrid from geoguessr where geoguessr_q=@qid)
 declare @guessrid int=(select guessrid from guessr where guessr_usr=@usrid and guessr_geo=@geoguessrid)
 if @guessrid is null begin
 	insert into guessr(guessr_usr,guessr_geo,guessr_lat,guessr_lng)
