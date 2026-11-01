@@ -1302,6 +1302,77 @@ select earned
 from grade
 where gradeid=@gradeid
 go
+create or alter proc geoguessr.insert_location -- All the puzzles
+(@id uniqueidentifier
+,@locationname nvarchar(max)
+,@lat decimal(10,7)
+,@lng decimal(10,7)
+,@heading decimal(7,4)
+,@pitch decimal(6,3)
+,@zoom decimal(5,2)
+,@panoid varchar(255)
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+insert into geoguessr(geoguessr_usr,locationname,lat,lng,heading,pitch,zoom,panoid)
+values(@usrid,@locationname,@lat,@lng,@heading,@pitch,@zoom,@panoid)
+go
+create or alter proc geoguessr.where_q
+(@qid int
+) as
+select geoguessrid,geoguessr_q as qid
+	,lat,lng,locationname
+	,heading,pitch,zoom,panoid
+from geoguessr
+where geoguessr_q=@qid
+go
+create or alter proc geoguessr.list
+(@id uniqueidentifier
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+select geoguessr_q as qid,locationname
+	,usrid,firstname -- The usr that created the puzzle
+	,guessr_geo -- Whether you have tried to solve it already
+from geoguessr
+join usr on geoguessr_usr=usrid
+left join (
+	select guessr_geo
+	from guessr
+	where guessr_usr=@usrid
+) guessr
+on guessr_geo = geoguessrid
+order by geoguessrid
+go
+
+--create schema guessr authorization dbo
+create or alter proc guessr.merge_q -- This is what they guessed
+(@id uniqueidentifier
+,@qid int
+,@lat decimal(10,7)
+,@lng decimal(10,7)
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+declare @geoguessrid int=(select geoguessrid from geoguessr where geoguessr_q=@qid)
+declare @guessrid int=(select guessrid from guessr where guessr_usr=@usrid and guessr_geo=@geoguessrid)
+if @guessrid is null begin
+	insert into guessr(guessr_usr,guessr_geo,guessr_lat,guessr_lng)
+	values(@usrid,@geoguessrid,@lat,@lng)
+	select @guessrid=scope_identity()
+end
+update guessr set
+ guessrdate=getdate()
+where guessrid=@guessrid
+go
+create or alter proc guessr.where_geo -- results
+(@geoguessrid int
+) as
+select guessr_lat,guessr_lng,guessrdate
+	,firstname
+from guessr
+join usr on guessr_usr=usrid
+where guessr_geo=@geoguessrid
+order by guessrdate
+go
+
 
 set nocount on
 select * from usr

@@ -15,6 +15,7 @@ if (isDefined('form.guessLat') && isDefined('form.guessLng')) {
         ,form.guessLat
         ,form.guessLng]
     )
+    new dbo.proc().usr('poll.merge_q',url.qid)
     location('winner.cfm?actid=' & form.actid & '&qid=' & url.qid,false)
 }
 

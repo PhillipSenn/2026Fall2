@@ -1,5 +1,4 @@
 <cfscript>
-request.progress.bar = false
 include '/Inc/header6.cfm'
 //geoguessr = new dbo.proc().exec('geoguessr.where_q',url.qid)
 function milesBetween(lat1, lng1, lat2, lng2) {
@@ -43,7 +42,6 @@ ranked = queryExecute('
 <cfoutput>
 <div class="card">
     <div class="card-header theme-primary theme-subtle">
-        #q.qname#
         <a class="btn float-end" href="./?actid=345">Next!</a>
     </div>
     <div class="card-body">
@@ -78,16 +76,25 @@ ranked = queryExecute('
 </div>
 <div class="row">
     <div class="col">
-        <img class="img-fluid" src="#q.qdesc#">
-        <p>#ans.ansname#</p>
+        <fieldset>
+            <legend> #q.qname#</legend>
+            <figure>
+                <img class="img-fluid" src="#q.qdesc#">
+                <figcaption>#ans.ansname#</figcaption>
+            </figure>
+        </fieldset>
     </div>
     <div class="col" id="map"></div>
+    <div class="card-footer">
+        <a class="btn" href="./?actid=345">Next!</a>
+    </div>
 </div>
 <script>
 var spot = {
     lat: #val(spot.lat)#,
     lng: #val(spot.lng)#,
-    name: '#encodeForJavaScript(spot.locationname)#'
+    name: '#encodeForJavaScript(spot.locationname)#',
+    image: '#encodeForJavaScript(q.qdesc)#'
 };
 var guesses = [
 <cfloop query="ranked">
