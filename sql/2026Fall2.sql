@@ -1372,6 +1372,26 @@ join usr on guessr_usr=usrid
 where guessr_geo=@geoguessrid
 order by guessrdate
 go
+create or alter proc poll.rnd_unanswered
+(@id uniqueidentifier
+,@actid int
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+select top 1 qid,qname,qsort
+	,q_cat as catid
+from q
+left join(
+	select poll_q
+	from poll
+	join grade on poll_grade=gradeid
+	where grade_usr=@usrid
+	and pollEnd is not null
+) poll
+on poll_q = qid
+where q_act=@actid
+and poll_q is null
+order by newid()
+go
 
 
 set nocount on

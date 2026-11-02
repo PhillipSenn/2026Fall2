@@ -1,0 +1,29 @@
+.wiki-copy {
+	display: flow-root;
+}
+.wiki-thumb {
+	float: right;
+	clear: right;
+	width: 220px;
+	margin: 0 0 0.8rem 1.4rem;
+	border: 1px solid #c8ccd1;
+	background-color: #f8f9fa;
+	padding: 3px;
+	font-size: 94%;
+	line-height: 1.4;
+}
+.wiki-thumb a {
+	display: block;
+}
+.wiki-thumb img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+.wiki-thumb figcaption {
+	padding: 3px;
+	text-align: left;
+}
+.card-body .btn-group {
+	clear: both;
+}
