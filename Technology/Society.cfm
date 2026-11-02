@@ -41,7 +41,7 @@ function eventImage(required string eventText, required numeric eventYear) {
 	}
 	for (page in pages) {
 		if (!isStruct(page) || !structKeyExists(page, 'thumbnail') || !isStruct(page.thumbnail) || !structKeyExists(page.thumbnail, 'source')) {
-			continue
+			continue;
 		}
 		if (!structKeyExists(fallback, 'title')) {
 			fallback = page
