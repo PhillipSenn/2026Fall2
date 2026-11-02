@@ -145,18 +145,22 @@ include '/Inc/header6.cfm';
 	<div class="card-header theme-primary theme-subtle">
 	</div>
 	<div class="card-body p-0">
-		<div class="row g-0">
-			<div id="rel-canvas" class="col-12 lg:col-8"></div>
-			<div class="rel-side col-12 lg:col-4">
-				<div id="rel-fields" aria-label="Fields">
-					<p class="rel-fields-hint">Drop fields here</p>
-				</div>
+		<div class="row g-0 h-100">
+			<div class="col-3">
 				<div id="sql-stmt"></div>
 			</div>
+			<div id="rel-canvas" class="col-9"></div>
 		</div>
 	</div>
 	<div class="card-footer">
-		<table id="rel-results"></table>
+		<div class="row g-0">
+			<div id="rel-fields" class="col-3" aria-label="Fields">
+				<p class="rel-fields-hint">Drop fields here</p>
+			</div>
+			<div class="col-9">
+				<table id="rel-results"></table>
+			</div>
+		</div>
 	</div>
 </div>
 <script type="application/json" id="rel-data">#relJson#</script>

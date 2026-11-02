@@ -1,10 +1,35 @@
 .card {
+	display: flex;
+	flex-direction: column;
+	height: calc(100vh - 72px);
+	height: calc(100dvh - 72px);
+	max-height: calc(100vh - 72px);
+	max-height: calc(100dvh - 72px);
+	overflow: hidden;
 	user-select: none;
+}
+
+.card-header {
+	flex: 0 0 auto;
+}
+
+.card-body {
+	display: flex;
+	flex: 1 1 auto;
+	flex-direction: column;
+	min-height: 0;
+	overflow: hidden;
+}
+
+.card-body > .row {
+	flex: 1 1 auto;
+	min-height: 0;
+	background: #d0d0d0;
 }
 
 #rel-canvas {
 	position: relative;
-	height: 720px;
+	height: 100%;
 	min-width: 0;
 	overflow: auto;
 	background: #d0d0d0;
@@ -12,27 +37,13 @@
 	touch-action: none;
 }
 
-.rel-side {
-	display: flex;
-	flex-direction: column;
-	min-width: 0;
-	border-top: 1px solid #6d6d6d;
-	background: #fff;
-}
-
-@media (width >= 1024px) {
-	.rel-side {
-		border-top: 0;
-		border-left: 1px solid #6d6d6d;
-	}
-}
-
 #rel-fields {
-	flex: 0 1 auto;
-	max-height: 16rem;
-	min-height: 8rem;
+	height: 100%;
+	min-height: 0;
 	overflow: auto;
 	padding: 8px;
+	border-right: 1px solid #6d6d6d;
+	background: #fff;
 }
 
 #rel-fields.is-hot {
@@ -96,13 +107,18 @@
 }
 
 #sql-stmt {
-	flex: 1 1 auto;
-	min-height: 7rem;
+	box-sizing: border-box;
+	height: calc(16px + 17.5em);
+	max-height: calc(16px + 17.5em);
+	min-width: 0;
 	overflow: auto;
-	border-top: 1px solid #6d6d6d;
+	border-right: 1px solid #6d6d6d;
+	border-bottom: 1px solid #6d6d6d;
 	padding: 8px;
+	background: #fff;
 	font-family: Consolas, "Courier New", monospace;
 	font-size: 13px;
+	line-height: 1.25;
 	white-space: pre;
 	overflow-wrap: normal;
 	word-break: keep-all;
@@ -110,8 +126,12 @@
 }
 
 .card-footer {
+	flex: 0 0 auto;
+	height: calc(5 * 2.5625rem); /* 5 table rows */
+	max-height: calc(5 * 2.5625rem);
 	padding: 0;
 	background: #fff;
+	overflow: auto;
 }
 
 .card-footer .table-responsive,
