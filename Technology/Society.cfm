@@ -40,23 +40,22 @@ function eventImage(required string eventText, required numeric eventYear) {
 		return found
 	}
 	for (page in pages) {
-		if (!isStruct(page) || !structKeyExists(page, 'thumbnail') || !isStruct(page.thumbnail) || !structKeyExists(page.thumbnail, 'source')) {
-			continue;
-		}
-		if (!structKeyExists(fallback, 'title')) {
-			fallback = page
-		}
-		title = ''
-		if (structKeyExists(page, 'title')) {
-			title = replace(page.title, '_', ' ', 'all')
-		}
-		if (len(title) && len(plain)) {
-			if (find(title, plain) && len(title) > bestLength) {
-				best = page
-				bestLength = len(title)
-			} else if (findNoCase(title, plain) && len(title) > looseLength) {
-				loose = page
-				looseLength = len(title)
+		if (isStruct(page) && structKeyExists(page, 'thumbnail') && isStruct(page.thumbnail) && structKeyExists(page.thumbnail, 'source')) {
+			if (!structKeyExists(fallback, 'title')) {
+				fallback = page
+			}
+			title = ''
+			if (structKeyExists(page, 'title')) {
+				title = replace(page.title, '_', ' ', 'all')
+			}
+			if (len(title) && len(plain)) {
+				if (find(title, plain) && len(title) > bestLength) {
+					best = page
+					bestLength = len(title)
+				} else if (findNoCase(title, plain) && len(title) > looseLength) {
+					loose = page
+					looseLength = len(title)
+				}
 			}
 		}
 	}
