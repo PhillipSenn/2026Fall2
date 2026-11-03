@@ -97,6 +97,16 @@ function createTermChase(config) {
    var solvedTerms = []
    var inputUnlockAt = 0
    var speed = 1
+   var basePlayerSpeed = 4.5
+   var boostedPlayerSpeed = 6.5
+   var fruitBoostRemaining = 0
+   var fruits = []
+   var fruitKinds = [
+      { name: 'cherry', color: '#e63946', stem: '#2d6a4f' },
+      { name: 'strawberry', color: '#d00000', stem: '#40916c' },
+      { name: 'orange', color: '#f77f00', stem: '#2d6a4f' },
+      { name: 'banana', color: '#ffd60a', stem: '#6c584c' }
+   ]
 
    function makeMap() {
       var guard = 0
@@ -110,6 +120,37 @@ function createTermChase(config) {
       }
       playerStart = pickPlayer(openCells())
       ghostStarts = pickGhosts(openCells(), playerStart)
+      placeFruits()
+   }
+
+   function placeFruits() {
+      var cells = openCells()
+      var i, spot
+      fruits = []
+      shuffleSpots(cells)
+      for (i = 0; i < cells.length && fruits.length < fruitKinds.length; i++) {
+         spot = cells[i]
+         if (!fruitCellOk(spot)) continue
+         fruits.push({
+            x: spot.x,
+            y: spot.y,
+            kind: fruitKinds[fruits.length],
+            eaten: false
+         })
+      }
+   }
+
+   function fruitCellOk(spot) {
+      var i
+      if (sameCell(spot, playerStart)) return false
+      for (i = 0; i < ghostStarts.length; i++) {
+         if (sameCell(spot, ghostStarts[i])) return false
+      }
+      for (i = 0; i < fruits.length; i++) {
+         if (sameCell(spot, fruits[i])) return false
+         if (Math.abs(spot.x - fruits[i].x) + Math.abs(spot.y - fruits[i].y) < 4) return false
+      }
+      return true
    }
 
    function carveMaze() {
@@ -531,6 +572,32 @@ function createTermChase(config) {
       }
    }
 
+   function touchFruit() {
+      var i, fruit, dx, dy
+      for (i = 0; i < fruits.length; i++) {
+         fruit = fruits[i]
+         if (fruit.eaten) continue
+         dx = fruit.x - player.x
+         dy = fruit.y - player.y
+         if (dx * dx + dy * dy < 0.45) {
+            fruit.eaten = true
+            fruitBoostRemaining = 15
+            playFruitSound()
+         }
+      }
+   }
+
+   function playFruitSound() {
+      tone(523, 0.08, 0, 'sine')
+      tone(659, 0.08, 0.07, 'sine')
+      tone(784, 0.08, 0.14, 'sine')
+      tone(1047, 0.18, 0.22, 'triangle')
+   }
+
+   function playerMoveSpeed() {
+      return (fruitBoostRemaining > 0 ? boostedPlayerSpeed : basePlayerSpeed) * speed
+   }
+
    function submitAnswer() {
       var url = config.endpoint
       var form = {}
@@ -558,6 +625,7 @@ function createTermChase(config) {
       animationTime += dt
       collisionGrace = Math.max(0, collisionGrace - dt)
       wrongCooldown -= dt
+      fruitBoostRemaining = Math.max(0, fruitBoostRemaining - dt)
       if (phase === 'running') {
          elapsed += dt
          if (!revealed) {
@@ -570,7 +638,8 @@ function createTermChase(config) {
             }
          }
       }
-      move(player, 5.5 * speed, dt, -1)
+      move(player, playerMoveSpeed(), dt, -1)
+      touchFruit()
       if (phase === 'running') touchGoal()
       for (i = 0; i < ghosts.length; i++) {
          move(ghosts[i], (phase === 'chase' ? 2.5 : 2.8) * speed, dt, i)
@@ -674,6 +743,114 @@ function createTermChase(config) {
       }
    }
 
+   function drawFruit(fruit) {
+      var x = (fruit.x + 0.5) * cell
+      var y = (fruit.y + 0.5) * cell
+      var name = fruit.kind.name
+      if (name === 'cherry') drawCherry(x, y, fruit.kind)
+      else if (name === 'strawberry') drawStrawberry(x, y, fruit.kind)
+      else if (name === 'orange') drawOrange(x, y, fruit.kind)
+      else drawBanana(x, y, fruit.kind)
+   }
+
+   function drawCherry(x, y, kind) {
+      ctx.strokeStyle = kind.stem
+      ctx.lineWidth = 2
+      ctx.beginPath()
+      ctx.moveTo(x - 4, y + 2)
+      ctx.quadraticCurveTo(x - 1, y - 8, x, y - 10)
+      ctx.quadraticCurveTo(x + 1, y - 8, x + 5, y + 1)
+      ctx.stroke()
+      ctx.fillStyle = kind.color
+      ctx.beginPath()
+      ctx.arc(x - 5, y + 4, 5.5, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.beginPath()
+      ctx.arc(x + 5, y + 3, 5.5, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.fillStyle = '#fff8'
+      ctx.beginPath()
+      ctx.arc(x - 7, y + 2, 1.6, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.beginPath()
+      ctx.arc(x + 3, y + 1, 1.6, 0, Math.PI * 2)
+      ctx.fill()
+   }
+
+   function drawStrawberry(x, y, kind) {
+      ctx.fillStyle = kind.stem
+      ctx.beginPath()
+      ctx.moveTo(x - 4, y - 6)
+      ctx.lineTo(x, y - 11)
+      ctx.lineTo(x + 4, y - 6)
+      ctx.closePath()
+      ctx.fill()
+      ctx.fillStyle = kind.color
+      ctx.beginPath()
+      ctx.moveTo(x, y + 9)
+      ctx.quadraticCurveTo(x + 9, y + 2, x + 7, y - 5)
+      ctx.lineTo(x - 7, y - 5)
+      ctx.quadraticCurveTo(x - 9, y + 2, x, y + 9)
+      ctx.closePath()
+      ctx.fill()
+      ctx.fillStyle = '#ffd60a'
+      ctx.beginPath()
+      ctx.arc(x - 3, y - 1, 1.1, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.beginPath()
+      ctx.arc(x + 2, y + 1, 1.1, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.beginPath()
+      ctx.arc(x - 1, y + 4, 1.1, 0, Math.PI * 2)
+      ctx.fill()
+   }
+
+   function drawOrange(x, y, kind) {
+      ctx.fillStyle = kind.color
+      ctx.beginPath()
+      ctx.arc(x, y + 1, 8, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.strokeStyle = '#c65d00'
+      ctx.lineWidth = 1
+      ctx.beginPath()
+      ctx.arc(x, y + 1, 8, 0, Math.PI * 2)
+      ctx.stroke()
+      ctx.fillStyle = kind.stem
+      ctx.beginPath()
+      ctx.ellipse(x + 1, y - 7, 3.5, 2.2, -0.4, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.fillStyle = '#fff6'
+      ctx.beginPath()
+      ctx.arc(x - 3, y - 1, 2, 0, Math.PI * 2)
+      ctx.fill()
+   }
+
+   function drawBanana(x, y, kind) {
+      drawOneBanana(x - 5, y, -0.35, kind)
+      drawOneBanana(x, y + 1, 0.05, kind)
+      drawOneBanana(x + 5, y, 0.4, kind)
+   }
+
+   function drawOneBanana(x, y, tilt, kind) {
+      ctx.save()
+      ctx.translate(x, y)
+      ctx.rotate(tilt)
+      ctx.strokeStyle = kind.color
+      ctx.lineWidth = 5
+      ctx.lineCap = 'round'
+      ctx.beginPath()
+      ctx.moveTo(-2, -8)
+      ctx.quadraticCurveTo(8, -2, 2, 9)
+      ctx.stroke()
+      ctx.strokeStyle = kind.stem
+      ctx.lineWidth = 2
+      ctx.beginPath()
+      ctx.moveTo(-2, -8)
+      ctx.lineTo(-1, -10)
+      ctx.stroke()
+      ctx.restore()
+   }
+
    function draw() {
       var x, y, i, goal, mouth, angle, labelSize
       ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -694,6 +871,9 @@ function createTermChase(config) {
                ctx.stroke()
             }
          }
+      }
+      for (i = 0; i < fruits.length; i++) {
+         if (!fruits[i].eaten) drawFruit(fruits[i])
       }
       for (i = 0; i < goals.length && phase !== 'chase' && phase !== 'finished' && !(phase === 'paused' && resumePhase === 'chase'); i++) {
          goal = goals[i]

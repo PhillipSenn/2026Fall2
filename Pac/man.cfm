@@ -6,7 +6,7 @@ poll = new dbo.proc().usr('poll.unanswered',form.actid)
 <cfoutput>
 <div id="manGame">
    <div id="mazeSpace">
-      <canvas id="maze" tabindex="0" aria-label="Move with arrow keys or WASD. Find the correct term, then catch a ghost. Swipe to steer on touch screens."></canvas>
+      <canvas id="maze" tabindex="0" aria-label="Move with arrow keys or WASD. Find the correct term, then catch a ghost. Eat fruit to speed up. Swipe to steer on touch screens."></canvas>
    </div>
    <aside class="man-sidebar" id="manDefinition" aria-label="Current definition">
       <p id="definition" aria-live="polite"></p>
