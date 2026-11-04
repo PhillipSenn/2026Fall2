@@ -361,7 +361,7 @@ go
 create or alter proc q.where_act
 (@actid int
 ) as
-select qid,qname,qdesc,qhref
+select qid,qname,qdesc,qhref,qsort
 --	,ansnames
 from q
 --left join (

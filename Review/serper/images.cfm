@@ -74,36 +74,38 @@ if (arrayLen(articles)) {
 		cfhttpparam(type='url', name='redirects', value='1');
 		cfhttpparam(type='url', name='titles', value=arrayToList(titles, '|'));
 	}
-	wikiData = deserializeJSON(wiki.fileContent)
-	byTitle = {}
-	if (structKeyExists(wikiData, 'query') && structKeyExists(wikiData.query, 'pages')) {
-		for (page in wikiData.query.pages) {
-			if (!structKeyExists(page, 'title') || val(page.ns) != 0) {
-				continue
+	if (isJSON(wiki.fileContent)) {
+		wikiData = deserializeJSON(wiki.fileContent)
+		byTitle = {}
+		if (structKeyExists(wikiData, 'query') && structKeyExists(wikiData.query, 'pages')) {
+			for (page in wikiData.query.pages) {
+				if (!structKeyExists(page, 'title') || val(page.ns) != 0) {
+					continue
+				}
+				if (!structKeyExists(page, 'original')) {
+					continue
+				}
+				byTitle[lCase(page.title)] = page.original.source
 			}
-			if (!structKeyExists(page, 'original')) {
-				continue
-			}
-			byTitle[lCase(page.title)] = page.original.source
-		}
-		if (structKeyExists(wikiData.query, 'redirects')) {
-			for (item in wikiData.query.redirects) {
-				target = lCase(item.to)
-				if (structKeyExists(byTitle, target)) {
-					byTitle[lCase(item.from)] = byTitle[target]
+			if (structKeyExists(wikiData.query, 'redirects')) {
+				for (item in wikiData.query.redirects) {
+					target = lCase(item.to)
+					if (structKeyExists(byTitle, target)) {
+						byTitle[lCase(item.from)] = byTitle[target]
+					}
 				}
 			}
 		}
-	}
-	for (article in articles) {
-		key = lCase(article.title)
-		if (!structKeyExists(byTitle, key)) {
-			continue
+		for (article in articles) {
+			key = lCase(article.title)
+			if (!structKeyExists(byTitle, key)) {
+				continue
+			}
+			arrayAppend(images, {
+				'link' = article.link,
+				'imageUrl' = byTitle[key]
+			})
 		}
-		arrayAppend(images, {
-			'link' = article.link,
-			'imageUrl' = byTitle[key]
-		})
 	}
 }
 
