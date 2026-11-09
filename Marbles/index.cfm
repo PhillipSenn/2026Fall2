@@ -4,13 +4,13 @@ include '/Inc/header6.cfm';
 
 <cfoutput query="act">
 <form method="post" action="marbles.cfm" class="card">
-	<div class="card-header theme-primary theme-subtle">
-	</div>
-	<div class="card-body">
-	</div>
-	<div class="card-footer">
+	<header class="theme-primary theme-subtle">
+	</header>
+	<section>
+	</section>
+	<footer>
 		<button>Ready!</button>
-	</div>
+	</footer>
 	<input hidden name="id" value="#request.usr.id#">
 	<input hidden name="actid" value="#actid#">
 </form>

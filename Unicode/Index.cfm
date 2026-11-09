@@ -30,11 +30,11 @@ function utf8Bytes(code) {
 </cfscript>
 
 <cfoutput>
-<div class="card">
-	<div class="card-header">
+<article>
+	<header>
 		Unicode
-	</div>
-	<div class="card-body">
+	</header>
+	<section>
 		<p>ASCII gave every character a number from 0 to 127. ANSI used the next 128 numbers for Western European letters. Unicode keeps one list for the characters of every writing system, plus symbols and emoji.</p>
 		<p>Each character's number is called a code point. It is written with U+ and the number in hexadecimal. The letter A is U+0041, which is the same decimal 65 it had in ASCII. Code points run from U+0000 through U+10FFFF. The first 128 are the ASCII characters, with the same numbers.</p>
 		<p>UTF-8 is a way to store a code point in bytes. ASCII characters stay one byte, so an old ASCII file is already valid UTF-8. Other characters take two, three, or four bytes.</p>
@@ -63,7 +63,7 @@ function utf8Bytes(code) {
 			</tbody>
 		</table>
 		<p><a href="viewer.cfm">Browse every block</a> or read the <a href="https://cdn.jsdelivr.net/gh/unicode-org/unicodetools@main/unicodetools/data/ucd/dev/UnicodeData.txt">Unicode character list</a>.</p>
-	</div>
-</div>
+	</section>
+</article>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

@@ -5,16 +5,16 @@ rows = [1, 2, 3, 4, 13, 12, 11, 10, 9, 10, 11, 12, 13, 4, 3, 2, 1];
 </cfscript>
 
 <cfoutput query="act">
-<div class="row">
+<row>
 	<div class="col-8">
-		<div class="card">
-			<div class="card-header theme-primary theme-subtle d-flex justify-content-end align-items-center">
+		<article>
+			<header class="theme-primary theme-subtle d-flex justify-content-end align-items-center">
 				<span class="d-flex gap-2">
 					<button type="button" id="rotate" class="btn btn-sm btn-outline theme-secondary">Rotate</button>
 					<button type="button" id="reset" class="btn btn-sm btn-outline theme-secondary">Reset</button>
 				</span>
-			</div>
-			<div class="card-body">
+			</header>
+			<section>
 				<div class="star" id="board" aria-label="Chinese checkers board">
 					<cfloop from="1" to="#arrayLen(rows)#" index="row">
 						<cfset count = rows[row]>
@@ -26,13 +26,13 @@ rows = [1, 2, 3, 4, 13, 12, 11, 10, 9, 10, 11, 12, 13, 4, 3, 2, 1];
 					</cfloop>
 				</div>
 				<p id="status" class="text-center fg-2 mb-0 mt-3">Try a move.</p>
-			</div>
-		</div>
+			</section>
+		</article>
 	</div>
 	<div class="col-4">
-		<div class="card h-100">
-			<div class="card-header theme-primary theme-subtle">One player</div>
-			<div class="card-body">
+		<article class="h-100">
+			<header class="theme-primary theme-subtle">One player</header>
+			<section>
 				<div class="d-flex flex-wrap gap-2" id="players">
 					<button type="button" class="btn-outline theme-secondary" data-players="1">1</button>
 					<button type="button" class="btn-outline theme-secondary" data-players="2">2</button>
@@ -50,10 +50,10 @@ rows = [1, 2, 3, 4, 13, 12, 11, 10, 9, 10, 11, 12, 13, 4, 3, 2, 1];
 					<button type="button" class="btn-color" data-color="blue">Blue</button>
 					<button type="button" class="btn-color" data-color="purple">Purple</button>
 				</div>
-			</div>
-		</div>
+			</section>
+		</article>
 	</div>
-</div>
+</row>
 
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

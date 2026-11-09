@@ -10,10 +10,10 @@ order by pollid desc')
 </cfscript>
 
 <cfoutput>
-<div class="card">
-	<div class="card-header theme-primary theme-subtle">
-	</div>
-	<div class="card-body">
+<article>
+	<header class="theme-primary theme-subtle">
+	</header>
+	<section>
 		<table>
 			<thead>
 				<tr>
@@ -40,7 +40,7 @@ order by pollid desc')
 				</cfloop>
 			</tbody>
 		</table>
-	</div>
-</div>
+	</section>
+</article>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

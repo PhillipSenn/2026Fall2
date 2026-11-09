@@ -21,16 +21,16 @@ class = queryExecute(
 
 <cfoutput query="act">
 <form class="card" action="ord.cfm">
-	<div class="card-header theme-primary theme-subtle">domain: #path.domainname#</div>
-	<div class="card-header theme-primary theme-subtle">kingdom: #path.kingdomname#</div>
-	<div class="card-header theme-primary theme-subtle">phylum: #path.phylumname#</div>
-	<div class="card-body">
+	<header class="theme-primary theme-subtle">domain: #path.domainname#</header>
+	<header class="theme-primary theme-subtle">kingdom: #path.kingdomname#</header>
+	<header class="theme-primary theme-subtle">phylum: #path.phylumname#</header>
+	<section>
 		<cfloop query="class">
 			<div>
 				<button class="btn-link" name="classid" value="#classid#">#classname#</button>
 			</div>
 		</cfloop>
-	</div>
+	</section>
 	<input hidden name="id" value="#request.usr.id#">
 	<input hidden name="actid" value="#form.actid#">
 </form>

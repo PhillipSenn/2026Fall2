@@ -19,15 +19,15 @@ if (isDefined('form.js')) {
 </style>
 <form id="fs-small" class="row">
 	<div class="col-12 md:col-7">
-		<div class="card">
-			<div class="card-body" id="canvas-container">
+		<article>
+			<section id="canvas-container">
 				<canvas id="canvas"></canvas>
-			</div>
-			<div class="card-footer">
+			</section>
+			<footer>
 				which_key: <span id="which-key"></span>
 				<button class="float-end">Save</button>
-			</div>
-		</div>
+			</footer>
+		</article>
 	</div>
 	<div class="col-12 md:col-5 md:ps-0">
 		<div class="accordion mb-2">

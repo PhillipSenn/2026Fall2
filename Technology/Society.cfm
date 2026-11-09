@@ -84,14 +84,14 @@ function eventImage(required string eventText, required numeric eventYear) {
 </cfscript>
 
 <cfoutput query="act">
-<div class="row">
+<row>
 	<div class="lg:col-6 lg:mx-auto">
 		<form class="card">
 			<cfif q.recordcount>
-				<div class="card-header">
+				<header>
 					<h1 class="h2 mb-0">#q.qsort#</h1>
-				</div>
-				<div class="card-body">
+				</header>
+				<section>
 					<div class="wiki-copy">
 						<cfif len(wikiImage.src)>
 							<figure class="wiki-thumb">
@@ -109,11 +109,11 @@ function eventImage(required string eventText, required numeric eventYear) {
                      <button type="submit" name="catid" value="347" class="btn-outline theme-primary">World History</button>
                   </div>
 					</div>
-				</div>
+				</section>
 				<input hidden id="catid" value="#q.catid#">
 			<cfelse>
-				<div class="card-header">#actname#</div>
-				<div class="card-body">You did it!</div>
+				<header>#actname#</header>
+				<section>You did it!</section>
 			</cfif>
 			<input hidden name="actid" value="#form.actid#">
 			<input hidden name="id" value="#request.usr.id#">
@@ -121,6 +121,6 @@ function eventImage(required string eventText, required numeric eventYear) {
          <input hidden name="q_cat" value="#q.catid#">
 		</form>
 	</div>
-</div>
+</row>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

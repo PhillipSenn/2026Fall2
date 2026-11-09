@@ -3,10 +3,10 @@ include '/Inc/header6.cfm';
 </cfscript>
 
 <cfoutput query="act">
-<div class="card">
-	<div class="card-body text-center">
+<article>
+	<section class="text-center">
 		<h1 id="dice-heading" class="mb-4">Dice Roller</h1>
-		<div class="row justify-content-center align-items-center">
+		<row class="justify-content-center align-items-center">
 			<div class="md:col-8">
 				<div class="dice-pair d-flex justify-content-center gap-4 mb-4" aria-live="polite">
 					<div id="dieOne" class="die" role="img" aria-label="Die one: 1">
@@ -37,8 +37,8 @@ include '/Inc/header6.cfm';
 				<p id="rollStatus" class="fg-2 mt-2 mb-0" role="status" aria-live="polite"></p>
 			</div>
 			<aside class="md:col-2 mt-4 md:mt-0 text-start" aria-labelledby="results-heading">
-				<div class="card">
-					<div class="card-header" id="results-heading">Roll totals</div>
+				<article>
+					<header id="results-heading">Roll totals</header>
 					<ol id="rollResults" class="list-group list-group-numbered list-group-flush">
 						<cfoutput><cfloop from="1" to="12" index="rollTotal">
 							<li class="list-group-item d-flex justify-content-between align-items-center" data-total="#rollTotal#">
@@ -54,16 +54,16 @@ include '/Inc/header6.cfm';
 							<span id="resultsTotal" class="badge bg-black fg-white">0</span>
 						</li>
 					</ol>
-					<div class="card-footer">
+					<footer>
 						<div class="form-field">
 							<input id="speedMode" class="check" type="checkbox">
 							<label for="speedMode">Speed</label>
 						</div>
-					</div>
-				</div>
+					</footer>
+				</article>
 			</aside>
-		</div>
-	</div>
-</div>
+		</row>
+	</section>
+</article>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

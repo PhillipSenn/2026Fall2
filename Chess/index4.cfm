@@ -11,16 +11,16 @@ start = {
 </cfscript>
 
 <cfoutput query="act">
-<div class="row">
+<row>
 	<div class="col-8">
-		<div class="card">
-			<div class="card-header theme-primary theme-subtle d-flex justify-content-end align-items-center">
+		<article>
+			<header class="theme-primary theme-subtle d-flex justify-content-end align-items-center">
 				<span class="d-flex gap-2">
 					<button type="button" id="flip" class="btn btn-sm btn-outline theme-secondary">Flip</button>
 					<button type="button" id="reset" class="btn btn-sm btn-outline theme-secondary">Reset</button>
 				</span>
-			</div>
-			<div class="card-body">
+			</header>
+			<section>
 				<div class="board" id="board" aria-label="Chessboard">
 				<cfloop from="8" to="1" index="rank" step="-1">
 					<cfloop from="1" to="8" index="fileN">
@@ -52,25 +52,25 @@ start = {
 					<button type="button" class="btn btn-sm btn-outline theme-secondary" data-type="B"></button>
 					<button type="button" class="btn btn-sm btn-outline theme-secondary" data-type="N"></button>
 				</div>
-			</div>
-		</div>
+			</section>
+		</article>
 	</div>
 	<div class="col-4">
 		<form class="card h-100" action="index2.cfm">
-			<div class="card-header theme-primary theme-subtle">"If they capture a piece, then their progress goes up by the value of that piece.
-If they checkmate, then their progress goes to 100%"</div>
-			<div class="card-body">
-			</div>
+			<header class="theme-primary theme-subtle">"If they capture a piece, then their progress goes up by the value of that piece.
+If they checkmate, then their progress goes to 100%"</header>
+			<section>
+			</section>
 			<!---
-			<div class="card-footer">
+			<footer>
 				<button class="float-end" formaction="index5.cfm">Next</button>
-			</div>
+			</footer>
 			--->
 			<input hidden name="actid" value="#actid#">
 			<input hidden name="id" value="#request.usr.id#">
 		</form>
 	</div>
-</div>
+</row>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>
 

@@ -4,21 +4,21 @@ include '/Inc/header6.cfm'
 
 <cfoutput query="act">
 <div>
-	<div class="card">
-		<div class="card-header theme-primary theme-subtle">
-		</div>
-		<div class="card-body">
+	<article>
+		<header class="theme-primary theme-subtle">
+		</header>
+		<section>
 			Instructions for this test:
-		</div>
-	</div>
-	<div class="card">
-		<div class="card-body">
+		</section>
+	</article>
+	<article>
+		<section>
 			#actdesc#
-		</div>
-		<div class="card-footer">
+		</section>
+		<footer>
 			<a class="btn" href="bank.cfm?actid=#actid#">Ready!</a>
-		</div>
-	</div>
+		</footer>
+	</article>
 </div>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

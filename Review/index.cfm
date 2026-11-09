@@ -4,27 +4,27 @@ include '/Inc/header6.cfm'
 
 <cfoutput query="act">
 <form action="question.cfm">
-	<div class="card">
-		<div class="card-header theme-primary theme-subtle">
+	<article>
+		<header class="theme-primary theme-subtle">
 			Review Questions
-		</div>
-		<div class="card-body">
+		</header>
+		<section>
 			The textbook supplies these review questions, but no answer sheet.
 			<p>Don't worry! You'll get a 100 posted into Canvas for having completed this task.
 			But in addition, there is a scoring system that should help us come to an agreement as to which answer is best:
 			<p>You receive 1 point towards consensus, for your vote and anyone who agrees with you.
-		</div>
-	</div>
-	<div class="card">
-		<div class="card-body">
+		</section>
+	</article>
+	<article>
+		<section>
 			#actdesc#
-		</div>
-		<div class="card-footer">
+		</section>
+		<footer>
 			<button>Ready!</button>
-		</div>
+		</footer>
 		<input hidden name="id" value="#request.usr.id#">
 		<input hidden name="actid" value="#actid#">
-	</div>
+	</article>
 </form>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

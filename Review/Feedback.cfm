@@ -7,11 +7,11 @@ ans = new dbo.proc().exec('ans.where_q',form.qid)
 
 <cfoutput query="act">
 <form action="Questions.cfm">
-	<div class="card">
-		<div class="card-header theme-primary theme-subtle">
+	<article>
+		<header class="theme-primary theme-subtle">
 			#q.qname#
-		</div>
-		<div class="card-body">
+		</header>
+		<section>
 			<cfloop query="ans">
 				<div class="form-field">
 					<cfset checked = "">
@@ -24,16 +24,16 @@ ans = new dbo.proc().exec('ans.where_q',form.qid)
 					</label>
 				</div>
 			</cfloop>
-		</div>
-		<div class="card-footer">
+		</section>
+		<footer>
 			<textarea autofocus name="guessname">#guess.guessname#</textarea>
-		</div>
-	</div>
-	<div class="card">
-		<div class="card-body">
+		</footer>
+	</article>
+	<article>
+		<section>
 			<button>Save</button>
-		</div>
-	</div>
+		</section>
+	</article>
 	<input hidden name="actid" value="#form.actid#">
 	<input hidden name="id" value="#request.usr.id#">
 </form>

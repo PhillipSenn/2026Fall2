@@ -40,11 +40,11 @@ ranked = queryExecute('
 </cfscript>
 
 <cfoutput>
-<div class="card">
-    <div class="card-header theme-primary theme-subtle">
+<article>
+    <header class="theme-primary theme-subtle">
         <a class="btn float-end" href="./?actid=345">Next!</a>
-    </div>
-    <div class="card-body">
+    </header>
+    <section>
         <table>
             <thead>
                 <tr>
@@ -72,9 +72,9 @@ ranked = queryExecute('
                 </cfloop>
             </tbody>
         </table>
-    </div>
-</div>
-<div class="row">
+    </section>
+</article>
+<row>
     <div class="col">
         <fieldset>
             <legend> #q.qname#</legend>
@@ -85,10 +85,10 @@ ranked = queryExecute('
         </fieldset>
     </div>
     <div class="col" id="map"></div>
-    <div class="card-footer">
+    <footer>
         <a class="btn" href="./?actid=345">Next!</a>
-    </div>
-</div>
+    </footer>
+</row>
 <script>
 var spot = {
     lat: #val(spot.lat)#,

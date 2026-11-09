@@ -1,6 +1,6 @@
 <cfinclude template="/Inc/header6.cfm">
-<div class="card">
-    <div class="card-body">
+<article>
+    <section>
         <h1 class="card-title">Google Maps</h1>
         <p class="card-text">I thought I would document my journey
         of having ChatGPT create a Google map game for my students.
@@ -17,6 +17,6 @@
         <li><a href="9.cfm">Make airports clickable</a></li>
         <li><a href="10.cfm">Multiplayer</a></li>
         </ol>
-    </div>
-</div>
+    </section>
+</article>
 <cfinclude template="/Inc/footer6.cfm">

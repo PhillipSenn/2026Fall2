@@ -13,16 +13,16 @@ start = {
 </cfscript>
 
 <cfoutput query="act">
-<div class="row">
+<row>
 	<div class="col-8">
-		<div class="card">
-			<div class="card-header theme-primary theme-subtle d-flex justify-content-end align-items-center">
+		<article>
+			<header class="theme-primary theme-subtle d-flex justify-content-end align-items-center">
 				<span class="d-flex gap-2">
 					<button type="button" id="flip" class="btn btn-sm btn-outline theme-secondary">Flip</button>
 					<button type="button" id="reset" class="btn btn-sm btn-outline theme-secondary">Reset</button>
 				</span>
-			</div>
-			<div class="card-body">
+			</header>
+			<section>
 				<div class="board" id="board" aria-label="Chessboard">
 				<cfloop from="8" to="1" index="rank" step="-1">
 					<cfloop from="1" to="8" index="fileN">
@@ -47,13 +47,13 @@ start = {
 				</cfloop>
 				</div>
 				<p class="chess-hint text-center fg-2 mb-0 mt-3">Click a piece, then a square. You can also drag a piece.</p>
-			</div>
-		</div>
+			</section>
+		</article>
 	</div>
 	<div class="col-4">
 		<form class="card h-100" action="index2.cfm">
-			<div class="card-header theme-primary theme-subtle">"create a chessboard"</div>
-			<div class="card-body">
+			<header class="theme-primary theme-subtle">"create a chessboard"</header>
+			<section>
 Chess/index now shows a chessboard in the starting position, with white at the bottom and files a–h and ranks 1–8 labeled.
 <ul>
 <li>Click a piece, then click a square, or drag a piece onto a square.
@@ -61,14 +61,14 @@ Chess/index now shows a chessboard in the starting position, with white at the b
 <li><b>Reset</b> restores the starting position.
 </ul>
 Pieces can move to any square. The page does not enforce chess rules.			
-			</div>
-			<div class="card-footer">
+			</section>
+			<footer>
 				<button class="float-end">Next</button>
-			</div>
+			</footer>
 			<input hidden name="actid" value="#actid#">
 			<input hidden name="id" value="#request.usr.id#">
 		</form>
 	</div>
-</div>
+</row>
 </cfoutput>
 <cfinclude template="/Inc/footer6.cfm">

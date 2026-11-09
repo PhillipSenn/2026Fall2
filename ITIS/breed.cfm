@@ -53,15 +53,15 @@ if (path.speciesname == 'Canis familiaris') {
 
 <cfoutput query="act">
 <form class="card">
-	<div class="card-header theme-primary theme-subtle">Domain: #path.domainname#</div>
-	<div class="card-header theme-primary theme-subtle">Kingdom: #path.kingdomname#</div>
-	<div class="card-header theme-primary theme-subtle">Phylum: #path.phylumname#</div>
-	<div class="card-header theme-primary theme-subtle">Class: #path.classname#</div>
-	<div class="card-header theme-primary theme-subtle">Order: #path.ordname#</div>
-	<div class="card-header theme-primary theme-subtle">Family: #path.familyname#</div>
-	<div class="card-header theme-primary theme-subtle">Genus: #path.genusname#</div>
-	<div class="card-header theme-primary theme-subtle">Species: #path.speciesname#</div>
-	<div class="card-body">
+	<header class="theme-primary theme-subtle">Domain: #path.domainname#</header>
+	<header class="theme-primary theme-subtle">Kingdom: #path.kingdomname#</header>
+	<header class="theme-primary theme-subtle">Phylum: #path.phylumname#</header>
+	<header class="theme-primary theme-subtle">Class: #path.classname#</header>
+	<header class="theme-primary theme-subtle">Order: #path.ordname#</header>
+	<header class="theme-primary theme-subtle">Family: #path.familyname#</header>
+	<header class="theme-primary theme-subtle">Genus: #path.genusname#</header>
+	<header class="theme-primary theme-subtle">Species: #path.speciesname#</header>
+	<section>
 		<cfloop query="breed">
 			<div>
 				<cfif len(anchor)>
@@ -71,7 +71,7 @@ if (path.speciesname == 'Canis familiaris') {
 				</cfif>
 			</div>
 		</cfloop>
-	</div>
+	</section>
 	<input hidden name="id" value="#request.usr.id#">
 	<input hidden name="actid" value="#form.actid#">
 </form>

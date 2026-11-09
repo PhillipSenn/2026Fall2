@@ -6,10 +6,10 @@ include '/Inc/header6.cfm'
 
 <cfoutput>
 <form class="card" action="Relationships.cfm">
-	<div class="card-header theme-primary theme-subtle">MS-SQL</div>
-	<div class="card-body">
+	<header class="theme-primary theme-subtle">MS-SQL</header>
+	<section>
 		<button class="btn-link">Relationships</button>
-	</div>
+	</section>
 	<input hidden name="id" value="#request.usr.id#">
 	<input hidden name="actid" value="#form.actid#">
 </form>

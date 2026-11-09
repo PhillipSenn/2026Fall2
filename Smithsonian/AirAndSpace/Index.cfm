@@ -4,18 +4,18 @@ include '/Inc/header6.cfm';
 </cfscript>
 
 <cfoutput query="act">
-<div class="row">
+<row>
    <div class="col-12 md:col-10 lg:col-5 order-2 md:order-1">
-      <div class="card" id="picturePanel">
-         <div class="card-header" role="status" aria-live="polite">
+      <article id="picturePanel">
+         <header role="status" aria-live="polite">
             <a id="artifactTitle" target="_blank" rel="noopener noreferrer"></a>
-         </div>
-         <div class="card-body p-0">
+         </header>
+         <section class="p-0">
             <figure id="artifactMedia">
                <figcaption id="artifactCredit" class="artifact-credit text-body-secondary"></figcaption>
             </figure>
-         </div>
-      </div>
+         </section>
+      </article>
    </div>
 
    <div class="col-12 lg:col-5 order-3 lg:order-2">
@@ -37,18 +37,18 @@ include '/Inc/header6.cfm';
    </div>
 
    <div class="col-12 md:col-2 lg:col-2 order-1 md:order-2 lg:order-3">
-      <div class="card">
-         <div class="card-body p-0">
+      <article>
+         <section class="p-0">
             <div class="btn-group-vertical align-self-stretch w-100" role="group"
                  aria-label="Artifact navigation">
                <button type="button" id="btnPrev" class="btn btn-outline-primary">&larr; Previous</button>
                <button type="button" id="btnNext" class="btn btn-outline-primary">Next &rarr;</button>
                <button type="button" id="btnExplanation" class="btn btn-outline-primary lg:d-none">Explanation</button>
             </div>
-         </div>
-      </div>
+         </section>
+      </article>
    </div>
-</div>
+</row>
 
 <div id="artifactZoom" class="artifact-zoom" hidden>
    <img id="artifactZoomImage" alt="">

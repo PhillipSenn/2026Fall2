@@ -107,13 +107,13 @@ function onError(exception, eventName) {
 
 	sql = errorField(source, 'sql')
 //	cflog(file='2026Fall2', type='error', text=eventName & ': ' & message & ' ' & detail)
-	writeOutput('<div class="card">' & chr(10))
-	writeoutput('	<div class="card-header bg-danger-subtle">' & chr(10))
+	writeOutput('<article>' & chr(10))
+	writeoutput('	<header class="bg-danger-subtle">' & chr(10))
 	if (len(message)) {
 		writeOutput(encodeForHTML(message))
 	}
-	writeoutput('	</div>'  & chr(10))
-	writeoutput('	<div class="card-body">' & chr(10))
+	writeoutput('	</header>'  & chr(10))
+	writeoutput('	<section>' & chr(10))
 	if (len(detail) and detail != message) {
 		writeOutput('<div>' & encodeForHTML(detail) & '</div>')
 	}
@@ -150,12 +150,12 @@ function onError(exception, eventName) {
 				,subject=subject) {
 				writeOutput(usrname & ' had the following error:' & chr(10) & chr(10) & detail & chr(10) & chr(10) & sql)
 			}
-			writeoutput('</div>' & chr(10))
-			writeoutput('<div class="card-footer bg-warning-subtle">An email has been sent to sennp@lr.edu and PhillipSenn@gmail.com' & chr(10))
+			writeoutput('</section>' & chr(10))
+			writeoutput('<footer class="bg-warning-subtle">An email has been sent to sennp@lr.edu and PhillipSenn@gmail.com' & chr(10))
 		} catch (any ignore) {}
 	}
-	writeoutput('	</div>' & chr(10))
-	writeOutput('</div>' & chr(10))
+	writeoutput('	</footer>' & chr(10))
+	writeOutput('</article>' & chr(10))
 }
 
 function errorField(source, key) {

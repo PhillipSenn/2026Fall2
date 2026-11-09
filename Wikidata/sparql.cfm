@@ -5,17 +5,17 @@ include '/Inc/header6.cfm'
 
 <cfoutput query="act">
 <div id="wikidataExplorer">
-    <div class="row g-4">
+    <row class="g-4">
 
         <div class="col-12 lg:col-5">
-            <div class="card">
-                <div class="card-header">
+            <article>
+                <header>
                     <a id="askChatGPT" target="_blank" rel="noopener noreferrer"
                         href="https://chatgpt.com/?q=#urlEncodedFormat('Write a Wikidata SPARQL query for a top 10 list of ')#"
                     >Ask ChatGPT</a>
-                </div>
+                </header>
 
-                <div class="card-body">
+                <section>
                     <textarea
                         id="sparqlQuery"
                         class="form-control font-monospace"
@@ -31,18 +31,18 @@ include '/Inc/header6.cfm'
                             class="btn-solid theme-primary btn-styled"
                         >Execute Query</button>
                     </div>
-                </div>
-            </div>
+                </section>
+            </article>
         </div>
 
         <div class="col-12 lg:col-7">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
+            <article>
+                <header class="d-flex justify-content-between align-items-center">
                     <h2 class="h4 mb-0">Results</h2>
                     <span id="resultCount" class="small fg-2"></span>
-                </div>
+                </header>
 
-                <div class="card-body">
+                <section>
                     <div id="queryMessage" role="status" aria-live="polite"></div>
 
                     <div id="resultsArea" class="table-responsive">
@@ -50,11 +50,11 @@ include '/Inc/header6.cfm'
                             Your query results will appear here.
                         </p>
                     </div>
-                </div>
-            </div>
+                </section>
+            </article>
         </div>
 
-    </div>
+    </row>
 </div>
 
 

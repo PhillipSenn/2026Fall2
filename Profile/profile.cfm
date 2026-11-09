@@ -19,7 +19,7 @@ if (!len(mark)) {
 </cfscript>
 
 <cfoutput>
-<div class="card profile shadow">
+<article class="profile shadow">
 	<form>
 		<div class="text-center">
 			<button name="actid" value="329" formaction="../Unicode/player.cfm" class="profile-banner">
@@ -28,7 +28,7 @@ if (!len(mark)) {
 				<div class="email">#encodeForHtml(request.usr.email)#</div>
 			</button>
 		</div>
-		<div class="card-body">
+		<section>
 			<p class="fs-lg fw-light mb-3">Hello, <span class="profile-firstname">#encodeForHtml(request.usr.firstname)#</span>.</p>
 			<label for="firstname">First name</label>
 			<input type="text" name="firstname" id="firstname" class="form-control" required autofocus
@@ -40,12 +40,12 @@ if (!len(mark)) {
 					<option value="#encodeForHtmlAttribute(wordname)#">#encodeForHtml(wordname)#</option>
 				</cfloop>
 			</select>
-		</div>
-		<div class="card-footer text-end">
+		</section>
+		<footer class="text-end">
 			<button><i class="bi bi-person-check me-1"></i>Save</button>
-		</div>
+		</footer>
 		<input hidden name="id" value="#request.usr.id#">
 	</form>
-</div>
+</article>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

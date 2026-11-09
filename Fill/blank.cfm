@@ -32,13 +32,13 @@ ans = new dbo.proc().exec('ans.where_q',q.qid)
 </cfscript>
 
 <cfoutput query="act">
-<div class="row">
+<row>
 	<div class="lg:col-6 lg:mx-auto">
 		<form class="card">
-			<div class="card-header theme-primary theme-subtle">
+			<header class="theme-primary theme-subtle">
 				#q.qname#
-			</div>
-			<div class="card-body">
+			</header>
+			<section>
 				<cfif len(q.qdesc)>
 					<fieldset>
 						<legend>#ReplaceNoCase(ListFirst(ListLast(q.qdesc,'/'),'.'),'Figure','Figure ')#</legend>
@@ -54,14 +54,14 @@ ans = new dbo.proc().exec('ans.where_q',q.qid)
 						</fieldset>
 					</cfif>
 				</cfloop>
-			</div>
-			<div class="card-footer">
+			</section>
+			<footer>
 				<button name="qid" value="#q.qid#" class="btn-outline theme-success" #disabled#>Next</button>
-			</div>
+			</footer>
 			<input hidden name="actid" value="#form.actid#">
 			<input hidden name="id" value="#request.usr.id#">
 		</form>
 	</div>
-</div>
+</row>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

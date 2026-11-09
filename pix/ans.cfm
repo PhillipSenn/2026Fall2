@@ -60,41 +60,41 @@ if (previous.recordCount && !isNull(previous.ansid)) {
 
 <cfoutput query="act">
 <form id="pix">
-<div class="row">
-	<div class="col-6">
-		<div class="card">
-			<div class="card-header theme-primary theme-subtle">
-				#unanswered.qname#
-			</div>
-			<div class="card-body">
-				<cfloop query="ans">
-					<cfif ansid gt previousAnsid and ansid le unanswered.ansid>
-						<p>#ansname#</p>
-					</cfif>
+	<row>
+		<div class="col-6">
+			<article>
+				<header class="theme-primary theme-subtle">
+					#unanswered.qname#
+				</header>
+				<section>
+					<cfloop query="ans">
+						<cfif ansid gt previousAnsid and ansid le unanswered.ansid>
+							<p>#ansname#</p>
+						</cfif>
+					</cfloop>
+				</section>
+				<footer data-ansid="#unanswered.ansid#">
+					<span class="pix-hint">Drop the picture here</span>
+				</footer>
+			</article>
+		</div>
+		<div class="col-6">
+			<div class="pix-choices pix-side">
+				<cfloop array="#side#" index="pic">
+					<img src="#pic.ansdesc#" data-ansid="#pic.ansid#" class="pix-choice img-thumbnail" draggable="true" alt="">
 				</cfloop>
 			</div>
-			<div class="card-footer" data-ansid="#unanswered.ansid#">
-				<span class="pix-hint">Drop the picture here</span>
-			</div>
 		</div>
+	</row>
+	<div class="pix-choices">
+		<cfloop array="#below#" index="pic">
+			<img src="#pic.ansdesc#" data-ansid="#pic.ansid#" class="pix-choice img-thumbnail" draggable="true" alt="">
+		</cfloop>
 	</div>
-	<div class="col-6">
-		<div class="pix-choices pix-side">
-			<cfloop array="#side#" index="pic">
-				<img src="#pic.ansdesc#" data-ansid="#pic.ansid#" class="pix-choice img-thumbnail" draggable="true" alt="">
-			</cfloop>
-		</div>
-	</div>
-</div>
-<div class="pix-choices">
-	<cfloop array="#below#" index="pic">
-		<img src="#pic.ansdesc#" data-ansid="#pic.ansid#" class="pix-choice img-thumbnail" draggable="true" alt="">
-	</cfloop>
-</div>
-<input hidden name="id" value="#request.usr.id#">
-<input hidden name="actid" value="#actid#">
-<input hidden name="ansid">
-<input hidden name="pixorder" value="#encodeForHTMLAttribute(form.pixorder)#">
+	<input hidden name="id" value="#request.usr.id#">
+	<input hidden name="actid" value="#actid#">
+	<input hidden name="ansid">
+	<input hidden name="pixorder" value="#encodeForHTMLAttribute(form.pixorder)#">
 </form>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

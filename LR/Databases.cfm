@@ -25,12 +25,12 @@ q = queryExecute(
 
 <cfoutput>
 <div class="mx-auto" style="max-width: 1024px">
-	<div class="card">
-		<div class="card-header theme-primary theme-subtle d-flex justify-content-between align-items-center gap-3">
+	<article>
+		<header class="theme-primary theme-subtle d-flex justify-content-between align-items-center gap-3">
 			<span>Type a number to move that database to the top. Databases with no number stay at the bottom, in alphabetical order.</span>
 			<a href="Top5.cfm?actid=#val(form.actid)#">Top 5</a>
-		</div>
-		<div class="card-body">
+		</header>
+		<section>
 			<table id="databases">
 				<thead>
 					<tr>
@@ -56,8 +56,8 @@ q = queryExecute(
 					</cfloop>
 				</tbody>
 			</table>
-		</div>
-	</div>
+		</section>
+	</article>
 </div>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

@@ -4,11 +4,11 @@ include '/Inc/header6.cfm'
 
 <cfoutput query="act">
 <form action="Terms.cfm">
-	<div class="card">
-		<div class="card-header theme-primary theme-subtle">
+	<article>
+		<header class="theme-primary theme-subtle">
 			How would you like to solve this modules's key terms?
-		</div>
-		<div class="card-body">
+		</header>
+		<section>
 			<ul>
 				<li>
 					<a href="../Key2/Terms.cfm?actid=#url.actid#">Key Terms</a>
@@ -20,13 +20,13 @@ include '/Inc/header6.cfm'
 					<a href="../Pac/man.cfm">Pac-Man</a>
 				</li>
 			</ul>
-		</div>
-		<div class="card-footer">
+		</section>
+		<footer>
 			<button>Ready!</button>
-		</div>
+		</footer>
 		<input hidden name="id" value="#request.usr.id#">
 		<input hidden name="actid" value="#actid#">
-	</div>
+	</article>
 </form>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

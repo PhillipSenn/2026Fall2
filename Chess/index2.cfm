@@ -13,16 +13,16 @@ start = {
 </cfscript>
 
 <cfoutput query="act">
-<div class="row">
+<row>
 	<div class="col-8">
-		<div class="card">
-			<div class="card-header theme-primary theme-subtle d-flex justify-content-end align-items-center">
+		<article>
+			<header class="theme-primary theme-subtle d-flex justify-content-end align-items-center">
 				<span class="d-flex gap-2">
 					<button type="button" id="flip" class="btn btn-sm btn-outline theme-secondary">Flip</button>
 					<button type="button" id="reset" class="btn btn-sm btn-outline theme-secondary">Reset</button>
 				</span>
-			</div>
-			<div class="card-body">
+			</header>
+			<section>
 				<div class="board" id="board" aria-label="Chessboard">
 				<cfloop from="8" to="1" index="rank" step="-1">
 					<cfloop from="1" to="8" index="fileN">
@@ -54,13 +54,13 @@ start = {
 					<button type="button" class="btn btn-sm btn-outline theme-secondary" data-type="B"></button>
 					<button type="button" class="btn btn-sm btn-outline theme-secondary" data-type="N"></button>
 				</div>
-			</div>
-		</div>
+			</section>
+		</article>
 	</div>
 	<div class="col-4">
 		<form class="card h-100" action="index3.cfm">
-			<div class="card-header theme-primary theme-subtle">"enforce chess rules"</div>
-			<div class="card-body">
+			<header class="theme-primary theme-subtle">"enforce chess rules"</header>
+			<section>
 index2 now follows chess rules. A piece can only move to a legal square, and only on that side's turn.
 <ul>
 <li>Pawns, knights, bishops, rooks, queens, and kings move by their usual rules.
@@ -69,14 +69,14 @@ index2 now follows chess rules. A piece can only move to a legal square, and onl
 <li>The line under the board shows whose turn it is, and it announces check, checkmate, or stalemate.
 </ul>
 Legal destinations are marked when you select a piece.
-			</div>
-			<div class="card-footer">
+			</section>
+			<footer>
 				<button class="float-end">Next</button>
-			</div>
+			</footer>
 			<input hidden name="actid" value="#actid#">
 			<input hidden name="id" value="#request.usr.id#">
 		</form>
 	</div>
-</div>
+</row>
 </cfoutput>
 <cfinclude template="/Inc/footer6.cfm">

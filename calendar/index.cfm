@@ -6,25 +6,25 @@ include '/Inc/header6.cfm'
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro@3.4.0/styles/core.css">
 
-<div class="row g-4 my-4">
+<row class="g-4 my-4">
 	<div class="col-6">
-		<div class="card h-100">
-			<div class="card-header">Vanilla Calendar Pro</div>
-			<div class="card-body">
+		<article class="h-100">
+			<header>Vanilla Calendar Pro</header>
+			<section>
 				<div id="calendar"></div>
 				<p id="picked" class="mt-3 mb-0">Select a start date and an end date.</p>
-			</div>
-		</div>
+			</section>
+		</article>
 	</div>
 	<div class="col-6">
-		<div class="card h-100">
-			<div class="card-header">Input</div>
-			<div class="card-body">
+		<article class="h-100">
+			<header>Input</header>
+			<section>
 				<label for="calendar-input" class="form-label">Choose a date</label>
 				<input type="text" class="form-control w-12" id="calendar-input">
-			</div>
-		</div>
+			</section>
+		</article>
 	</div>
-</div>
+</row>
 
 <cfinclude template="/Inc/footer6.cfm">

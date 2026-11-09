@@ -12,16 +12,16 @@ start = {
 </cfscript>
 
 <cfoutput query="act">
-<div class="row">
+<row>
 	<div class="col-8">
-		<div class="card">
-			<div class="card-header theme-primary theme-subtle d-flex justify-content-end align-items-center">
+		<article>
+			<header class="theme-primary theme-subtle d-flex justify-content-end align-items-center">
 				<span class="d-flex gap-2">
 					<button type="button" id="flip" class="btn btn-sm btn-outline theme-secondary">Flip</button>
 					<button type="button" id="reset" class="btn btn-sm btn-outline theme-secondary">Reset</button>
 				</span>
-			</div>
-			<div class="card-body">
+			</header>
+			<section>
 				<div class="board" id="board" aria-label="Chessboard">
 				<cfloop from="8" to="1" index="rank" step="-1">
 					<cfloop from="1" to="8" index="fileN">
@@ -53,33 +53,33 @@ start = {
 					<button type="button" class="btn btn-sm btn-outline theme-secondary" data-type="B"></button>
 					<button type="button" class="btn btn-sm btn-outline theme-secondary" data-type="N"></button>
 				</div>
-			</div>
-		</div>
+			</section>
+		</article>
 	</div>
 	<div class="col-4">
 		<form class="card h-100">
-			<div class="card-header theme-primary theme-subtle">"Make this a one-player game"</div>
-			<div class="card-body">
+			<header class="theme-primary theme-subtle">"Make this a one-player game"</header>
+			<section>
 				index3 is now a one-player game. You play the side at the bottom of the board, and the computer plays the side at the top.
 				<ul>
 				<li>After your move, the computer answers with a legal move. It takes a capture when one is available, and otherwise plays any legal move.
 				<li><b>Flip</b> turns the board so you play Black. The computer is White and moves first.
 				<li><b>Flip</b> again, or <b>Reset</b>, puts White back at the bottom and cancels a computer move that has not happened yet.
 				</ul>
-			</div>
-			<div class="card-header theme-primary theme-subtle">"Explain the logic for how the computer decides which move to make next."</div>
-			<div class="card-body">
+			</section>
+			<header class="theme-primary theme-subtle">"Explain the logic for how the computer decides which move to make next."</header>
+			<section>
 				<p>The computer looks only one move ahead. It lists every legal move.
 				<p>If any move is a capture, it chooses only from the captures.
 				<p>It does not rank pieces, so the capture of a pawn is treated the same as the capture of a queen.
-			</div>
-			<div class="card-footer">
+			</section>
+			<footer>
 				<button class="float-end" formaction="index4.cfm">Next</button>
-			</div>
+			</footer>
 			<input hidden name="actid" value="#actid#">
 			<input hidden name="id" value="#request.usr.id#">
 		</form>
 	</div>
-</div>
+</row>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

@@ -25,20 +25,20 @@ species = queryExecute(
 
 <cfoutput query="act">
 <form class="card" action="breed.cfm">
-	<div class="card-header theme-primary theme-subtle">domain: #path.domainname#</div>
-	<div class="card-header theme-primary theme-subtle">kingdom: #path.kingdomname#</div>
-	<div class="card-header theme-primary theme-subtle">phylum: #path.phylumname#</div>
-	<div class="card-header theme-primary theme-subtle">class: #path.classname#</div>
-	<div class="card-header theme-primary theme-subtle">ord: #path.ordname#</div>
-	<div class="card-header theme-primary theme-subtle">family: #path.familyname#</div>
-	<div class="card-header theme-primary theme-subtle">genus: #path.genusname#</div>
-	<div class="card-body">
+	<header class="theme-primary theme-subtle">domain: #path.domainname#</header>
+	<header class="theme-primary theme-subtle">kingdom: #path.kingdomname#</header>
+	<header class="theme-primary theme-subtle">phylum: #path.phylumname#</header>
+	<header class="theme-primary theme-subtle">class: #path.classname#</header>
+	<header class="theme-primary theme-subtle">ord: #path.ordname#</header>
+	<header class="theme-primary theme-subtle">family: #path.familyname#</header>
+	<header class="theme-primary theme-subtle">genus: #path.genusname#</header>
+	<section>
 		<cfloop query="species">
 			<div>
 				<button class="btn-link" name="speciesid" value="#speciesid#">#speciesname#</button>
 			</div>
 		</cfloop>
-	</div>
+	</section>
 	<input hidden name="id" value="#request.usr.id#">
 	<input hidden name="actid" value="#form.actid#">
 </form>

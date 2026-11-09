@@ -304,11 +304,11 @@ function binary(code) {
 </cfscript>
 
 <cfoutput query="act">
-<div class="card">
-	<div class="card-header theme-primary theme-subtle">
+<article>
+	<header class="theme-primary theme-subtle">
 		Extended ASCII
-	</div>
-	<div class="card-body">
+	</header>
+	<section>
 		<p>This is the whole IBM PC code page 437, starting at 0. Codes 0 through 31 are the ASCII control signals, and the PC also stored a picture for each one. Codes 176 through 223 are the box-drawing characters. Programs joined those lines, corners, and shades to draw boxes and menus on the text screen.</p>
 		<table class="table table-sm table-striped mb-0">
 			<thead>
@@ -332,10 +332,10 @@ function binary(code) {
 				</cfloop>
 			</tbody>
 		</table>
-	</div>
-	<div class="card-footer">
+	</section>
+	<footer>
 		<img class="img-fluid" src="https://upload.wikimedia.org/wikipedia/commons/6/69/IBM_PC_5150.jpg">
-	</div>
-</div>
+	</footer>
+</article>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

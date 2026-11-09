@@ -40,19 +40,19 @@ cfloop(query=rows) {
 </cfscript>
 
 <cfoutput>
-<div class="row">
+<row>
 	<cfloop array="#users#" index="person">
 		<div class="col-2">
-			<div class="card h-100">
-				<div class="card-header theme-primary theme-subtle">#encodeForHTML(person.name)#</div>
+			<article class="h-100">
+				<header class="theme-primary theme-subtle">#encodeForHTML(person.name)#</header>
 				<ol class="list-group list-group-numbered list-group-flush">
 					<cfloop array="#person.items#" index="qname">
 						<li class="list-group-item">#encodeForHTML(qname)#</li>
 					</cfloop>
 				</ol>
-			</div>
+			</article>
 		</div>
 	</cfloop>
-</div>
+</row>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

@@ -7,11 +7,11 @@ if (structKeyExists(form,'codePoint')) {
 </cfscript>
 
 <cfoutput query="act">
-<div class="card">
-	<div class="card-header">
+<article>
+	<header>
 		Select Your Character
-	</div>
-	<div class="card-body">
+	</header>
+	<section>
 		<div class="btn-group flex-wrap mb-3" id="emojiCategories">
 
 			<button class="btn-outline theme-primary active"
@@ -77,14 +77,14 @@ if (structKeyExists(form,'codePoint')) {
 			<div id="selectedCharacter" class="fs-5xl fw-light"></div>
 			<div>CodePoint: <span id="textCodePoint"></span></div>
 		</div>
-	</div>
-	<form class="card-footer">
+	</section>
+	<footer><form>
 		<button name="codePoint">
 		Save
 		</button>
 		<input hidden name="actid" value="#actid#">
 		<input hidden name="id" value="#request.usr.id#">
-	</form>
-</div>
+	</form></footer>
+</article>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

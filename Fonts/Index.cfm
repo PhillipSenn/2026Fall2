@@ -73,12 +73,12 @@ function cssGeneric(category) {
 
 <cfoutput>
 <form class="card">
-	<div class="card-header theme-primary theme-subtle">
+	<header class="theme-primary theme-subtle">
 		Which font do you want as your default?
-	</div>
-	<div class="card-body">
+	</header>
+	<section>
 		<div class="font-try">
-			<div class="row">
+			<row>
 				<div class="col">
 					<label for="fontSize">Size</label>
 					<select name="fontSize" id="fontSize" class="form-control">
@@ -104,7 +104,7 @@ function cssGeneric(category) {
 						<button>Save</button>
 					</div>
 				</div>
-			</div>
+			</row>
 		</div>
 		<h2 class="h5 font-section">Built-in fonts</h2>
 		<p class="form-text">These fonts are already on the computer.</p>
@@ -129,10 +129,10 @@ function cssGeneric(category) {
 				</label>
 			</cfloop>
 		</div>
-	</div>
-	<div class="card-footer text-end">
+	</section>
+	<footer class="text-end">
 		<button>Save</button>
-	</div>
+	</footer>
 	<input hidden name="id" value="#request.usr.id#">
 	<input hidden name="actid" value="#form.actid#">
 </form>

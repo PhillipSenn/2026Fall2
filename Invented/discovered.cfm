@@ -20,49 +20,49 @@ answers= new dbo.proc().exec('ans.q_catname',[q.qid,'Possible Answer'])
 </cfscript>
 
 <cfoutput query="act">
-<div class="row">
+<row>
    <div class="col-6">
-      <div class="card">
-         <div class="card-header theme-primary theme-subtle">
+      <article>
+         <header class="theme-primary theme-subtle">
             In #year#, #prefix.ansname# #q.qname# #suffix.ansname#:
-         </div>
-         <div class="card-body">
+         </header>
+         <section>
             <cfif len(img.ansname)>
                <a target="_blank" href="#img.ansname#">
                   <img src="#img.ansname#" class="img-fluid img-thumbnail">
                </a>
             </cfif>
-         </div>
-         <form class="card-footer">
+         </section>
+         <footer><form>
             <input name="ansname" class="form-control" autofocus>
             <img id="ansnamePreview" class="img-fluid img-thumbnail mt-2 d-none" alt="">
             <input hidden name="qid" value="#img.qid#">
             <a target="_blank" href="https://www.google.com/search?tbm=isch&q=#EncodeForURL(year & ' ' & q.qname)#">Google Images</a>
             <button class="float-end">Save</button>
-         </form>
-      </div>
+         </form></footer>
+      </article>
    </div>
    <div class="col-6">
       <form class="card">
-         <div class="card-header">
+         <header>
             &nbsp;
-         </div>
-         <div class="card-body">
+         </header>
+         <section>
             <div class="btn-group" role="group" aria-label="Possible answers">
                <cfloop query="answers">
                   <button name="ansid" class="btn-outline theme-primary" value="#ansid#">#ansname#</button>
                </cfloop>
             </div>
-         </div>
-         <div class="card-footer">
+         </section>
+         <footer>
             See: <a target="_blank" href="https://online.pubhtml5.com/hmeo/wjuj/?1793911589##p=#page.ansname+1#">
                Page #page.ansname#
             </a>
-         </div>
+         </footer>
          <input hidden name="id" value="#request.usr.id#">
          <input hidden name="actid" value="#form.actid#">
       </form>
    </div>
-</div>
+</row>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

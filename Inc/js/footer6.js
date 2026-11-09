@@ -1,3 +1,9 @@
+$('article').addClass('card')
+$('.card > header').addClass('card-header')
+$('.card > section').addClass('card-body')
+$('.card > footer').addClass('card-footer')
+$('row').addClass('row')
+
 var dom = {} // Document Object Model
 
 pgm.init = function() {
@@ -135,14 +141,14 @@ function cfdebug() {
 	var debug = $('table.cfdebug').first()
 	if (!debug.length) return
 	debug.wrap('<div class="container"></div>')
-	debug.wrap('<div class="card"></div>')
+	debug.wrap('<article class="card"></article>')
 	debug.wrap('<div class="collapse" id="cfdebugBody"></div>')
-	debug.wrap('<div class="card-body"></div>')
+	debug.wrap('<section class="card-body"></section>')
 
 	debug.closest('.card').prepend(
-		'<div class="card-header" data-bs-toggle="collapse" data-bs-target="#cfdebugBody">' +
+		'<header data-bs-toggle="collapse" data-bs-target="#cfdebugBody">' +
 			'Debugging Information' +
-		'</div>'
+		'</header>'
 	)
 	$('a[name="cfdebug_top"]').remove()
 	$('style[type="text/css"]').remove()
@@ -151,4 +157,3 @@ function cfdebug() {
 	$('hr').remove()
 	$('.cfdebuglge').remove()
 }
-

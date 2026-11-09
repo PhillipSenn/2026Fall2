@@ -218,11 +218,11 @@ function binary(code) {
 </cfscript>
 
 <cfoutput query="act">
-<div class="card">
-	<div class="card-header">
+<article>
+	<header>
 		American National Standards Institute
-	</div>
-	<div class="card-body">
+	</header>
+	<section>
 		<p><a href="https://en.wikipedia.org/wiki/ANSI_escape_code">ANSI</a> was designed to control a text terminal. A program sent short sequences that moved the cursor, cleared the screen, and set the color and style of the characters that followed.</p>
 		<img class="img-thumbnail" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/DEC_VT100_terminal.jpg/500px-DEC_VT100_terminal.jpg">
 		<p>The character set Windows called ANSI is code page 1252. Codes 0 through 127 are the same ASCII characters. Codes 128 through 255 add punctuation and letters used in Western European languages.</p>
@@ -284,7 +284,7 @@ function binary(code) {
 				</cfloop>
 			</tbody>
 		</table>
-	</div>
-</div>
+	</section>
+</article>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

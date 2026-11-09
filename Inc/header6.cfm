@@ -156,7 +156,7 @@ writeoutput('<body class="' & request.body & '">')
 			<cfset request.progress.color = "bg-success progress-bar-striped progress-bar-animated fw-bold">
 		</cfif>
 		<cfif request.progress.bar>
-			<div class="row">
+			<row>
 				<div class="col">
 					<div class="progress">
 						<div class="progress-bar #request.progress.color#" role="progressbar" 
@@ -168,7 +168,7 @@ writeoutput('<body class="' & request.body & '">')
 						</div>
 					</div>
 				</div>
-			</div>
+			</row>
 		</cfif>
 	</cfif>
 </div>

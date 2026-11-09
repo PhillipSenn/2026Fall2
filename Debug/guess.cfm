@@ -20,8 +20,8 @@ guess = queryexecute(sql, selectedUsrid ? {usrid: {value: selectedUsrid, cfsqlty
 </cfscript>
 
 <cfoutput>
-<div class="card">
-	<div class="card-header theme-primary theme-subtle">
+<article>
+	<header class="theme-primary theme-subtle">
 		<form>
 			<select name="usrid" id="usrid" class="form-control" onchange="this.form.submit()">
 				<option value="">All</option>
@@ -31,8 +31,8 @@ guess = queryexecute(sql, selectedUsrid ? {usrid: {value: selectedUsrid, cfsqlty
 			</select>
 			<input type="hidden" name="id" value="#request.usr.id#">
 		</form>
-	</div>
-	<div class="card-body">
+	</header>
+	<section>
 		<table>
 			<thead>
 				<tr>
@@ -61,7 +61,7 @@ guess = queryexecute(sql, selectedUsrid ? {usrid: {value: selectedUsrid, cfsqlty
 				</cfloop>
 			</tbody>
 		</table>
-	</div>
-</div>
+	</section>
+</article>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

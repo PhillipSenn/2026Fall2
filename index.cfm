@@ -10,20 +10,20 @@ for (band = 1; band <= 10; band++) {
 		title: 'Week ' & band,
 		low: band * 10000,
 		high: band * 10000 + 9999,
-		open: band == 4
+		open: band == 5
 	})
 }
 </cfscript>
 
 <cfoutput>
 <form class="card">
-	<div class="card-header">
+	<header>
 		<div class="btn-group" role="group" aria-label="View">
 			<button name="view" value="accordion" formaction="index.cfm"<cfif listView> class="btn-outline theme-secondary"</cfif>>Focused</button>
 			<button name="view" value="list" formaction="index.cfm?view=list"<cfif !listView> class="btn-outline theme-secondary"</cfif>>List View</button>
 		</div>
-	</div>
-	<div class="card-body">
+	</header>
+	<section>
 		<cfif listView>
 			<a href="toc.cfm?accordion">Table Of Contents (TOC)</a>
 			<table>
@@ -125,11 +125,11 @@ for (band = 1; band <= 10; band++) {
 			</cfloop>
 		</div>
 		</cfif>
-	</div>
+	</section>
 	<cfif request.usr.isAdmin>
-		<div class="card-footer">
+		<footer>
 			<button formaction="Debug/guess.cfm">Guess</button>
-		</div>
+		</footer>
 	</cfif>
 	<input hidden name="id" value="#request.usr.id#">
 </form>

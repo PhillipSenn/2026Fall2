@@ -20,24 +20,24 @@ if (qs.recordCount) {
 </cfscript>
 
 <cfoutput query="act">
-<div class="card">
-	<form class="card-header theme-primary theme-subtle">
+<article>
+	<header class="theme-primary theme-subtle"><form>
 		<cfif qs.recordCount>#qs.qname#</cfif>
 		<button name="reset" class="float-end btn-outline theme-danger">Reset</button>
 		<input hidden name="id" value="#request.usr.id#">
 		<input hidden name="actid" value="#actid#">
-	</form>
-	<div class="card-body">
+	</form></header>
+	<section>
 		<cfif len(imageSrc)>
 			<img src="#encodeForHTMLAttribute(imageSrc)#" class="img-fluid" alt="#encodeForHTMLAttribute(qs.qname)#">
 		</cfif>
 		<cfloop query="ans">
 			<p>#ansname#</p>
 		</cfloop>
-	</div>
-	<div class="card-footer">
+	</section>
+	<footer>
 		<a class="btn" href="ans.cfm?actid=#actid#">Next</a>
-	</div>
-</div>
+	</footer>
+</article>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

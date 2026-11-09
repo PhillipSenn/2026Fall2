@@ -39,7 +39,7 @@ submitted = val(url.submitted ?: 0)
 
     <form id="location" class="location-actions">
 
-        <div class="row align-items-center g-3">
+        <row class="align-items-center g-3">
 
             <div class="col">
                 <div class="fw-semibold">
@@ -61,7 +61,7 @@ submitted = val(url.submitted ?: 0)
                 </button>
             </div>
 
-        </div>
+        </row>
         <input hidden name="actid" value="#form.actid#">
         <input hidden name="guessLat" id="guessLat">
         <input hidden name="guessLng" id="guessLng">

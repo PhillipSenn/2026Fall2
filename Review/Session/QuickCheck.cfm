@@ -17,11 +17,11 @@ if (q.recordCount) {
 <cfoutput query="act">
 <cfif q.recordcount>
 	<form class="card flex-grow-1">
-		<div class="card-header theme-primary theme-subtle">
+		<header class="theme-primary theme-subtle">
 			Question #qs.recordcount-q.recordCount+1#/#qs.recordCount#
-		</div>
-		<div class="card-body">
-			<div class="row">
+		</header>
+		<section>
+			<row>
 				<div class="col-6" id="qname">
 					#q.qname#
 				</div>
@@ -33,14 +33,14 @@ if (q.recordCount) {
 								<svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m2 5 6 6 6-6"/></svg>
 							</summary>
 							<div class="accordion-body">
-								<div class="card">
-									<div class="card-body" id="ansname"></div>
-									<div class="card-footer">
+								<article>
+									<section id="ansname"></section>
+									<footer>
 										<button name="qid" value="#q.qid#" class="mt-2">Save</button>
-									</div>
-									<div class="card-body" id="imgname">
-									</div>
-								</div>
+									</footer>
+									<section id="imgname">
+									</section>
+								</article>
 							</div>
 						</details>
 						<details class="accordion-item" name="answers">
@@ -49,33 +49,33 @@ if (q.recordCount) {
 								<svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m2 5 6 6 6-6"/></svg>
 							</summary>
 							<div class="accordion-body">
-								<div class="card">
-									<div class="card-body">
+								<article>
+									<section>
 										#ans.ansname#
-									</div>
-									<div class="card-footer">
+									</section>
+									<footer>
 										<button name="qid" value="#q.qid#" class="mt-2">Save</button>
-									</div>
-								</div>
+									</footer>
+								</article>
 							</div>
 						</details>
 					</div>
 				</div>
-			</div>
-		</div>
+			</row>
+		</section>
 		<input hidden name="actid" value="#form.actid#">
 		<input hidden name="id" value="#request.usr.id#">
 	</form>
 	<div hidden id="catname">#cat.catname#</div>
 <cfelse>
 	<form class="card">
-		<div class="card-header theme-primary theme-subtle">
+		<header class="theme-primary theme-subtle">
 			You did it!
 			<button class="float-end btn-outline theme-danger" name="actid" value="#actid#" formaction="reset.cfm">Reset</a>
-		</div>
-		<div class="card-body">
+		</header>
+		<section>
 			<button class="theme-success" formaction="#request.home#">Finished!</button>
-		</div>
+		</section>
 		<input hidden name="id" value="#request.usr.id#">
 	</form>
 </cfif>

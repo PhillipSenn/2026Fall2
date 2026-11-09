@@ -25,7 +25,7 @@ for (i = arrayLen(choices); i > 1; i--) {
 
 <cfoutput query="act">
 <form class="card">
-	<div class="card-header theme-primary theme-subtle">
+	<header class="theme-primary theme-subtle">
 		<cfif grade.earned ge 100>
 			<button class="float-end btn-outline theme-danger" name="reset">Reset</button>
 			<input hidden name="id" value="#request.usr.id#">
@@ -33,9 +33,9 @@ for (i = arrayLen(choices); i > 1; i--) {
 		<cfelse>
 			Click a shortcut and what it does, in either order.
 		</cfif>
-	</div>
-	<div class="card-body">
-		<div class="row g-3">
+	</header>
+	<section>
+		<row class="g-3">
 			<div class="md:col-4" id="questions">
 				<cfloop query="ans">
 					<cfset matched = structKeyExists(guessed, ans.ansid)>
@@ -52,8 +52,8 @@ for (i = arrayLen(choices); i > 1; i--) {
 						<cfif matched>disabled</cfif>>#encodeForHtml(choice.ansname)#</button>
 				</cfloop>
 			</div>
-		</div>
-	</div>
+		</row>
+	</section>
 </form>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

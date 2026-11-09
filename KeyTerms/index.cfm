@@ -4,23 +4,23 @@ include '/Inc/header6.cfm'
 
 <cfoutput query="act">
 <form action="setup.cfm">
-	<div class="card">
-		<div class="card-header theme-primary theme-subtle">
-		</div>
-		<div class="card-body">
+	<article>
+		<header class="theme-primary theme-subtle">
+		</header>
+		<section>
 			Let's setup the key terms first.
-		</div>
-	</div>
-	<div class="card">
-		<div class="card-body">
+		</section>
+	</article>
+	<article>
+		<section>
 			#actdesc#
-		</div>
-		<div class="card-footer">
+		</section>
+		<footer>
 			<button>Ready!</button>
-		</div>
+		</footer>
 		<input hidden name="id" value="#request.usr.id#">
 		<input hidden name="actid" value="#actid#">
-	</div>
+	</article>
 </form>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

@@ -5,11 +5,11 @@ geoguessr = new dbo.proc().usr('geoguessr.list')
 </cfscript>
 
 <cfoutput>
-<div class="card">
-    <div class="card-header theme-primary theme-subtle">
+<article>
+    <header class="theme-primary theme-subtle">
         Locations
-    </div>
-    <div class="card-body">
+    </header>
+    <section>
         <table>
             <thead>
                 <tr>
@@ -38,10 +38,10 @@ geoguessr = new dbo.proc().usr('geoguessr.list')
                 </cfloop>
             </tbody>
         </table>
-    </div>
-    <div class="card-footer">
+    </section>
+    <footer>
         <a class="btn" href="create.cfm?actid=344">Create a new one</a>
-    </div>
-</div>
+    </footer>
+</article>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

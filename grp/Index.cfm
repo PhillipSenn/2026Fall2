@@ -4,8 +4,8 @@ act = new dbo.proc().usr('act.where_grp', act.grpid)
 </cfscript>
 
 <cfoutput>
-<div class="card">
-	<div class="card-body">
+<article>
+	<section>
 		<table>
 			<thead>
 				<tr>
@@ -28,7 +28,7 @@ act = new dbo.proc().usr('act.where_grp', act.grpid)
 				</tr>
 			</cfloop>
 		</table>
-	</div>
-</div>
+	</section>
+</article>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

@@ -141,28 +141,28 @@ include '/Inc/header6.cfm';
 </cfscript>
 
 <cfoutput query="act">
-<div class="card">
-	<div class="card-header theme-primary theme-subtle">
-	</div>
-	<div class="card-body p-0">
-		<div class="row g-0 h-100">
+<article>
+	<header class="theme-primary theme-subtle">
+	</header>
+	<section class="p-0">
+		<row class="g-0 h-100">
 			<div class="col-3">
 				<div id="sql-stmt"></div>
 			</div>
 			<div id="rel-canvas" class="col-9"></div>
-		</div>
-	</div>
-	<div class="card-footer">
-		<div class="row g-0">
+		</row>
+	</section>
+	<footer>
+		<row class="g-0">
 			<div id="rel-fields" class="col-3" aria-label="Fields">
 				<p class="rel-fields-hint">Drop fields here</p>
 			</div>
 			<div class="col-9">
 				<table id="rel-results"></table>
 			</div>
-		</div>
-	</div>
-</div>
+		</row>
+	</footer>
+</article>
 <script type="application/json" id="rel-data">#relJson#</script>
 <cfloop array="#lookupTables#" index="table">
 	<cfset lookup = rows[table.id]>

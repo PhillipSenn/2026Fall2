@@ -210,32 +210,32 @@ if (isNull(artifacts) || !isArray(artifacts)) {
         </div>
     </cfif>
 
-    <div class="row g-3">
+    <row class="g-3">
 
         <!--- First column: Artifact --->
         <div class="col-6">
-            <div class="card h-100">
+            <article class="h-100">
 
-                <div class="card-header">
+                <header>
                     <h2 id="artifactTitle" class="met-title mb-0"></h2>
-                </div>
+                </header>
 
-                <div class="card-body met-image-container">
+                <section class="met-image-container">
                     <img
                         id="artifactImage"
                         class="met-image"
                         alt=""
                     >
-                </div>
+                </section>
 
-            </div>
+            </article>
         </div>
 
         <!--- Second column: Navigation and details --->
         <div class="col-6">
-            <div class="card h-100">
+            <article class="h-100">
 
-                <div class="card-header">
+                <header>
                     <div class="met-navigation">
 
                         <button
@@ -257,9 +257,9 @@ if (isNull(artifacts) || !isArray(artifacts)) {
                         </button>
 
                     </div>
-                </div>
+                </header>
 
-                <div class="card-body">
+                <section>
 
                     <dl
                         class="row met-details"
@@ -277,17 +277,17 @@ if (isNull(artifacts) || !isArray(artifacts)) {
                         </a>
                     </div>
 
-                </div>
+                </section>
 
-                <div class="card-footer text-body-secondary">
+                <footer class="text-body-secondary">
                     Collection data provided by
                     The Metropolitan Museum of Art.
-                </div>
+                </footer>
 
-            </div>
+            </article>
         </div>
 
-    </div>
+    </row>
 </div>
 
 <div id="metArtifacts" hidden>

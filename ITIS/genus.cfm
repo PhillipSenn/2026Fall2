@@ -24,19 +24,19 @@ genus = queryExecute(
 
 <cfoutput query="act">
 <form class="card" action="species.cfm">
-	<div class="card-header theme-primary theme-subtle">domain: #path.domainname#</div>
-	<div class="card-header theme-primary theme-subtle">kingdom: #path.kingdomname#</div>
-	<div class="card-header theme-primary theme-subtle">phylum: #path.phylumname#</div>
-	<div class="card-header theme-primary theme-subtle">class: #path.classname#</div>
-	<div class="card-header theme-primary theme-subtle">ord: #path.ordname#</div>
-	<div class="card-header theme-primary theme-subtle">family: #path.familyname#</div>
-	<div class="card-body">
+	<header class="theme-primary theme-subtle">domain: #path.domainname#</header>
+	<header class="theme-primary theme-subtle">kingdom: #path.kingdomname#</header>
+	<header class="theme-primary theme-subtle">phylum: #path.phylumname#</header>
+	<header class="theme-primary theme-subtle">class: #path.classname#</header>
+	<header class="theme-primary theme-subtle">ord: #path.ordname#</header>
+	<header class="theme-primary theme-subtle">family: #path.familyname#</header>
+	<section>
 		<cfloop query="genus">
 			<div>
 				<button class="btn-link" name="genusid" value="#genusid#">#genusname#</button>
 			</div>
 		</cfloop>
-	</div>
+	</section>
 	<input hidden name="id" value="#request.usr.id#">
 	<input hidden name="actid" value="#form.actid#">
 </form>

@@ -19,14 +19,14 @@ kingdom = queryExecute(
 
 <cfoutput query="act">
 <form class="card" action="phylum.cfm">
-	<div class="card-header theme-primary theme-subtle">domain: #path.domainname#</div>
-	<div class="card-body">
+	<header class="theme-primary theme-subtle">domain: #path.domainname#</header>
+	<section>
 		<cfloop query="kingdom">
 			<div>
 				<button class="btn-link" name="kingdomid" value="#kingdomid#">#kingdomname#</button>
 			</div>
 		</cfloop>
-	</div>
+	</section>
 	<input hidden name="id" value="#request.usr.id#">
 	<input hidden name="actid" value="#form.actid#">
 </form>

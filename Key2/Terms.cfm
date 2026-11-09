@@ -18,14 +18,14 @@ cfloop(query=finishedPoll) {
 </cfscript>
 
 <cfoutput query="act">
-<div class="card">
-	<form class="card-header theme-primary theme-subtle">
+<article>
+	<header class="theme-primary theme-subtle"><form>
 		<button class="float-end">Pass</button>
 		<input hidden name="id" value="#request.usr.id#">
 		<input hidden name="actid" value="#actid#">
-	</form>
-	<div class="card-body">
-		<div class="row">
+	</form></header>
+	<section>
+		<row>
 			<div id="key-term-prompt" class="col-8">
 				<div id="qid"></div>
 				<figure class="border ps-4">
@@ -40,7 +40,7 @@ cfloop(query=finishedPoll) {
 					<div class="mb-2"><button class="btn-outline theme-primary<cfif structKeyExists(finished, qid)> d-none</cfif>" value="#qid#">#qname#</button></div>
 				</cfloop>
 			</div>
-		</div>
+		</row>
 		<table id="qids" class="d-none">
 			<thead>
 				<tr>
@@ -59,7 +59,7 @@ cfloop(query=finishedPoll) {
 				</cfloop>
 			</tbody>
 		</table>
-	</div>
-</div>
+	</section>
+</article>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

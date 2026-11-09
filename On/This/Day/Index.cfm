@@ -830,14 +830,14 @@ for (section in sections) {
 </aside>
 <div class="otd-main">
 	<p class="otd-status" role="status"></p>
-	<div class="card mb-3">
+	<article class="mb-3">
 		<cfif len(errorMessage) || len(wikiMessage)>
-			<div class="card-body">
+			<section>
 				<cfif len(wikiMessage)><p class="mb-0">#encodeForHTML(wikiMessage)#</p></cfif>
 				<cfif len(errorMessage)><p class="mb-0">#encodeForHTML(errorMessage)#</p></cfif>
-			</div>
+			</section>
 		</cfif>
-	</div>
+	</article>
 
 <cfif !len(errorMessage)>
 	<div class="accordion">

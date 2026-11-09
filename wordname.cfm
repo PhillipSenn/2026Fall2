@@ -9,12 +9,12 @@ word = new dbo.proc().exec('word.random20')
 </cfscript>
 
 <cfoutput>
-<div class="card shadow">
-	<div class="card-header theme-primary theme-subtle">
+<article class="shadow">
+	<header class="theme-primary theme-subtle">
 		Choose a password.
-	</div>
+	</header>
 	<form>
-		<div class="card-body">
+		<section>
 			<div>
 				<cfloop query="word">
 					<button name="wordname" value="#wordname#">
@@ -22,9 +22,9 @@ word = new dbo.proc().exec('word.random20')
 					</button>
 				</cfloop>
 			</div>
-		</div>
+		</section>
 		<input type="hidden" name="id" value="#request.usr.id#">
 	</form>
-</div>
+</article>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

@@ -7,16 +7,16 @@ rows = [1, 2, 3, 4, 13, 12, 11, 10, 9, 10, 11, 12, 13, 4, 3, 2, 1];
 </cfscript>
 
 <cfoutput query="act">
-<div class="row">
+<row>
 	<div class="col-8">
-		<div class="card">
-			<div class="card-header theme-primary theme-subtle d-flex justify-content-end align-items-center">
+		<article>
+			<header class="theme-primary theme-subtle d-flex justify-content-end align-items-center">
 				<span class="d-flex gap-2">
 					<button type="button" id="flip" class="btn btn-sm btn-outline theme-secondary">Flip</button>
 					<button type="button" id="reset" class="btn btn-sm btn-outline theme-secondary">Reset</button>
 				</span>
-			</div>
-			<div class="card-body">
+			</header>
+			<section>
 				<div class="star" id="board" aria-label="Chinese checkers board">
 					<cfloop from="1" to="#arrayLen(rows)#" index="row">
 						<cfset count = rows[row]>
@@ -51,22 +51,22 @@ rows = [1, 2, 3, 4, 13, 12, 11, 10, 9, 10, 11, 12, 13, 4, 3, 2, 1];
 						</div>
 					</cfloop>
 				</div>
-			</div>
-		</div>
+			</section>
+		</article>
 	</div>
 	<div class="col-4">
 		<form class="card h-100">
-			<div class="card-header theme-primary theme-subtle">"Create a Chinese Checkers board"</div>
-			<div class="card-body">
-			</div>
-			<div class="card-footer">
+			<header class="theme-primary theme-subtle">"Create a Chinese Checkers board"</header>
+			<section>
+			</section>
+			<footer>
 				<button class="float-end" formaction="Checkers2.cfm">Next</button>
-			</div>
+			</footer>
 			<input hidden name="actid" value="#actid#">
 			<input hidden name="id" value="#request.usr.id#">
 		</form>
 	</div>
-</div>
+</row>
 
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

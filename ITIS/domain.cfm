@@ -12,16 +12,16 @@ domain = queryExecute(
 
 <cfoutput query="act">
 <form class="card" action="kingdom.cfm">
-	<div class="card-body">
+	<section>
 		<cfloop query="domain">
 			<div>
 				<button class="btn-link" name="domainid" value="#domainid#">#domainname#</button>
 			</div>
 		</cfloop>
-	</div>
+	</section>
 	<input hidden name="id" value="#request.usr.id#">
 	<input hidden name="actid" value="#form.actid#">
-	<div class="card-footer"><pre>
+	<footer><pre>
 Human:  Eukaryota → Animalia → Chordata → Mammalia → Primates → Hominidae → Homo → Homo sapiens
 Dog:    Eukaryota → Animalia → Chordata → Mammalia → Carnivora → Canidae → Canis → Canis familiaris
 Cat:    Eukaryota → Animalia → Chordata → Mammalia → Carnivora → Felidae → Felis → Felis catus
@@ -35,7 +35,7 @@ Ducks:  Eukaryota → Animalia → Chordata → Aves → Anseriformes → Anatid
 Muscovy 
 Ducks:  Eukaryota → Animalia → Chordata → Aves → Anseriformes → Anatidae → Anas → Cairina moschata
 </pre>
-	</div>
+	</footer>
 </form>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

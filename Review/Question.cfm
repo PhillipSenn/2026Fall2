@@ -12,11 +12,11 @@ if (q.recordcount) {
 <cfoutput query="act">
 <form class="card">
 	<cfif q.recordcount>
-		<div class="card-header theme-primary theme-subtle">
+		<header class="theme-primary theme-subtle">
 			Review Questions
-		</div>
-		<div class="card-body">
-			<div class="row">
+		</header>
+		<section>
+			<row>
 				<div class="col-4 d-flex xalign-items-centerx h4" id="qname">
 					#q.qname#
 				</div>
@@ -35,22 +35,22 @@ if (q.recordcount) {
 						<img id="qdesc" src="#q.qdesc#" class="img-fluid">
 					</cfif>
 				</div>
-			</div>
-		</div>
-		<div class="card-footer">
+			</row>
+		</section>
+		<footer>
 			<textarea autofocus name="guessname"></textarea>
-		</div>
+		</footer>
 	<cfelse>
-		<div class="card-header theme-primary theme-subtle">
+		<header class="theme-primary theme-subtle">
 			Review Questions
 			<button class="float-end btn-outline theme-danger" formaction="reset.cfm">Reset</button>
-		</div>
-		<div class="card-body fs-6xl fw-light">
+		</header>
+		<section class="fs-6xl fw-light">
 			You did it!
-		</div>
-		<div class="card-footer">
+		</section>
+		<footer>
 			<button formaction="questions.cfm" class="theme-success">Finished!</button>
-		</div>
+		</footer>
 	</cfif>
 	<input hidden name="actid" value="#form.actid#">
 	<input hidden id="qid" value="#q.qid#">

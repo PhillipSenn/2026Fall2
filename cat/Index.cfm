@@ -4,10 +4,10 @@ cat = new dbo.proc().usr('act.where_cat', act.catid)
 </cfscript>
 
 <cfoutput query="act">
-<div class="card">
-	<div class="card-header theme-primary theme-subtle">
-	</div>
-	<div class="card-body">
+<article>
+	<header class="theme-primary theme-subtle">
+	</header>
+	<section>
 		<table>
 			<thead>
 				<tr>
@@ -30,7 +30,7 @@ cat = new dbo.proc().usr('act.where_cat', act.catid)
 				</tr>
 			</cfloop>
 		</table>
-	</div>
-</div>
+	</section>
+</article>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

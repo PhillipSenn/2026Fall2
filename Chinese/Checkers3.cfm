@@ -7,17 +7,17 @@ rows = [1, 2, 3, 4, 13, 12, 11, 10, 9, 10, 11, 12, 13, 4, 3, 2, 1];
 </cfscript>
 
 <cfoutput query="act">
-<div class="row">
+<row>
 	<div class="col-8">
-		<div class="card">
-			<div class="card-header theme-primary theme-subtle d-flex justify-content-end align-items-center">
+		<article>
+			<header class="theme-primary theme-subtle d-flex justify-content-end align-items-center">
 				<span class="d-flex gap-2">
 					<button type="button" id="end" class="btn btn-sm btn-outline theme-secondary" hidden>End turn</button>
 					<button type="button" id="flip" class="btn btn-sm btn-outline theme-secondary">Flip</button>
 					<button type="button" id="reset" class="btn btn-sm btn-outline theme-secondary">Reset</button>
 				</span>
-			</div>
-			<div class="card-body">
+			</header>
+			<section>
 				<div class="star" id="board" aria-label="Chinese checkers board">
 					<cfloop from="1" to="#arrayLen(rows)#" index="row">
 						<cfset count = rows[row]>
@@ -29,13 +29,13 @@ rows = [1, 2, 3, 4, 13, 12, 11, 10, 9, 10, 11, 12, 13, 4, 3, 2, 1];
 					</cfloop>
 				</div>
 				<p id="status" class="text-center fg-2 mb-0 mt-3">Red to move.</p>
-			</div>
-		</div>
+			</section>
+		</article>
 	</div>
 	<div class="col-4">
 		<form class="card h-100">
-			<div class="card-header theme-primary theme-subtle">How many players?</div>
-			<div class="card-body">
+			<header class="theme-primary theme-subtle">How many players?</header>
+			<section>
 				<div class="d-flex flex-wrap gap-2" id="players">
 					<button type="button" class="btn btn-solid theme-secondary" data-players="2">2</button>
 					<button type="button" class="btn btn-outline theme-secondary" data-players="3">3</button>
@@ -44,15 +44,15 @@ rows = [1, 2, 3, 4, 13, 12, 11, 10, 9, 10, 11, 12, 13, 4, 3, 2, 1];
 				</div>
 				<p class="mt-3 mb-2">Each player moves one marble into the point across the board. Drag a marble onto a highlighted hole, or click the marble and then the hole. A turn is one step into a neighboring hole, or a chain of jumps over adjacent marbles. Jumped marbles stay on the board. A marble that has entered its opposite point stays inside that point.</p>
 				<p class="mb-0" id="setup-note">2 play from opposite points. 3 play from every other point. 4 play as two pairs of opposites. 6 use every point.</p>
-			</div>
-			<div class="card-footer">
+			</section>
+			<footer>
 				<button class="float-end" formaction="Checkers4.cfm">Next</button>
-			</div>
+			</footer>
 			<input hidden name="actid" value="#actid#">
 			<input hidden name="id" value="#request.usr.id#">
 		</form>
 	</div>
-</div>
+</row>
 
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

@@ -35,7 +35,7 @@ ans = new dbo.proc().exec('ans.where_q',poll.qid)
    </div>
 
    <form id="location" class="location-actions">
-      <div class="row">
+      <row>
          <div class="col">
             <textarea autofocus class="form-control"
                   id="locationName"
@@ -45,7 +45,7 @@ ans = new dbo.proc().exec('ans.where_q',poll.qid)
          <div id="coordinates" class="col">
             Loading Street View...
          </div>
-      </div>
+      </row>
 
       <input type="hidden" name="lat">
       <input type="hidden" name="lng">

@@ -4,8 +4,8 @@ include '/Inc/header6.cfm'
 
 <cfoutput>
 <form class="card">
-	<div class="card-body">
-		<div class="row">
+	<section>
+		<row>
 			<div class="col-6">
 				<a href="https://faculty.cengage.com/works/9780357671993?q=contents">From the Textbook</a>:
 			</div>
@@ -28,7 +28,7 @@ include '/Inc/header6.cfm'
 				</cfif>
 				</div>
 			</div>
-		</div>
+		</row>
 		<ul>
 			 <li>Cover Page
 				<ul>
@@ -3937,7 +3937,7 @@ include '/Inc/header6.cfm'
 			</ul>
 		</li>
 	</ul>
-	</div>
+	</section>
 	<input hidden name="id" value="#request.usr.id#">
 </form>
 <cfinclude template="/Inc/footer6.cfm">

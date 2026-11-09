@@ -4,11 +4,11 @@ include '/Inc/header6.cfm'
 </cfscript>
 
 <cfoutput query="act">
-<div class="card">
-    <div class="card-header">
+<article>
+    <header>
         actid: #actid#
-    </div>
-    <div class="card-body">
+    </header>
+    <section>
         <table>
             <thead>
                 <tr>
@@ -27,7 +27,7 @@ include '/Inc/header6.cfm'
                 </cfloop>
             </tbody>
         </table>
-    </div>
-</div>
+    </section>
+</article>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

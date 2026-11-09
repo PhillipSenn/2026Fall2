@@ -5,10 +5,10 @@ include '/Inc/header6.cfm'
 </cfscript>
 
 <cfoutput>
-<div class="card">
+<article>
 	<cfinclude template="/Inc/card-header.cfm">
-</div>
-<div class="row mx-0">
+</article>
+<row class="mx-0">
 	<div class="col-1 playarea freeParking">
 		<div class="property">FREE PARKING</div>
 	</div>
@@ -48,8 +48,8 @@ include '/Inc/header6.cfm'
 	<div class="col-1 playarea gotoJail">
 		<div class="property">GO TO JAIL</div>
 	</div>
-</div>
-<div class="row mx-0 h100">
+</row>
+<row class="mx-0 h100">
 	<div class="col-1 playarea">
 		<span class="rightHeader orange">&nbsp;</span>
 		<div class="property">NEW YORK AVENUE</div>
@@ -61,8 +61,8 @@ include '/Inc/header6.cfm'
 		<span class="leftHeader green">&nbsp;</span>
 		<div class="property">PACIFIC AVENUE</div>
 	</div>
-</div>
-<div class="row mx-0 h100">
+</row>
+<row class="mx-0 h100">
 	<div class="col-1 playarea">
 		<span class="rightHeader orange">&nbsp;</span>
 		<div class="property">TENN ESSEE AVENUE</div>
@@ -74,8 +74,8 @@ include '/Inc/header6.cfm'
 		<span class="leftHeader green">&nbsp;</span>
 		<div class="property">NORTH CAROLINA AVENUE</div>
 	</div>
-</div>
-<div class="row mx-0 h100">
+</row>
+<row class="mx-0 h100">
 	<div class="col-1 playarea communityChest">
 		<div class="property">COMMUNITY CHEST</div>
 	</div>
@@ -84,8 +84,8 @@ include '/Inc/header6.cfm'
 	<div class="col-1 playarea communityChest">
 		<div class="property">COMMUNITY CHEST</div>
 	</div>
-</div>
-<div class="row mx-0 h100">
+</row>
+<row class="mx-0 h100">
 	<div class="col-1 playarea">
 		<span class="rightHeader orange">&nbsp;</span>
 		<div class="property">ST. JAMES PLACE</div>
@@ -95,8 +95,8 @@ include '/Inc/header6.cfm'
 		<span class="leftHeader green">&nbsp;</span>
 		<div class="property">PENN SYLVANIA AVENUE</div>
 	</div>
-</div>
-<div class="row mx-0 h100">
+</row>
+<row class="mx-0 h100">
 	<div class="col-1 playarea railroad2">
 		<div class="property">PENN SYLVANIA RAILROAD</div>
 	</div>
@@ -104,8 +104,8 @@ include '/Inc/header6.cfm'
 	<div class="col-1 playarea railroad4">
 		<div class="property">SHORT LINE</div>
 	</div>
-</div>
-<div class="row mx-0 h100">
+</row>
+<row class="mx-0 h100">
 	<div class="col-1 playarea">
 		<span class="rightHeader pink">&nbsp;</span>
 		<div class="property">VIRGINIA AVENUE</div>
@@ -114,8 +114,8 @@ include '/Inc/header6.cfm'
 	<div class="col-1 playarea chance3">
 		<div class="property">CHANCE</div>
 	</div>
-</div>
-<div class="row mx-0 h100">
+</row>
+<row class="mx-0 h100">
 	<div class="col-1 playarea">
 		<span class="rightHeader pink">&nbsp;</span>
 		<div class="property">STATES AVENUE</div>
@@ -125,8 +125,8 @@ include '/Inc/header6.cfm'
 		<span class="leftHeader blue">&nbsp;</span>
 		<div class="property">PARK PLACE</div>
 	</div>
-</div>
-<div class="row mx-0 h100">
+</row>
+<row class="mx-0 h100">
 	<div class="col-1 playarea electricCompany">
 		<div class="property">ELECTRIC COMPANY</div>
 	</div>
@@ -134,14 +134,14 @@ include '/Inc/header6.cfm'
 	<div class="col-1 playarea luxuryTax">
 		<div class="property">LUXURY TAX</div>
 	</div>
-</div>
-<div class="row mx-0 h100">
+</row>
+<row class="mx-0 h100">
 	<div class="col-1 playarea">
 		<span class="rightHeader pink">&nbsp;</span>
 		<div class="property">ST. CHARLES PLACE</div>
 	</div>
 	<div class="col-9">
-		<div class="row text-center">
+		<row class="text-center">
 			<div class="col-1 offset-2">
 				<img src="gif/battleship.gif" class="draggable" width="50px">
 			</div>
@@ -186,14 +186,14 @@ include '/Inc/header6.cfm'
 				<img src="gif/guitar.gif" class="img-fluid">
 			</div>
 			--->
-		</div>
+		</row>
 	</div>
 	<div class="col-1 playarea">
 		<span class="leftHeader blue">&nbsp;</span>
 		<div class="property">BOARD WALK</div>
 	</div>
-</div>
-<div class="row mx-0 h150">
+</row>
+<row class="mx-0 h150">
 	<div class="col-1 playarea jail">
 		<div class="property">JUST VISITING</div>
 	</div>
@@ -232,6 +232,6 @@ include '/Inc/header6.cfm'
 	<div id="GO" class="col-1 playarea">
 		<div class="property">GO</div>
 	</div>
-</div>
+</row>
 </cfoutput>
 <cfinclude template="/Inc/footer6.cfm">

@@ -3,9 +3,9 @@ include '/Inc/header6.cfm'
 </cfscript>
 
 <cfoutput query="act">
-<div class="card" id="unicode-viewer">
-	<div class="card-body">
-		<div class="row">
+<article id="unicode-viewer">
+	<section>
+		<row>
 			<div class="col-3">
 				<div class="rendered-row">
 					<p id="rendered" class="unicode-text" hidden></p>
@@ -34,8 +34,8 @@ include '/Inc/header6.cfm'
 					<div id="blocks" class="btn-group flex-wrap" role="group" aria-label="Unicode blocks"></div>
 				</div>
 			</div>
-		</div>
-	</div>
-</div>
+		</row>
+	</section>
+</article>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

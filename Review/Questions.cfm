@@ -49,11 +49,11 @@ tscore = 0
 
 <cfoutput query="act">
 <form class="card">
-	<div class="card-header theme-primary theme-subtle">
+	<header class="theme-primary theme-subtle">
 		Review Questions
 		<button class="btn-sm float-end btn-outline theme-danger" formaction="reset.cfm">Reset</button>
-	</div>
-	<div class="card-body">
+	</header>
+	<section>
 		<table class="table-bordered table-striped table-hover align-middle">
 			<thead>
 				<tr>
@@ -130,9 +130,9 @@ tscore = 0
 				</tr>
 			</tfoot>
 		</table>
-	</div>
-	<div class="card-footer">
-	</div>
+	</section>
+	<footer>
+	</footer>
 	<input hidden name="actid" value="#form.actid#">
 	<input hidden name="id" value="#request.usr.id#">
 </form>

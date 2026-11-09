@@ -19,13 +19,13 @@ writedump(cat)
 
 <cfoutput query="act">
 <form class="card">
-	<div class="card-header theme-primary theme-subtle">
-	</div>
-	<div class="card-body">
+	<header class="theme-primary theme-subtle">
+	</header>
+	<section>
 		<cfif unanswered.recordcount>
-			<div id="unanswered" class="row">
+			<row id="unanswered">
 				<div class="col-8">
-					<div class="row" id="slider">
+					<row id="slider">
 						<div class="col-8 h3">
 						</div>
 						<div class="col-4">
@@ -40,7 +40,7 @@ writedump(cat)
 							</figure>
 --->
 						</div>
-					</div>
+					</row>
 				</div>
 				<div class="col-4">
 					<cfloop query="keyTerms">
@@ -48,7 +48,7 @@ writedump(cat)
 						<button type="button" class="btn-outline theme-primary d-block mb-2 keyTerm#qid#" value="#qid#">#qname#</button>
 					</cfloop>
 				</div>
-			</div>
+			</row>
 		</cfif>
 		<table id="all" class="d-none">
 			<thead>
@@ -68,7 +68,7 @@ writedump(cat)
 				</cfloop>
 			</tbody>
 		</table>
-	</div>
+	</section>
 	<input hidden name="id" value="#request.usr.id#">
 </form>
 <div>

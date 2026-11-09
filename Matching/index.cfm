@@ -4,22 +4,22 @@ include '/Inc/header6.cfm'
 
 <cfoutput query="act">
 <div action="matching.cfm">
-	<div class="card">
-		<div class="card-header theme-primary theme-subtle">
-		</div>
-		<div class="card-body">
+	<article>
+		<header class="theme-primary theme-subtle">
+		</header>
+		<section>
 			I'm trying to make this course a little better than reading a textbook, so pick a keyword on the left and it's description on the right.
 			<p>Or the description first and then find its keyword.</p>
-		</div>
-	</div>
-	<div class="card">
-		<div class="card-body">
+		</section>
+	</article>
+	<article>
+		<section>
 			#actdesc#
-		</div>
-		<div class="card-footer">
+		</section>
+		<footer>
 			<a class="btn" href="matching.cfm?actid=#actid#">Ready!</a>
-		</div>
-	</div>
+		</footer>
+	</article>
 </div>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

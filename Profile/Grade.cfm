@@ -6,10 +6,10 @@ act = new dbo.proc().usr('act.where_usr')
 
 <cfoutput>
 <form class="card">
-	<div class="card-header bg-info-subtle">
+	<header class="bg-info-subtle">
 		An email has been sent to #request.usr.email#
-	</div>
-	<div class="card-body">
+	</header>
+	<section>
 		<button class="btn-link" formaction="toc.cfm?accordion">Table Of Contents (TOC)</button>
 		<cfsavecontent variable="str">
 		<table>
@@ -45,7 +45,7 @@ act = new dbo.proc().usr('act.where_usr')
 		</cfsavecontent>
 		#str#
 
-	</div>
+	</section>
 	<input hidden name="id" value="#request.usr.id#">
 </div>
 <cfset str = request.usr.firstname & ':<p>' & str & '</p>'

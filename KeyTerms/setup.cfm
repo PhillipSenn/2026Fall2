@@ -17,20 +17,20 @@ ans = new dbo.proc().exec('ans.where_q',q.qid)
 	text-decoration-line: underline;
 }
 </style>
-<div class="card">
-	<div class="card-header theme-primary theme-subtle fs-3xl fw-light">
+<article>
+	<header class="theme-primary theme-subtle fs-3xl fw-light">
 		#q.qname#
 		<div class="float-end">
 			#qs.recordCount-q.recordCount+1# / #qs.recordCount#
 		</div>
-	</div>
-	<div class="card-body">
+	</header>
+	<section>
 		#Replace(q.qdesc,'. ','.<br>','all')#
-	</div>
-</div>
+	</section>
+</article>
 <form class="card" id="slideDown">
-	<div class="card-body">
-		<div class="row g-3">
+	<section>
+		<row class="g-3">
 			<cfloop query="ans">
 				<cfif Left(ansdesc,3) eq "en/">
 					<cfset src = 'https://upload.wikimedia.org/wikipedia/' & ansdesc>
@@ -52,8 +52,8 @@ ans = new dbo.proc().exec('ans.where_q',q.qid)
 					</figure>
 				</div>
 			</cfloop>
-		</div>
-	</div>
+		</row>
+	</section>
 	<input hidden name="actid" value="#form.actid#">
 	<input hidden name="id" value="#request.usr.id#">
 </form>

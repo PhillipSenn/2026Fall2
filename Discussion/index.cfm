@@ -5,23 +5,23 @@ q = new dbo.proc().exec('q.where_act',form.actid)
 </cfscript>
 
 <cfoutput query="act">
-<div class="row">
+<row>
 	<div class="col-6 mx-auto">
 		<form class="card">
-			<div class="card-header theme-primary theme-subtle">
+			<header class="theme-primary theme-subtle">
 				For classroom discussion
-			</div>
+			</header>
 		</form>
 		<cfloop query="q">
-			<div class="card">
-				<div class="card-body">
+			<article>
+				<section>
 					#qname#
-				</div>
-			</div>
+				</section>
+			</article>
 		</cfloop>
 		<input hidden name="actid" value="#actid#">
 		<input hidden name="id" value="#request.usr.id#">
 	</div>
-</div>
+</row>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

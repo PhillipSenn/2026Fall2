@@ -20,15 +20,15 @@ phylum = queryExecute(
 
 <cfoutput query="act">
 <form class="card" action="class.cfm">
-	<div class="card-header theme-primary theme-subtle">domain: #path.domainname#</div>
-	<div class="card-header theme-primary theme-subtle">kingdom: #path.kingdomname#</div>
-	<div class="card-body">
+	<header class="theme-primary theme-subtle">domain: #path.domainname#</header>
+	<header class="theme-primary theme-subtle">kingdom: #path.kingdomname#</header>
+	<section>
 		<cfloop query="phylum">
 			<div>
 				<button class="btn-link" name="phylumid" value="#phylumid#">#phylumname#</button>
 			</div>
 		</cfloop>
-	</div>
+	</section>
 	<input hidden name="id" value="#request.usr.id#">
 	<input hidden name="actid" value="#form.actid#">
 </form>

@@ -3,16 +3,16 @@ include '/Inc/header6.cfm'
 </cfscript>
 
 <cfoutput query="act">
-<div class="card">
-	<div class="card-header theme-primary theme-subtle">
-	</div>
-	<div class="card-body">
+<article>
+	<header class="theme-primary theme-subtle">
+	</header>
+	<section>
 
-	</div>
-	<div class="card-footer">
+	</section>
+	<footer>
 		<button>Save</button>
-	</div>
+	</footer>
 	<input hidden name="id" value="#request.usr.id#" />
-</div>
+</article>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

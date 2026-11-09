@@ -75,11 +75,11 @@ function binary(code) {
 </cfscript>
 
 <cfoutput query="act">
-<div class="card">
-	<div class="card-header">
+<article>
+	<header>
 		American Standard Code for Information Interchange
-	</div>
-	<div class="card-body">
+	</header>
+	<section>
 		<p>ASCII was designed so different machines could exchange text using the same character codes. Each letter, digit, punctuation mark, and control signal, such as carriage return and line feed, was assigned a number from 0 to 127.</p>
 		<p>The codes below 32 were control signals, not characters you can see. A teletype used them to run the machine: bell rang the bell, backspace moved the print head back, horizontal tab jumped to the next stop, line feed advanced the paper, and carriage return returned the print head to the left margin. The rest marked the start and end of a message or separated records.</p>
 		<table class="table table-sm table-striped mb-0">
@@ -126,7 +126,7 @@ function binary(code) {
 		<img class="img-fluid" src="https://www.wacdllc.com/wp-content/uploads/2017/06/A_typewriter_10995863465.jpg">
 
 <p><iframe width="560" height="315" src="https://www.youtube.com/embed/S81GyMKH7zw?si=RW8IaaUNE-5DXSA_&amp;start=360" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-	</div>
-</div>
+	</section>
+</article>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

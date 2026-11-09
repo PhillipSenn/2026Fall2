@@ -9,11 +9,11 @@ where gradeid = :gradeid', {
 </cfscript>
 
 <cfoutput>
-<div class="card">
-	<div class="card-header theme-primary theme-subtle">
+<article>
+	<header class="theme-primary theme-subtle">
 		gradeid: #gradeid#
-	</div>
-	<div class="card-body">
+	</header>
+	<section>
 		<cfif grade.recordCount>
 			<table>
 				<tbody>
@@ -26,7 +26,7 @@ where gradeid = :gradeid', {
 				</tbody>
 			</table>
 		</cfif>
-	</div>
-</div>
+	</section>
+</article>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

@@ -7,10 +7,10 @@ include '/Inc/header6.cfm'
 
 <cfoutput>
 <form class="card" action="domain.cfm">
-	<div class="card-header theme-primary theme-subtle">ITIS</div>
-	<div class="card-body">
+	<header class="theme-primary theme-subtle">ITIS</header>
+	<section>
 		<button class="btn-link">Domain</button>
-	</div>
+	</section>
 	<input hidden name="id" value="#request.usr.id#">
 	<input hidden name="actid" value="#form.actid#">
 </form>

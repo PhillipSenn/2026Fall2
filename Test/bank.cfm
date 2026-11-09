@@ -76,22 +76,22 @@ cfloop(query="qry") {
 <form>
 	<cfif StructKeyExists(form,'qid') OR remaining>
 		<cfif len(q.qdesc)>
-			<div class="row">
+			<row>
 				<div class="col">
-					<div class="card">
-						<div class="card-header">
+					<article>
+						<header>
 							Textbook
-						</div>
-						<div class="card-body">
+						</header>
+						<section>
 							#qname#
-						</div>
-					</div>
+						</section>
+					</article>
 				</div>
 				<div class="col">
-					<div class="card">
-						<fieldset class="card-header">
+					<article>
+						<header><fieldset>
 							<legend>AI</legend>
-							<div class="row">
+							<row>
 								<div class="col-2 border">
 									<label for="SpeechPitch" class="d-block">Pitch</label>
 									<input style="width:60px" type="number" id="SpeechPitch" name="SpeechPitch" min=0 max=2 step=0.1 value=#request.usr.SpeechPitch#>
@@ -116,11 +116,11 @@ cfloop(query="qry") {
 										<button type="button" name="SpeechSynthesisUtterance" class="btn-outline theme-primary bi-volume-mute" value="0"></button>
 									</cfif>
 								</div>
-							</div>
+							</row>
 							<input hidden name="SpeechVolume" value="1">
 							<input hidden name="Speech" value="#request.usr.SpeechSynthesisUtterance#">
-						</fieldset>
-						<div class="card-body">
+						</fieldset></header>
+						<section>
 							<div id="qdesc">#qdesc#</div>
 							<ul class="list-unstyled" id="answers">
 								<cfloop query="ans">
@@ -148,21 +148,21 @@ cfloop(query="qry") {
 									</li>
 								</cfloop>
 							</ul>
-						</div>
-						<div class="card-footer text-end">
+						</section>
+						<footer class="text-end">
 							<a target="_blank" href="https://ebooks.cengage.com/reader/37144ab6-3307-483b-b060-42403fe46440/content-bd_part_02_opener?sidepanel=contents">#unanswered.qhref#</a>
-						</div>
-					</div>
+						</footer>
+					</article>
 				</div>
-			</div>
+			</row>
 		<cfelse>
-			<div class="row">
+			<row>
 				<div class="col-6 mx-auto">
-					<div class="card">
-						<div class="card-header">
+					<article>
+						<header>
 							#qname#
-						</div>
-						<div class="card-body">
+						</header>
+						<section>
 							<ul class="list-unstyled" id="answers">
 								<cfloop query="ans">
 									<li>
@@ -189,24 +189,24 @@ cfloop(query="qry") {
 									</li>
 								</cfloop>
 							</ul>
-						</div>
-						<div class="card-footer text-end">
+						</section>
+						<footer class="text-end">
 							<a target="_blank" href="https://ebooks.cengage.com/reader/37144ab6-3307-483b-b060-42403fe46440/content-bd_part_02_opener?sidepanel=contents">#unanswered.qhref#</a>
-						</div>
-					</div>
+						</footer>
+					</article>
 				</div>
-			</div>
+			</row>
 		</cfif>
 		<div hidden>
 			<div id="answered">#answered#</div>
 			<div id="questions">#q.recordcount#</div>
 		</div>
 	<cfelse>
-		<div class="card">
-			<div class="card-header theme-primary theme-subtle">
+		<article>
+			<header class="theme-primary theme-subtle">
 				<button formaction="../reset.cfm" class="btn-outline theme-danger float-end btn-sm">Reset</button>
-			</div>
-			<div class="card-body">
+			</header>
+			<section>
 				<table>
 					<thead>
 						<tr>
@@ -288,8 +288,8 @@ cfloop(query="qry") {
 						</tr>
 					</tbody>
 				</table>
-			</div>
-		</div>
+			</section>
+		</article>
 		<div hidden id="count_right">#rightWrong.count_right#</div>
 		<div hidden id="count_wrong">#rightWrong.count_wrong#</div>
 	</cfif>

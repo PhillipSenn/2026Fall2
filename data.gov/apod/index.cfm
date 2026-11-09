@@ -4,23 +4,23 @@ include '/Inc/header6.cfm'
 </cfscript>
 
 <cfoutput query="act">
-<div class="row">
+<row>
       <div class="col-12 md:col-8 lg:col-5 order-2 md:order-1">
 
-         <div class="card" id="picturePanel">
-            <div class="card-header" role="status" aria-live="polite">
+         <article id="picturePanel">
+            <header role="status" aria-live="polite">
                <a id="apodTitle"
                   href="https://science.nasa.gov/"
                   target="_blank"
                   rel="noopener noreferrer"></a>
-            </div>
+            </header>
 
-            <div class="card-body p-0">
+            <section class="p-0">
                <figure id="apodMedia">
                   <figcaption id="apodCredit" class="apod-credit text-body-secondary"></figcaption>
                </figure>
-            </div>
-         </div>
+            </section>
+         </article>
 
       </div>
 
@@ -53,12 +53,12 @@ include '/Inc/header6.cfm'
       </div>
 
       <div class="col-12 md:col-4 lg:col-3 order-1 md:order-2 lg:order-3">
-         <div class="card">
-            <div class="card-header">
+         <article>
+            <header>
                <input id="apodDate" class="form-control apod-date" type="text" autocomplete="off" spellcheck="false" placeholder="YYYY-MM-DD" aria-label="Picture date">
-            </div>
+            </header>
 
-            <div class="card-body p-0">
+            <section class="p-0">
                <div class="btn-group w-100" role="group" aria-label="Picture navigation">
                   <button type="button" id="btnPrev" class="btn-outline theme-primary">Prev</button>
                   <button type="button" id="btnRandom" class="btn-outline theme-primary">Rnd</button>
@@ -68,10 +68,10 @@ include '/Inc/header6.cfm'
                <button type="button" id="btnExplanation" class="btn-outline theme-primary w-100 lg:d-none">
                   Explanation
                </button>
-            </div>
-         </div>
+            </section>
+         </article>
       </div>
-   </div>
+   </row>
 
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

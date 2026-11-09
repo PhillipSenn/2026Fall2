@@ -8,10 +8,10 @@ lastEnd = ""
 
 <cfoutput query="act">
 <form action="question.cfm" class="card">
-	<div class="card-header theme-primary theme-subtle">
+	<header class="theme-primary theme-subtle">
 		#actname# complete
-	</div>
-	<div class="card-body">
+	</header>
+	<section>
 		<table class="table align-middle mb-0">
 			<thead>
 				<tr>
@@ -63,7 +63,7 @@ lastEnd = ""
 				</tr>
 			</tfoot>
 		</table>
-	</div>
+	</section>
 	<input hidden name="actid" value="#form.actid#">
 	<input hidden name="id" value="#request.usr.id#">
 </form>
