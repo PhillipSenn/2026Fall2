@@ -818,12 +818,14 @@ declare @actid int=(select q_act from q where qid=@qid)
 select qid -- Test/bank.cfm
 	,qname,qdesc
 	,qhref -- Test/bank.cfm
+	,qsort
 	,rowNumber
 from (
 	select qid
 		,qname
 		,qdesc
 		,qhref
+		,qsort
 		,row_number() over(order by qsort,qid) as rowNumber
 	from q
 	where q_act=@actid
@@ -1392,7 +1394,108 @@ where q_act=@actid
 and poll_q is null
 order by newid()
 go
+create or alter proc ans.unanswered_img
+(@id uniqueidentifier
+,@actid int
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+select top 1 qid,ansname
+from q
+left join (
+	select poll_q
+	from poll
+	join grade on poll_grade=gradeid
+	where grade_usr=@usrid
+) poll
+on poll_q=qid
+left join(
+	select ans_q,ansname
+	from ans
+	join cat on ans_cat=catid
+	and catname = 'img' 
+	and ansname like 'http%'
+) ans
+on ans_q=qid
+where q_act=@actid
+and poll_q is null
+order by case when ansname is null then 1 else 0 end
+	,newid()
+go
+exec ans.unanswered_img '19C76747-5CF9-449C-9A52-FEF8906AD52E',167
+create or alter proc ans.q_catname
+(@qid int
+,@catname varchar(max)
+) as
+select ansid,ansname
+from ans
+join cat on ans_cat=catid
+where ans_q=@qid
+and catname=@catname
+go
 
+
+create or alter proc guess.invented_discovered -- 999 possible, 100 max.
+(@id uniqueidentifier
+,@ansid int
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+declare @qid int=(select ans_q from ans where ansid=@ansid)
+declare @actid int=(select q_act from q where qid=@qid)
+declare @gradeid int=(select gradeid from grade where grade_usr=@usrid and grade_act=@actid)
+if @gradeid is null begin
+	insert into grade(grade_usr,grade_act) values(@usrid,@actid)
+	select @gradeid=scope_identity()
+end
+declare @guessid int=(
+	select guessid 
+	from guess
+	join grade on guess_grade=gradeid
+	join ans on guess_ans=ansid
+	where guess_grade=@gradeid
+	and ans_q=@qid
+)
+if @guessid is null begin
+	insert into guess(guess_grade,guess_ans) values(@gradeid,@ansid)
+	select @guessid=scope_identity()
+end
+update guess set
+ guess_ans=@ansid
+where guessid=@guessid
+
+declare @answered int=(
+	select count(*) 
+	from guess
+	where guess_grade=@gradeid
+)
+update grade set
+ earned=@answered -- earned=earned+1, earned + 1
+where gradeid=@gradeid
+and @answered <= 100
+select earned
+from grade
+where gradeid=@gradeid
+go
+
+create or alter proc ans.merge_pix
+(@qid int
+,@ansname varchar(max)
+) as
+declare @catid int=(select catid from cat where catname='img')
+declare @ansid int=(
+	select ansid
+	from ans
+	where ans_q=@qid
+	and ans_cat=@catid
+)
+if @ansid is null begin
+	insert into ans(ans_q,ans_cat) values(@qid,@catid)
+	select @ansid=scope_identity()
+end
+update ans set
+ ansname=@ansname
+where ansid=@ansid
+go
+exec ans.merge_pix 13141,'test'
 
 set nocount on
 select * from usr

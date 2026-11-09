@@ -116,6 +116,42 @@ select * from usr
 update usr usrname='',firstname='' where usrid=2
 
 select * from ans
+select * from q
+where q_act=284
+insert into ans(ans_q,ansname) values(27399,'https://www.saifsociety.ca/wp-content/uploads/2023/11/Cyberstalking-What-is-it-What-Can-You-Do-1.webp')\
+insert into ans(ans_q,ansname) values(27400,'https://www.zenarmor.com/docs/cybercrime-cyberterrorism-cyberespionage.png')
+insert into ans(ans_q,ansname) values(27401,'https://cdn.prod.website-files.com/672bdc2d5c21197424e41ee8/67cdaaa1e7250808507ee776_backup-best-practice-1024x1024.png')
+insert into ans(ans_q,ansname) values(27402,'https://www.altexsoft.com/static/blog-post/2023/11/7f972d96-bbb2-4c1a-98f0-c31a27f93bb3.jpg')
+insert into ans(ans_q,ansname) values(27403,'https://www.newsoftwares.net/blog/wp-content/uploads/2023/11/What-Is-Decryption.png')
+insert into ans(ans_q,ansname) values(27404,'https://www.loginradius.com/assets/blog/identity/what-are-digital-certificates/digital-certificate-icons.webp')
+insert into ans(ans_q,ansname) values(27405,'https://www.genevaenvironmentnetwork.org/wp-content/uploads/2020/09/ewaste-aspect-ratio-2000-1200-768x461.jpg')
+insert into ans(ans_q,ansname) values(27406,'https://www.pandasecurity.com/en/mediacenter/src/uploads/2025/01/email-encryption-steps-1007x960.png')
+insert into ans(ans_q,ansname) values(27407,'https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/Ergonomic_Workstation.svg/500px-Ergonomic_Workstation.svg.png')
+insert into ans(ans_q,ansname) values(0,'')
+insert into ans(ans_q,ansname) values(0,'')
+insert into ans(ans_q,ansname) values(0,'')
+insert into ans(ans_q,ansname) values(0,'')
+insert into ans(ans_q,ansname) values(0,'')
+insert into ans(ans_q,ansname) values(0,'')
+insert into ans(ans_q,ansname) values(0,'')
+insert into ans(ans_q,ansname) values(0,'')
+insert into ans(ans_q,ansname) values(0,'')
+insert into ans(ans_q,ansname) values(0,'')
+insert into ans(ans_q,ansname) values(0,'')
+insert into ans(ans_q,ansname) values(0,'')
+insert into ans(ans_q,ansname) values(0,'')
+insert into ans(ans_q,ansname) values(0,'')
+insert into ans(ans_q,ansname) values(0,'')
+insert into ans(ans_q,ansname) values(0,'')
+insert into ans(ans_q,ansname) values(0,'')
+insert into ans(ans_q,ansname) values(0,'')
+insert into ans(ans_q,ansname) values(0,'')
+insert into ans(ans_q,ansname) values(0,'')
+insert into ans(ans_q,ansname) values(0,'')
+insert into ans(ans_q,ansname) values(0,'')
+insert into ans(ans_q,ansname) values(0,'')
+insert into ans(ans_q,ansname) values(0,'')
+insert into ans(ans_q,ansname) values(0,'')
 
 /*
 truncate table act
@@ -125,3 +161,4 @@ truncate table grade
 truncate table poll
 truncate table guess
 */
+
