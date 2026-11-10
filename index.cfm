@@ -29,10 +29,6 @@ for (band = 1; band <= 10; band++) {
 			<table>
 				<thead>
 					<tr>
-						<cfif request.usr.isAdmin>
-							<th classs="text-center">Hide</th>
-							<th class="text-end">Sort</th>
-						</cfif>
 						<th>Chapter</th>
 						<th>Assignment</th>
 						<th>Category</th>
@@ -41,23 +37,13 @@ for (band = 1; band <= 10; band++) {
 				</thead>
 				<cfloop query="act">
 					<tr data-actid="#actid#">
-						<cfif request.usr.isAdmin>
-							<td class="text-center isHidden" contenteditable>#isHidden#</td>
-							<td class="text-end actsort" contenteditable>#actsort#</td>
-						</cfif>
 						<td>#grpname#</td>
 						<td>
 							<a href="#actlink#?actid=#actid#">#actname#</a>
 						</td>
 						<td>#catname#</td>
 						<td class="text-end">
-							<cfif request.usr.isAdmin>
-								<button formaction="Admin/act.cfm" name="actid" value="#actid#" class="btn-outline theme-info">
-									#earned#
-								</button>
-							<cfelse>
-								#earned#
-							</cfif>
+							#earned#
 						</td>
 					</tr>
 				</cfloop>
@@ -87,10 +73,6 @@ for (band = 1; band <= 10; band++) {
 						<table>
 							<thead>
 								<tr>
-									<cfif request.usr.isAdmin>
-										<th classs="text-center">Hide</th>
-										<th class="text-end">Sort</th>
-									</cfif>
 									<th>Chapter</th>
 									<th>Assignment</th>
 									<th>Category</th>
@@ -99,23 +81,13 @@ for (band = 1; band <= 10; band++) {
 							</thead>
 							<cfloop query="rows">
 								<tr data-actid="#actid#">
-									<cfif request.usr.isAdmin>
-										<td class="text-center isHidden" contenteditable>#isHidden#</td>
-										<td class="text-end actsort" contenteditable>#actsort#</td>
-									</cfif>
 									<td>#grpname#</td>
 									<td>
 										<a href="#actlink#?actid=#actid#">#actname#</a>
 									</td>
 									<td>#catname#</td>
 									<td class="text-end">
-										<cfif request.usr.isAdmin>
-											<button formaction="Admin/act.cfm" name="actid" value="#actid#" class="btn-outline theme-info">
-												#earned#
-											</button>
-										<cfelse>
-											#earned#
-										</cfif>
+										#earned#
 									</td>
 								</tr>
 							</cfloop>
@@ -126,11 +98,6 @@ for (band = 1; band <= 10; band++) {
 		</div>
 		</cfif>
 	</section>
-	<cfif request.usr.isAdmin>
-		<footer>
-			<button formaction="Debug/guess.cfm">Guess</button>
-		</footer>
-	</cfif>
 	<input hidden name="id" value="#request.usr.id#">
 </form>
 <cfinclude template="/Inc/footer6.cfm">

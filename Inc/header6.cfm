@@ -132,7 +132,7 @@ writeoutput('<body class="' & request.body & '">')
 			<cfif StructKeyExists(request,'usr')>
 				<ul class="navbar-nav ms-auto me-3">
 					<li class="nav-item position-relative">
-						<a class="nav-link" href="JavaScript:" role="button" data-bs-toggle="menu" data-bs-placement="bottom-end" aria-expanded="false">
+						<a id="firstname" class="nav-link" href="JavaScript:" role="button" data-bs-toggle="menu" data-bs-placement="bottom-end" aria-expanded="false">
 							#request.usr.firstname#
 						</a>
 						<div class="menu">

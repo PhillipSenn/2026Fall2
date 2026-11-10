@@ -1,0 +1,52 @@
+#jsSource {
+	font-family: Consolas, "Courier New", monospace;
+	min-height: 20rem;
+}
+
+aside.js-topics {
+	flex: 0 0 auto;
+	width: 14rem;
+	max-width: 14rem;
+}
+
+aside.js-topics li + li {
+	margin-top: 0.75rem;
+}
+
+aside.js-topics .example-link {
+	text-decoration: none;
+}
+
+aside.js-topics .example-link.active {
+	text-decoration: underline;
+}
+
+.js-source {
+	flex: 1 1 0;
+	min-width: 0;
+}
+
+aside.js-sidebar {
+	flex: 1 1 0;
+	min-width: 0;
+	width: auto;
+	max-width: none;
+}
+
+#jsPreview {
+	display: block;
+	width: 100%;
+	min-height: 20rem;
+	border: 1px solid var(--bs-border-color, #dee2e6);
+	background: #fff;
+}
+
+@media (max-width: 767.98px) {
+	aside.js-topics,
+	aside.js-sidebar,
+	.js-source {
+		width: 100%;
+		max-width: 100%;
+		flex: 0 0 auto;
+	}
+}

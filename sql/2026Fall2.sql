@@ -66,6 +66,23 @@ update act set
  isHidden=@isHidden
 where actid=@actid
 go
+create or alter proc act.update_grp
+(@actid int
+,@grpid int
+) as
+update act set 
+ act_grp=@grpid
+where actid=@actid
+go
+create or alter proc act.update_cat
+(@actid int
+,@catid int
+) as
+update act set 
+ act_cat=@catid
+where actid=@actid
+go
+
 --create schema grade authorization dbo
 create or alter proc grade.where_act
 (@id uniqueidentifier
@@ -1399,15 +1416,8 @@ create or alter proc ans.unanswered_img
 ,@actid int
 ) as
 declare @usrid int=(select usrid from usr where id=@id)
-select qid,ansname
+select top 1 qid,ansname
 from q
-left join (
-	select poll_q
-	from poll
-	join grade on poll_grade=gradeid
-	where grade_usr=@usrid
-) poll
-on poll_q=qid
 left join(
 	select ans_q,ansname
 	from ans
@@ -1416,8 +1426,16 @@ left join(
 	and ansname like 'http%'
 ) ans
 on ans_q=qid
+left join(
+	select ans_q as answered_q
+	from guess
+	join grade on guess_grade=gradeid
+	join ans on guess_ans=ansid
+	where grade_usr=@usrid
+) answered
+on answered_q = qid
 where q_act=@actid
-and poll_q is null
+and answered_q is null
 order by case when ansname is null then 1 else 0 end
 	,newid()
 go
@@ -1497,6 +1515,25 @@ update ans set
 where ansid=@ansid
 go
 --exec ans.merge_pix 13141,'test'
+--create schema grp authorization dbo
+create or alter proc grp.list as
+select grpid,grpname
+from grp
+order by grpid
+go
+create or alter proc grp.update_grp
+(@grpid int
+,@grpname nvarchar(max)
+) as
+update grp set
+ grpname=@grpname
+where grpid=@grpid
+go
+create or alter proc cat.list as
+select catid,cat_grp,catname
+from cat
+order by catid
+go
 
 set nocount on
 select * from usr
