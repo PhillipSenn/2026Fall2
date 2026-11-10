@@ -1,7 +1,8 @@
 <cfscript>
-if (structKeyExists(form,'ansname')) {
+if (structKeyExists(form,'ansname') and len(form.ansname)) {
    new dbo.proc().exec('ans.merge_pix',[form.qid,form.ansname])
-} else if (structKeyExists(form,'ansid')) {
+}
+if (structKeyExists(form,'ansid')) {
    new dbo.proc().usr('guess.invented_discovered',form.ansid)
 }
 include '/Inc/header6.cfm'
@@ -20,7 +21,7 @@ answers= new dbo.proc().exec('ans.q_catname',[q.qid,'Possible Answer'])
 </cfscript>
 
 <cfoutput query="act">
-<row>
+<form class="row">
    <div class="col-6">
       <article>
          <header class="theme-primary theme-subtle">
@@ -33,17 +34,16 @@ answers= new dbo.proc().exec('ans.q_catname',[q.qid,'Possible Answer'])
                </a>
             </cfif>
          </section>
-         <footer><form>
+         <footer>
             <input name="ansname" class="form-control" autofocus>
             <img id="ansnamePreview" class="img-fluid img-thumbnail mt-2 d-none" alt="">
             <input hidden name="qid" value="#img.qid#">
             <a target="_blank" href="https://www.google.com/search?tbm=isch&q=#EncodeForURL(year & ' ' & q.qname)#">Google Images</a>
-            <button class="float-end">Save</button>
-         </form></footer>
+         </footer>
       </article>
    </div>
-   <div class="col-6">
-      <form class="card">
+   <aside>
+      <section>
          <header>
             &nbsp;
          </header>
@@ -61,8 +61,8 @@ answers= new dbo.proc().exec('ans.q_catname',[q.qid,'Possible Answer'])
          </footer>
          <input hidden name="id" value="#request.usr.id#">
          <input hidden name="actid" value="#form.actid#">
-      </form>
-   </div>
-</row>
+      </section>
+   </aside>
+</form>
 <cfinclude template="/Inc/footer6.cfm">
 </cfoutput>

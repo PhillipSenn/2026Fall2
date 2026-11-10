@@ -1399,7 +1399,7 @@ create or alter proc ans.unanswered_img
 ,@actid int
 ) as
 declare @usrid int=(select usrid from usr where id=@id)
-select top 1 qid,ansname
+select qid,ansname
 from q
 left join (
 	select poll_q
@@ -1422,6 +1422,7 @@ order by case when ansname is null then 1 else 0 end
 	,newid()
 go
 exec ans.unanswered_img '19C76747-5CF9-449C-9A52-FEF8906AD52E',167
+go
 create or alter proc ans.q_catname
 (@qid int
 ,@catname varchar(max)
@@ -1495,7 +1496,7 @@ update ans set
  ansname=@ansname
 where ansid=@ansid
 go
-exec ans.merge_pix 13141,'test'
+--exec ans.merge_pix 13141,'test'
 
 set nocount on
 select * from usr

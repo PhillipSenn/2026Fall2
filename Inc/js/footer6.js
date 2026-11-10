@@ -1,8 +1,9 @@
+$('row').addClass('row')
 $('article').addClass('card')
 $('.card > header').addClass('card-header')
 $('.card > section').addClass('card-body')
 $('.card > footer').addClass('card-footer')
-$('row').addClass('row')
+$('aside').addClass('col-auto')
 
 var dom = {} // Document Object Model
 
