@@ -1,4 +1,3 @@
-```cfm
 <cfscript>
 request.progress.bar = false
 request.container = 'container-fluid'
@@ -375,4 +374,3 @@ if (isNull(artifacts) || !isArray(artifacts)) {
 </cfoutput>
 
 <cfinclude template="/Inc/footer6.cfm">
-```
