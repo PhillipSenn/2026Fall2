@@ -133,7 +133,7 @@ for (table in tables) {
 	}
 	arrayAppend(clientTables, {id: table.id, fields: fields});
 }
-relJson = serializeJSON({tables: clientTables, pairs: pairs});
+relJson = serializeJSON({tables: clientTables, pairs: pairs, database: "LR"});
 relJson = replace(relJson, "##", "\u0023", "all");
 relJson = replace(relJson, "</", "<\/", "all");
 

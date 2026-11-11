@@ -3,12 +3,13 @@ setting showdebugoutput = false;
 cfcontent(type="application/json", reset=true);
 param form.sql = "";
 param form.fields = "";
+param form.database = "LR";
 
-payload = runStatement(replace(trim(form.sql), chr(13), "", "all"), form.fields);
+payload = runStatement(replace(trim(form.sql), chr(13), "", "all"), form.fields, form.database);
 writeOutput(serializeJSON(payload));
 
-function runStatement(sql, fields) {
-	parsed = parseSql(sql, fields);
+function runStatement(sql, fields, database) {
+	parsed = parseSql(sql, fields, database);
 	if (!parsed.ok) {
 		return {columns: [], rows: []};
 	}
@@ -23,13 +24,16 @@ function runStatement(sql, fields) {
 	return queryPayload(result, parsed.headers);
 }
 
-function parseSql(sql, fields) {
+function parseSql(sql, fields, database) {
 	lines = listToArray(sql, chr(10), false);
 	ident = "[A-Za-z_][A-Za-z0-9_]*";
 	fieldKeys = listToArray(fields);
 	headers = [];
 	joins = [];
 	tables = {};
+	if (!reFindNoCase("^#ident#$", database)) {
+		return {ok: false};
+	}
 	if (arrayLen(lines) < 2) {
 		return {ok: false};
 	}
@@ -74,9 +78,9 @@ function parseSql(sql, fields) {
 		}
 		arrayAppend(selectList, "[" & parts[1] & "].[" & parts[2] & "] AS [" & headers[i] & "]");
 	}
-	statement = "SELECT " & arrayToList(selectList) & " FROM LR.dbo.[" & fromTable & "] AS [" & fromTable & "]";
+	statement = "SELECT TOP 200 " & arrayToList(selectList) & " FROM [" & database & "].dbo.[" & fromTable & "] AS [" & fromTable & "]";
 	for (join in joins) {
-		statement &= " JOIN LR.dbo.[" & join.table & "] AS [" & join.table & "]";
+		statement &= " JOIN [" & database & "].dbo.[" & join.table & "] AS [" & join.table & "]";
 		statement &= " ON [" & join.leftTable & "].[" & join.leftCol & "]=[" & join.rightTable & "].[" & join.rightCol & "]";
 	}
 	return {ok: true, sql: statement, headers: headers};

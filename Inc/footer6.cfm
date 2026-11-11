@@ -7,11 +7,6 @@ param request.bootstrap = true;
 if (request.bootstrap) {
 	writeoutput('<script type="module" src="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/js/bootstrap.bundle.js"></script>' & chr(10))
 }
-param request.jQuery = '';
-if (request.jQuery == 'none') {
-} else {
-	writeoutput('<script src="/Inc/js/jQuery.js"></script>' & chr(10))
-}
 param request.jQueryUI = 'none';
 if (request.jQueryUI != 'none') {
 	writeoutput('<script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>' & chr(10))

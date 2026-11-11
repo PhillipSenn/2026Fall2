@@ -2,6 +2,7 @@
 	const relData = JSON.parse(document.getElementById('rel-data').textContent);
 	const tables = (relData.tables || relData.TABLES).map(readTable);
 	const pairs = relData.pairs || relData.PAIRS;
+	const database = relData.database || relData.DATABASE || 'LR';
 
 	function readTable(table) {
 		return {
@@ -557,6 +558,7 @@
 		form.body.set('id', app.id);
 		form.body.set('sql', sql);
 		form.body.set('fields', chips.join(','));
+		form.body.set('database', database);
 		fetch(url, form)
 			.then(json_done)
 			.then(show)
@@ -789,7 +791,7 @@
 		const columns = [[], [], []];
 		const incoming = {};
 		const y = [28, 28, 28];
-		const x = [36, 340, 660];
+		const x = [36, 536, 660];
 		let bottom = 0;
 		pairs.forEach(markIncoming);
 		tables.forEach(assignColumn);
@@ -806,7 +808,7 @@
 			let hasOutgoing = false;
 			table.fields.forEach(checkField);
 			if (!hasOutgoing) {
-				columns[2].push(table);
+				columns[0].push(table);
 			} else if (incoming[table.id]) {
 				columns[0].push(table);
 			} else {

@@ -97,6 +97,11 @@ if (form.actid) {
 	}
 }
 writeoutput('<title>' & request.title & '</title>' & chr(10))
+param request.jQuery = '';
+if (request.jQuery == 'none') {
+} else { // For .js files that are loaded before footer6.cfm
+	writeoutput('<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.js"></script>' & chr(10))
+}
 param request.navbar = true;
 param request.body = 'bg-1';
 writeoutput('</head>' & chr(10))

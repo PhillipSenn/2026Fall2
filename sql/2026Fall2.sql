@@ -1171,16 +1171,27 @@ declare @guessid int=(
 if @guessid is null begin
 	insert into guess(guess_grade,guess_ans) values(@gradeid,@ansid)
 end
-declare @possible int=(select sum(connections) as totalConnections
-from(
-	select ansname
-		,count(*)-1 as connections
-	from ans
-	join q on ans_q=qid
-	where q_act=@actid
-	group by ansname
-	having count(*) > 1
-) x
+declare @possible int=(
+	select count(*)
+	from ans a
+	join q aq on a.ans_q = aq.qid
+	where aq.q_act = @actid
+	and lower(a.ansname) <> lower(aq.qname + 'id')
+	and exists (
+		select 1
+		from q tq
+		join ans pk on pk.ans_q = tq.qid and lower(pk.ansname) = lower(tq.qname + 'id')
+		where tq.q_act = @actid
+		and tq.qid <> aq.qid
+		and (
+			lower(a.ansname) = lower(pk.ansname)
+			or replace(lower(a.ansname), '_', '') = lower(tq.qname)
+			or (
+				len(replace(lower(a.ansname), '_', '')) > len(tq.qname)
+				and right(replace(lower(a.ansname), '_', ''), len(tq.qname)) = lower(tq.qname)
+			)
+		)
+	)
 )
 declare @answered int=(
 	select count(guess_ans) 
@@ -1188,7 +1199,7 @@ declare @answered int=(
 	where guess_grade=@gradeid
 )
 update grade set
- earned=ceiling(100.0 * @answered / @possible)
+ earned=case when isnull(@possible,0)=0 then 0 else ceiling(100.0 * @answered / @possible) end
 where gradeid=@gradeid
 select earned
 from grade
