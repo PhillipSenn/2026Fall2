@@ -1109,3 +1109,36 @@ insert into ans(ans_q,ansname) values(@qid,'credit_movie')
 insert into ans(ans_q,ansname) values(@qid,'credit_person')
 insert into ans(ans_q,ansname) values(@qid,'credit_type')
 insert into ans(ans_q,ansname) values(@qid,'credit_character')
+
+select * from credittype
+order by credittypeid
+
+select * from credit
+
+insert into Phillipsenn.boxofficemojo.dbo.credittype(credittypename)
+select credittypename
+from credittype
+where credittypeid > 1
+order by credittypeid
+
+select * from Phillipsenn.boxofficemojo.dbo.credittype
+
+select * from Phillipsenn.boxofficemojo.dbo.movie
+order by gross desc
+
+insert into Phillipsenn.boxofficemojo.dbo.[character](charactername)
+select charactername
+from character
+order by characterid
+
+select * from Phillipsenn.boxofficemojo.dbo.person
+insert into Phillipsenn.boxofficemojo.dbo.person(personid,personname)
+select personid,personname
+from person
+order by personid
+
+insert into Phillipsenn.boxofficemojo.dbo.credit(credit_movie,credit_person,credit_type,credit_character)
+select credit_movie,credit_person,credit_type,credit_character
+from credit
+order by creditid
+

@@ -1,10 +1,10 @@
 <cfscript>
+if (isDefined('form.reset')) {
+	new dbo.proc().usr('poll.reset_act', form.actid)
+}
 request.jQueryUI = 'base'
 include '/Inc/header6.cfm'
 q = new dbo.proc().usr('poll.unanswered', form.actid)
-if (!q.recordcount) {
-	location(request.home, false)
-}
 colors = []
 limit = min(20, q.recordcount)
 for (i = 1; i <= limit; i++) {
@@ -29,6 +29,9 @@ for (i = arrayLen(colors); i > 1; i--) {
 			<article>
 				<header class="theme-primary theme-subtle">
 					Color
+					<cfif grade.earned ge 100>
+						<button class="float-end btn-outline theme-danger" name="reset">Reset</button>
+					</cfif>
 				</header>
 				<section id="colors">
                <cfloop array="#colors#" index="item">
