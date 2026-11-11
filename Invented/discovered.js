@@ -1,3 +1,8 @@
+if ('scrollRestoration' in history) {
+	history.scrollRestoration = 'manual'
+}
+$(window).scrollTop(0)
+
 $('[name=ansname]').on('paste', clean_ansname)
 $('[name=ansname]').on('input', preview_ansname)
 $(window).on('focus', focus_ansname)

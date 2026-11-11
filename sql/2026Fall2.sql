@@ -1450,8 +1450,6 @@ and answered_q is null
 order by case when ansname is null then 1 else 0 end
 	,newid()
 go
-exec ans.unanswered_img '19C76747-5CF9-449C-9A52-FEF8906AD52E',167
-go
 create or alter proc ans.q_catname
 (@qid int
 ,@catname varchar(max)
@@ -1572,12 +1570,12 @@ where grade_usr=@usrid
 and grade_act=@actid
 order by guessid desc
 go
-exec guess.answered '19C76747-5CF9-449C-9A52-FEF8906AD52E',167
+--exec guess.answered '19C76747-5CF9-449C-9A52-FEF8906AD52E',167
 
 
-set nocount on
 select * from usr
 /*
+set nocount on
 select * from ansview
 where actname is null
 
