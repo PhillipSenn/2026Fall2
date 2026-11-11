@@ -10,10 +10,6 @@ param request.ico = 'https://www.lr.edu/sites/default/files/favicon.ico';
 param request.top = 'sticky-top';
 param request.header = {};
 param request.header.css = true;
-param request.production = '';
-if (findNoCase('phillipsenn.com', cgi.server_name) && structKeyExists(cookie, 'admin')) {
-	request.production = 'bg-subtle-danger'
-}
 
 param request.progress.bar = true;
 param request.progress.color = 'bg-primary';
@@ -108,6 +104,9 @@ if (request.jQuery == 'none') {
 }
 param request.navbar = true;
 param request.body = 'bg-1';
+if (findNoCase('phillipsenn.com', cgi.server_name) && structKeyExists(cookie, 'admin')) {
+	request.body = 'bg-subtle-danger'
+}
 writeoutput('</head>' & chr(10))
 writeoutput('<body class="' & request.body & '">')
 </cfscript>
@@ -183,4 +182,4 @@ writeoutput('<body class="' & request.body & '">')
 </div>
 </cfif>
 </cfoutput>
-<main class="<cfoutput>#request.container# #request.production#</cfoutput>">
+<main class="<cfoutput>#request.container#</cfoutput>">
