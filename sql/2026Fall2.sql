@@ -1545,6 +1545,35 @@ select catid,cat_grp,catname
 from cat
 order by catid
 go
+create or alter proc guess.answered -- Invented/Discovered.cfm
+(@id uniqueidentifier
+,@actid int
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+select qid,qname,qsort
+	,ansid,ansname
+	,isnull(x.SameAnswer,0) as SameAnswer
+	,isnull(x.DifferentAnswer,0) as DifferentAnswer
+from guess
+join grade on guess_grade=gradeid
+join ans on guess_ans=ansid
+join q on ans_q=qid
+outer apply (
+	select
+		count(distinct case when g2.guess_ans=ansid then gr2.grade_usr end) as SameAnswer
+		,count(distinct case when g2.guess_ans<>ansid then gr2.grade_usr end) as DifferentAnswer
+	from guess g2
+	join grade gr2 on g2.guess_grade=gr2.gradeid
+	join ans a2 on g2.guess_ans=a2.ansid
+	where gr2.grade_act=@actid
+	and a2.ans_q=qid
+) x
+where grade_usr=@usrid
+and grade_act=@actid
+order by guessid desc
+go
+exec guess.answered '19C76747-5CF9-449C-9A52-FEF8906AD52E',167
+
 
 set nocount on
 select * from usr

@@ -55,7 +55,15 @@ function drop_name(event, ui) {
 	name.draggable('disable')
 	merge_q(name.data('qid'))
 	remaining -= 1
-	name.closest('li').add(swatch).slideUp('slow', after_slide)
+	clearTimeout(swatch.data('labelTimer'))
+	swatch.removeData('labelTimer')
+	if (!swatch.find('.color-label').length) {
+		swatch.append($('<span class="color-label">').text(swatch.attr('data-qdesc')))
+	}
+	setTimeout(slide_away, 1000)
+	function slide_away() {
+		name.closest('li').add(swatch).slideUp('slow', after_slide)
+	}
 	function after_slide() {
 		$(this).remove()
 		if (remaining <= 0 && !$('.color-swatch').length) {

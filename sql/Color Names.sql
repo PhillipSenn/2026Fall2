@@ -147,3 +147,4 @@ insert into q(q_act,qname,qdesc) values(@actid,'FFFFFF','White')
 insert into q(q_act,qname,qdesc) values(@actid,'F5F5F5','WhiteSmoke')
 insert into q(q_act,qname,qdesc) values(@actid,'FFFF00','Yellow')
 insert into q(q_act,qname,qdesc) values(@actid,'9ACD32','YellowGreen')
+select * from q where q_act=@actid

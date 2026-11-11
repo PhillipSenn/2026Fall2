@@ -4,7 +4,10 @@ if (structKeyExists(form,'ansname') and len(form.ansname)) {
 }
 if (structKeyExists(form,'ansid')) {
    new dbo.proc().usr('guess.invented_discovered',form.ansid)
+} else if (structKeyExists(url,'ansid')) {
+   new dbo.proc().usr('guess.invented_discovered',url.ansid)
 }
+request.container = 'container-fluid'
 include '/Inc/header6.cfm'
 img = new dbo.proc().usr('ans.unanswered_img',form.actid)
 q = new dbo.proc().exec('q.where_q',img.qid)
@@ -18,6 +21,7 @@ prefix = new dbo.proc().exec('ans.q_catname',[q.qid,'prefix'])
 suffix = new dbo.proc().exec('ans.q_catname',[q.qid,'suffix'])
 page   = new dbo.proc().exec('ans.q_catname',[q.qid,'page'])
 answers= new dbo.proc().exec('ans.q_catname',[q.qid,'Possible Answer'])
+guess  = new dbo.proc().usr('guess.answered',form.actid)
 </cfscript>
 
 <cfoutput query="act">
@@ -62,6 +66,57 @@ answers= new dbo.proc().exec('ans.q_catname',[q.qid,'Possible Answer'])
          <input hidden name="id" value="#request.usr.id#">
          <input hidden name="actid" value="#form.actid#">
       </section>
+   </aside>
+   <aside style="flex:1 1 0%; min-width:0">
+      <table>
+         <thead>
+            <tr>
+               <th>Year</th>
+               <th>Item</th>
+               <th>Inv</th>
+               <th>Disc</th>
+            </tr>
+         </thead>
+         <tbody>
+            <cfloop query="guess">
+               <cfset guessYear = qsort>
+               <cfif guessYear lt 0>
+                  <cfset guessYear = -guessYear & ' B.C.'>
+               <cfelseif guessYear lt 1000>
+                  <cfset guessYear = +guessYear & ' A.D.'>
+               </cfif>
+               <cfset chosenClass = 'theme-success'>
+               <cfif DifferentAnswer ge SameAnswer>
+                  <cfset chosenClass = 'theme-danger'>
+               </cfif>
+               <cfif ansname EQ 'Invented'>
+                  <cfset invQty = SameAnswer>
+                  <cfset discQty = DifferentAnswer>
+                  <cfset invClass = chosenClass>
+                  <cfset discClass = 'theme-danger'>
+               <cfelse>
+                  <cfset invQty = DifferentAnswer>
+                  <cfset discQty = SameAnswer>
+                  <cfset invClass = 'theme-danger'>
+                  <cfset discClass = chosenClass>
+               </cfif>
+               <tr>
+                  <td>#guessYear#</td>
+                  <td>#encodeForHtml(qname)#</td>
+                  <td class="text-center">
+                     <cfif invQty>
+                        <a href="Discovered.cfm?actid=#url.actid#&ansid=#ansid#" class="#invClass# underline-10 hover:underline-100">#invQty#</a>
+                     </cfif>
+                  </td>
+                  <td class="text-center">
+                     <cfif discQty>
+                        <a href="Discovered.cfm?actid=#url.actid#&ansid=#ansid#" class="#discClass# underline-10 hover:underline-100">#discQty#</a>
+                     </cfif>
+                  </td>
+               </tr>
+            </cfloop>
+         </tbody>
+      </table>
    </aside>
 </form>
 <cfinclude template="/Inc/footer6.cfm">
