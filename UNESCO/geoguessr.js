@@ -27,7 +27,15 @@ $(window).scrollTop(0)
 		openBtn.on('click', openPanel)
 		closeBtn.on('click', closePanel)
 		backdrop.on('click', closeAllPanels)
+		backdrop.on('wheel', closeAllPanels)
+		backdrop.on('mousedown', onBackdropMouseDown)
 		$(document).on('keydown', onKeydown)
+
+		function onBackdropMouseDown(event) {
+			if (event.button === 1) {
+				closeAllPanels()
+			}
+		}
 
 		function openPanel() {
 			closeAllPanels()
