@@ -574,11 +574,16 @@ from states -- row, country
 insert into PhillipSenn.UNESCO.dbo.iso(iso_row,iso2)
 select iso_row,iso2 from iso -- row,iso2
 
-insert into PhillipSenn.UNESCO.dbo.poi()
-select * from poi
+insert into PhillipSenn.UNESCO.dbo.poi(poiid,poi_row,lat,lng,iso2)
+select poiid,poi_row,lat,lng,iso2 
+from poi
+order by poiid
 
-insert into PhillipSenn.UNESCO.dbo.row()
-select * from row
+insert into PhillipSenn.UNESCO.dbo.row(rowid,image_url,row_category,danger,date_inscribed,extension,short_description,sitename,transnational)
+select rowid,image_url,row_category,danger,date_inscribed,extension,short_description,sitename,transnational
+from row
+order by rowid
+
 where transnational <> 0
 
 
