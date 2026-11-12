@@ -410,6 +410,24 @@ where q_act=@actid
 order by qsort,qid
 go
 
+create or alter proc q.usrs_act -- 100/things.cfm
+(@actid int
+) as
+select qid,qname,qsort
+	,pollname
+	,firstname
+from q
+left join (
+	select poll_q,pollname,firstname
+	from poll
+	join grade on poll_grade=gradeid
+	join usr on grade_usr=usrid
+) poll
+on poll_q = qid
+where q_act=@actid
+order by qsort,qid
+go
+
 -- We don't really need to do poll.start_q
 -- It just shows how long they thought before answering.
 create or alter proc poll.start_q
