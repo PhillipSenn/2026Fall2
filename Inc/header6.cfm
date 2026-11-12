@@ -94,6 +94,9 @@ if (form.actid) {
 		} else {
 			request.progress.width = min(100,val(grade.earned))
 		}
+		if (val(grade.earned)) {
+			param request.progress.pct = grade.earned & '%';
+		}
 	}
 }
 writeoutput('<title>' & request.title & '</title>' & chr(10))
@@ -172,7 +175,7 @@ writeoutput('<body class="' & request.body & '">')
 							aria-valuemin="0" 
 							aria-valuemax="100"
 							style="width: #request.progress.width#%">
-							<cfif val(grade.earned)>#grade.earned#%</cfif> <!--- This should be earned so as not to confused the student --->
+							#request.progress.pct#
 						</div>
 					</div>
 				</div>

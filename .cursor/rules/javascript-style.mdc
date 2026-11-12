@@ -10,6 +10,7 @@ alwaysApply: false
 - Handlers take a `response` argument and return a result.
 - Prefer jQuery over vanilla DOM APIs.
 - Prefer promises (`.then` / `.catch`) and callbacks. Do not use `async`/`await`.
+- Do not use `$.trim`. Current jQuery no longer includes it; use `String(...).trim()` instead.
 
 ```javascript
 // ❌ BAD
