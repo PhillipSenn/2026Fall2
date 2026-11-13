@@ -29,14 +29,6 @@
 	pointer-events: none;
 }
 
-.memory-qid {
-	margin-bottom: 0.25rem;
-	font-size: 0.75rem;
-	line-height: 1;
-	text-align: center;
-	color: #495057;
-}
-
 .memory-card {
 	appearance: none;
 	border: 0;

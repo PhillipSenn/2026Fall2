@@ -166,7 +166,7 @@ solved = queryExecute(
 <cfoutput query="act">
 <article>
 	<header class="theme-primary theme-subtle">
-		Match each Picture with its Image.
+		Match the woman with her invention.
 		<span class="float-end">
 			<a href="Invention.cfm?id=#request.usr.id#&actid=#form.actid#&level=easy" class="btn-outline #form.level EQ 'easy' ? 'theme-success' : 'theme-secondary'#">Easy</a>
 			<a href="Invention.cfm?id=#request.usr.id#&actid=#form.actid#&level=medium" class="btn-outline #form.level EQ 'medium' ? 'theme-success' : 'theme-secondary'#">Medium</a>
@@ -180,7 +180,6 @@ solved = queryExecute(
 		<div id="memory-board" class="memory-board" data-level="#encodeForHTMLAttribute(form.level)#">
 			<cfloop array="#cards#" index="card">
 				<div class="memory-slot">
-					<div class="memory-qid">#card.qid#</div>
 					<div class="memory-card"
 						role="button"
 						tabindex="0"
