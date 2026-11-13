@@ -1589,6 +1589,92 @@ and grade_act=@actid
 order by guessid desc
 go
 --exec guess.answered '19C76747-5CF9-449C-9A52-FEF8906AD52E',167
+--create schema stat authorization dbo
+create or alter proc stat.where_act
+(@id uniqueidentifier
+,@actid int
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+select stat_start,stat_end
+from stat
+join grade on stat_grade=gradeid
+where grade_usr=@usrid
+and grade_act=@actid
+order by stat_start,stat_end
+go
+create or alter proc stat.merge_act
+(@id uniqueidentifier
+,@actid int
+,@earned int
+,@ranges nvarchar(max)='' -- start-end,start-end in seconds
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+
+declare @gradeid int=(select gradeid from grade where grade_usr=@usrid and grade_act=@actid)
+if @gradeid is null begin
+	insert into grade(grade_usr,grade_act) values(@usrid,@actid)
+	select @gradeid=scope_identity()
+end
+UPDATE grade SET earned = CASE
+	WHEN @earned > 100 THEN 100
+	WHEN @earned > earned THEN @earned
+	ELSE earned
+END
+WHERE gradeid = @gradeid
+
+if nullif(ltrim(rtrim(@ranges)),'') is not null begin
+	declare @part nvarchar(100)
+	declare @dash int
+	declare @s int
+	declare @e int
+	declare c cursor local fast_forward for
+		select ltrim(rtrim(value))
+		from string_split(@ranges, ',')
+		where nullif(ltrim(rtrim(value)),'') is not null
+	open c
+	fetch next from c into @part
+	while @@fetch_status = 0 begin
+		set @dash = charindex('-', @part)
+		if @dash > 1 begin
+			set @s = try_cast(left(@part, @dash - 1) as int)
+			set @e = try_cast(substring(@part, @dash + 1, 50) as int)
+			if @s is not null and @e is not null and @e >= @s begin
+				while exists (
+					select 1
+					from stat
+					where stat_grade = @gradeid
+					and stat_start <= @e + 1
+					and stat_end >= @s - 1
+					and (stat_start < @s or stat_end > @e)
+				) begin
+					select @s = min(x.stat_start), @e = max(x.stat_end)
+					from (
+						select @s as stat_start, @e as stat_end
+						union all
+						select stat_start, stat_end
+						from stat
+						where stat_grade = @gradeid
+						and stat_start <= @e + 1
+						and stat_end >= @s - 1
+					) x
+				end
+				delete from stat
+				where stat_grade = @gradeid
+				and stat_start <= @e + 1
+				and stat_end >= @s - 1
+				insert into stat(stat_grade,stat_start,stat_end) values(@gradeid,@s,@e)
+			end
+		end
+		fetch next from c into @part
+	end
+	close c
+	deallocate c
+end
+
+select earned
+from grade
+where gradeid=@gradeid
+go
 
 
 select * from usr

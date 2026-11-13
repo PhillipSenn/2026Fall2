@@ -120,3 +120,10 @@ select * from usr
 update usr set SpeechSynthesisUtterance=1
 update usr set isadmin=1 where usrid=1
 
+create table stat
+(statid int identity primary key clustered
+,stat_grade int
+,stat_start int
+,stat_end int
+)
+go

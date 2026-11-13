@@ -96,6 +96,8 @@ if (form.actid) {
 		}
 		if (val(grade.earned)) {
 			param request.progress.pct = grade.earned & '%';
+		} else {
+			param request.progress.pct = ''; // But don't overwrite it
 		}
 	}
 }

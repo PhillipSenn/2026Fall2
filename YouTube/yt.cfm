@@ -1,11 +1,17 @@
 <cfscript>
 include '/Inc/header6.cfm'
 q = new dbo.proc().exec('q.where_act',form.actid)
+stat = new dbo.proc().usr('stat.where_act',form.actid)
+savedRanges = []
+for (row in stat) {
+	arrayAppend(savedRanges, val(row.stat_start) & '-' & val(row.stat_end))
+}
 </cfscript>
 
 <cfoutput query="act">
 <div hidden id="videoId">#encodeForHTML(q.qname)#</div>
 <div hidden id="startSecond">#val(q.qsort)#</div>
+<div hidden id="watchedSaved">#encodeForHTML(arrayToList(savedRanges, ','))#</div>
 <article>
 	<section>
 		<row>
