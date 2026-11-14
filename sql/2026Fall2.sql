@@ -36,9 +36,6 @@ left join grade on grade.grade_usr=@usrid and grade.grade_act=act.actid
 where isHidden=0 or @isAdmin=1
 order by isHidden,actsort,actid
 go
-/*
-exec act.where_usr '19C76747-5CF9-449C-9A52-FEF8906AD52E'
-*/
 create or alter proc act.where_act
 (@actid int
 ) as
@@ -297,9 +294,6 @@ where q_act=@actid
 and poll_q is null
 order by qsort,qid
 go
---exec poll.unanswered '19C76747-5CF9-449C-9A52-FEF8906AD52E',292
---select * from usr
-
 create or alter proc ans.where_q
 (@qid int
 ) as
@@ -545,26 +539,6 @@ on ans_q=qid
 where ans_q is null
 order by rowNumber
 go
---drop proc ans.answered_pix
---(@id uniqueidentifier
---,@actid int
---) as
---declare @usrid int=(select usrid from usr where id=@id)
---select top 1 ansid
---from ans
---join (
---	select guess_ans
---	from guess
---	join grade on guess_grade=gradeid
---	where grade_usr=@usrid
---) guess
---on guess_ans=ansid
---join q on ans_q=qid
---where q_act=@actid
---and ansdesc is not null
---order by ansid desc
---go
---exec ans.answered_pix '19C76747-5CF9-449C-9A52-FEF8906AD52E',340 
 create or alter proc ans.unanswered_pix
 (@id uniqueidentifier
 ,@actid int
@@ -586,8 +560,6 @@ and ansdesc is not null
 and guess_ans is null
 order by ansid
 go
---exec ans.unanswered_pix '19C76747-5CF9-449C-9A52-FEF8906AD52E',340 
---go
 create or alter proc ans.unanswered_rnd
 (@id uniqueidentifier
 ,@actid int
@@ -608,7 +580,6 @@ and ansdesc is not null
 and guess_ans is null
 order by newid()
 go
---exec ans.unanswered_rnd '19C76747-5CF9-449C-9A52-FEF8906AD52E',340 
 create or alter proc guess.where_act_pix
 (@id uniqueidentifier
 ,@actid int
@@ -621,9 +592,6 @@ join q on ans_q=qid
 where q_act=@actid
 order by ansid desc
 go
---exec guess.where_act_pix '19C76747-5CF9-449C-9A52-FEF8906AD52E',340 
-
-
 create or alter proc guess.where_act
 (@id uniqueidentifier
 ,@actid int
@@ -715,7 +683,6 @@ outer apply (
 where q_act=@actid
 order by qsort,qid
 go
---exec guess.wrong_act '19C76747-5CF9-449C-9A52-FEF8906AD52E',242
 create or alter proc poll.update_poll -- Doesn't affect grade.earned
 (@id uniqueidentifier
 ,@pollid int
@@ -1163,8 +1130,6 @@ from(
 	having count(*) > 1
 ) x
 go
---exec ans.connections 336
-go
 
 create or alter proc guess.merge_relationships
 (@id uniqueidentifier
@@ -1223,11 +1188,6 @@ select earned
 from grade
 where gradeid=@gradeid
 go
-/*
-declare @actid int=328
-execute q.merge_unicode '19C76747-5CF9-449C-9A52-FEF8906AD52E',@actid,1,'U+1F468 U+1F3FB U+200D U+2764 U+FE0F U+200D U+1F48B U+200D U+1F468 U+1F3FB'
-select * from act
-*/
 create or alter view ansview as
 select ansid,ansname,ansdesc,correct
 	,qid,qname,qdesc,qsort,qhref
@@ -1541,7 +1501,6 @@ update ans set
  ansname=@ansname
 where ansid=@ansid
 go
---exec ans.merge_pix 13141,'test'
 --create schema grp authorization dbo
 create or alter proc grp.list as
 select grpid,grpname
@@ -1588,7 +1547,6 @@ where grade_usr=@usrid
 and grade_act=@actid
 order by guessid desc
 go
---exec guess.answered '19C76747-5CF9-449C-9A52-FEF8906AD52E',167
 --create schema stat authorization dbo
 create or alter proc stat.where_act
 (@id uniqueidentifier

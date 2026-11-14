@@ -1,0 +1,142 @@
+#wordle {
+	--wordle-len: 5;
+	max-width: min(100%, calc(var(--wordle-len) * 3.4rem));
+	margin: 0 auto;
+}
+
+.wordle-board {
+	display: grid;
+	gap: 0.35rem;
+	margin: 0 auto 1rem;
+	width: min(100%, calc(var(--wordle-len) * 3.4rem));
+}
+
+.wordle-board > .wordle-row {
+	display: grid;
+	grid-template-columns: repeat(var(--wordle-len), minmax(0, 1fr));
+	gap: 0.35rem;
+}
+
+.wordle-tile {
+	aspect-ratio: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 2px solid #878a8c;
+	background: #fff;
+	color: #1a1a1b;
+	font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+	font-size: clamp(1rem, 4vw, 1.75rem);
+	font-weight: 700;
+	text-transform: uppercase;
+	user-select: none;
+	transition: transform 0.18s ease, background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.wordle-tile.is-filled {
+	border-color: #565758;
+	animation: wordle-pop 0.08s ease;
+}
+
+.wordle-tile.is-correct {
+	background: #6aaa64;
+	border-color: #6aaa64;
+	color: #fff;
+}
+
+.wordle-tile.is-present {
+	background: #c9b458;
+	border-color: #c9b458;
+	color: #fff;
+}
+
+.wordle-tile.is-absent {
+	background: #787c7e;
+	border-color: #787c7e;
+	color: #fff;
+}
+
+.wordle-status {
+	font-weight: 600;
+}
+
+.wordle-keyboard {
+	display: grid;
+	gap: 0.4rem;
+}
+
+.wordle-keyboard > .wordle-row {
+	display: flex;
+	justify-content: center;
+	gap: 0.35rem;
+}
+
+.wordle-key {
+	min-width: 2rem;
+	min-height: 3rem;
+	padding: 0 0.55rem;
+	border: 0;
+	border-radius: 0.35rem;
+	background: #d3d6da;
+	color: #1a1a1b;
+	font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+	font-size: 0.8rem;
+	font-weight: 700;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.wordle-key-wide {
+	min-width: 3.4rem;
+	font-size: 0.7rem;
+}
+
+.wordle-key.is-correct {
+	background: #6aaa64;
+	color: #fff;
+}
+
+.wordle-key.is-present {
+	background: #c9b458;
+	color: #fff;
+}
+
+.wordle-key.is-absent {
+	background: #787c7e;
+	color: #fff;
+}
+
+.wordle-qdesc {
+	font-size: 1.05rem;
+	line-height: 1.5;
+	color: #333;
+}
+
+.wordle-row.is-shake {
+	animation: wordle-shake 0.45s ease;
+}
+
+@keyframes wordle-pop {
+	from { transform: scale(0.9); }
+	to { transform: scale(1); }
+}
+
+@keyframes wordle-shake {
+	0%, 100% { transform: translateX(0); }
+	20% { transform: translateX(-6px); }
+	40% { transform: translateX(6px); }
+	60% { transform: translateX(-4px); }
+	80% { transform: translateX(4px); }
+}
+
+@media (max-width: 480px) {
+	.wordle-key {
+		min-width: 1.55rem;
+		min-height: 2.6rem;
+		padding: 0 0.35rem;
+	}
+
+	.wordle-key-wide {
+		min-width: 2.6rem;
+	}
+}

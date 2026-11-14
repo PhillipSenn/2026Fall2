@@ -1,0 +1,136 @@
+#crossword aside {
+	position: sticky;
+	top: 5rem;
+	align-self: flex-start;
+	width: 16rem;
+}
+
+#crossword aside article {
+	display: flex;
+	flex-direction: column;
+	max-height: calc(100dvh - 5.5rem);
+	overflow: hidden;
+}
+
+#crossword aside section {
+	overflow-y: auto;
+	min-height: 0;
+}
+
+.crossword-board-wrap {
+	overflow: auto;
+	max-height: calc(100dvh - 9rem);
+}
+
+.crossword-board {
+	display: grid;
+	grid-template-columns: repeat(var(--grid-size), 1.5rem);
+	grid-template-rows: repeat(var(--grid-size), 1.5rem);
+	width: max-content;
+	gap: 0;
+	border: 1px solid rgba(0, 0, 0, 0.35);
+	background:
+		linear-gradient(rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)),
+		repeating-conic-gradient(#f7f7f4 0% 25%, #efeee8 0% 50%) 0 0 / 3rem 3rem;
+}
+
+.crossword-board .cell {
+	box-sizing: border-box;
+	width: 1.5rem;
+	height: 1.5rem;
+	border: 1px solid rgba(0, 0, 0, 0.18);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 0.85rem;
+	font-weight: 700;
+	line-height: 1;
+	text-transform: uppercase;
+	user-select: none;
+}
+
+.crossword-board .cell.is-filled {
+	background: #fff;
+}
+
+.crossword-board .cell.is-preview-ok {
+	background: rgba(25, 135, 84, 0.25);
+	outline: 1px solid rgba(25, 135, 84, 0.7);
+}
+
+.crossword-board .cell.is-preview-bad {
+	background: rgba(220, 53, 69, 0.25);
+	outline: 1px solid rgba(220, 53, 69, 0.7);
+}
+
+.crossword-board .cell.is-just-placed {
+	background: #fff3cd;
+}
+
+#words li.is-placed {
+	display: none;
+}
+
+.qname {
+	display: inline-block;
+	cursor: grab;
+	padding: 0.2rem 0.45rem;
+	margin-bottom: 0.2rem;
+	border: 1px solid transparent;
+	border-radius: 0.25rem;
+	user-select: none;
+}
+
+.qname.is-vertical {
+	background: rgba(13, 110, 253, 0.08);
+	border-color: rgba(13, 110, 253, 0.35);
+}
+
+.qname.is-vertical::after {
+	content: " ↓";
+	opacity: 0.65;
+	font-weight: 700;
+}
+
+.qname:not(.is-vertical)::after {
+	content: " →";
+	opacity: 0.45;
+}
+
+.qname.ui-draggable-dragging,
+.qname.is-dragging {
+	opacity: 0.35;
+}
+
+.qname.ui-draggable-disabled,
+.qname.is-placed {
+	cursor: default;
+	opacity: 0.45;
+}
+
+.word-helper {
+	display: flex;
+	gap: 0;
+	pointer-events: none;
+	z-index: 1000;
+}
+
+.word-helper.is-vertical {
+	flex-direction: column;
+}
+
+.helper-letter {
+	box-sizing: border-box;
+	width: 1.5rem;
+	height: 1.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid rgba(0, 0, 0, 0.45);
+	background: #fff;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 0.85rem;
+	font-weight: 700;
+	box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+}
