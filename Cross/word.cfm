@@ -1,6 +1,23 @@
 <cfscript>
+if (structKeyExists(form, 'reset')) {
+	try {
+		queryExecute(
+			"DELETE c
+			FROM crossword.crossword c
+			JOIN grade g ON c.crossword_grade = g.gradeid
+			WHERE g.grade_usr = (SELECT usrid FROM usr WHERE id = :id)
+			AND g.grade_act = :actid",
+			{
+				id: {value: request.usr.id, cfsqltype: "cf_sql_varchar"},
+				actid: {value: form.actid, cfsqltype: "cf_sql_integer"}
+			}
+		)
+	} catch (any e) {
+	}
+	new dbo.proc().usr('grade.merge_act', [form.actid, 0])
+}
 request.jQueryUI = 'base'
-request.container = 'container-fluid'
+//request.container = 'container-fluid'
 q = new dbo.proc().exec('q.where_act', form.actid)
 gradeLabel = new dbo.proc().usr('grade.where_act', form.actid)
 placedMap = {}
@@ -31,9 +48,17 @@ try {
 } catch (any e) {
 	placedCount = 0
 }
-request.progress.pct = placedCount & ' / ' & q.recordCount & ' (' & val(gradeLabel.earned) & '%)'
+wordTotal = 0
+for (row in q) {
+	letters = reReplaceNoCase(row.qname, '\([^)]*\)', '', 'all')
+	letters = reReplaceNoCase(letters, '[^A-Za-z]', '', 'all')
+	if (len(letters) && len(letters) <= 15) {
+		wordTotal++
+	}
+}
+request.progress.pct = placedCount & ' / ' & wordTotal & ' (' & val(gradeLabel.earned) & '%)'
 request.progress.width = min(100, val(gradeLabel.earned))
-gridSize = 35
+gridSize = 15
 include '/Inc/header6.cfm'
 </cfscript>
 
@@ -43,8 +68,9 @@ include '/Inc/header6.cfm'
 		<div class="col">
 			<article>
 				<header class="theme-primary theme-subtle">
-					Drag a word onto the grid. Click a word (or press R) to rotate horizontal / vertical.
-					Words may cross when they share the same letter.
+					Drag a word onto the grid. Drag a placed word again to move it.
+					Click a keyword to toggle horizontal / vertical. Words may cross on the same letter.
+					<button class="float-end btn-outline theme-danger" name="reset">Reset</button>
 				</header>
 				<section class="crossword-board-wrap">
 					<div id="board" class="crossword-board" style="--grid-size: #gridSize#" data-size="#gridSize#">
@@ -65,8 +91,9 @@ include '/Inc/header6.cfm'
 				<section>
 					<ul id="words" class="list-unstyled mb-0">
 						<cfloop query="q">
-							<cfset letters = reReplaceNoCase(qname, '[^A-Za-z]', '', 'all')>
-							<cfif !len(letters)>
+							<cfset letters = reReplaceNoCase(qname, '\([^)]*\)', '', 'all')>
+							<cfset letters = reReplaceNoCase(letters, '[^A-Za-z]', '', 'all')>
+							<cfif !len(letters) || len(letters) GT 15>
 								<cfcontinue>
 							</cfif>
 							<cfset isPlaced = structKeyExists(placedMap, qid)>

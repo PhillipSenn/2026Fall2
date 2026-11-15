@@ -1,6 +1,7 @@
-var size = +$('#board').data('size') || 35
+var size = +$('#board').data('size') || 15
 var cells = {}
-var placed = {}
+var placements = {}
+var dragThisGesture = false
 
 init_cells()
 load_placed()
@@ -18,7 +19,7 @@ function init_cells() {
 		cells[key(row, col)] = {
 			el: cell,
 			letter: '',
-			count: 0
+			owners: {}
 		}
 	}
 }
@@ -39,18 +40,15 @@ function load_placed() {
 		if (!info) {
 			return
 		}
-		placed[qid] = true
-		word.addClass('is-placed').closest('li').addClass('is-placed')
-		if (info.ROW == null && info.row == null) {
-			return
-		}
 		var row = +(info.ROW != null ? info.ROW : info.row)
 		var col = +(info.COL != null ? info.COL : info.col)
-		var dir = +(info.DIR != null ? info.DIR : info.dir)
+		var dir = +(info.DIR != null ? info.DIR : info.dir) || 0
 		if (isNaN(row) || isNaN(col)) {
 			return
 		}
-		paint_word(String(word.data('letters')), row, col, dir, true)
+		word.attr('data-dir', dir).toggleClass('is-vertical', !!dir)
+		paint_word(qid, String(word.data('letters')), row, col, dir, true)
+		word.addClass('is-placed')
 	}
 }
 
@@ -67,56 +65,99 @@ function by_name(a, b) {
 }
 
 function bind_words() {
-	$('.qname').not('.is-placed')
+	$('.qname')
+		.data('correct', false)
+		.on('mousedown', reset_gesture)
 		.on('click', rotate_word)
 		.draggable({
 			helper: drag_helper,
 			appendTo: 'body',
 			zIndex: 1000,
-			revert: 'invalid',
+			distance: 4,
+			cursorAt: { left: 20, top: 20 },
+			revert: revert_word,
 			cursor: 'grabbing',
 			start: drag_start,
+			drag: drag_move,
 			stop: drag_stop
 		})
+}
+
+function reset_gesture() {
+	dragThisGesture = false
 }
 
 function bind_board() {
 	$('#board .cell').droppable({
 		accept: '.qname',
 		tolerance: 'pointer',
-		over: over_cell,
-		out: out_cell,
 		drop: drop_word
 	})
 }
 
 function rotate_word(event) {
-	if ($(this).hasClass('ui-draggable-dragging')) {
+	var word = $(this)
+	var qid = String(word.data('qid'))
+	var letters = String(word.data('letters') || '')
+	var placement
+	var newDir
+	if (dragThisGesture || word.hasClass('ui-draggable-dragging')) {
 		return
 	}
 	event.preventDefault()
-	toggle_dir($(this))
+	placement = placements[qid]
+	newDir = +word.attr('data-dir') ? 0 : 1
+	if (!placement) {
+		toggle_dir(word)
+		return
+	}
+	unpaint_word(qid)
+	if (!can_place(letters, placement.row, placement.col, newDir)) {
+		paint_word(qid, letters, placement.row, placement.col, placement.dir, true)
+		toggle_dir(word)
+		return
+	}
+	word.attr('data-dir', newDir).toggleClass('is-vertical', !!newDir)
+	paint_word(qid, letters, placement.row, placement.col, newDir, false)
+	merge_q(qid, placement.row, placement.col, newDir)
+		.catch(caught('merge_q.cfm'))
 }
 
 function toggle_dir(word) {
 	var dir = +word.attr('data-dir') ? 0 : 1
 	word.attr('data-dir', dir)
 	word.toggleClass('is-vertical', !!dir)
+	refresh_helper(word)
+}
+
+function refresh_helper(word) {
+	var helper = $('.word-helper').last()
+	var letters
+	var dir
+	var i
+	if (!helper.length) {
+		return
+	}
+	letters = String(word.data('letters') || '')
+	dir = +word.attr('data-dir')
+	helper.toggleClass('is-vertical', !!dir).empty()
+	for (i = 0; i < letters.length; i++) {
+		helper.append($('<span class="helper-letter">').text(letters.charAt(i)))
+	}
 }
 
 function on_keydown(event) {
 	if (event.key !== 'r' && event.key !== 'R') {
 		return
 	}
-	var dragging = $('.qname.ui-draggable-dragging')
+	var dragging = $('.qname.is-dragging')
 	if (dragging.length) {
-		toggle_dir(dragging)
-		dragging.draggable('option', 'helper', drag_helper)
+		toggle_dir(dragging.first())
 		return
 	}
-	var hovered = $('.qname:hover').not('.is-placed')
+	var hovered = $('.qname:hover')
 	if (hovered.length) {
-		toggle_dir(hovered.first())
+		hovered.first().trigger('click')
 	}
 }
 
@@ -132,47 +173,116 @@ function drag_helper() {
 	return helper
 }
 
-function drag_start() {
-	$(this).addClass('is-dragging')
+function drag_start(event, ui) {
+	var word = $(this)
+	var qid = String(word.data('qid'))
+	var placement = placements[qid]
+	var first = ui.helper.find('.helper-letter').first()
+	dragThisGesture = true
+	word.data('correct', false).addClass('is-dragging')
+	if (first.length) {
+		word.draggable('option', 'cursorAt', {
+			left: first.outerWidth() / 2,
+			top: first.outerHeight() / 2
+		})
+	}
+	if (placement) {
+		word.data('origin', {
+			letters: placement.letters,
+			row: placement.row,
+			col: placement.col,
+			dir: placement.dir
+		})
+		unpaint_word(qid)
+	} else {
+		word.removeData('origin')
+	}
+}
+
+function drag_move(event, ui) {
+	var cell
+	dragThisGesture = true
+	cell = cell_from_helper(ui.helper)
+	if (!cell.length) {
+		clear_preview()
+		return
+	}
+	preview_word($(this), +cell.data('row'), +cell.data('col'))
+}
+
+function cell_from_helper(helper) {
+	var first = helper.find('.helper-letter').first()
+	var rect
+	var el
+	if (!first.length) {
+		return $()
+	}
+	rect = first[0].getBoundingClientRect()
+	helper.css('visibility', 'hidden')
+	el = document.elementFromPoint(
+		rect.left + rect.width / 2,
+		rect.top + rect.height / 2
+	)
+	helper.css('visibility', 'visible')
+	return $(el).closest('.cell')
 }
 
 function drag_stop() {
-	$(this).removeClass('is-dragging')
+	var word = $(this)
+	word.removeClass('is-dragging')
 	clear_preview()
+	if (!word.data('correct')) {
+		restore_origin(word)
+	}
+	word.removeData('origin')
 }
 
-function over_cell(event, ui) {
-	var cell = $(this)
-	var word = ui.draggable
-	preview_word(word, +cell.data('row'), +cell.data('col'))
+function restore_origin(word) {
+	var origin = word.data('origin')
+	var qid
+	if (!origin) {
+		return
+	}
+	qid = String(word.data('qid'))
+	word.attr('data-dir', origin.dir).toggleClass('is-vertical', !!origin.dir)
+	paint_word(qid, origin.letters, origin.row, origin.col, origin.dir, true)
+	word.addClass('is-placed')
 }
 
-function out_cell() {
-	clear_preview()
+function revert_word() {
+	return !$(this).data('correct')
 }
 
 function drop_word(event, ui) {
-	var cell = $(this)
+	var cell = cell_from_helper(ui.helper)
 	var word = ui.draggable
-	var row = +cell.data('row')
-	var col = +cell.data('col')
+	var row
+	var col
 	var dir = +word.attr('data-dir')
 	var letters = String(word.data('letters') || '')
-	var qid = word.data('qid')
+	var qid = String(word.data('qid'))
+	var wasPlaced = !!word.data('origin')
 	clear_preview()
+	if (!cell.length) {
+		cell = $(this)
+	}
+	row = +cell.data('row')
+	col = +cell.data('col')
 	if (!can_place(letters, row, col, dir)) {
+		word.data('correct', false)
 		return
 	}
-	paint_word(letters, row, col, dir, false)
-	placed[String(qid)] = true
-	word.draggable('disable')
-	word.addClass('is-placed').closest('li').slideUp('slow', after_slide)
+	paint_word(qid, letters, row, col, dir, false)
+	word.data('correct', true)
+	word.addClass('is-placed')
 	merge_q(qid, row, col, dir)
-		.then(show_earned)
+		.then(after_merge)
 		.catch(caught('merge_q.cfm'))
 
-	function after_slide() {
-		$(this).addClass('is-placed')
+	function after_merge(response) {
+		if (!wasPlaced) {
+			show_earned(response)
+		}
 	}
 }
 
@@ -181,9 +291,10 @@ function preview_word(word, row, col) {
 	var dir = +word.attr('data-dir')
 	var ok = can_place(letters, row, col, dir)
 	var i
+	var at
 	clear_preview()
 	for (i = 0; i < letters.length; i++) {
-		var at = offset_cell(row, col, dir, i)
+		at = offset_cell(row, col, dir, i)
 		if (!at) {
 			continue
 		}
@@ -215,17 +326,25 @@ function can_place(letters, row, col, dir) {
 	return true
 }
 
-function paint_word(letters, row, col, dir, silent) {
+function paint_word(qid, letters, row, col, dir, silent) {
 	var i
 	var at
+	var letter
+	placements[qid] = {
+		letters: letters,
+		row: row,
+		col: col,
+		dir: dir
+	}
 	for (i = 0; i < letters.length; i++) {
 		at = offset_cell(row, col, dir, i)
 		if (!at) {
 			continue
 		}
-		at.letter = letters.charAt(i)
-		at.count += 1
-		at.el.text(at.letter).addClass('is-filled')
+		letter = letters.charAt(i)
+		at.owners[qid] = letter
+		at.letter = letter
+		at.el.text(letter).addClass('is-filled')
 		if (!silent) {
 			at.el.addClass('is-just-placed')
 		}
@@ -233,6 +352,32 @@ function paint_word(letters, row, col, dir, silent) {
 	if (!silent) {
 		setTimeout(clear_just_placed, 700)
 	}
+}
+
+function unpaint_word(qid) {
+	var placement = placements[qid]
+	var i
+	var at
+	var ownerIds
+	if (!placement) {
+		return
+	}
+	for (i = 0; i < placement.letters.length; i++) {
+		at = offset_cell(placement.row, placement.col, placement.dir, i)
+		if (!at) {
+			continue
+		}
+		delete at.owners[qid]
+		ownerIds = Object.keys(at.owners)
+		if (!ownerIds.length) {
+			at.letter = ''
+			at.el.text('').removeClass('is-filled is-just-placed')
+		} else {
+			at.letter = at.owners[ownerIds[0]]
+			at.el.text(at.letter).addClass('is-filled')
+		}
+	}
+	delete placements[qid]
 }
 
 function clear_just_placed() {

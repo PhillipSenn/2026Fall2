@@ -27,12 +27,19 @@ placed = queryExecute(
 		actid: {value: act.actid, cfsqltype: "cf_sql_integer"}
 	}
 );
-total = queryExecute(
-	"SELECT COUNT(*) AS cnt
+qs = queryExecute(
+	"SELECT qname
 	FROM q
-	WHERE q_act = :actid
-	AND qname LIKE '%[A-Za-z]%'",
+	WHERE q_act = :actid",
 	{actid: {value: act.actid, cfsqltype: "cf_sql_integer"}}
 );
-writeOutput(grade.earned & '|' & val(placed.cnt) & ' / ' & val(total.cnt) & ' (' & grade.earned & '%)');
+wordTotal = 0;
+for (row in qs) {
+	letters = reReplaceNoCase(row.qname, '\([^)]*\)', '', 'all');
+	letters = reReplaceNoCase(letters, '[^A-Za-z]', '', 'all');
+	if (len(letters) && len(letters) <= 15) {
+		wordTotal++;
+	}
+}
+writeOutput(grade.earned & '|' & val(placed.cnt) & ' / ' & wordTotal & ' (' & grade.earned & '%)');
 </cfscript>

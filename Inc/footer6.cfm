@@ -24,10 +24,12 @@ if (request.footer.js) {
 //writeoutput('<h1>#fileExists(request.pgmDir & request.pgmName & '.js')#</h1>')
 param request.pageModule = false;
 if (structKeyExists(request,'usr') AND fileExists(request.pgmDir & request.pgmName & '.js')) {
+	jsInfo = getFileInfo(request.pgmDir & request.pgmName & '.js')
+	jsVer = dateFormat(jsInfo.lastmodified, 'yyyymmdd') & timeFormat(jsInfo.lastmodified, 'HHmmss')
 	if (request.pageModule) {
-		writeoutput('<script type="module" src="' & request.pgmName & '.js"></script>' & chr(10))
+		writeoutput('<script type="module" src="' & request.pgmName & '.js?v=' & jsVer & '"></script>' & chr(10))
 	} else {
-		writeoutput('<script src="' & request.pgmName & '.js"></script>' & chr(10))
+		writeoutput('<script src="' & request.pgmName & '.js?v=' & jsVer & '"></script>' & chr(10))
 	}
 }
 //writeOutput('<div hidden id="serverfile">' & request.serverFile & '</div>' & chr(10))

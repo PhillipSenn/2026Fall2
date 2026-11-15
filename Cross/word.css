@@ -1,8 +1,19 @@
+#crossword > .row {
+	flex-wrap: nowrap;
+	align-items: flex-start;
+}
+
+#crossword > .row > .col {
+	min-width: 0;
+}
+
 #crossword aside {
 	position: sticky;
 	top: 5rem;
 	align-self: flex-start;
+	flex: 0 0 16rem;
 	width: 16rem;
+	max-width: 16rem;
 }
 
 #crossword aside article {
@@ -18,32 +29,35 @@
 }
 
 .crossword-board-wrap {
-	overflow: auto;
-	max-height: calc(100dvh - 9rem);
+	overflow: visible;
+	display: flex;
+	justify-content: flex-end;
 }
 
 .crossword-board {
+	--cell-size: 2.5rem;
 	display: grid;
-	grid-template-columns: repeat(var(--grid-size), 1.5rem);
-	grid-template-rows: repeat(var(--grid-size), 1.5rem);
+	grid-template-columns: repeat(var(--grid-size), var(--cell-size));
+	grid-template-rows: repeat(var(--grid-size), var(--cell-size));
 	width: max-content;
+	margin-left: auto;
 	gap: 0;
 	border: 1px solid rgba(0, 0, 0, 0.35);
 	background:
 		linear-gradient(rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)),
-		repeating-conic-gradient(#f7f7f4 0% 25%, #efeee8 0% 50%) 0 0 / 3rem 3rem;
+		repeating-conic-gradient(#f7f7f4 0% 25%, #efeee8 0% 50%) 0 0 / calc(var(--cell-size) * 2) calc(var(--cell-size) * 2);
 }
 
 .crossword-board .cell {
 	box-sizing: border-box;
-	width: 1.5rem;
-	height: 1.5rem;
+	width: var(--cell-size);
+	height: var(--cell-size);
 	border: 1px solid rgba(0, 0, 0, 0.18);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	font-family: "Courier New", Courier, monospace;
-	font-size: 0.85rem;
+	font-size: 1.15rem;
 	font-weight: 700;
 	line-height: 1;
 	text-transform: uppercase;
@@ -66,10 +80,6 @@
 
 .crossword-board .cell.is-just-placed {
 	background: #fff3cd;
-}
-
-#words li.is-placed {
-	display: none;
 }
 
 .qname {
@@ -103,10 +113,9 @@
 	opacity: 0.35;
 }
 
-.qname.ui-draggable-disabled,
 .qname.is-placed {
-	cursor: default;
-	opacity: 0.45;
+	background: rgba(25, 135, 84, 0.12);
+	border-color: rgba(25, 135, 84, 0.35);
 }
 
 .word-helper {
@@ -122,15 +131,15 @@
 
 .helper-letter {
 	box-sizing: border-box;
-	width: 1.5rem;
-	height: 1.5rem;
+	width: 2.5rem;
+	height: 2.5rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	border: 1px solid rgba(0, 0, 0, 0.45);
 	background: #fff;
 	font-family: "Courier New", Courier, monospace;
-	font-size: 0.85rem;
+	font-size: 1.15rem;
 	font-weight: 700;
 	box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
 }

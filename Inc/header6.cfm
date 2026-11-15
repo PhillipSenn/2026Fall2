@@ -78,7 +78,9 @@ if (request.header.css) {
 	writeoutput('<link	rel="stylesheet" href="' & request.home & 'Inc/css/header6.css">' & chr(10))
 }
 if (fileExists(request.pgmDir & request.pgmName & '.css')) {
-	writeoutput('<link	rel="stylesheet" href="' & request.pgmName & '.css">' & chr(10))
+	cssInfo = getFileInfo(request.pgmDir & request.pgmName & '.css')
+	cssVer = dateFormat(cssInfo.lastmodified, 'yyyymmdd') & timeFormat(cssInfo.lastmodified, 'HHmmss')
+	writeoutput('<link	rel="stylesheet" href="' & request.pgmName & '.css?v=' & cssVer & '">' & chr(10))
 }
 writeoutput('<link	rel="icon"		 href="' & request.ico & '">' & chr(10))
 param form.actid=0;
