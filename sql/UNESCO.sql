@@ -1,10 +1,11 @@
 USE UNESCO
-create table iso2
-(iso2id char(2)
-,iso2name nvarchar(max)
-)
 go
-
+--create table iso2
+--(iso2id char(2)
+--,iso2name nvarchar(max)
+--)
+--go
+/*
 insert into iso2(iso2id,iso2name) values
  ('AD',N'Andorra')
 ,('AE',N'United Arab Emirates')
@@ -469,24 +470,22 @@ insert into country(countryname) values
 (N'Yemen'),
 (N'Zambia'),
 (N'Zimbabwe');
-
 go
-drop table [row]
-go
-create table [row]
-(rowid int -- id_number 
-,image_url varchar(255)
-,row_category int
-,danger bit
-,date_inscribed smallint
-,extension bit
-,short_description nvarchar(max)
-,sitename nvarchar(max)
-,transnational bit
-)
-go
-select * from row
-where short_description like '%vast and isolated linear cluste%'
+*/
+--drop table [row]
+--go
+--create table [row]
+--(rowid int -- id_number 
+--,image_url varchar(255)
+--,row_category int
+--,danger bit
+--,date_inscribed smallint
+--,extension bit
+--,short_description nvarchar(max)
+--,sitename nvarchar(max)
+--,transnational bit
+--)
+--go
 
 --create schema row authorization dbo
 create or alter proc row.rnd
@@ -515,31 +514,31 @@ order by case when exists(
 go
 -- EXEC row.rnd @id='...'
 
-create table iso -- iso_codes csv
-(iso_row int
-,iso2 char(2)
-)
-go
-select * from poi
---drop table poi
+--create table iso -- iso_codes csv
+--(iso_row int
+--,iso2 char(2)
+--)
+--go
+--select * from poi
+----drop table poi
 
-create table poi
-(poiid int primary key clustered
-,poi_row int
-,lat decimal(13,10) -- 10.7749785403
-,lng decimal(13,10)
-,iso2 char(2)
-)
-go
-create table ug -- The user's guess: UGH!
-(ugid int identity primary key clustered
-,ug_usr int
-,ug_row int
-,ug_lat decimal(13,10)
-,ug_lng decimal(13,10)
-,ugdate datetime2(0) 
-)
-go
+--create table poi
+--(poiid int primary key clustered
+--,poi_row int
+--,lat decimal(13,10) -- 10.7749785403
+--,lng decimal(13,10)
+--,iso2 char(2)
+--)
+--go
+--create table ug -- The user's guess: UGH!
+--(ugid int identity primary key clustered
+--,ug_usr int
+--,ug_row int
+--,ug_lat decimal(13,10)
+--,ug_lng decimal(13,10)
+--,ugdate datetime2(0) 
+--)
+--go
 --create schema ug authorization dbo
 --create schema poi authorization dbo
 create or alter proc poi.where_row
@@ -575,31 +574,31 @@ where ug_row=@rowid
 order by ugdate
 go
 
-select * from PhillipSenn.UNESCO.dbo.iso2
-select * from PhillipSenn.UNESCO.dbo.region
-insert into PhillipSenn.UNESCO.dbo.regions(regions_row,regions_region)
-select regions_row,regions_region
-from regions -- row, region
+--select * from PhillipSenn.UNESCO.dbo.iso2
+--select * from PhillipSenn.UNESCO.dbo.region
+--insert into PhillipSenn.UNESCO.dbo.regions(regions_row,regions_region)
+--select regions_row,regions_region
+--from regions -- row, region
 
-select * from PhillipSenn.UNESCO.dbo.category
-select * from PhillipSenn.UNESCO.dbo.country
-insert into PhillipSenn.UNESCO.dbo.states(states_row,states_country)
-select states_row,states_country
-from states -- row, country
+--select * from PhillipSenn.UNESCO.dbo.category
+--select * from PhillipSenn.UNESCO.dbo.country
+--insert into PhillipSenn.UNESCO.dbo.states(states_row,states_country)
+--select states_row,states_country
+--from states -- row, country
 
-insert into PhillipSenn.UNESCO.dbo.iso(iso_row,iso2)
-select iso_row,iso2 from iso -- row,iso2
+--insert into PhillipSenn.UNESCO.dbo.iso(iso_row,iso2)
+--select iso_row,iso2 from iso -- row,iso2
 
-insert into PhillipSenn.UNESCO.dbo.poi(poiid,poi_row,lat,lng,iso2)
-select poiid,poi_row,lat,lng,iso2 
-from poi
-order by poiid
+--insert into PhillipSenn.UNESCO.dbo.poi(poiid,poi_row,lat,lng,iso2)
+--select poiid,poi_row,lat,lng,iso2 
+--from poi
+--order by poiid
 
-insert into PhillipSenn.UNESCO.dbo.row(rowid,image_url,row_category,danger,date_inscribed,extension,short_description,sitename,transnational)
-select rowid,image_url,row_category,danger,date_inscribed,extension,short_description,sitename,transnational
-from row
-order by rowid
+--insert into PhillipSenn.UNESCO.dbo.row(rowid,image_url,row_category,danger,date_inscribed,extension,short_description,sitename,transnational)
+--select rowid,image_url,row_category,danger,date_inscribed,extension,short_description,sitename,transnational
+--from row
+--order by rowid
 
-where transnational <> 0
+--where transnational <> 0
 
 
