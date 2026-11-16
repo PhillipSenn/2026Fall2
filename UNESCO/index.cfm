@@ -1,5 +1,4 @@
 <cfscript>
-include '/Inc/header6.cfm'
 row = queryExecute('
 select rowid,sitename,short_description,image_url,danger,extension,transnational
 	,categoryid,categoryname
@@ -15,7 +14,15 @@ on poi_row=rowid
 left join ug on ug_usr=#request.usr.usrid# and ug_row=rowid
 order by isnull(ugid,0) desc,rowid',{},{datasource='UNESCO'})
 
-
+doneCount = 0
+for (r in row) {
+	if (val(r.ug_row)) {
+		doneCount++
+	}
+}
+gradeLabel = new dbo.proc().usr('grade.where_act', form.actid)
+request.progress.pct = doneCount & ' / ' & row.recordCount & ' (' & val(gradeLabel.earned) & '%)'
+include '/Inc/header6.cfm'
 
 category = queryExecute('
 select categoryid,categoryname

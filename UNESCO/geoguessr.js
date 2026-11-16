@@ -256,14 +256,16 @@ function awardGuessPoints(results) {
 }
 
 function showEarned(response) {
-	var pct = parseInt(response, 10)
+	var parts = String(response || '').split('|')
+	var pct = parseInt(parts[0], 10)
+	var label = parts[1] || (pct + '%')
 	var bar = $('.progress-bar')
 	if (isNaN(pct) || !bar.length) {
 		return
 	}
 	bar.css('width', Math.min(100, pct) + '%')
 		.attr('aria-valuenow', pct)
-		.text(pct + '%')
+		.text(label)
 	if (pct >= 100) {
 		bar.addClass('bg-success progress-bar-striped progress-bar-animated fw-bold')
 	}

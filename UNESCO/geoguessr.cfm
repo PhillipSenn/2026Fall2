@@ -1,5 +1,30 @@
 <cfscript>
 request.container = 'container-fluid'
+done = queryExecute('
+	select count(*) as cnt
+	from ug
+	join (
+		select poi_row
+		from poi
+		group by poi_row
+	) poi on poi_row = ug_row
+	where ug_usr = :usrid',
+	{usrid: {value: request.usr.usrid, cfsqltype: 'cf_sql_integer'}},
+	{datasource: 'UNESCO'}
+)
+total = queryExecute('
+	select count(*) as cnt
+	from row
+	join (
+		select poi_row
+		from poi
+		group by poi_row
+	) poi on poi_row = rowid',
+	{},
+	{datasource: 'UNESCO'}
+)
+gradeLabel = new dbo.proc().usr('grade.where_act', form.actid)
+request.progress.pct = val(done.cnt) & ' / ' & val(total.cnt) & ' (' & val(gradeLabel.earned) & '%)'
 include '/Inc/header6.cfm'
 row = queryNew('')
 if (structKeyExists(url, 'rowid') && isNumeric(url.rowid) && val(url.rowid)) {

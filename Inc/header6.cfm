@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta	name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <cfscript>
-param request.container = 'md:container';
+param request.container = 'container-fluid lg:container';
 param request.title = 'CSC175';
 param request.ico = 'https://www.lr.edu/sites/default/files/favicon.ico';
 param request.top = 'sticky-top';
