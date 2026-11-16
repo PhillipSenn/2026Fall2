@@ -8,6 +8,10 @@ if (structKeyExists(form,'ansid')) {
    new dbo.proc().usr('guess.invented_discovered',url.ansid)
 }
 request.container = 'container-fluid'
+total = new dbo.proc().exec('q.where_act',form.actid)
+guess = new dbo.proc().usr('guess.answered',form.actid)
+gradeLabel = new dbo.proc().usr('grade.where_act',form.actid)
+request.progress.pct = guess.recordCount & ' / ' & total.recordCount & ' (' & val(gradeLabel.earned) & '%)'
 include '/Inc/header6.cfm'
 img = new dbo.proc().usr('ans.unanswered_img',form.actid)
 q = new dbo.proc().exec('q.where_q',img.qid)
@@ -21,7 +25,6 @@ prefix = new dbo.proc().exec('ans.q_catname',[q.qid,'prefix'])
 suffix = new dbo.proc().exec('ans.q_catname',[q.qid,'suffix'])
 page   = new dbo.proc().exec('ans.q_catname',[q.qid,'page'])
 answers= new dbo.proc().exec('ans.q_catname',[q.qid,'Possible Answer'])
-guess  = new dbo.proc().usr('guess.answered',form.actid)
 </cfscript>
 
 <cfoutput query="act">
