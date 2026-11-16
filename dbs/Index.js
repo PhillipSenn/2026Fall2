@@ -326,7 +326,16 @@
 	function sizeSurface() {
 		let width = canvas.clientWidth;
 		let height = canvas.clientHeight;
+		let extent = canvas.querySelector('.rel-extent');
+		canvas.style.height = '';
 		canvas.querySelectorAll('.rel-table').forEach(measureTable);
+		if (!extent) {
+			extent = document.createElement('div');
+			extent.className = 'rel-extent';
+			canvas.insertBefore(extent, canvas.firstChild);
+		}
+		extent.style.width = width + 'px';
+		extent.style.height = height + 'px';
 		svg.style.width = width + 'px';
 		svg.style.height = height + 'px';
 
@@ -792,13 +801,9 @@
 		const incoming = {};
 		const y = [28, 28, 28];
 		const x = [36, 536, 660];
-		let bottom = 0;
 		pairs.forEach(markIncoming);
 		tables.forEach(assignColumn);
 		columns.forEach(placeColumn);
-		if (bottom + 24 > canvas.clientHeight) {
-			canvas.style.height = (bottom + 24) + 'px';
-		}
 
 		function markIncoming(pair) {
 			incoming[pair[0].split('.')[0]] = true;
@@ -830,7 +835,6 @@
 				table.x = x[index];
 				table.y = y[index];
 				y[index] += height + 18;
-				bottom = Math.max(bottom, table.y + height);
 			}
 		}
 	}

@@ -30,11 +30,16 @@
 #rel-canvas {
 	position: relative;
 	height: 100%;
+	min-height: 0;
 	min-width: 0;
 	overflow: auto;
 	background: #d0d0d0;
 	cursor: default;
 	touch-action: none;
+}
+
+#rel-canvas .rel-extent {
+	pointer-events: none;
 }
 
 #rel-fields {

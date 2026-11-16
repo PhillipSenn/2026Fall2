@@ -602,3 +602,72 @@ go
 --where transnational <> 0
 
 
+select * from row
+
+use LR2026Fall2
+insert into act(actname,actlink) values('UNESCO database','dbs/UNESCO.cfm')
+select * from act 
+order by actid desc
+go
+declare @actid int=362
+declare @qid int
+insert into q(q_act,qname) values(@actid,'iso2')
+select @qid=scope_identity()
+insert into ans(ans_q,ansname) values(@qid,'iso2id')
+insert into ans(ans_q,ansname) values(@qid,'iso2name')
+
+insert into q(q_act,qname) values(@actid,'region')
+select @qid=scope_identity()
+insert into ans(ans_q,ansname) values(@qid,'regionid')
+insert into ans(ans_q,ansname) values(@qid,'regionname')
+
+insert into q(q_act,qname) values(@actid,'regions')
+select @qid=scope_identity()
+insert into ans(ans_q,ansname) values(@qid,'regions_row')
+insert into ans(ans_q,ansname) values(@qid,'regions_region')
+
+insert into q(q_act,qname) values(@actid,'category')
+select @qid=scope_identity()
+insert into ans(ans_q,ansname) values(@qid,'categoryid')
+insert into ans(ans_q,ansname) values(@qid,'categoryname')
+
+insert into q(q_act,qname) values(@actid,'country')
+select @qid=scope_identity()
+insert into ans(ans_q,ansname) values(@qid,'countryid')
+insert into ans(ans_q,ansname) values(@qid,'countryname')
+
+insert into q(q_act,qname) values(@actid,'states')
+select @qid=scope_identity()
+insert into ans(ans_q,ansname) values(@qid,'states_row')
+insert into ans(ans_q,ansname) values(@qid,'states_country')
+insert into q(q_act,qname) values(@actid,'row')
+select @qid=scope_identity()
+insert into ans(ans_q,ansname) values(@qid,'rowid')
+insert into ans(ans_q,ansname) values(@qid,'row_category')
+insert into ans(ans_q,ansname) values(@qid,'danger')
+insert into ans(ans_q,ansname) values(@qid,'date_inscribed')
+insert into ans(ans_q,ansname) values(@qid,'extension')
+insert into ans(ans_q,ansname) values(@qid,'short_description')
+insert into ans(ans_q,ansname) values(@qid,'sitename')
+insert into ans(ans_q,ansname) values(@qid,'transnational')
+go
+declare @actid int=362
+declare @qid int
+insert into q(q_act,qname) values(@actid,'iso')
+select @qid=scope_identity()
+insert into ans(ans_q,ansname) values(@qid,'iso_row')
+insert into ans(ans_q,ansname) values(@qid,'iso2')
+
+insert into q(q_act,qname) values(@actid,'poi')
+select @qid=scope_identity()
+insert into ans(ans_q,ansname) values(@qid,'poiid')
+insert into ans(ans_q,ansname) values(@qid,'poi_row')
+insert into ans(ans_q,ansname) values(@qid,'lat')
+insert into ans(ans_q,ansname) values(@qid,'lng')
+insert into ans(ans_q,ansname) values(@qid,'iso2')
+
+select * from q
+order by qid desc
+
+select * from ans order by ansid desc
+update ans set ansname='iso2' where ansid=122040

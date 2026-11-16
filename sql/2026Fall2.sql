@@ -1177,12 +1177,35 @@ declare @possible int=(
 	)
 )
 declare @answered int=(
-	select count(guess_ans) 
-	from guess 
-	where guess_grade=@gradeid
+	select count(*)
+	from guess g
+	join ans a on g.guess_ans = a.ansid
+	join q aq on a.ans_q = aq.qid
+	where g.guess_grade = @gradeid
+	and aq.q_act = @actid
+	and lower(a.ansname) <> lower(aq.qname + 'id')
+	and exists (
+		select 1
+		from q tq
+		join ans pk on pk.ans_q = tq.qid and lower(pk.ansname) = lower(tq.qname + 'id')
+		where tq.q_act = @actid
+		and tq.qid <> aq.qid
+		and (
+			lower(a.ansname) = lower(pk.ansname)
+			or replace(lower(a.ansname), '_', '') = lower(tq.qname)
+			or (
+				len(replace(lower(a.ansname), '_', '')) > len(tq.qname)
+				and right(replace(lower(a.ansname), '_', ''), len(tq.qname)) = lower(tq.qname)
+			)
+		)
+	)
 )
 update grade set
- earned=case when isnull(@possible,0)=0 then 0 else ceiling(100.0 * @answered / @possible) end
+ earned=case
+	when isnull(@possible,0)=0 then 0
+	when ceiling(100.0 * @answered / @possible) > 100 then 100
+	else ceiling(100.0 * @answered / @possible)
+ end
 where gradeid=@gradeid
 select earned
 from grade
