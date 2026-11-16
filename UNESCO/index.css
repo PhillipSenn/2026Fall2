@@ -1,0 +1,9 @@
+article > header.sticky-top {
+	top: 3rem; /* sit under the site navbar */
+	z-index: 1010;
+}
+
+.short-description p,
+.short-description {
+	text-indent: 2em;
+}

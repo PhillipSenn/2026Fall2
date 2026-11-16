@@ -1,7 +1,29 @@
 <cfscript>
 request.container = 'container-fluid'
 include '/Inc/header6.cfm'
-row = new dbo.proc().usr('row.rnd',{},'UNESCO')
+row = queryNew('')
+if (structKeyExists(url, 'rowid') && isNumeric(url.rowid) && val(url.rowid)) {
+	row = queryExecute('
+		select rowid,image_url,danger,date_inscribed,extension,short_description,sitename,transnational
+			,categoryname
+		from row
+		left join category on row_category=categoryid
+		where rowid=:rowid
+		and not exists(
+			select 1 from ug
+			where ug_row=rowid
+			and ug_usr=:usrid
+		)',
+		{
+			rowid: {value: val(url.rowid), cfsqltype: 'cf_sql_integer'},
+			usrid: {value: request.usr.usrid, cfsqltype: 'cf_sql_integer'}
+		},
+		{datasource: 'UNESCO'}
+	)
+}
+if (!row.recordCount) {
+	row = new dbo.proc().usr('row.rnd',{},'UNESCO')
+}
 poi = new dbo.proc().exec('poi.where_row',row.rowid,'UNESCO')
 </cfscript>
 
@@ -39,7 +61,8 @@ poi = new dbo.proc().exec('poi.where_row',row.rowid,'UNESCO')
     <div class="col-7">
         <article class="map-card">
             <header class="theme-primary theme-subtle">
-                <a class="btn-sm btn-outline theme-primary float-end" href="geoguessr.cfm?actid=#form.actid#&id=#request.usr.id#">Next</a>
+                <a class="btn-sm btn-outline" href="./?actid=#form.actid#">Back</a>
+                <a class="btn-sm btn-outline float-end" href="geoguessr.cfm?actid=#form.actid#&id=#request.usr.id#">Next</a>
             </header>
             <section>
                 <div id="map"></div>
