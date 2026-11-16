@@ -1,8 +1,7 @@
 <cfscript>
 request.container = 'container-fluid'
-request.progress.bar = false
 include '/Inc/header6.cfm'
-row = new dbo.proc().exec('row.rnd',{},'UNESCO')
+row = new dbo.proc().usr('row.rnd',{},'UNESCO')
 poi = new dbo.proc().exec('poi.where_row',row.rowid,'UNESCO')
 </cfscript>
 

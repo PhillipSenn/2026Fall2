@@ -489,15 +489,31 @@ select * from row
 where short_description like '%vast and isolated linear cluste%'
 
 --create schema row authorization dbo
-create or alter proc row.rnd as
+create or alter proc row.rnd
+(@id uniqueidentifier
+) as
+declare @usrid int=(select usrid from lr2026fall2..usr where id=@id)
 select top 1 rowid,image_url,danger,date_inscribed,extension,short_description,sitename,transnational
 	,categoryname
 from row
 left join category on row_category=categoryid
---where rowid=772
-order by newid()
+where exists(
+	select 1 from poi
+	where poi_row=rowid
+)
+and not exists(
+	select 1 from ug
+	where ug_row=rowid
+	and ug_usr=@usrid
+)
+order by case when exists(
+	select 1 from ug
+	where ug_row=rowid
+	and ug_usr<>@usrid
+) then 0 else 1 end
+,newid()
 go
-EXEC row.rnd
+-- EXEC row.rnd @id='...'
 
 create table iso -- iso_codes csv
 (iso_row int

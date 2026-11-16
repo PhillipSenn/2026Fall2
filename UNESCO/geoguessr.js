@@ -212,7 +212,61 @@ function showGuessResults(response) {
 
 	results.sort(byMiles)
 	fillResultsTable(results)
+	awardGuessPoints(results)
 	openResultsPanel()
+}
+
+function awardGuessPoints(results) {
+	var mine = null
+	var i
+	var closest = true
+	var points
+	var url
+	var form
+
+	for (i = 0; i < results.length; i++) {
+		if (isCurrentStudent(results[i])) {
+			mine = results[i]
+			break
+		}
+	}
+	if (!mine) {
+		return
+	}
+	for (i = 0; i < results.length; i++) {
+		if (isCurrentStudent(results[i])) {
+			continue
+		}
+		if (results[i].miles <= mine.miles) {
+			closest = false
+			break
+		}
+	}
+	points = closest ? 10 : 1
+	url = 'Grade/add_earned.cfm'
+	form = {}
+	form.body = new URLSearchParams()
+	form.body.set('id', app.id)
+	form.body.set('actid', app.actid)
+	form.body.set('points', points)
+	fetch(url, form)
+		.then(text_done)
+		.then(showEarned)
+		.catch(caught(url))
+}
+
+function showEarned(response) {
+	var pct = parseInt(response, 10)
+	var bar = $('.progress-bar')
+	if (isNaN(pct) || !bar.length) {
+		return
+	}
+	bar.css('width', Math.min(100, pct) + '%')
+		.attr('aria-valuenow', pct)
+		.text(pct + '%')
+	if (pct >= 100) {
+		bar.addClass('bg-success progress-bar-striped progress-bar-animated fw-bold')
+	}
 }
 
 function isCurrentStudent(row) {
