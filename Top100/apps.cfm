@@ -33,10 +33,9 @@ for (row in polled) {
 	answeredMap[toString(row.poll_q)] = true
 }
 startRow = 1
-rowIndex = 0
-for (row in q) {
-	rowIndex += 1
-	if (!structKeyExists(answeredMap, toString(row.qid))) {
+for (rowIndex = 1; rowIndex <= q.recordCount; rowIndex++) {
+	qid = toString(queryGetCell(q, 'qid', rowIndex))
+	if (!structKeyExists(answeredMap, qid)) {
 		startRow = rowIndex
 		break
 	}

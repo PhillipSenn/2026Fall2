@@ -19,12 +19,29 @@ if (carouselEl && counterEl) {
 }
 
 function resume_start() {
-	var start = Number(carouselEl.getAttribute('data-start') || 1)
-	if (start > 1) {
-		jump_to(start - 1)
+	var target = first_unanswered_index()
+	if (target < 0) {
+		jump_to(0)
+		return
+	}
+	if (target > 0) {
+		jump_to(target)
 		return
 	}
 	view_active()
+}
+
+function first_unanswered_index() {
+	var items = carouselEl.querySelectorAll('.carousel-item')
+	var i
+	var qid
+	for (i = 0; i < items.length; i++) {
+		qid = String(items[i].getAttribute('data-qid') || '').trim()
+		if (qid && !seen[qid]) {
+			return i
+		}
+	}
+	return -1
 }
 
 function mark_seen(qid) {
@@ -116,6 +133,13 @@ function skip_forward() {
 		}
 	}
 	if (target < 0) {
+		target = first_unanswered_index()
+	}
+	if (target < 0) {
+		return
+	}
+	var currentZero = current - 1
+	if (target === currentZero) {
 		return
 	}
 	jump_to(target)
