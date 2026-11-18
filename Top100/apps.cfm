@@ -28,38 +28,6 @@ polled = queryExecute(
 )
 gradeLabel = new dbo.proc().usr('grade.where_act', form.actid)
 request.progress.pct = polled.recordCount & '/' & q.recordCount & ' (' & val(gradeLabel.earned) & '%)'
-answeredMap = {}
-for (row in polled) {
-	answeredMap[toString(row.poll_q)] = true
-}
-firstOpen = queryExecute(
-	"SELECT TOP 1 q.qid
-	FROM q
-	WHERE q.q_act = :actid
-	AND NOT EXISTS (
-		SELECT 1
-		FROM poll
-		JOIN grade ON poll_grade = gradeid
-		WHERE grade_usr = (SELECT usrid FROM usr WHERE id = :id)
-		AND grade_act = :actid
-		AND pollEnd IS NOT NULL
-		AND poll_q = q.qid
-	)
-	ORDER BY q.qid",
-	{
-		id: {value: request.usr.id, cfsqltype: "cf_sql_varchar"},
-		actid: {value: form.actid, cfsqltype: "cf_sql_integer"}
-	}
-)
-startRow = 1
-if (firstOpen.recordCount) {
-	for (rowIndex = 1; rowIndex <= q.recordCount; rowIndex++) {
-		if (toString(queryGetCell(q, 'qid', rowIndex)) EQ toString(firstOpen.qid)) {
-			startRow = rowIndex
-			break
-		}
-	}
-}
 include '/Inc/header6.cfm'
 </cfscript>
 
@@ -71,11 +39,10 @@ include '/Inc/header6.cfm'
 	<section>
 		<div id="appsCarousel" class="carousel slide"
 			data-total="#q.recordCount#"
-			data-start="#startRow#"
 			data-answered-count="#polled.recordCount#"
 			data-answered="#valueList(polled.poll_q)#">
 			<div class="d-flex justify-content-between align-items-center mb-3">
-				<div class="fg-emphasis-secondary" id="appsCounter">#startRow# / #q.recordCount#</div>
+				<div class="fg-emphasis-secondary" id="appsCounter">1 / #q.recordCount#</div>
 				<div>
 					<button class="btn-icon btn-sm" type="button" id="appsSkipBack" title="Skip back 10">
 						<i class="bi bi-chevron-double-left" aria-hidden="true"></i>
@@ -107,7 +74,7 @@ include '/Inc/header6.cfm'
 					<cfif len(appDesc) AND left(lCase(appDesc), len(qname)) EQ lCase(qname)>
 						<cfset appDesc = trim(mid(appDesc, len(qname) + 1, len(appDesc)))>
 					</cfif>
-					<div class="carousel-item<cfif q.currentRow EQ startRow> active</cfif>" data-slide-index="#q.currentRow#" data-qid="#qid#">
+					<div class="carousel-item<cfif q.currentRow EQ 1> active</cfif>" data-slide-index="#q.currentRow#" data-qid="#qid#">
 						<div class="app-slide d-flex flex-column justify-content-center p-5">
 							<p class="fs-4 mb-0">
 								<cfif len(appHref)>

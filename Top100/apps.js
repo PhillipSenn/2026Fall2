@@ -12,22 +12,10 @@ if (carouselEl && counterEl) {
 	answeredCount = Number(carouselEl.getAttribute('data-answered-count') || 0)
 	String(carouselEl.getAttribute('data-answered') || '').split(',').forEach(mark_seen)
 	carouselEl.addEventListener('slid.bs.carousel', on_slide)
+	$('#appsCarousel [data-bs-slide]').on('click', view_active)
 	$('#appsSkipBack').on('click', skip_back)
 	$('#appsSkipForward').on('click', skip_forward)
 	update_counter()
-	resume_start()
-}
-
-function resume_start() {
-	var target = first_unanswered_index()
-	if (target < 0) {
-		target = 0
-	}
-	if (active_index() !== target) {
-		jump_to(target)
-		return
-	}
-	view_active()
 }
 
 function first_unanswered_index() {
@@ -103,6 +91,7 @@ function show_earned(response) {
 }
 
 function skip_back() {
+	view_active()
 	var index = active_index() + 1
 	var target = Math.max(1, index - SKIP)
 	if (target === index) {
@@ -112,6 +101,7 @@ function skip_back() {
 }
 
 function skip_forward() {
+	view_active()
 	var items = carouselEl.querySelectorAll('.carousel-item')
 	var current = active_index() + 1
 	var i
