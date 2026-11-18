@@ -30,11 +30,13 @@ gradeLabel = new dbo.proc().usr('grade.where_act', form.actid)
 request.progress.pct = polled.recordCount & '/' & q.recordCount & ' (' & val(gradeLabel.earned) & '%)'
 answeredMap = {}
 for (row in polled) {
-	answeredMap[row.poll_q] = true
+	answeredMap[toString(row.poll_q)] = true
 }
 startRow = 1
-for (rowIndex = 1; rowIndex <= q.recordCount; rowIndex++) {
-	if (!structKeyExists(answeredMap, q.qid[rowIndex])) {
+rowIndex = 0
+for (row in q) {
+	rowIndex += 1
+	if (!structKeyExists(answeredMap, toString(row.qid))) {
 		startRow = rowIndex
 		break
 	}
