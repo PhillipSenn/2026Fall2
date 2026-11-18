@@ -1,21 +1,27 @@
 var carouselEl = document.getElementById('appsCarousel')
-var counterEl = document.getElementById('appsCounter')
+var titleEl = document.getElementById('appsTitle')
+var downloadsEl = document.getElementById('appsDownloads')
 var total = 0
 var answeredCount = 0
 var seen = {}
 var carouselApi = null
-var SKIP = 10
 var ignoreSlides = false
+var altHeld = false
 
-if (carouselEl && counterEl) {
+if (carouselEl && titleEl) {
 	total = Number(carouselEl.getAttribute('data-total') || carouselEl.querySelectorAll('.carousel-item').length)
 	answeredCount = Number(carouselEl.getAttribute('data-answered-count') || 0)
 	String(carouselEl.getAttribute('data-answered') || '').split(',').forEach(mark_seen)
 	carouselEl.addEventListener('slid.bs.carousel', on_slide)
-	$('#appsCarousel [data-bs-slide]').on('click', view_active)
-	$('#appsSkipBack').on('click', skip_back)
 	$('#appsSkipForward').on('click', skip_forward)
-	update_counter()
+	$('#appsCats [data-catid]').on('click', cat_click)
+	$(document).on('keydown', alt_down)
+	$(document).on('keyup', alt_up)
+	$(window).on('blur', alt_up)
+	update_title()
+	update_downloads()
+	update_cat()
+	update_skip_forward()
 }
 
 function first_unanswered_index() {
@@ -44,27 +50,127 @@ function mark_seen(qid) {
 }
 
 function on_slide() {
-	update_counter()
-	if (ignoreSlides) {
+	update_title()
+	update_downloads()
+	update_cat()
+	update_skip_forward()
+}
+
+function update_title() {
+	var active = carouselEl.querySelector('.carousel-item.active')
+	var name = active ? String(active.getAttribute('data-qname') || '').trim() : ''
+	var href = active ? String(active.getAttribute('data-href') || '').trim() : ''
+	var link
+	if (!name) {
+		return
+	}
+	titleEl.textContent = ''
+	if (href) {
+		link = document.createElement('a')
+		link.href = href
+		link.target = '_blank'
+		link.rel = 'noopener noreferrer'
+		link.textContent = name
+		titleEl.appendChild(link)
+		return
+	}
+	titleEl.textContent = name
+}
+
+function update_downloads() {
+	var active = carouselEl.querySelector('.carousel-item.active')
+	var downloads = active ? String(active.getAttribute('data-downloads') || '').trim() : ''
+	if (downloadsEl && downloads) {
+		downloadsEl.textContent = downloads
+	}
+}
+
+function update_cat() {
+	var active = carouselEl.querySelector('.carousel-item.active')
+	var catid = active ? String(active.getAttribute('data-catid') || '') : ''
+	$('#appsCats [data-catid]').each(each_cat)
+	function each_cat() {
+		var on = String($(this).attr('data-catid') || '') === catid
+		if (altHeld && on) {
+			$(this).removeClass('btn-outline theme-primary').addClass('btn-solid theme-success')
+		} else {
+			$(this).removeClass('btn-solid theme-success').addClass('btn-outline theme-primary')
+		}
+	}
+}
+
+function alt_down(event) {
+	if (event.key !== 'Alt' || event.repeat) {
+		return
+	}
+	event.preventDefault()
+	altHeld = true
+	update_cat()
+}
+
+function alt_up(event) {
+	if (event.key && event.key !== 'Alt') {
+		return
+	}
+	altHeld = false
+	update_cat()
+}
+
+function update_skip_forward() {
+	var btn = document.getElementById('appsSkipForward')
+	var active = carouselEl.querySelector('.carousel-item.active')
+	var qid = active ? String(active.getAttribute('data-qid') || '').trim() : ''
+	var disabled = !qid || !seen[qid]
+	if (!btn) {
+		return
+	}
+	btn.disabled = disabled
+	btn.setAttribute('aria-disabled', disabled ? 'true' : 'false')
+}
+
+function cat_click() {
+	var catid = String($(this).attr('data-catid') || '')
+	var active = carouselEl.querySelector('.carousel-item.active')
+	var currentCat = active ? String(active.getAttribute('data-catid') || '') : ''
+	var current = active_index()
+	var items = carouselEl.querySelectorAll('.carousel-item')
+	var target = current + 1
+	if (catid !== currentCat) {
 		return
 	}
 	view_active()
-}
-
-function update_counter() {
-	var active = carouselEl.querySelector('.carousel-item.active')
-	var index = active ? Number(active.getAttribute('data-slide-index') || 1) : 1
-	counterEl.textContent = index + ' / ' + total
+	if (target >= items.length) {
+		return
+	}
+	jump_to(target)
 }
 
 function view_active() {
 	var active = carouselEl.querySelector('.carousel-item.active')
 	var qid = active ? String(active.getAttribute('data-qid') || '') : ''
 	if (!qid || seen[qid]) {
+		update_skip_forward()
 		return
 	}
 	seen[qid] = true
+	update_skip_forward()
+	dec_cat_badge(active)
 	merge_q(qid)
+}
+
+function dec_cat_badge(active) {
+	var catid = active ? String(active.getAttribute('data-catid') || '') : ''
+	var badge
+	var n
+	if (!catid) {
+		return
+	}
+	badge = document.querySelector('#appsCats [data-catid="' + catid + '"] .badge')
+	if (!badge) {
+		return
+	}
+	n = Math.max(0, Number(badge.textContent || 0) - 1)
+	badge.textContent = String(n)
 }
 
 function merge_q(qid) {
@@ -90,24 +196,19 @@ function show_earned(response) {
 	}
 }
 
-function skip_back() {
-	view_active()
-	var index = active_index() + 1
-	var target = Math.max(1, index - SKIP)
-	if (target === index) {
-		return
-	}
-	jump_to(target - 1)
-}
-
 function skip_forward() {
-	view_active()
+	var active = carouselEl.querySelector('.carousel-item.active')
+	var currentQid = active ? String(active.getAttribute('data-qid') || '').trim() : ''
 	var items = carouselEl.querySelectorAll('.carousel-item')
 	var current = active_index() + 1
 	var i
 	var qid
 	var index
 	var target = -1
+	if (!currentQid || !seen[currentQid]) {
+		update_skip_forward()
+		return
+	}
 	for (i = 0; i < items.length; i++) {
 		index = Number(items[i].getAttribute('data-slide-index') || (i + 1))
 		if (index <= current) {
@@ -144,14 +245,18 @@ function jump_to(zeroBased) {
 				carouselEl.removeEventListener('slid.bs.carousel', landed)
 				window.clearTimeout(safety)
 				ignoreSlides = false
-				update_counter()
-				view_active()
+				update_title()
+				update_downloads()
+				update_cat()
+				update_skip_forward()
 				resolve()
 			}
 			if (active_index() === zeroBased) {
 				ignoreSlides = false
-				update_counter()
-				view_active()
+				update_title()
+				update_downloads()
+				update_cat()
+				update_skip_forward()
 				resolve()
 				return
 			}
@@ -163,10 +268,10 @@ function jump_to(zeroBased) {
 				done = true
 				carouselEl.removeEventListener('slid.bs.carousel', landed)
 				ignoreSlides = false
-				update_counter()
-				if (active_index() === zeroBased) {
-					view_active()
-				}
+				update_title()
+				update_downloads()
+				update_cat()
+				update_skip_forward()
 				resolve()
 			}, 2000)
 			carousel.to(zeroBased)
@@ -180,7 +285,7 @@ function ensure_carousel() {
 	}
 	return import(bootstrap_url()).then(loaded)
 	function loaded(mod) {
-		carouselApi = mod.Carousel.getOrCreateInstance(carouselEl)
+		carouselApi = mod.Carousel.getOrCreateInstance(carouselEl, {wrap: false})
 		return carouselApi
 	}
 }

@@ -1656,7 +1656,30 @@ select earned
 from grade
 where gradeid=@gradeid
 go
-
+create or alter proc q.cat_act
+(@id uniqueidentifier
+,@actid int
+) as
+declare @usrid int=(select usrid from usr where id=@id)
+select catid,catname,cnt
+from cat
+join (
+	select q_cat,count(*) as cnt
+	from q
+	left join (
+		select poll_q
+		from poll
+		join grade on poll_grade=gradeid
+		where grade_usr=@usrid
+	) poll
+	on poll_q=qid
+	where q_act=@actid
+	and poll_q is null
+	group by q_cat
+) q
+on q_cat=catid
+order by catname
+go
 
 select * from usr
 /*

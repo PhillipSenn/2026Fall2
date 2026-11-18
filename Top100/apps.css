@@ -1,3 +1,7 @@
+.apps-main {
+	min-width: 0;
+}
+
 .app-slide {
 	min-height: 320px;
 	background: linear-gradient(160deg, var(--bs-secondary-bg, #f8f9fa), var(--bs-tertiary-bg, #e9ecef));
@@ -14,6 +18,12 @@
 	height: auto;
 	object-fit: contain;
 	align-self: center;
+}
+
+#appsCarousel,
+#appsCarousel .carousel-inner {
+	max-width: 100%;
+	overflow: hidden;
 }
 
 #appsCarousel .carousel-inner {
