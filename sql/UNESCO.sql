@@ -605,7 +605,7 @@ go
 select * from row
 
 use LR2026Fall2
-insert into act(actname,actlink) values('UNESCO database','dbs/UNESCO.cfm')
+insert into act(actid,actname,actlink) values(362,'UNESCO database','dbs/UNESCO.cfm')
 select * from act 
 order by actid desc
 go

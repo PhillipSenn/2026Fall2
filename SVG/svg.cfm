@@ -69,17 +69,8 @@ for (row in credited) {
 	arrayAppend(creditedQids, row.qid)
 }
 points = min(100, val(answered.cnt) * 10)
-queryExecute(
-	"UPDATE grade
-	SET earned = :points
-	WHERE grade_usr = (SELECT usrid FROM usr WHERE id = :id)
-	AND grade_act = :actid",
-	{
-		points: {value: points, cfsqltype: "cf_sql_integer"},
-		id: {value: request.usr.id, cfsqltype: "cf_sql_varchar"},
-		actid: {value: form.actid, cfsqltype: "cf_sql_integer"}
-	}
-)
+grade = new dbo.proc().usr('grade.merge_act', [form.actid, points])
+points = val(grade.earned)
 request.progress.pct = val(answered.cnt) & ' / ' & q.recordCount & ' (' & points & '%)'
 request.progress.width = points
 include '/Inc/header6.cfm'
