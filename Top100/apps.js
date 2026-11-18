@@ -5,7 +5,7 @@ var answeredCount = 0
 var seen = {}
 var carouselApi = null
 var SKIP = 10
-var jumpTarget = null
+var ignoreSlides = false
 
 if (carouselEl && counterEl) {
 	total = Number(carouselEl.getAttribute('data-total') || carouselEl.querySelectorAll('.carousel-item').length)
@@ -21,10 +21,9 @@ if (carouselEl && counterEl) {
 function resume_start() {
 	var target = first_unanswered_index()
 	if (target < 0) {
-		jump_to(0)
-		return
+		target = 0
 	}
-	if (target > 0) {
+	if (active_index() !== target) {
 		jump_to(target)
 		return
 	}
@@ -44,6 +43,11 @@ function first_unanswered_index() {
 	return -1
 }
 
+function active_index() {
+	var active = carouselEl.querySelector('.carousel-item.active')
+	return active ? Number(active.getAttribute('data-slide-index') || 1) - 1 : 0
+}
+
 function mark_seen(qid) {
 	qid = String(qid || '').trim()
 	if (qid) {
@@ -53,13 +57,8 @@ function mark_seen(qid) {
 
 function on_slide() {
 	update_counter()
-	if (jumpTarget !== null) {
-		var active = carouselEl.querySelector('.carousel-item.active')
-		var index = active ? Number(active.getAttribute('data-slide-index') || 1) - 1 : -1
-		if (index !== jumpTarget) {
-			return
-		}
-		jumpTarget = null
+	if (ignoreSlides) {
+		return
 	}
 	view_active()
 }
@@ -104,8 +103,7 @@ function show_earned(response) {
 }
 
 function skip_back() {
-	var active = carouselEl.querySelector('.carousel-item.active')
-	var index = active ? Number(active.getAttribute('data-slide-index') || 1) : 1
+	var index = active_index() + 1
 	var target = Math.max(1, index - SKIP)
 	if (target === index) {
 		return
@@ -115,8 +113,7 @@ function skip_back() {
 
 function skip_forward() {
 	var items = carouselEl.querySelectorAll('.carousel-item')
-	var active = carouselEl.querySelector('.carousel-item.active')
-	var current = active ? Number(active.getAttribute('data-slide-index') || 1) : 1
+	var current = active_index() + 1
 	var i
 	var qid
 	var index
@@ -135,26 +132,55 @@ function skip_forward() {
 	if (target < 0) {
 		target = first_unanswered_index()
 	}
-	if (target < 0) {
-		return
-	}
-	var currentZero = current - 1
-	if (target === currentZero) {
+	if (target < 0 || target === active_index()) {
 		return
 	}
 	jump_to(target)
 }
 
 function jump_to(zeroBased) {
-	jumpTarget = zeroBased
-	return go_to(zeroBased)
-}
-
-function go_to(zeroBased) {
-	return ensure_carousel().then(to_slide)
-	function to_slide(carousel) {
-		carousel.to(zeroBased)
-		return carousel
+	ignoreSlides = true
+	return ensure_carousel().then(moved)
+	function moved(carousel) {
+		return new Promise(finish_jump)
+		function finish_jump(resolve) {
+			var done = false
+			var safety
+			function landed() {
+				if (done || active_index() !== zeroBased) {
+					return
+				}
+				done = true
+				carouselEl.removeEventListener('slid.bs.carousel', landed)
+				window.clearTimeout(safety)
+				ignoreSlides = false
+				update_counter()
+				view_active()
+				resolve()
+			}
+			if (active_index() === zeroBased) {
+				ignoreSlides = false
+				update_counter()
+				view_active()
+				resolve()
+				return
+			}
+			carouselEl.addEventListener('slid.bs.carousel', landed)
+			safety = window.setTimeout(function() {
+				if (done) {
+					return
+				}
+				done = true
+				carouselEl.removeEventListener('slid.bs.carousel', landed)
+				ignoreSlides = false
+				update_counter()
+				if (active_index() === zeroBased) {
+					view_active()
+				}
+				resolve()
+			}, 2000)
+			carousel.to(zeroBased)
+		}
 	}
 }
 

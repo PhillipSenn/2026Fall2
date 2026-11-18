@@ -32,12 +32,32 @@ answeredMap = {}
 for (row in polled) {
 	answeredMap[toString(row.poll_q)] = true
 }
+firstOpen = queryExecute(
+	"SELECT TOP 1 q.qid
+	FROM q
+	WHERE q.q_act = :actid
+	AND NOT EXISTS (
+		SELECT 1
+		FROM poll
+		JOIN grade ON poll_grade = gradeid
+		WHERE grade_usr = (SELECT usrid FROM usr WHERE id = :id)
+		AND grade_act = :actid
+		AND pollEnd IS NOT NULL
+		AND poll_q = q.qid
+	)
+	ORDER BY q.qid",
+	{
+		id: {value: request.usr.id, cfsqltype: "cf_sql_varchar"},
+		actid: {value: form.actid, cfsqltype: "cf_sql_integer"}
+	}
+)
 startRow = 1
-for (rowIndex = 1; rowIndex <= q.recordCount; rowIndex++) {
-	qid = toString(queryGetCell(q, 'qid', rowIndex))
-	if (!structKeyExists(answeredMap, qid)) {
-		startRow = rowIndex
-		break
+if (firstOpen.recordCount) {
+	for (rowIndex = 1; rowIndex <= q.recordCount; rowIndex++) {
+		if (toString(queryGetCell(q, 'qid', rowIndex)) EQ toString(firstOpen.qid)) {
+			startRow = rowIndex
+			break
+		}
 	}
 }
 include '/Inc/header6.cfm'
