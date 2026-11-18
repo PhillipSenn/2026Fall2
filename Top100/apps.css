@@ -1,0 +1,21 @@
+.app-slide {
+	min-height: 320px;
+	background: linear-gradient(160deg, var(--bs-secondary-bg, #f8f9fa), var(--bs-tertiary-bg, #e9ecef));
+}
+
+.app-desc {
+	text-indent: 2em;
+}
+
+.app-image {
+	max-width: 100%;
+	max-height: 360px;
+	width: auto;
+	height: auto;
+	object-fit: contain;
+	align-self: center;
+}
+
+#appsCarousel .carousel-inner {
+	border: 1px solid var(--bs-border-color, #dee2e6);
+}
